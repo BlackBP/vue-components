@@ -1,0 +1,184 @@
+.c-btn {
+  // Elements refs
+  $self: #{&};
+  $icon: #{$self}__icon;
+  $text: #{$self}__text;
+
+  $mod-color-primary: #{$self}--primary;
+  $mod-color-secondary: #{$self}--secondary;
+  $mod-color-success: #{$self}--success;
+  $mod-color-error: #{$self}--error;
+  $mod-color-warn: #{$self}--warn;
+  $mod-color-info: #{$self}--info;
+
+  $mod-elevated: #{$self}--elevated;
+  $mod-transparent: #{$self}--transparent;
+  $mod-block: #{$self}--block;
+  $mod-icon-left: #{$self}--icon-left;
+  $mod-icon-right: #{$self}--icon-right;
+
+  // Configuration
+  $padding: 8px 16px;
+  $border-radius: $g-border-radius - 2;
+  $background-color: $btn-base-color;
+  $font-color: $g-font-color;
+
+  $icon-margin: 8px;
+  $icon-font-size: 110%;
+
+  /**
+   *
+   */
+  @mixin make-modifier($name) {
+    #{$name} {
+      @content
+    }
+  }
+
+  /**
+   *
+   */
+  @mixin make-colored($name, $background, $text: #fff) {
+    @include make-modifier($name) {
+      background: $background;
+      color: $text;
+
+      &:hover,
+      &:focus {
+        background: lighten($background, 5%);
+        color: $text;
+      }
+
+      &:active {
+        background: darken($background, 5%);
+        color: $text;
+      }
+
+      @content
+    }
+  }
+
+  /**
+   *
+   */
+  @mixin make-transparent($mod-name, $color) {
+    &#{$mod-name} {
+      background: transparent;
+      color: $color;
+
+      &:hover,
+      &:focus {
+        background: rgba($color, 0.2);
+      }
+
+      &:active {
+        background: rgba(darken($color, 5%), 0.3);
+      }
+    }
+  }
+
+  @at-root {
+
+    #{$self} {
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      padding: $padding;
+      border: none;
+      border-radius: $border-radius;
+      background: $background-color;
+      color: $font-color;
+      line-height: 1;
+      font-weight: 600;
+      cursor: pointer;
+      transition: box-shadow $g-transition, background-color $g-transition, color $g-transition;
+      @include no-select();
+
+      &:hover,
+      &:focus {
+        background: darken($background-color, 5%);
+      }
+
+      &:active {
+        background: darken($background-color, 10%);
+      }
+
+      &[disabled],
+      &[disabled="disabled"] {
+        background: $disabled-background !important;
+        color: $disabled-font-color !important;
+        box-shadow: none !important;
+        cursor: not-allowed !important;
+        pointer-events: unset;
+      }
+    }
+
+    #{$text} {
+      flex: 1 1 auto;
+      display: inline-block;
+    }
+
+    #{$icon} {
+      flex: 0 0 auto;
+      display: inline-block;
+      font-size: $icon-font-size;
+    }
+
+    /**
+    ** Mods
+    */
+    // Colors
+    @include make-colored($mod-color-primary, $color-primary);
+    @include make-colored($mod-color-secondary, $color-secondary);
+    @include make-colored($mod-color-success, $color-success);
+    @include make-colored($mod-color-error, $color-error);
+    @include make-colored($mod-color-warn, $color-warn);
+    @include make-colored($mod-color-info, $color-info);
+
+    // Elevated
+    @include make-modifier($mod-elevated) {
+      @include box-elevation(3);
+
+      &:hover,
+      &:focus {
+        @include box-elevation(6)
+      }
+
+      &:active {
+        @include box-elevation(1);
+      }
+    }
+
+    // Block
+    @include make-modifier($mod-block) {
+      width: 100%;
+    }
+
+    // Icon
+    @include make-modifier($mod-icon-left) {
+      #{$icon} {
+        margin: auto $icon-margin auto auto;
+      }
+    }
+
+    @include make-modifier($mod-icon-right) {
+      #{$icon} {
+        margin: auto auto auto $icon-margin;
+      }
+    }
+
+    // Transparent
+    @include make-modifier($mod-transparent) {
+      background: transparent;
+
+      @include make-transparent($mod-color-primary, $color-primary);
+      @include make-transparent($mod-color-secondary, $color-secondary);
+      @include make-transparent($mod-color-success, $color-success);
+      @include make-transparent($mod-color-error, $color-error);
+      @include make-transparent($mod-color-warn, $color-warn);
+      @include make-transparent($mod-color-info, $color-info);
+    }
+
+  }
+}

@@ -1,0 +1,89 @@
+/*
+ * WEIGHTS:
+ * Hairline = 100
+ * Thin     = 200
+ * Light    = 300
+ * Regular  = 400
+ * Medium   = 500
+ * Semibold = 600
+ * Bold     = 700
+ * Black    = 800
+ * Heavy    = 900
+ */
+@import "../fonts/fira-sans";
+@import "../fonts/open-sans";
+
+// Common
+* {
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+}
+
+body {
+  font-family: $g-font-family;
+  font-size: $g-font-size;
+  font-weight: $g-font-weight;
+  color: $g-font-color;
+  line-height: $g-line-height;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Selected text
+::selection {
+  background: $g-selected-background;
+  text-shadow: 0 1px 3px #000;
+  color: $g-selected-font-color;
+}
+
+// Links
+a {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+// Headers
+
+h1,
+.h1 {
+  font-weight: 800;
+  font-size: 38px;
+}
+
+h2,
+.h2 {
+  font-weight: 700;
+  font-size: 34px;
+}
+
+h3,
+.h3 {
+  font-weight: 700;
+  font-size: 26px;
+}
+
+h4,
+.h4 {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+h5,
+.h5 {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+h6,
+.h6 {
+  font-weight: 600;
+  font-size: 14px;
+}

@@ -1,0 +1,106 @@
+//
+@mixin clear-fix {
+  &:after,
+  &:before {
+    display: table;
+    content: "";
+    clear: both;
+  }
+}
+
+//
+@mixin box-sizing() {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  &::after,
+  &::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+//
+@mixin box-elevation($level: 3, $color: #000, $opacity-boost: 0) {
+
+  @if $level < 0 {
+    $level: 0;
+  }
+  @if $level > 24 {
+    $level: 24;
+  }
+
+  $umbra-color-level: map_get($elevation-umbra-map, $level);
+  $penumbra-color-level: map_get($elevation-penumbra-map, $level);
+  $ambient-color-level: map_get($elevation-ambient-map, $level);
+
+  $umbra-color: rgba($color, $elevation-umbra-opacity + $opacity-boost);
+  $penumbra-color: rgba($color, $elevation-penumbra-opacity + $opacity-boost);
+  $ambient-color: rgba($color, $elevation-ambient-opacity + $opacity-boost);
+
+  box-shadow: #{$umbra-color-level} #{$umbra-color},
+  #{$penumbra-color-level} #{$penumbra-color},
+  #{$ambient-color-level} #{$ambient-color};
+
+}
+
+//
+@mixin input-placeholder {
+  &::-webkit-input-placeholder {
+    @content
+  }
+  &:-moz-placeholder {
+    @content
+  }
+  &::-moz-placeholder {
+    @content
+  }
+  &:-ms-input-placeholder {
+    @content
+  }
+}
+
+//
+@mixin no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+//
+@mixin word-wrap() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  white-space: normal;
+}
+
+@mixin word-ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin word-nowrap() {
+  white-space: nowrap;
+}
+
+//
+@mixin make-state($state) {
+  &#{$state} {
+    @content;
+  }
+}
+
+//
+@mixin make-modifier($name) {
+  &--#{$name} {
+    @content;
+  }
+}

@@ -1,0 +1,64 @@
+.c-chip {
+  $self: #{&};
+  $text: #{$self}__text;
+  $leading: #{$self}__leading;
+  $trailing: #{$self}__trailing;
+
+  $icon-gap: 5px;
+  $padding: 6px 10px;
+
+  @at-root {
+    #{$self} {
+      position: relative;
+      display: inline-flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      width: auto;
+      height: auto;
+      padding: $padding;
+      margin: auto;
+      background: $color-grey-light;
+      color: $g-font-color;
+      border-radius: 0;
+      font-size: 14px;
+      line-height: 1;
+      overflow: hidden;
+    }
+
+    #{$text} {
+      @include word-nowrap();
+    }
+
+    #{$leading} {
+      display: inline-block;
+      width: auto;
+      height: auto;
+      margin: auto $icon-gap auto 0;
+    }
+
+    #{$trailing} {
+      display: inline-block;
+      width: auto;
+      height: auto;
+      margin: auto 0 auto $icon-gap;
+    }
+
+    // == Modifiers
+
+    @mixin make-colored($name, $background: $color-black, $font-color: #fff) {
+      @include make-modifier($name) {
+        background: $background;
+        color: $font-color;
+        @content;
+      }
+    }
+
+    #{$self} {
+      @include make-colored('red', $color-red, #fff);
+      @include make-colored('green', $color-green, #fff);
+      @include make-colored('blue', $color-info, #fff);
+      @include make-colored('orange', $color-orange, #fff);
+    }
+
+  }
+}
