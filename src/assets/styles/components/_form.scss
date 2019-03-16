@@ -1,0 +1,338 @@
+// Config
+$state-focused: '.is-focused';
+$state-error: '.has-error';
+$state-success: '.has-success';
+
+$field-border: $g-border;
+$field-border-color: nth($g-border, 3);
+$field-border-active: nth($g-border, 1) nth($g-border, 2) $color-primary;
+$field-border-radius: $g-border-radius;
+
+$field-icon-size: 24px;
+$field-icon-color: #B0B0B0;
+
+$field-height: 38px;
+$field-padding: 6px 12px;
+
+$field-placeholder-color: #757575;
+
+$field-readonly-background: #F5F5F5;
+$field-readonly-color: #555;
+
+// == Form field
+.c-form-field {
+  $self: #{&};
+  $content: #{$self}__content;
+  $footer: #{$self}__footer;
+  $helper: #{$self}__helper;
+  $counter: #{$self}__counter;
+
+  $font-color: $g-font-color;
+
+  @at-root {
+    #{$self} {
+      display: block;
+      color: $font-color;
+      line-height: 1;
+
+      &.has-error {
+        #{$content} {
+          border-color: $color-error !important;
+          background-color: rgba($color-error, 0.1) !important;
+        }
+
+        #{$helper} {
+          color: $color-error;
+        }
+
+        #{$counter} {
+          display: none;
+        }
+      }
+
+      &.is-focused {
+        #{$content} {
+          border: $field-border-active;
+        }
+      }
+
+      &.is-readonly {
+        #{$content} {
+          background: $field-readonly-background !important;
+          border: $field-border !important;
+        }
+      }
+
+      &.is-disabled {
+        #{$content} {
+          background: $field-border-color !important;
+          border: $field-border !important;
+        }
+      }
+
+      input,
+      textarea {
+        @include input-placeholder() {
+          color: $field-placeholder-color;
+          line-height: inherit;
+          font-size: inherit;
+        }
+      }
+
+    }
+
+    #{$content} {
+      position: relative;
+      display: block;
+      background: #FFF;
+      border: $field-border;
+      border-radius: $field-border-radius;
+      //box-shadow: 0 0 8px 0 rgba(#000, 0.1);
+      transition: border $g-transition, color $g-transition, background-color $g-transition;
+    }
+
+    #{$footer} {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-left: 12px;
+      margin-top: 3px;
+      font-size: 12px;
+      line-height: 1.1;
+      color: rgba($font-color, 0.7)
+    }
+
+    #{$helper} {
+      flex: 1 1 auto;
+      display: block;
+      width: auto;
+      height: auto;
+      margin: auto auto auto 0;
+    }
+
+    #{$counter} {
+      flex: 0 0 auto;
+      display: block;
+      width: auto;
+      height: auto;
+      margin: auto 0 auto 10px;
+    }
+  }
+}
+
+// == Text Input
+.c-text-input  {
+  $self: #{&};
+  $wrap: #{$self}__wrap;
+  $field: #{$self}__field;
+
+  @at-root {
+
+    #{$self} {
+
+      &.is-focused {
+
+      }
+
+      &.is-disabled {
+      }
+
+    }
+
+    #{$wrap} {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #{$field} {
+      flex: 1 1 auto;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: $field-height;
+      padding: $field-padding;
+      margin: 0;
+      background: none;
+      border: none;
+      line-height: 1;
+      color: inherit;
+
+      &[readonly="readonly"],
+      &[readonly] {
+        cursor: default !important;
+      }
+
+      &[disabled="disabled"],
+      &[disabled] {
+        cursor: not-allowed !important;
+      }
+    }
+
+  }
+
+}
+
+// == Text area
+.c-text-area {
+  $self: #{&};
+  $wrap: #{$self}__wrap;
+  $field: #{$self}__field;
+
+  @at-root {
+
+    #{$self} {
+
+      &.is-focused {
+      }
+
+      &.is-disabled {
+      }
+
+    }
+
+    #{$field} {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      min-height: 100px;
+      max-height: 150px;
+      padding: nth($field-padding, 2);
+      margin: 0;
+      background: none;
+      border: none;
+      line-height: $g-line-height;
+      color: inherit;
+      resize: none;
+
+      &[readonly="readonly"],
+      &[readonly] {
+        cursor: default !important;
+        color: $field-readonly-color !important;
+      }
+
+      &[disabled="disabled"],
+      &[disabled] {
+        cursor: not-allowed !important;
+        color: $field-readonly-color !important;
+      }
+    }
+
+  }
+
+}
+
+// == Select
+.c-select {
+  $self: #{&};
+  $wrap: #{$self}__wrap;
+
+  $label: #{$self}__label;
+
+  $field: #{$self}__field;
+  $field-placeholder: #{$self}__field-placeholder;
+  $field-input: #{$self}__field-input;
+  $field-icon: #{$self}__field-icon;
+
+  $list: #{$self}__list;
+  $list-placeholder: #{$self}__list-placeholder;
+  $list-options: #{$self}__list-options;
+
+  $option: #{$self}__option;
+
+  @at-root {
+
+    #{$self} {
+      cursor: pointer;
+    }
+
+    #{$wrap} {
+      position: relative;
+    }
+
+    #{$field} {
+      flex: 1 1 auto;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 100%;
+      height: $field-height;
+      padding: $field-padding;
+      margin: 0;
+      background: none;
+      border: none;
+      line-height: 1;
+      color: inherit;
+    }
+
+    #{$field-placeholder} {
+      flex: 1 1 auto;
+      color: $field-placeholder-color;
+      background: none;
+    }
+
+    #{$field-input} {
+      flex: 1 1 auto;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+      cursor: pointer;
+      background: none;
+    }
+
+    #{$field-icon} {
+      flex: 0 0 auto;
+      display: inline-block;
+      margin: auto 0 auto auto;
+      font-size: 22px;
+    }
+
+    #{$list} {
+      position: absolute;
+      z-index: 3;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: block;
+      height: auto;
+      max-height: 300px;
+      background: #fff;
+      border-style: solid;
+      border-color: $field-border-color;
+      border-width: 0 1px 1px;
+      box-shadow: 0 5px 10px 0 rgba(#000, 0.3);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    #{$list-placeholder} {
+      padding: nth($field-padding, 2);
+      color: $field-placeholder-color;
+    }
+
+    #{$option} {
+      display: block;
+      width: 100%;
+      padding: nth($field-padding, 2);
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background-color: rgba(#000, 0.05);
+      }
+
+      &.is-selected {
+        background-color: $color-primary;
+        color: #fff;
+      }
+    }
+
+  }
+
+}

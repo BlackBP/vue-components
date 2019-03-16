@@ -42,13 +42,13 @@
 </template>
 
 <script>
-    import female1 from '../../assets/avatars/female-1.jpg';
-    import female2 from '../../assets/avatars/female-2.jpg';
-    import female3 from '../../assets/avatars/female-3.jpg';
+    import female1 from '../../assets/images/avatars/female-1.jpg';
+    import female2 from '../../assets/images/avatars/female-2.jpg';
+    import female3 from '../../assets/images/avatars/female-3.jpg';
 
-    import male1 from '../../assets/avatars/male-1.jpg';
-    import male2 from '../../assets/avatars/male-2.jpg';
-    import male3 from '../../assets/avatars/male-3.jpg';
+    import male1 from '../../assets/images/avatars/male-1.jpg';
+    import male2 from '../../assets/images/avatars/male-2.jpg';
+    import male3 from '../../assets/images/avatars/male-3.jpg';
 
     const avatars = [
         female1,
