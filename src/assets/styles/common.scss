@@ -1,4 +1,4 @@
-@import "../../../node_modules/@mdi/font/css/materialdesignicons.min.css";
+@import "~@mdi/font/css/materialdesignicons.min.css";
 
 // Base
 @import "base/variables";
@@ -8,10 +8,10 @@
 
 // Components
 @import "components/button";
-//@import "components/chip";
-@import "components/icon-button";
+@import "components/chip";
+@import "components/checkbox-radio";
 @import "components/elevation";
 @import "components/form";
-@import "components/checkbox-radio";
-@import "components/switch";
+@import "components/icon-button";
 @import "components/modal";
+@import "components/switch";

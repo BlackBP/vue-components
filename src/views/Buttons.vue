@@ -7,23 +7,35 @@
                    :key="`normal-${button.text}`"
                    :color="button.color"
                    :text="button.text"/>
-        </c-section>
 
-        <c-section>
-            <c-icon-btn v-for="button in buttons"
-                        class="ml10px"
-                        :key="`icon-btn-normal-${button.text}`"
-                        :color="button.color"
-                        :icon="button.icon"/>
-        </c-section>
+            <template slot="subsections">
+                <c-section>
+                    <c-btn v-for="button in buttons"
+                           class="ml10px"
+                           :key="`normal-w-icons-${button.text}`"
+                           :color="button.color"
+                           :text="button.text"
+                           :icon="button.icon"
+                           :icon-left="true"/>
+                </c-section>
 
-        <c-section>
-            <c-icon-btn v-for="button in buttons"
-                        class="ml10px"
-                        :key="`icon-btn-normal-${button.text}`"
-                        :dense="true"
-                        :color="button.color"
-                        :icon="button.icon"/>
+                <c-section>
+                    <c-icon-btn v-for="button in buttons"
+                                class="ml10px"
+                                :key="`icon-btn-normal-${button.text}`"
+                                :color="button.color"
+                                :icon="button.icon"/>
+                </c-section>
+
+                <c-section>
+                    <c-icon-btn v-for="button in buttons"
+                                class="ml10px"
+                                :key="`icon-btn-normal-dense-${button.text}`"
+                                :dense="true"
+                                :color="button.color"
+                                :icon="button.icon"/>
+                </c-section>
+            </template>
         </c-section>
 
         <c-section title="Elevated">
@@ -33,25 +45,38 @@
                    :color="button.color"
                    :text="button.text"
                    :elevated="true"/>
-        </c-section>
 
-        <c-section>
-            <c-icon-btn v-for="button in buttons"
-                        class="ml10px"
-                        :key="`icon-btn-normal-${button.text}`"
-                        :elevated="true"
-                        :color="button.color"
-                        :icon="button.icon"/>
-        </c-section>
+            <template slot="subsections">
+                <c-section>
+                    <c-btn v-for="button in buttons"
+                           class="ml10px"
+                           :key="`elevated-w-icon-${button.text}`"
+                           :color="button.color"
+                           :text="button.text"
+                           :elevated="true"
+                           :icon="button.icon"
+                           :icon-left="true"/>
+                </c-section>
 
-        <c-section>
-            <c-icon-btn v-for="button in buttons"
-                        class="ml10px"
-                        :key="`icon-btn-normal-${button.text}`"
-                        :dense="true"
-                        :elevated="true"
-                        :color="button.color"
-                        :icon="button.icon"/>
+                <c-section>
+                    <c-icon-btn v-for="button in buttons"
+                                class="ml10px"
+                                :key="`icon-btn-normal-${button.text}`"
+                                :elevated="true"
+                                :color="button.color"
+                                :icon="button.icon"/>
+                </c-section>
+
+                <c-section>
+                    <c-icon-btn v-for="button in buttons"
+                                class="ml10px"
+                                :key="`icon-btn-normal-${button.text}`"
+                                :dense="true"
+                                :elevated="true"
+                                :color="button.color"
+                                :icon="button.icon"/>
+                </c-section>
+            </template>
         </c-section>
 
         <c-section title="Transparent">
@@ -61,25 +86,38 @@
                    :color="button.color"
                    :text="button.text"
                    :transparent="true"/>
-        </c-section>
 
-        <c-section>
-            <c-icon-btn v-for="button in buttons"
-                        class="ml10px"
-                        :key="`icon-btn-normal-${button.text}`"
-                        :transparent="true"
-                        :color="button.color"
-                        :icon="button.icon"/>
-        </c-section>
+            <template slot="subsections">
+                <c-section>
+                    <c-btn v-for="button in buttons"
+                           class="ml10px"
+                           :key="`transparent-${button.text}`"
+                           :color="button.color"
+                           :text="button.text"
+                           :transparent="true"
+                           :icon="button.icon"
+                           :icon-left="true"/>
+                </c-section>
 
-        <c-section>
-            <c-icon-btn v-for="button in buttons"
-                        class="ml10px"
-                        :key="`icon-btn-normal-${button.text}`"
-                        :dense="true"
-                        :transparent="true"
-                        :color="button.color"
-                        :icon="button.icon"/>
+                <c-section>
+                    <c-icon-btn v-for="button in buttons"
+                                class="ml10px"
+                                :key="`icon-btn-normal-${button.text}`"
+                                :transparent="true"
+                                :color="button.color"
+                                :icon="button.icon"/>
+                </c-section>
+
+                <c-section>
+                    <c-icon-btn v-for="button in buttons"
+                                class="ml10px"
+                                :key="`icon-btn-normal-${button.text}`"
+                                :dense="true"
+                                :transparent="true"
+                                :color="button.color"
+                                :icon="button.icon"/>
+                </c-section>
+            </template>
         </c-section>
 
         <c-section title="Disabled">
@@ -89,25 +127,38 @@
                    :color="button.color"
                    :text="button.text"
                    :disabled="true"/>
-        </c-section>
 
-        <c-section>
-            <c-icon-btn v-for="button in buttons"
-                        class="ml10px"
-                        :key="`icon-btn-normal-${button.text}`"
-                        :disabled="true"
-                        :color="button.color"
-                        :icon="button.icon"/>
-        </c-section>
+            <template slot="subsections">
+                <c-section>
+                    <c-btn v-for="button in buttons"
+                           class="ml10px"
+                           :key="`transparent-${button.text}`"
+                           :color="button.color"
+                           :text="button.text"
+                           :disabled="true"
+                           :icon="button.icon"
+                           :icon-left="true"/>
+                </c-section>
 
-        <c-section>
-            <c-icon-btn v-for="button in buttons"
-                        class="ml10px"
-                        :key="`icon-btn-normal-${button.text}`"
-                        :disabled="true"
-                        :dense="true"
-                        :color="button.color"
-                        :icon="button.icon"/>
+                <c-section>
+                    <c-icon-btn v-for="button in buttons"
+                                class="ml10px"
+                                :key="`icon-btn-normal-${button.text}`"
+                                :disabled="true"
+                                :color="button.color"
+                                :icon="button.icon"/>
+                </c-section>
+
+                <c-section>
+                    <c-icon-btn v-for="button in buttons"
+                                class="ml10px"
+                                :key="`icon-btn-normal-${button.text}`"
+                                :disabled="true"
+                                :dense="true"
+                                :color="button.color"
+                                :icon="button.icon"/>
+                </c-section>
+            </template>
         </c-section>
 
     </div>

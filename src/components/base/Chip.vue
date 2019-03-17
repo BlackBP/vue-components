@@ -1,27 +1,29 @@
 <template>
 
-    <div class="c-chip"
-         :class="className">
+    <div :class="className">
 
-        <i v-if="hasLeading"
-           class="c-chip__leading"
-           :class="leading"></i>
+        <c-icon v-if="hasLeading"
+                class="c-chip__leading"
+                :name="leading" />
 
         <div class="c-chip__text">
             {{ text }}
         </div>
 
-        <i v-if="hasTrailing"
-           class="c-chip__trailing"
-           :class="trailing"></i>
+        <c-icon v-if="hasTrailing"
+                class="c-chip__trailing"
+                :name="trailing" />
 
     </div>
 
 </template>
 
 <script>
+    import CIcon from "./Icon";
+
     export default {
         name: "Chip",
+        components: {CIcon},
         props: {
             text: {
                 type: String,
@@ -46,16 +48,16 @@
         },
         computed: {
             hasLeading() {
-                return !_.isEmpty(this.leading)
+                return this.leading !== ''
             },
             hasTrailing() {
-                return !_.isEmpty(this.trailing)
+                return this.trailing !== ''
             },
             className() {
                 let baseClass = 'c-chip';
                 let className = [];
 
-                if(!_.isEmpty(this.color)) {
+                if(typeof this.color === 'string' && this.color !== '') {
                     className.push(`${baseClass}--${this.color}`);
                 }
 

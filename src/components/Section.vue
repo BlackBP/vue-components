@@ -10,6 +10,10 @@
             <slot></slot>
         </div>
 
+        <div class="section__subsections">
+            <slot name="subsections"></slot>
+        </div>
+
     </div>
 
 </template>
@@ -32,21 +36,43 @@
 
 <style lang="scss">
     .section {
-        display: block;
-        width: 100%;
+        $self: #{&};
+        $title: #{$self}__title;
+        $content: #{$self}__content;
+        $subsections: #{$self}__subsections;
 
-        & + & {
-            margin-top: 15px;
-        }
+        $section-offset: 15px;
 
-        &__title {
-            font-size: 125%;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+        @at-root {
+            #{$self} {
+                display: block;
+                width: 100%;
 
-        &__content {
-            padding: 0 0 0 15px;
+                & + & {
+                    margin-top: $section-offset;
+                }
+            }
+
+            #{$title} {
+                font-size: 125%;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            #{$content},
+            #{$subsections} {
+                padding: 0 0 0 15px;
+            }
+
+            #{$subsections} {
+                margin-top: $section-offset;
+
+                & > #{$self} {
+                    #{$content} {
+                        padding: 0;
+                    }
+                }
+            }
         }
     }
 </style>

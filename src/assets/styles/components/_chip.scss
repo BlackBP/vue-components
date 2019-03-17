@@ -7,6 +7,9 @@
   $icon-gap: 5px;
   $padding: 6px 10px;
 
+  $background: $color-grey;
+  $font-color: $g-font-color;
+
   @at-root {
     #{$self} {
       position: relative;
@@ -17,8 +20,8 @@
       height: auto;
       padding: $padding;
       margin: auto;
-      background: $color-grey-light;
-      color: $g-font-color;
+      background: $background;
+      color: $font-color;
       border-radius: 0;
       font-size: 14px;
       line-height: 1;
@@ -41,23 +44,6 @@
       width: auto;
       height: auto;
       margin: auto 0 auto $icon-gap;
-    }
-
-    // == Modifiers
-
-    @mixin make-colored($name, $background: $color-black, $font-color: #fff) {
-      @include make-modifier($name) {
-        background: $background;
-        color: $font-color;
-        @content;
-      }
-    }
-
-    #{$self} {
-      @include make-colored('red', $color-red, #fff);
-      @include make-colored('green', $color-green, #fff);
-      @include make-colored('blue', $color-info, #fff);
-      @include make-colored('orange', $color-orange, #fff);
     }
 
   }

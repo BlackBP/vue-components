@@ -3,30 +3,31 @@
     <button :type="type"
             :class="className"
             :disabled="disabled"
-            @click="handleClick" >
+            @click="handleClick">
 
-        <i v-if="hasIcon && iconLeft"
-           :class="icon"
-           class="c-btn__icon">
-        </i>
+        <c-icon v-if="hasIcon && iconLeft"
+                class="c-btn__icon"
+                :name="icon"/>
 
         <span v-if="hasText"
               class="c-btn__text">
             {{ text }}
         </span>
 
-        <i v-if="hasIcon && iconRight"
-           :class="icon"
-           class="c-btn__icon">
-        </i>
+        <c-icon v-if="hasIcon && iconRight"
+                class="c-btn__icon"
+                :name="icon"/>
 
     </button>
 
 </template>
 
 <script>
+    import CIcon from "./Icon";
+
     export default {
         name: "c-btn",
+        components: {CIcon},
         props: {
             type: {
                 type: String,
@@ -110,12 +111,12 @@
 
                 let className = [baseClass, baseMods];
 
-                if(this.transparent) {
+                if (this.transparent) {
                     className.push(modTransparent);
                     return className;
                 }
 
-                if(this.elevated) {
+                if (this.elevated) {
                     className.push(modElevated);
                     return className;
                 }
@@ -131,7 +132,7 @@
                 this.disabled = false;
             },
             handleClick(event) {
-                if(this.disabled) return;
+                if (this.disabled) return;
 
                 this.$emit('click', event);
             }

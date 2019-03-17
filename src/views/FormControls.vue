@@ -70,22 +70,23 @@
         <c-section title="Checkbox, Radio, Switch">
 
             <c-section title="Checkbox">
-                <c-checkbox v-model="checkbox">
-                    Checkbox
+                <c-checkbox v-for="checkboxItem in checkboxes"
+                            v-model="checkbox"
+                            :key="checkboxItem.value"
+                            :value="checkboxItem">
+                    {{ checkboxItem.name }}
                 </c-checkbox>
 
                 <pre>checkbox: {{ checkbox }}</pre>
             </c-section>
 
             <c-section title="Radio">
-                <c-radio v-model="radio"
-                         val="1">
-                    Radio 1
-                </c-radio>
 
-                <c-radio v-model="radio"
-                         val="2">
-                    Radio 2
+                <c-radio v-for="radioItem in radios"
+                         v-model="radio"
+                         :key="radioItem.value"
+                         :value="radioItem">
+                    {{ radioItem.name }}
                 </c-radio>
 
                 <pre>radio: {{ radio }}</pre>
@@ -121,18 +122,32 @@
             return {
                 name: '',
                 about: '',
-                checkbox: false,
-                radio: 1,
+                checkbox: [],
+                radio: '1',
                 switcher: false,
-                selectedOption: '',
-                options: _.map(Array(5), (item, index) => {
-                    return {
-                        id: index + 1,
-                        name: `Option ${index + 1}`
-                    }
-                })
+                selectedOption: ''
             }
         },
+        computed: {
+            checkboxes() {
+                return _.times(5, item => ({
+                    name: `Checkbox ${item + 1}`,
+                    value: 100 + (item + 1) * 2
+                }))
+            },
+            radios() {
+                return _.times(5, item => ({
+                    name: `Radio ${item + 1}`,
+                    value: 1 + (item + 1) * 2
+                }))
+            },
+            options() {
+                return _.times(5, item => ({
+                    id: item + 1,
+                    name: `Option ${item + 1}`
+                }))
+            }
+        }
     }
 </script>
 

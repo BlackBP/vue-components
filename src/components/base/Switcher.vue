@@ -26,6 +26,12 @@
     export default {
         name: "c-switch",
         props: {
+            id: {
+                type: String,
+                default: function () {
+                    return this.$uuId('c-radio-')
+                }
+            },
             checkbox: {
                 type: Boolean,
                 default: true,
@@ -48,9 +54,6 @@
             };
         },
         computed: {
-            id() {
-                return this.$uuId('switcher-');
-            },
             type() {
                 return this.checkbox ? 'checkbox' : 'radio';
             },

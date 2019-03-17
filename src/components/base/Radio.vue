@@ -1,17 +1,27 @@
 <template>
 
-    <div class="c-radio">
-
-        <input v-model="checked"
-               type="radio"
-               :id="id"
-               :value="val"
-               :disabled="disabled"
-               @change="handleChange">
+    <div :class="className">
 
         <label ref="label"
+               class="c-radio__label"
                tabindex="0"
                :for="id">
+
+            <input type="radio"
+                   :id="id"
+                   :name="name"
+                   :checked="checked"
+                   :value="value"
+                   :disabled="disabled"
+                   @change="handleChange">
+
+            <c-icon v-if="!checked"
+                    class="c-radio__icon"
+                    name="radiobox-blank" />
+
+            <c-icon v-if="checked"
+                    class="c-radio__icon"
+                    name="radiobox-marked" />
 
             <span class="c-radio__content">
                 <slot></slot>
@@ -24,51 +34,54 @@
 </template>
 
 <script>
+    import CIcon from "./Icon";
     export default {
         name: "c-radio",
+        components: {CIcon},
+        model: {
+            prop: 'model',
+            event: 'change'
+        },
         props: {
-            value: {
-                type: null,
-                default: '',
-                required: false
+            id: {
+                type: String,
+                default: function () {
+                    return this.$uuId('c-radio-')
+                }
             },
-            val: {
-                type: null,
-                default: '',
-                required: false
+            model: {
+                type: null
+            },
+            value: {
+                type: null
             },
             name: {
                 type: String,
-                default: '',
-                required: false
+                default: null
             },
             disabled: {
                 type: Boolean,
-                default: false,
-                required: false
+                default: false
             }
         },
-        data() {
-            return {
-                proxy: false
-            };
-        },
         computed: {
-            id() {
-                return this.$uuId('radio-');
+            checked() {
+                return this.model == this.value;
             },
-            checked: {
-                get() {
-                    return this.value;
-                },
-                set(value) {
-                    this.proxy = value;
-                }
+            className() {
+                let base = 'c-radio';
+                let mods = {
+                    'is-active': this.checked,
+                    'is-disabled': this.disabled
+                };
+
+                return [base, mods]
             }
         },
         methods: {
-            handleChange(event) {
-                this.$emit('input', this.proxy);
+            handleChange({target: { checked }}) {
+                console.log(checked);
+                this.$emit('change', this.value)
             },
             focus() {
                 this.$refs.label.focus();

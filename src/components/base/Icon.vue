@@ -1,7 +1,7 @@
 <template functional>
 
     <i v-bind="data.attrs"
-       :class="[data.staticClass, `${props.vendorClassName}${props.name}`]"
+       :class="[data.staticClass, `${props.vendorPrefix}${props.name}`]"
        :style="data.staticStyle"
        v-on="listeners">
     </i>
@@ -17,7 +17,7 @@
                 default: 'dots-horizontal',
                 required: true
             },
-            vendorClassName: {
+            vendorPrefix: {
                 type: String,
                 default: 'mdi mdi-',
                 required: false

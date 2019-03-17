@@ -1,16 +1,27 @@
 <template>
 
-    <div class="c-checkbox">
-
-        <input v-model="checked"
-               type="checkbox"
-               :id="id"
-               :value="val"
-               @change="handleChange">
+    <div class="c-checkbox"
+         :class="checked ? 'is-active' : ''">
 
         <label ref="label"
+               class="c-checkbox__label"
                tabindex="0"
                :for="id">
+
+            <input type="checkbox"
+                   :id="id"
+                   :checked="checked"
+                   :value="value"
+                   :disabled="disabled"
+                   @change="handleChange">
+
+            <c-icon v-if="!checked"
+                    class="c-checkbox__icon"
+                    name="checkbox-blank-outline"/>
+
+            <c-icon v-if="checked"
+                    class="c-checkbox__icon"
+                    name="checkbox-marked"/>
 
             <span class="c-checkbox__content">
                 <slot></slot>
@@ -23,44 +34,64 @@
 </template>
 
 <script>
+    import CIcon from "./Icon";
+
     export default {
         name: "c-checkbox",
+        components: {CIcon},
+        model: {
+            prop: 'model',
+            event: 'change'
+        },
         props: {
-            value: {
-                type: null,
-                default: '',
-                required: false
-            },
-            val: {
-                type: null,
-                default: '',
-                required: false
-            }
-        },
-        data() {
-            return {
-                proxy: false
-            };
-        },
-        computed: {
-            id() {
-                return this.$uuId('checkbox-');
-            },
-            checked: {
-                get() {
-                    return this.value;
-                },
-                set(value) {
-                    this.proxy = value;
+            id: {
+                type: String,
+                default: function () {
+                    return this.$uuId('c-radio-')
                 }
             },
-            hasContent() {
-                return !_.isEmpty(this.$slots.default);
+            model: {
+                type: null
+            },
+            value: {
+                type: null
+            },
+            name: {
+                type: String,
+            },
+            disabled: {
+                type: Boolean,
+                default: false
+            }
+        },
+        computed: {
+            checked() {
+                if (this.model instanceof Array) {
+                    return this.model.includes(this.value);
+                } else {
+                    return this.model == this.value;
+                }
             }
         },
         methods: {
-            handleChange(event) {
-                this.$emit('input', this.proxy);
+            handleChange({target: {checked}}) {
+                let isChecked = checked;
+                let value = this.value;
+                let newValue = value;
+
+                if (this.model instanceof Array) {
+                    newValue = [...this.model];
+
+                    if (isChecked) {
+                        newValue.push(value);
+                    } else {
+                        newValue.splice(newValue.indexOf(value), 1);
+                    }
+
+                    this.$emit('change', newValue);
+                } else {
+                    this.$emit('change', value);
+                }
             },
             focus() {
                 this.$refs.label.focus();
