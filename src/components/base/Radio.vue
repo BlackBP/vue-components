@@ -19,7 +19,7 @@
                     class="c-radio__icon"
                     name="radiobox-blank" />
 
-            <c-icon v-if="checked"
+            <c-icon v-else
                     class="c-radio__icon"
                     name="radiobox-marked" />
 
@@ -79,9 +79,8 @@
             }
         },
         methods: {
-            handleChange({target: { checked }}) {
-                console.log(checked);
-                this.$emit('change', this.value)
+            handleChange(event) {
+                    this.$emit('change', this.value)
             },
             focus() {
                 this.$refs.label.focus();

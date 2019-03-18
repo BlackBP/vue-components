@@ -19,7 +19,7 @@
                     class="c-checkbox__icon"
                     name="checkbox-blank-outline"/>
 
-            <c-icon v-if="checked"
+            <c-icon v-else
                     class="c-checkbox__icon"
                     name="checkbox-marked"/>
 
@@ -47,7 +47,7 @@
             id: {
                 type: String,
                 default: function () {
-                    return this.$uuId('c-radio-')
+                    return this.$uuId('c-checkbox-')
                 }
             },
             model: {
@@ -68,6 +68,8 @@
             checked() {
                 if (this.model instanceof Array) {
                     return this.model.includes(this.value);
+                } else if (typeof this.model === 'boolean') {
+                    return this.model;
                 } else {
                     return this.model == this.value;
                 }
@@ -89,6 +91,8 @@
                     }
 
                     this.$emit('change', newValue);
+                } else if (typeof this.model === 'boolean') {
+                    this.$emit('change', isChecked);
                 } else {
                     this.$emit('change', value);
                 }
