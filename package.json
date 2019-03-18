@@ -1,19 +1,21 @@
 {
-  "name": "vue-dream-ui",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-bbp-ui",
+  "author": "blackbp",
+  "description": "UI library based on VueJS framework",
+  "version": "0.1.1",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
   "dependencies": {
     "@mdi/font": "^3.4.93",
+    "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
+    "shortid": "^2.2.14",
     "vue": "^2.5.22",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "lodash": "^4.17.11",
-    "shortid": "^2.2.14"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",

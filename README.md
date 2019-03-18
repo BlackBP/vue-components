@@ -1,4 +1,4 @@
-# vue-dream-ui
+# vue-bbp-ui
 
 ## Project setup
 ```
