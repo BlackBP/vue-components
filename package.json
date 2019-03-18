@@ -2,7 +2,7 @@
   "name": "vue-bbp-ui",
   "author": "blackbp",
   "description": "UI library based on VueJS framework",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
