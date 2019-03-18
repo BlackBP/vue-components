@@ -1,30 +1,54 @@
 .c-switch {
   $self: #{&};
+  $label: #{$self}__label;
+  $content: #{$self}__content;
+  $toggle: #{$self}__toggle;
 
   $padding: 3px 0;
   $track-width: 34px;
   $track-height: 14px;
   $knob-size: 20px;
 
-  display: inline-block;
-  position: relative;
-  user-select: none;
-  line-height: 1;
+  @at-root {
+    #{$self} {
+      display: inline-block;
+      position: relative;
+      line-height: 1;
+      @include no-select();
 
-  input[type="checkbox"],
-  input[type="radio"] {
+      &:hover,
+      &:focus {
+        #{$toggle} {
+          &:before {
+            box-shadow: 0 3px 1px -2px rgba(#000, 0.2),
+            0 2px 2px 0 rgba(#000, 0.14),
+            0 1px 5px 0 rgba(#000, 0.12),
+            0 0 0 10px rgba(#000, 0.05);
+          }
+        }
+      }
 
-    &:checked,
-    &:not(:checked) {
-      display: none;
-      opacity: 0;
+      &:active {
+        #{$toggle} {
+          &:before {
+            box-shadow: 0 3px 1px -2px rgba(#000, 0.2),
+            0 2px 2px 0 rgba(#000, 0.14),
+            0 1px 5px 0 rgba(#000, 0.12),
+            0 0 0 2px rgba($color-enabled, 0.1);
+          }
+        }
+      }
+
+      input[type="checkbox"],
+      input[type="radio"] {
+        display: none;
+        opacity: 0;
+      }
+
     }
 
-    // NOT CHECKED
-    & + label {
-
-
-      display: flex;
+    #{$label} {
+      display: inline-flex;
       flex-flow: row nowrap;
       justify-content: flex-start;
       align-items: flex-start;
@@ -34,33 +58,29 @@
       font-weight: 400;
       font-style: normal;
       line-height: 1;
+    }
 
-      &:hover,
-      &:focus {
-        &:after {
-          box-shadow: 0 3px 1px -2px rgba(#000, 0.2),
-          0 2px 2px 0 rgba(#000, 0.14),
-          0 1px 5px 0 rgba(#000, 0.12),
-          0 0 0 10px rgba(#000, 0.05);
-        }
-      }
-
-      &:active {
-        &:after {
-          box-shadow: 0 3px 1px -2px rgba(#000, 0.2),
-                      0 2px 2px 0 rgba(#000, 0.14),
-                      0 1px 5px 0 rgba(#000, 0.12),
-                      0 0 0 2px rgba($color-enabled, 0.1);
-        }
-      }
+    #{$toggle} {
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      top: 3px;
+      left: 0;
+      width: $track-width;
+      height: $track-height;
+      border-radius: $track-height / 2;
+      outline: none;
+      background-color: $color-disabled;
+      cursor: pointer;
+      transition: background-color 90ms ease;
 
       // Knob
-      &:after {
+      &:before {
         content: '';
         display: block;
         position: absolute;
-        z-index: 2;
-        top: 3px;
+        z-index: 3;
+        top: -3px;
         left: 0;
         width: $knob-size;
         height: $knob-size;
@@ -68,54 +88,30 @@
         border-radius: $knob-size / 2;
         border: 2px solid $color-disabled;
         background-color: #fff;
-        transition: transform 90ms nth($g-transition, 2),
-                    background-color 90ms nth($g-transition, 2),
-                    box-shadow 90ms nth($g-transition, 2);
-      }
-
-      // Track
-      &:before {
-        content: '';
-        display: inline-block;
-        position: relative;
-        z-index: 1;
-        top: 3px;
-        left: 0;
-        width: $track-width;
-        height: $track-height;
-        border-radius: $track-height / 2;
-        outline: none;
-        background-color: $color-disabled;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        transition: background-color 90ms ease;
+        transition: transform 0.1s nth($g-transition, 2),
+        background-color 0.1s nth($g-transition, 2),
+        box-shadow 0.1s nth($g-transition, 2);
       }
     }
 
-    // CHECKED
-    &:checked + label {
+    #{$content} {
+      display: block;
+      margin-top: 1px;
+      margin-left: 10px;
+    }
 
-      // Knob
-      &:after {
-        transform: translateX($track-width - $knob-size);
-        border-color: $color-enabled;
-      }
-
-      // Track
-      &:before {
+    // Active state
+    #{$self}.is-active {
+      #{$toggle} {
         background-color: $color-enabled;
-      }
 
+        &:before {
+          transform: translateX($track-width - $knob-size);
+          border-color: $color-enabled;
+        }
+      }
     }
 
   }
 
-  &__content {
-    display: block;
-    margin-top: 1px;
-    margin-left: 10px;
-  }
 }
