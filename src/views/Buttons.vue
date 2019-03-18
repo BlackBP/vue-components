@@ -8,7 +8,7 @@
                    :color="button.color"
                    :text="button.text"/>
 
-            <template slot="subsections">
+            <template slot="subsection">
                 <c-section>
                     <c-btn v-for="button in buttons"
                            class="ml10px"
@@ -46,7 +46,7 @@
                    :text="button.text"
                    :elevated="true"/>
 
-            <template slot="subsections">
+            <template slot="subsection">
                 <c-section>
                     <c-btn v-for="button in buttons"
                            class="ml10px"
@@ -87,7 +87,7 @@
                    :text="button.text"
                    :transparent="true"/>
 
-            <template slot="subsections">
+            <template slot="subsection">
                 <c-section>
                     <c-btn v-for="button in buttons"
                            class="ml10px"
@@ -128,7 +128,7 @@
                    :text="button.text"
                    :disabled="true"/>
 
-            <template slot="subsections">
+            <template slot="subsection">
                 <c-section>
                     <c-btn v-for="button in buttons"
                            class="ml10px"

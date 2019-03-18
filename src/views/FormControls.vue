@@ -98,6 +98,30 @@
                 </c-switch>
 
                 <pre>switcher: {{ switcher }}</pre>
+
+                <template slot="subsection">
+                    <c-section title="As checkbox (default)">
+                        <c-switch v-for="checkboxItem in checkboxes"
+                                  v-model="checkbox"
+                                  :key="checkboxItem.value"
+                                  :value="checkboxItem">
+                            Switch-{{ checkboxItem.name }}
+                        </c-switch>
+                        <pre>checkbox: {{ checkbox }}</pre>
+                    </c-section>
+
+                    <c-section title="As radio">
+                        <c-switch v-for="radioItem in radios"
+                                  v-model="radio"
+                                  type="radio"
+                                  :key="radioItem.value"
+                                  :value="radioItem">
+                            Switch-{{ radioItem.name }}
+                        </c-switch>
+                        <pre>radio: {{ radio }}</pre>
+                    </c-section>
+                </template>
+
             </c-section>
 
         </c-section>

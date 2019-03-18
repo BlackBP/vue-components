@@ -11,7 +11,7 @@
         </div>
 
         <div class="section__subsections">
-            <slot name="subsections"></slot>
+            <slot name="subsection"></slot>
         </div>
 
     </div>
