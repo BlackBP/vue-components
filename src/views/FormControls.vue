@@ -62,7 +62,7 @@
                       track-by="id"
                       placeholder="Опция"
                       :searchable="true"
-                      :options="options" />
+                      :options="options"/>
 
             <pre>selectedOption: {{ selectedOption }}</pre>
         </c-section>
@@ -81,7 +81,6 @@
             </c-section>
 
             <c-section title="Radio">
-
                 <c-radio v-for="radioItem in radios"
                          v-model="radio"
                          :key="radioItem.value"
@@ -100,6 +99,7 @@
                 <pre>switcher: {{ switcher }}</pre>
 
                 <template slot="subsection">
+
                     <c-section title="As checkbox (default)">
                         <c-switch v-for="checkboxItem in checkboxes"
                                   v-model="checkbox"
@@ -107,6 +107,7 @@
                                   :value="checkboxItem">
                             Switch-{{ checkboxItem.name }}
                         </c-switch>
+
                         <pre>checkbox: {{ checkbox }}</pre>
                     </c-section>
 
@@ -118,10 +119,11 @@
                                   :value="radioItem">
                             Switch-{{ radioItem.name }}
                         </c-switch>
+
                         <pre>radio: {{ radio }}</pre>
                     </c-section>
-                </template>
 
+                </template>
             </c-section>
 
         </c-section>
