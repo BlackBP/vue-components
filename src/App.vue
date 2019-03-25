@@ -22,9 +22,8 @@
                         Konstantin
                     </div>
 
-                    <div class="nav-user__role c-chip">
-                        developer
-                    </div>
+                    <c-chip class="nav-user__role"
+                            text="developer"/>
 
                 </div>
 
@@ -54,9 +53,12 @@
 
 <script>
     import {routes} from './router/routes';
+    import CMarker from "./components/Marker";
+    import CChip from "./components/base/Chip";
 
     export default {
         name: 'App',
+        components: {CChip, CMarker},
         data() {
             return {
                 routes: _.map(routes, route => {

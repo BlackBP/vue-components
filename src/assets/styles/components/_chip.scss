@@ -5,10 +5,11 @@
   $trailing: #{$self}__trailing;
 
   $icon-gap: 5px;
-  $padding: 6px 10px;
+  $padding: 3px 6px;
 
   $background: $color-grey;
   $font-color: $g-font-color;
+  $border-radius: $g-border-radius / 2;
 
   @at-root {
     #{$self} {
@@ -22,8 +23,8 @@
       margin: auto;
       background: $background;
       color: $font-color;
-      border-radius: 0;
-      font-size: 14px;
+      border-radius: $border-radius;
+      font-size: 100%;
       line-height: 1;
       overflow: hidden;
     }

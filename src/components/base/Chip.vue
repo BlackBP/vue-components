@@ -22,7 +22,7 @@
     import CIcon from "./Icon";
 
     export default {
-        name: "Chip",
+        name: "c-chip",
         components: {CIcon},
         props: {
             text: {
@@ -55,7 +55,7 @@
             },
             className() {
                 let baseClass = 'c-chip';
-                let className = [];
+                let className = [baseClass];
 
                 if(typeof this.color === 'string' && this.color !== '') {
                     className.push(`${baseClass}--${this.color}`);
