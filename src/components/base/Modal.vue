@@ -9,7 +9,7 @@
 
             <div class="c-modal-container__wrap">
 
-                <transition :name="modalTransition">
+                <transition :name="modalTransitionClassName">
 
                     <template v-if="customContent">
                         <div v-show="visible"
@@ -78,18 +78,17 @@
             modalOpened: 'modal-open'
         },
         modal: {
-            base: 'c-modal'
+            base: 'c-modal',
+            transition: {
+                scale: 'modal-scale',
+                slideY : 'modal-slideY',
+                slideUpY : 'modal-slideUpY',
+                slideX : 'modal-slideX',
+                slideRightX : 'modal-slideRightX',
+                rotateX : 'modal-rotateX',
+                rotateY : 'modal-rotateY'
+            }
         }
-    };
-
-    const Transitions = {
-        scale: 'modal-scale',
-        slideY : 'modal-slideY',
-        slideUpY : 'modal-slideUpY',
-        slideX : 'modal-slideX',
-        slideRightX : 'modal-slideRightX',
-        rotateX : 'modal-rotateX',
-        rotateY : 'modal-rotateY',
     };
 
     const Events = {
@@ -130,10 +129,10 @@
             },
             modalTransition: {
                 type: String,
-                default: Transitions.scale,
+                default: 'scale',
                 required: false,
                 validator(value) {
-                    return Object.values(Transitions).includes(value);
+                    return Object.keys(CssClass.modal.transition).includes(value);
                 }
             },
             customContent: {
@@ -187,6 +186,9 @@
                 return {
                     maxWidth: this.maxWidth
                 }
+            },
+            modalTransitionClassName() {
+                return CssClass.modal.transition[this.modalTransition];
             }
         },
         methods: {

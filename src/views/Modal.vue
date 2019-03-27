@@ -3,20 +3,47 @@
         <c-btn color="primary"
                text="Open modal"
                :elevated="true"
-               @click="openModal" />
+               @click="openModal(1)" />
 
-        <c-modal ref="modal"
-                 title="Закрытие заявки"
+        <c-modal ref="modal1"
+                 title="Simple modal"
                  icon="mdi mdi-home"
                  max-width="600px"
                  :allow-dismiss="true">
 
-            <rates-list v-show="currentComponent === 'RatesList'"
-                        :rate-click="selectRate" />
+            Hello world!
 
-            <task-done-form v-show="currentComponent === 'TaskDoneForm'"
-                            :rate="rate"
-                            @submit="showRatesList" />
+            <template slot="footer">
+                <c-btn color="primary"
+                       text="Open modal #2"
+                       :elevated="true"
+                       @click="openModal(2)"/>
+            </template>
+
+        </c-modal>
+
+        <c-modal ref="modal2"
+                 title="Simple modal #2"
+                 icon="mdi mdi-send"
+                 max-width="700px"
+                 :allow-dismiss="true">
+
+            Modal #2 content
+            <template slot="footer">
+                <c-btn color="primary"
+                       text="Open modal #2"
+                       :elevated="true"
+                       @click="openModal(3)"/>
+            </template>
+        </c-modal>
+
+        <c-modal ref="modal3"
+                 title="Simple modal #3"
+                 icon="mdi mdi-account"
+                 max-width="400px"
+                 :allow-dismiss="true">
+
+            Modal #3 content
 
         </c-modal>
 
@@ -26,13 +53,12 @@
 <script>
     import CBtn from "../components/base/Button";
     import CModal from "../components/base/Modal";
-    import RatesList from "./task-done/rates-list";
-    import TaskDoneForm from "./task-done/form";
-
-
     export default {
         name: "screen-modal",
-        components: {TaskDoneForm, RatesList, CModal, CBtn},
+        components: {
+            CModal,
+            CBtn
+        },
         data() {
             return {
                 currentComponent: 'RatesList',
@@ -40,17 +66,12 @@
             }
         },
         methods: {
-            openModal() {
-                this.$refs.modal.open();
-            },
-            selectRate(rate) {
-                this.rate = _.clone(rate);
-                this.$nextTick(() => {
-                    this.currentComponent = 'TaskDoneForm'
-                });
-            },
-            showRatesList() {
-                this.currentComponent = 'RatesList'
+            openModal(number = 1) {
+                let refName = `modal${number}`;
+
+                if(this.$refs.hasOwnProperty(refName)) {
+                    this.$refs[refName].open();
+                }
             }
         }
     }

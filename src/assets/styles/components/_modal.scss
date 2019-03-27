@@ -17,8 +17,12 @@
   }
 }
 
-$modal-transition: ease 0.65s;
+$modal-transition: 0.3s ease;
 
+/**
+** Animations
+ */
+// Scale
 .modal-scale {
   &-enter-active,
   &-leave-active {
@@ -42,6 +46,7 @@ $modal-transition: ease 0.65s;
   }
 }
 
+// Slide Y
 .modal-slideY {
   &-enter-active,
   &-leave-active {
@@ -88,6 +93,7 @@ $modal-transition: ease 0.65s;
   }
 }
 
+// Slide x
 .modal-slideX {
   &-enter-active,
   &-leave-active {
@@ -134,6 +140,7 @@ $modal-transition: ease 0.65s;
   }
 }
 
+// Rotate
 .modal-rotateX {
   &-enter-active,
   &-leave-active {
@@ -180,12 +187,20 @@ $modal-transition: ease 0.65s;
   }
 }
 
+/**
+** Layout modifiers
+ */
+// Html modifier
 html.modal-open {
   height: 100%;
   margin: 0;
   overflow: hidden;
 }
 
+/**
+** Modal styles
+ */
+// Modal container
 .c-modal-container {
   $self: #{&};
   $wrap: #{&}__wrap;
@@ -216,6 +231,7 @@ html.modal-open {
   }
 }
 
+// Modal
 .c-modal {
   $self: #{&};
   $close-icon: #{$self}__close-icon;
