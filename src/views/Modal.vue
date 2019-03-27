@@ -13,11 +13,18 @@
 
             Hello world!
 
-            <template slot="footer">
-                <c-btn color="primary"
-                       text="Open modal #2"
-                       :elevated="true"
-                       @click="openModal(2)"/>
+            <template slot="footer"
+                      slot-scope="methods">
+                <c-btn-group>
+                    <c-btn color="primary"
+                           text="Open modal #2"
+                           :elevated="true"
+                           @click="openModal(2)"/>
+
+                    <c-btn text="Close"
+                           :transparent="true"
+                           @click="methods.closeModal"/>
+                </c-btn-group>
             </template>
 
         </c-modal>
@@ -29,11 +36,19 @@
                  :allow-dismiss="true">
 
             Modal #2 content
-            <template slot="footer">
-                <c-btn color="primary"
-                       text="Open modal #2"
-                       :elevated="true"
-                       @click="openModal(3)"/>
+
+            <template slot="footer"
+                      slot-scope="methods">
+                <c-btn-group>
+                    <c-btn color="primary"
+                           text="Open modal #2"
+                           :elevated="true"
+                           @click="openModal(3)"/>
+
+                    <c-btn text="Close"
+                           :transparent="true"
+                           @click="methods.closeModal"/>
+                </c-btn-group>
             </template>
         </c-modal>
 
@@ -53,9 +68,11 @@
 <script>
     import CBtn from "../components/base/Button";
     import CModal from "../components/base/Modal";
+    import CBtnGroup from "../components/base/ButtonGroup";
     export default {
         name: "screen-modal",
         components: {
+            CBtnGroup,
             CModal,
             CBtn
         },

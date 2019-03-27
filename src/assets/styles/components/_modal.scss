@@ -244,7 +244,7 @@ html.modal-open {
   $padding: 15px;
   $blocks-gutter: 10px;
   $border: $g-border;
-  $border-radius: $g-border-radius;
+  $border-radius: $g-border-radius * 2;
 
   @at-root {
     #{$self} {

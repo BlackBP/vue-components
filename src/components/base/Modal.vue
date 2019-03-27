@@ -52,7 +52,9 @@
 
                             <footer v-show="showFooter"
                                     class="c-modal__footer">
-                                <slot name="footer"></slot>
+                                <slot name="footer"
+                                      :closeModal="close">
+                                </slot>
                             </footer>
 
                         </div>

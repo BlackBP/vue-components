@@ -19,7 +19,7 @@
 
   // Configuration
   $padding: 8px 16px;
-  $border-radius: $g-border-radius - 2;
+  $border-radius: $g-border-radius;
   $background-color: $btn-base-color;
   $font-color: $g-font-color;
 
@@ -180,5 +180,16 @@
       @include make-transparent($mod-color-info, $color-info);
     }
 
+  }
+}
+
+.c-btn-group {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  @include make-modifier('vert') {
+    flex-flow: column nowrap;
   }
 }
