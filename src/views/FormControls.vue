@@ -5,51 +5,51 @@
 
             <c-section title="Normal">
                 <c-text-input v-model="name"
-                              placeholder="Введите имя"
+                              placeholder="Your name"
                               :helper="`name: ${name}`"/>
 
                 <c-textarea v-model="about"
                             class="mt10px"
-                            placeholder="Напишите о себе"
+                            placeholder="About"
                             :helper="`about: ${about}`"/>
             </c-section>
 
             <c-section title="Error">
                 <c-text-input v-model="name"
-                              placeholder="Введите имя"
-                              :errors="['Обязательное поле']"
+                              placeholder="Your name"
+                              :errors="['Required']"
                               :helper="`name: ${name}`"/>
 
 
                 <c-textarea v-model="about"
                             class="mt10px"
-                            placeholder="Напишите о себе"
-                            :errors="['Обязательное поле']"
+                            placeholder="About"
+                            :errors="['Required']"
                             :helper="`about: ${about}`"/>
             </c-section>
 
             <c-section title="Disabled">
                 <c-text-input v-model="name"
-                              placeholder="Введите имя"
+                              placeholder="Your name"
                               :disabled="true"
                               :helper="`name: ${name}`"/>
 
                 <c-textarea v-model="about"
                             class="mt10px"
-                            placeholder="Напишите о себе"
+                            placeholder="About"
                             :disabled="true"
                             :helper="`about: ${about}`"/>
             </c-section>
 
             <c-section title="Readonly">
                 <c-text-input v-model="name"
-                              placeholder="Введите имя"
+                              placeholder="Your name"
                               :readonly="true"
                               :helper="`name: ${name}`"/>
 
                 <c-textarea v-model="about"
                             class="mt10px"
-                            placeholder="Напишите о себе"
+                            placeholder="About"
                             :readonly="true"
                             :helper="`about: ${about}`"/>
             </c-section>

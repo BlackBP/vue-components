@@ -7,19 +7,19 @@ export const routes = [
     {
         path: '/buttons',
         routeName: 'buttons',
-        name: 'Кнопки',
+        name: 'Buttons',
         component: Buttons
     },
     {
         path: '/form-controls',
         routeName: 'form-controls',
-        name: 'Элементы форм',
+        name: 'Form controls',
         component: FormControls
     },
     {
         path: '/modals',
         routeName: 'modals',
-        name: 'Модальные окна',
+        name: 'Modals',
         component: Modals
     }
 ];

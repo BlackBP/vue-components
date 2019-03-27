@@ -1,6 +1,11 @@
 {
   "name": "vue-bbp-ui",
   "author": "blackbp",
+  "homepage": "https://github.com/BlackBP/vue-dream-ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BlackBP/vue-dream-ui.git"
+  },
   "description": "UI library based on VueJS framework",
   "keywords": [
     "vue",
