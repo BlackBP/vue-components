@@ -41,7 +41,7 @@
                       slot-scope="methods">
                 <c-btn-group>
                     <c-btn color="primary"
-                           text="Open modal #2"
+                           text="Open custom modal"
                            :elevated="true"
                            @click="openModal(3)"/>
 
@@ -53,12 +53,12 @@
         </c-modal>
 
         <c-modal ref="modal3"
-                 title="Simple modal #3"
-                 icon="mdi mdi-account"
-                 max-width="400px"
+                 :custom-content="true"
                  :allow-dismiss="true">
 
-            Modal #3 content
+            <div style="background: #fff; padding: 30px; border-radius: 12px;">
+                Modal #3 (Custom style) content
+            </div>
 
         </c-modal>
 

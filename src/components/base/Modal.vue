@@ -13,8 +13,9 @@
 
                     <template v-if="customContent">
                         <div v-show="visible"
-                             class="c-modal">
-                            <slot></slot>
+                             class="c-modal"
+                             @click.stop>
+                            <slot :closeModal="close"></slot>
                         </div>
                     </template>
 
@@ -47,7 +48,7 @@
                             </header>
 
                             <div class="c-modal__body">
-                                <slot></slot>
+                                <slot :closeModal="close"></slot>
                             </div>
 
                             <footer v-show="showFooter"
