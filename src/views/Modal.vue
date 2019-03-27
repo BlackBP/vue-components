@@ -19,7 +19,7 @@
                     <c-btn color="primary"
                            text="Open modal #2"
                            :elevated="true"
-                           @click="openModal(2)"/>
+                           @click="() => {methods.closeModal(); openModal(2)}"/>
 
                     <c-btn text="Close"
                            :transparent="true"
@@ -43,7 +43,7 @@
                     <c-btn color="primary"
                            text="Open custom modal"
                            :elevated="true"
-                           @click="openModal(3)"/>
+                           @click="() => {methods.closeModal(); openModal(3);}"/>
 
                     <c-btn text="Close"
                            :transparent="true"
@@ -56,10 +56,19 @@
                  :custom-content="true"
                  :allow-dismiss="true">
 
-            <div style="background: #fff; padding: 30px; border-radius: 12px;">
-                Modal #3 (Custom style) content
-            </div>
+            <template slot-scope="methods">
+                <div style="background: #fff; padding: 30px; border-radius: 12px;">
+                    <div>
+                        Modal #3 (Custom style) content
+                    </div>
 
+                    <div style="margin-top: 15px;">
+                        <c-btn text="Close"
+                               :elevated="true"
+                               @click="methods.closeModal"/>
+                    </div>
+                </div>
+            </template>
         </c-modal>
 
     </div>
