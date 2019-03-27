@@ -36,7 +36,6 @@
                                     {{ title }}
                                 </div>
 
-
                                 <div class="c-modal__close-icon">
                                     <c-icon-btn v-show="allowDismiss"
                                                 icon="close"
@@ -72,9 +71,42 @@
     import CIcon from "./Icon";
     import CIconBtn from "./IconButton";
 
+    const $html = document.querySelector('html');
+
+    const CssClass = {
+        html: {
+            modalOpened: 'modal-open'
+        },
+        modal: {
+            base: 'c-modal'
+        }
+    };
+
+    const Transitions = {
+        scale: 'modal-scale',
+        slideY : 'modal-slideY',
+        slideUpY : 'modal-slideUpY',
+        slideX : 'modal-slideX',
+        slideRightX : 'modal-slideRightX',
+        rotateX : 'modal-rotateX',
+        rotateY : 'modal-rotateY',
+    };
+
+    const Events = {
+        open: {
+            name: 'open'
+        },
+        close: {
+            name: 'close'
+        }
+    };
+
     export default {
         name: "c-modal",
-        components: {CIconBtn, CIcon},
+        components: {
+            CIconBtn,
+            CIcon
+        },
         props: {
             title: {
                 type: String,
@@ -98,8 +130,11 @@
             },
             modalTransition: {
                 type: String,
-                default: 'modal-scale',
-                required: false
+                default: Transitions.scale,
+                required: false,
+                validator(value) {
+                    return Object.values(Transitions).includes(value);
+                }
             },
             customContent: {
                 type: Boolean,
@@ -134,13 +169,13 @@
         },
         computed: {
             hasTitle() {
-                return !_.isEmpty(this.title);
+                return typeof this.title === 'string' && this.title !== '';
             },
             hasIcon() {
-                return !_.isEmpty(this.icon);
+                return typeof this.icon === 'string' && this.icon !== '';
             },
             modalClassName() {
-                let base = 'c-modal';
+                let base = CssClass.modal.base;
                 let mods = {};
 
                 mods[`${base}--${this.styleType}`] = !!this.styleType;
@@ -156,19 +191,18 @@
         },
         methods: {
             open() {
-                document.querySelector('html').classList.add('modal-open');
+                setTimeout(() => {
+                    $html.classList.add(CssClass.html.modalOpened);
+                }, 100);
 
                 this.visible = true;
-                this.$emit('open');
+                this.$emit(Events.open.name);
             },
             close() {
-                document.querySelector('html').classList.remove('modal-open');
+                $html.classList.remove(CssClass.html.modalOpened);
 
                 this.visible = false;
-                this.$emit('close');
-            },
-            toggle() {
-                this.visible = !this.visible;
+                this.$emit(Events.close.name);
             },
             backdropClick(event) {
                 event.preventDefault();

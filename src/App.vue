@@ -73,7 +73,5 @@
 </script>
 
 <style lang="scss">
-    @import "assets/styles/common";
-
-
+    @import "assets/styles/app.scss";
 </style>

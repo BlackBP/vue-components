@@ -188,7 +188,6 @@ html.modal-open {
 
 .c-modal-container {
   $self: #{&};
-  $backdrop: #{&}__backdrop;
   $wrap: #{&}__wrap;
   $content: #{&}__content;
 
