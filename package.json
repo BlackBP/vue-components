@@ -15,8 +15,10 @@
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build ./src/app.js",
+    "build-bundle": "vue-cli-service build --target lib --name bbp-ui ./index.js"
   },
+  "main": "index.js",
   "dependencies": {
     "@mdi/font": "^3.5.95",
     "lodash": "^4.17.11",
