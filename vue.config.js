@@ -9,14 +9,8 @@ module.exports = {
         modules: false,
         loaderOptions: {
             sass: {
-                data: `@import "@/assets/styles/base/_mixins.scss"; @import "@/assets/styles/base/_variables.scss";`
+                data: `@import "@/assets/styles/base/_variables.scss"; @import "@/assets/styles/base/_mixins.scss";`
             }
         }
-    },
-    filenameHashing: false,
-    chainWebpack: config => {
-        config.plugins.delete('html');
-        config.plugins.delete('preload');
-        config.plugins.delete('prefetch')
     }
 };

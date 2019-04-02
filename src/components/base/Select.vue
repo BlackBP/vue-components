@@ -359,6 +359,7 @@
                 if (!this.focused) return;
 
                 this.focused = false;
+                this.resetList();
 
                 if (this.searchable) {
                     this.$refs.search.blur();
