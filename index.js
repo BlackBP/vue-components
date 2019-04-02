@@ -11,7 +11,7 @@ import Switcher from './src/components/base/Switcher'
 import TextArea from './src/components/base/TextArea'
 import TextInput from './src/components/base/TextInput'
 
-import './src/assets/styles/app.scss'
+import './src/assets/styles/bundle.scss'
 
 export {
     Btn,

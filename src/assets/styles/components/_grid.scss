@@ -1,0 +1,161 @@
+$grid-gutter: 15px !default;
+$grid-columns-count: 12;
+
+@mixin make-columns() {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+
+  &-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+  }
+
+  @for $index from 1 through $grid-columns-count {
+    $width: (100% / $grid-columns-count) * $index;
+
+    &-#{$index} {
+      flex: 0 0 $width;
+      max-width: $width;
+    }
+  }
+}
+
+@-ms-viewport {
+  width: device-width;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar;
+}
+
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+// == Container
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+}
+
+.container-fluid {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+}
+
+// == Row
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$grid-gutter;
+  margin-left: -$grid-gutter;
+}
+
+// Without gutters
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+// == Columns
+%columnStyle {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+}
+
+.col {
+  $self: #{&};
+  $breakpoints: sm md lg xl;
+
+  @at-root {
+    #{$self},
+    #{$self}-auto {
+      @extend %columnStyle;
+    }
+  }
+
+  @each $breakpoint in $breakpoints {
+    &-#{$breakpoint},
+    &-#{$breakpoint}-auto {
+      @extend %columnStyle;
+    }
+
+    &-#{$breakpoint} {
+      @for $columnIndex from 1 through $grid-columns-count {
+        &-#{$columnIndex} {
+          @extend %columnStyle;
+        }
+      }
+    }
+  }
+}
+
+.col {
+  @include make-columns();
+}
+
+// == Media
+@include media(sm) {
+  .container {
+    width: 570px;
+    max-width: 100%;
+  }
+
+  .col-sm {
+    @include make-columns();
+  }
+}
+
+@include media(md) {
+  .container {
+    width: 750px;
+    max-width: 100%;
+  }
+
+  .col-md {
+    @include make-columns();
+  }
+}
+
+@include media(lg) {
+  .container {
+    width: 990px;
+    max-width: 100%;
+  }
+
+  .col-lg {
+    @include make-columns();
+  }
+}
+
+@include media(xl) {
+  .container {
+    width: 1170px;
+    max-width: 100%;
+  }
+
+  .col-xl {
+    @include make-columns();
+  }
+}
