@@ -1,0 +1,256 @@
+// ==== Clearfix
+.u-clearfix {
+  &:after,
+  &:before {
+    display: table;
+    content: "";
+    clear: both;
+  }
+}
+
+// ==== Lists
+.u-list {
+  &-unstyled {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+}
+
+// ==== Images
+.u-img {
+  &-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+  }
+
+  &-rounded {
+    display: block;
+    border-radius: 50%;
+    border: 0;
+  }
+}
+
+// ==== Text
+
+.u-text {
+
+  // Colors
+  &-primary {
+    color: $color-primary;
+  }
+
+  &-secondary {
+    color: $color-secondary;
+  }
+
+  &-success {
+    color: $color-success;
+  }
+  &-info {
+    color: $color-info;
+  }
+  &-error {
+    color: $color-error;
+  }
+  &-warn {
+    color: $color-warn;
+  }
+
+  // Alignment
+  &-center {
+    text-align: center;
+  }
+
+  &-left {
+    text-align: left;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-justify {
+    text-align: justify;
+  }
+
+  // Transforms
+  &-upper {
+    text-transform: uppercase;
+  }
+
+  &-lower {
+    text-transform: lowercase;
+  }
+
+  &-capitalize {
+    text-transform: capitalize;
+  }
+
+  // Decorations
+  &-underline {
+    text-decoration: underline;
+  }
+
+  // Weights
+  &-hairline {
+    font-weight: 100;
+  }
+
+  &-thin {
+    font-weight: 200;
+  }
+
+  &-light {
+    font-weight: 300;
+  }
+
+  &-regular {
+    font-weight: 400;
+  }
+
+  &-medium {
+    font-weight: 500;
+  }
+
+  &-semibold {
+    font-weight: 600;
+  }
+
+  &-bold {
+    font-weight: 700;
+  }
+
+  &-black {
+    font-weight: 800;
+  }
+
+  &-heavy {
+    font-weight: 900;
+  }
+
+  // Wrap
+  &-nowrap {
+    white-space: nowrap;
+  }
+
+  &-wrap {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    white-space: normal;
+  }
+
+  &-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+// ==== Displaying
+.u-hidden {
+  display: none;
+
+  &-xl,
+  &-lg,
+  &-md,
+  &-sm,
+  &-xs {
+    display: block;
+  }
+
+  @each $breakpoint in $g-media-list {
+    @include media($breakpoint) {
+      &-#{$breakpoint} {
+        display: none !important;
+      }
+    }
+  }
+}
+
+.u-visible {
+  display: block;
+
+  &-xl,
+  &-lg,
+  &-md,
+  &-sm,
+  &-xs {
+    display: none;
+  }
+
+  @each $breakpoint in $g-media-list {
+    &-#{$breakpoint} {
+      @include media($breakpoint) {
+        display: block !important;
+      }
+    }
+  }
+}
+
+// ==== Center block
+.u-center-block {
+  display: block;
+  margin: 0 auto;
+}
+
+// ==== Selection
+.u-no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// ==== Cursor
+.u-cursor {
+  &-pointer {
+    cursor: pointer;
+  }
+}
+
+// ==== Tables
+.u-table-wrap {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.u-table-unstyled {
+  width: auto;
+  max-width: 100%;
+  border: none;
+  border-collapse: collapse;
+  background-color: transparent;
+  box-sizing: content-box;
+  text-align: left;
+
+  tbody,
+  thead,
+  tfoot {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  tr,
+  td,
+  th {
+    border: none;
+    background: none;
+  }
+
+  td,
+  th {
+    vertical-align: baseline;
+    box-sizing: content-box;
+  }
+}

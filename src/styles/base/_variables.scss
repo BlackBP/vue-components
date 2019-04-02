@@ -1,58 +1,61 @@
 /**
 ** Colors
 */
-$color-primary: #61bd4f !default;;
-$color-secondary: #ffa726 !default;;
+$color-primary: #61bd4f !default;
+$color-secondary: #ffa726 !default;
 
-$color-success: #4caf50 !default;;
-$color-error: #ff5252 !default;;
-$color-warn: #fb8c00 !default;;
-$color-info: #2196f3 !default;;
+$color-success: #4caf50 !default;
+$color-error: #ff5252 !default;
+$color-warn: #fb8c00 !default;
+$color-info: #2196f3 !default;
 
-$color-grey: #EEE !default;;
+$color-grey: #EEE !default;
 
-$color-disabled: #CCC !default;;
-$color-enabled: $color-primary !default;;
+$color-disabled: #CCC !default;
+$color-enabled: $color-primary !default;
 
 /**
 ** Global
 */
 // Typography
-$g-font-family: 'Lato', sans-serif !default;; // 'Roboto', sans-serif;
-$g-font-size: 16px !default;;
-$g-font-weight: 400 !default;;
-$g-font-color: #333 !default;;
-$g-line-height: 1.25 !default;;
+$g-font-family: 'Lato', sans-serif !default; // 'Roboto', sans-serif;
+$g-font-size: 16px !default;
+$g-font-weight: 400 !default;
+$g-font-color: #333 !default;
+$g-line-height: 1.25 !default;
 
 // Selected text
-$g-selected-font-color: #fff !default;;
-$g-selected-background: $color-primary !default;;
+$g-selected-font-color: #fff !default;
+$g-selected-background: $color-primary !default;
 
 // Border
 $g-border: 1px solid #ddd;
-$g-border-width: nth($g-border, 1) !default;;
-$g-border-style: nth($g-border, 2) !default;;
-$g-border-color: nth($g-border, 3) !default;;
+$g-border-width: nth($g-border, 1) !default;
+$g-border-style: nth($g-border, 2) !default;
+$g-border-color: nth($g-border, 3) !default;
 
-$g-border-radius: 6px !default;;
+$g-border-radius: 6px !default;
 
 // Transition
-$g-transition: 0.2s ease !default;;
+$g-transition: 0.2s ease !default;
 
 // Disabled state
-$disabled-background: #DDD !default;;
-$disabled-font-color: $g-font-color !default;;
+$disabled-background: #DDD !default;
+$disabled-font-color: $g-font-color !default;
+
+// Media queries
+$g-media-list: xl, lg, md, sm, xs;
 
 /**
 ** Components
 */
 // Elevation
-$elevation-start-index: 0 !default;;
-$elevation-end-index: 24 !default;;
+$elevation-start-index: 0 !default;
+$elevation-end-index: 24 !default;
 
-$elevation-umbra-opacity: .15 !default;; // default = 0.2
-$elevation-penumbra-opacity: .1 !default;; // default = 0.14
-$elevation-ambient-opacity: .09 !default;; // default = 0.12
+$elevation-umbra-opacity: .15 !default; // default = 0.2
+$elevation-penumbra-opacity: .1 !default; // default = 0.14
+$elevation-ambient-opacity: .09 !default; // default = 0.12
 
 $elevation-umbra-map: (
         0: "0px 0px 0px 0px",
