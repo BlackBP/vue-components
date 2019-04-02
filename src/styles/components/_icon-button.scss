@@ -87,6 +87,7 @@
       color: inherit;
       font-size: $icon-font-size;
       line-height: 1;
+      text-decoration: none;
       cursor: pointer;
       transition: box-shadow $g-transition, background-color $g-transition, color $g-transition;
       @include no-select();
@@ -94,6 +95,7 @@
       &:hover,
       &:focus {
         background: darken($background-color, 5%);
+        text-decoration: none;
       }
 
       &:active {
