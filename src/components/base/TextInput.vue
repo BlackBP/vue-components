@@ -15,7 +15,6 @@
                ref="field"
                class="c-text-input__field"
                autocomplete="off"
-               :id="id"
                :type="type"
                :placeholder="placeholder"
                :disabled="disabled"
@@ -114,9 +113,6 @@
                     this.valueLength = _.toString(value).length;
                     this.$emit('input', value);
                 }
-            },
-            id() {
-                return this.$uuId('text-input-')
             },
             hasErrors() {
                 if(_.isArray(this.errors)) {

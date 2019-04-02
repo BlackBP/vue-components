@@ -1,5 +1,5 @@
 <template>
-    <FormField ref="" class="c-text-area"
+    <FormField class="c-text-area"
                content-class="c-text-area__wrap"
                :focused="focused"
                :has-error="hasErrors"
@@ -113,9 +113,6 @@
                     this.valueLength = _.toString(value).length;
                     this.$emit('input', value);
                 }
-            },
-            id() {
-                return this.$uuId('text-input-')
             },
             hasErrors() {
                 return !_.isEmpty(this.errors)

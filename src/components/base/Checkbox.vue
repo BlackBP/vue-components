@@ -5,11 +5,9 @@
 
         <label ref="label"
                class="c-checkbox__label"
-               tabindex="0"
-               :for="id">
+               tabindex="0">
 
             <input type="checkbox"
-                   :id="id"
                    :checked="checked"
                    :value="value"
                    :disabled="disabled"
@@ -44,12 +42,6 @@
             event: 'change'
         },
         props: {
-            id: {
-                type: String,
-                default: function () {
-                    return this.$uuId('c-checkbox-')
-                }
-            },
             model: {
                 type: null
             },

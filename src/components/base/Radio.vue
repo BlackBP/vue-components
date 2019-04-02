@@ -4,11 +4,9 @@
 
         <label ref="label"
                class="c-radio__label"
-               tabindex="0"
-               :for="id">
+               tabindex="0">
 
             <input type="radio"
-                   :id="id"
                    :name="name"
                    :checked="checked"
                    :value="value"
@@ -43,12 +41,6 @@
             event: 'change'
         },
         props: {
-            id: {
-                type: String,
-                default: function () {
-                    return this.$uuId('c-radio-')
-                }
-            },
             model: {
                 type: null
             },

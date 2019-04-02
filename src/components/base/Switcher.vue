@@ -5,11 +5,9 @@
 
         <label ref="label"
                tabindex="0"
-               class="c-switch__label"
-               :for="id">
+               class="c-switch__label">
 
-            <input :id="id"
-                   :type="type"
+            <input :type="type"
                    :checked="checked"
                    :value="value"
                    :disabled="disabled"
@@ -35,13 +33,6 @@
             event: 'change'
         },
         props: {
-            id: {
-                type: String,
-                default: function () {
-                    return this.$uuId('c-switch-')
-                },
-                required: false
-            },
             model: {
                 type: null,
                 required: false
