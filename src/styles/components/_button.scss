@@ -116,14 +116,21 @@
     }
 
     #{$text} {
-      flex: 1 1 auto;
       display: inline-block;
+
+      & + #{$icon} {
+        margin-left: $icon-margin;
+      }
     }
 
     #{$icon} {
       flex: 0 0 auto;
       display: inline-block;
       font-size: $icon-font-size;
+
+      & + #{$text} {
+        margin-left: $icon-margin;
+      }
     }
 
     /**
@@ -154,19 +161,6 @@
     // Block
     @include make-modifier($mod-block) {
       width: 100%;
-    }
-
-    // Icon
-    @include make-modifier($mod-icon-left) {
-      #{$icon} {
-        margin: auto $icon-margin auto auto;
-      }
-    }
-
-    @include make-modifier($mod-icon-right) {
-      #{$icon} {
-        margin: auto auto auto $icon-margin;
-      }
     }
 
     // Transparent

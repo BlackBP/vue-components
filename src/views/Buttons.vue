@@ -5,8 +5,9 @@
             <c-btn v-for="button in buttons"
                    class="ml10px"
                    :key="`normal-${button.text}`"
-                   :color="button.color"
-                   :text="button.text"/>
+                   :color="button.color">
+                {{ button.text }}
+            </c-btn>
 
             <template slot="subsection">
                 <c-section>
@@ -14,9 +15,10 @@
                            class="ml10px"
                            :key="`normal-w-icons-${button.text}`"
                            :color="button.color"
-                           :text="button.text"
                            :icon="button.icon"
-                           :icon-left="true"/>
+                           :icon-left="true">
+                        {{ button.text }}
+                    </c-btn>
                 </c-section>
 
                 <c-section>
@@ -43,8 +45,10 @@
                    class="ml10px"
                    :key="`elevated-${button.text}`"
                    :color="button.color"
-                   :text="button.text"
-                   :elevated="true"/>
+
+                   :elevated="true">
+                {{ button.text }}
+            </c-btn>
 
             <template slot="subsection">
                 <c-section>
@@ -52,10 +56,12 @@
                            class="ml10px"
                            :key="`elevated-w-icon-${button.text}`"
                            :color="button.color"
-                           :text="button.text"
+
                            :elevated="true"
                            :icon="button.icon"
-                           :icon-left="true"/>
+                           :icon-left="true">
+                        {{ button.text }}
+                    </c-btn>
                 </c-section>
 
                 <c-section>
@@ -84,8 +90,10 @@
                    class="ml10px"
                    :key="`transparent-${button.text}`"
                    :color="button.color"
-                   :text="button.text"
-                   :transparent="true"/>
+
+                   :transparent="true">
+                {{ button.text }}
+            </c-btn>
 
             <template slot="subsection">
                 <c-section>
@@ -93,10 +101,11 @@
                            class="ml10px"
                            :key="`transparent-${button.text}`"
                            :color="button.color"
-                           :text="button.text"
                            :transparent="true"
                            :icon="button.icon"
-                           :icon-left="true"/>
+                           :icon-left="true">
+                        {{ button.text }}
+                    </c-btn>
                 </c-section>
 
                 <c-section>
@@ -125,8 +134,10 @@
                    class="ml10px"
                    :key="`transparent-${button.text}`"
                    :color="button.color"
-                   :text="button.text"
-                   :disabled="true"/>
+
+                   :disabled="true">
+                {{ button.text }}
+            </c-btn>
 
             <template slot="subsection">
                 <c-section>
@@ -134,10 +145,12 @@
                            class="ml10px"
                            :key="`transparent-${button.text}`"
                            :color="button.color"
-                           :text="button.text"
+
                            :disabled="true"
                            :icon="button.icon"
-                           :icon-left="true"/>
+                           :icon-left="true">
+                        {{ button.text }}
+                    </c-btn>
                 </c-section>
 
                 <c-section>

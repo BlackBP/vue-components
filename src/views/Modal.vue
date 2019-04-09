@@ -1,9 +1,10 @@
 <template>
     <div>
         <c-btn color="primary"
-               text="Open modal"
                :elevated="true"
-               @click="openModal(1)" />
+               @click="openModal(1)" >
+            Open modal
+        </c-btn>
 
         <c-modal ref="modal1"
                  title="Simple modal"
@@ -17,13 +18,15 @@
                       slot-scope="methods">
                 <c-btn-group>
                     <c-btn color="primary"
-                           text="Open modal #2"
                            :elevated="true"
-                           @click="() => {methods.closeModal(); openModal(2)}"/>
+                           @click="() => {methods.closeModal(); openModal(2)}">
+                        Open modal #2
+                    </c-btn>
 
-                    <c-btn text="Close"
-                           :transparent="true"
-                           @click="methods.closeModal"/>
+                    <c-btn :transparent="true"
+                           @click="methods.closeModal">
+                        Close
+                    </c-btn>
                 </c-btn-group>
             </template>
 
@@ -41,13 +44,15 @@
                       slot-scope="methods">
                 <c-btn-group>
                     <c-btn color="primary"
-                           text="Open custom modal"
                            :elevated="true"
-                           @click="() => {methods.closeModal(); openModal(3);}"/>
+                           @click="() => {methods.closeModal(); openModal(3);}">
+                        Open custom modal
+                    </c-btn>
 
-                    <c-btn text="Close"
-                           :transparent="true"
-                           @click="methods.closeModal"/>
+                    <c-btn :transparent="true"
+                           @click="methods.closeModal">
+                        Close
+                    </c-btn>
                 </c-btn-group>
             </template>
         </c-modal>
@@ -63,9 +68,9 @@
                     </div>
 
                     <div style="margin-top: 15px;">
-                        <c-btn text="Close"
-                               :elevated="true"
-                               @click="methods.closeModal"/>
+                        <c-btn @click="methods.closeModal">
+                            Close
+                        </c-btn>
                     </div>
                 </div>
             </template>

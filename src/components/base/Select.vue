@@ -1,18 +1,18 @@
 <template>
 
-    <FormField class="c-select"
-               content-class="c-select__wrap"
-               tabindex="0"
-               :focused="focused"
-               :has-error="hasErrors"
-               :helper-text="helperText"
-               :disabled="disabled"
-               :count="itemsCount"
-               :count-max="maxItems"
-               :show-counter="showCounter"
-               :show-helper="true"
-               @focus="showList"
-               @blur="hideList">
+    <c-form-field class="c-select"
+                  content-class="c-select__wrap"
+                  tabindex="0"
+                  :focused="focused"
+                  :has-error="hasErrors"
+                  :helper-text="helperText"
+                  :disabled="disabled"
+                  :count="itemsCount"
+                  :count-max="maxItems"
+                  :show-counter="showCounter"
+                  :show-helper="true"
+                  @focus="showList"
+                  @blur="hideList">
 
         <div class="c-select__field">
 
@@ -72,19 +72,19 @@
 
         </div>
 
-    </FormField>
+    </c-form-field>
 
 </template>
 
 <script>
-    import FormField from "./FormField";
+    import CFormField from "./FormField";
     import CIcon from "./Icon";
 
     export default {
         name: "c-select",
         components: {
             CIcon,
-            FormField
+            CFormField
         },
         props: {
             options: {

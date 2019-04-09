@@ -6,7 +6,7 @@
             <div class="nav-user__left">
 
                 <div class="nav-user__photo c-image c-image--circle">
-                    <img src="../../assets/images/avatars/user.png"
+                    <img src=""
                          alt="User">
                 </div>
 
