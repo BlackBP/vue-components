@@ -1,9 +1,9 @@
 <template functional>
 
     <i v-bind="data.attrs"
+       v-on="listeners"
        :class="[data.staticClass, `${props.vendorPrefix}${props.name}`]"
-       :style="data.staticStyle"
-       v-on="listeners">
+       :style="data.staticStyle">
     </i>
 
 </template>
