@@ -13,13 +13,8 @@
                    :disabled="disabled"
                    @change="handleChange">
 
-            <c-icon v-if="!checked"
-                    class="c-radio__icon"
-                    name="radiobox-blank" />
-
-            <c-icon v-else
-                    class="c-radio__icon"
-                    name="radiobox-marked" />
+            <c-icon class="c-radio__icon"
+                    :name="checked ? 'radiobox-marked' : 'radiobox-blank'" />
 
             <span class="c-radio__content">
                 <slot></slot>

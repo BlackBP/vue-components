@@ -2,6 +2,7 @@
 
     <i v-bind="data.attrs"
        v-on="listeners"
+       class="c-icon"
        :class="[data.staticClass, `${props.vendorPrefix}${props.name}`]"
        :style="data.staticStyle">
     </i>

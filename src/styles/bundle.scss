@@ -2,20 +2,9 @@
 @import "~@mdi/font/css/materialdesignicons.min.css";
 
 // Base
-@import "base/variables";
-@import "base/mixins";
-@import "base/reset";
-@import "base/typography";
+@import "./variables";
+@import "./mixins";
+@import "./reset";
 
 // Components
-@import "components/button";
-@import "components/chip";
-@import "components/checkbox-radio";
-@import "components/elevation";
-@import "components/form";
-@import "components/grid";
-@import "components/icon-button";
-@import "components/modal";
-@import "components/switch";
-@import "components/marker";
-@import "components/utils";
+@import "./components";

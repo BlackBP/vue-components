@@ -34,7 +34,6 @@
 }
 
 // ==== Text
-
 .u-text {
 
   // Colors
@@ -155,47 +154,6 @@
   }
 }
 
-// ==== Displaying
-.u-hidden {
-  display: none;
-
-  &-xl,
-  &-lg,
-  &-md,
-  &-sm,
-  &-xs {
-    display: block;
-  }
-
-  @each $breakpoint in $g-media-list {
-    @include media($breakpoint) {
-      &-#{$breakpoint} {
-        display: none !important;
-      }
-    }
-  }
-}
-
-.u-visible {
-  display: block;
-
-  &-xl,
-  &-lg,
-  &-md,
-  &-sm,
-  &-xs {
-    display: none;
-  }
-
-  @each $breakpoint in $g-media-list {
-    &-#{$breakpoint} {
-      @include media($breakpoint) {
-        display: block !important;
-      }
-    }
-  }
-}
-
 // ==== Center block
 .u-center-block {
   display: block;
@@ -208,49 +166,4 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-// ==== Cursor
-.u-cursor {
-  &-pointer {
-    cursor: pointer;
-  }
-}
-
-// ==== Tables
-.u-table-wrap {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  overflow: auto;
-}
-
-.u-table-unstyled {
-  width: auto;
-  max-width: 100%;
-  border: none;
-  border-collapse: collapse;
-  background-color: transparent;
-  box-sizing: content-box;
-  text-align: left;
-
-  tbody,
-  thead,
-  tfoot {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  tr,
-  td,
-  th {
-    border: none;
-    background: none;
-  }
-
-  td,
-  th {
-    vertical-align: baseline;
-    box-sizing: content-box;
-  }
 }

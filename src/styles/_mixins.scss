@@ -1,4 +1,4 @@
-//
+// Elevation
 @mixin box-elevation($level: 3, $color: #000, $opacity-boost: 0) {
 
   @if $level < 0 {
@@ -22,7 +22,7 @@
 
 }
 
-//
+// Input, TextArea placeholder
 @mixin input-placeholder {
   &::-webkit-input-placeholder {
     @content
@@ -38,7 +38,55 @@
   }
 }
 
-//
+// Media queries
+@mixin media( $breakpoints ) {
+  @each $breakpoint in $breakpoints {
+
+    @if $breakpoint == xs-s {
+      @media screen and (max-width: 320px) {
+        @content;
+      }
+    }
+    @if $breakpoint == xs-m {
+      @media screen and (min-width: 321px) and (max-width: 375px) {
+        @content;
+      }
+    }
+    @if $breakpoint == xs-l {
+      @media screen and (min-width: 376px) and (max-width: 425px) {
+        @content;
+      }
+    }
+    @if $breakpoint == xs {
+      @media screen and (max-width: 575px) {
+        @content;
+      }
+    }
+    @if $breakpoint == sm {
+      @media screen and (min-width: 576px) and (max-width: 767px) {
+        @content;
+      }
+    }
+    @if $breakpoint == md {
+      @media screen and (min-width: 768px) and (max-width: 991px) {
+        @content;
+      }
+    }
+    @if $breakpoint == lg {
+      @media screen and (min-width: 992px) and (max-width: 1199px) {
+        @content;
+      }
+    }
+    @if $breakpoint == xl {
+      @media screen and (min-width: 1200px) {
+        @content;
+      }
+    }
+
+  }
+}
+
+// Disable user selection
 @mixin no-select {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -46,7 +94,7 @@
   user-select: none;
 }
 
-//
+// Word wrapping
 @mixin word-wrap() {
   overflow-wrap: break-word;
   word-wrap: break-word;

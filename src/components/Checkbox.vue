@@ -13,13 +13,8 @@
                    :disabled="disabled"
                    @change="handleChange">
 
-            <c-icon v-if="!checked"
-                    class="c-checkbox__icon"
-                    name="checkbox-blank-outline"/>
-
-            <c-icon v-else
-                    class="c-checkbox__icon"
-                    name="checkbox-marked"/>
+            <c-icon class="c-checkbox__icon"
+                    :name="checked ? 'checkbox-marked' : 'checkbox-blank-outline'"/>
 
             <span class="c-checkbox__content">
                 <slot></slot>
