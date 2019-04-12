@@ -18,9 +18,8 @@
     "build": "vue-cli-service build",
     "build-bundle": "vue-cli-service build --target lib --name bbp-ui src/Bundle.vue"
   },
-  "main": "./dist/bbp-ui.common.js",
+  "main": "./src/components.js",
   "files": [
-    "dist/*",
     "src/*",
     "*.json",
     "*.js"
