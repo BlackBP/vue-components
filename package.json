@@ -11,14 +11,20 @@
     "vue",
     "ui"
   ],
-  "version": "0.2.6",
+  "version": "0.2.7",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name bbp-ui ./index.js"
+    "build-bundle": "vue-cli-service build --target lib --name bbp-ui src/Bundle.vue"
   },
-  "main": "index.js",
+  "main": "./dist/bbp-ui.common.js",
+  "files": [
+    "dist/*",
+    "src/*",
+    "*.json",
+    "*.js"
+  ],
   "dependencies": {
     "@mdi/font": "^3.5.95",
     "lodash": "^4.17.11",
