@@ -4,6 +4,7 @@ import Checkbox from './components/Checkbox'
 import Chip from './components/Chip'
 import Icon from './components/Icon'
 import IconBtn from './components/IconButton'
+import Loading from './components/Loading'
 import Modal from './components/Modal'
 import Radio from './components/Radio'
 import Select from './components/Select'
@@ -18,6 +19,7 @@ export {
     Chip,
     Icon,
     IconBtn,
+    Loading,
     Modal,
     Radio,
     Select,

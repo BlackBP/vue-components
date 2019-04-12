@@ -14,9 +14,9 @@
   "version": "0.2.8",
   "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve src/app.js",
     "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name bbp-ui src/Bundle.vue"
+    "build-bundle": "vue-cli-service build --target lib --name bbp-ui src/components.js.vue"
   },
   "main": "./src/components.js",
   "files": [
