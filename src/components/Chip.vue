@@ -4,7 +4,7 @@
 
         <c-icon v-if="hasLeading"
                 class="c-chip__leading"
-                :name="leading" />
+                :name="leading"/>
 
         <div class="c-chip__text">
             <slot></slot>
@@ -12,7 +12,7 @@
 
         <c-icon v-if="hasTrailing"
                 class="c-chip__trailing"
-                :name="trailing" />
+                :name="trailing"/>
 
     </div>
 
@@ -52,7 +52,7 @@
                 let baseClass = 'c-chip';
                 let className = [baseClass];
 
-                if(typeof this.color === 'string' && this.color !== '') {
+                if (typeof this.color === 'string' && this.color !== '') {
                     className.push(`${baseClass}--${this.color}`);
                 }
 

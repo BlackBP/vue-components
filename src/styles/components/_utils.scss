@@ -1,4 +1,4 @@
-// ==== Clearfix
+// == Clearfix
 .u-clearfix {
   &:after,
   &:before {
@@ -8,7 +8,7 @@
   }
 }
 
-// ==== Lists
+// == Lists
 .u-list {
   &-unstyled {
     padding: 0;
@@ -17,7 +17,7 @@
   }
 }
 
-// ==== Images
+// == Images
 .u-img {
   &-responsive {
     display: block;
@@ -33,12 +33,12 @@
   }
 }
 
-// ==== Text
+// == Text
 .u-text {
 
   // Colors
   &-primary {
-    color: $color-primary;
+    color: var(--color-primary);
   }
 
   &-secondary {
@@ -48,12 +48,15 @@
   &-success {
     color: $color-success;
   }
+
   &-info {
     color: $color-info;
   }
+
   &-error {
     color: $color-error;
   }
+
   &-warn {
     color: $color-warn;
   }
@@ -154,16 +157,96 @@
   }
 }
 
-// ==== Center block
+// == Aligning
 .u-center-block {
   display: block;
   margin: 0 auto;
 }
 
-// ==== Selection
+// == Selection
 .u-no-select {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+// == Display
+.u-inline {
+  display: inline;
+}
+
+.u-inline-block {
+  display: inline-block;
+}
+
+.u-flex {
+  display: flex;
+}
+
+.u-inline-flex {
+  display: inline-flex;
+}
+
+// == Flex
+.u-flex-row {
+  flex-direction: row;
+}
+
+.u-flex-column {
+  flex-direction: column;
+}
+
+.u-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.u-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.u-flex-content {
+  &-start {
+    justify-content: flex-start;
+  }
+
+  &-end {
+    justify-content: flex-end;
+  }
+
+  &-center {
+    justify-content: center;
+  }
+
+  &-between {
+    justify-content: space-between;
+  }
+}
+
+.u-flex-items {
+  &-start {
+    align-items: flex-start;
+  }
+
+  &-end {
+    align-items: flex-end;
+  }
+
+  &-center {
+    align-items: center;
+  }
+
+  &-stretch {
+    align-items: stretch;
+  }
+}
+
+// == Misc
+
+//
+.u-h100 {
+  height: 100%;
+}
+.u-m0 {
+  margin: 0;
 }

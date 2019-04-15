@@ -1,5 +1,7 @@
 import Home from '../views/Home';
+import Orders from '../views/Orders';
 import Logs from '../views/Logs';
+import Products from "../views/Products";
 
 // == Мета-данные маршрутов
 export const META = {
@@ -68,5 +70,7 @@ function createRoute(metaData, component, rest = {}) {
 
 export default [
     createRoute(META.home, Home),
+    createRoute(META.orders, Orders),
+    createRoute(META.products, Products),
     createRoute(META.logs, Logs)
 ]

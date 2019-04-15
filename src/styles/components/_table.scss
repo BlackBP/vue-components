@@ -1,77 +1,122 @@
-.c-table-wrap {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  overflow: auto;
-}
-
 .c-table {
-  $padding: 5px 10px;
+  $self: #{&};
+  $wrap: #{$self}__wrap;
+  $table: #{$self}__table;
+  $header: #{$self}__header;
+  $footer: #{$self}__footer;
+  $loading: #{$self}__loading;
+
+  $padding: 10px;
   $border: $g-border;
-  $header-color: $color-secondary;
 
-  $row-hover-background: rgba(#000, 0.05);
+  $hover-background: rgba(#000, 0.05);
 
-  width: 100%;
-  max-width: 100%;
-  border-collapse: collapse;
-  background-color: #fff;
-  box-sizing: content-box;
-
-  thead {
-    width: 100%;
-    border-bottom: $border;
-
+  @at-root {
+    td,
     th {
-      font-size: 18px;
-      font-weight: 700;
-      vertical-align: middle;
+      text-align: inherit;
     }
 
-  }
+    #{$self} {
+      position: relative;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      width: 100%;
+      overflow: hidden;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
 
-  tbody {
-    width: 100%;
+    #{$table} {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 100%;
+      border-collapse: collapse;
+      background-color: transparent;
 
-    tr {
-      &:hover {
-        background-color: $row-hover-background;
+      thead {
+        border-bottom: 2px nth($border, 2) nth($border, 3);
+
+        th {
+          font-size: 1.125rem;
+          font-weight: 700;
+          vertical-align: middle;
+        }
+
+      }
+
+      tbody {
+        tr {
+          &:hover,
+          &:focus {
+            background-color: $hover-background;
+          }
+        }
+      }
+
+      tr {
+        border: none;
+
+        &:first-child {
+          border-top: none;
+        }
+
+        & + tr {
+          border-top: $border;
+        }
+      }
+
+      th, td {
+        padding: $padding;
+        vertical-align: middle;
       }
     }
 
-    th, td {
+    #{$wrap},
+    #{$header},
+    #{$footer} {
+      display: block;
+      width: 100%;
+    }
+
+    #{$header},
+    #{$footer} {
+      flex: 0 0 auto;
+    }
+
+    #{$wrap} {
+      flex: 1 1 auto;
+    }
+
+    #{$header} {
+      margin-bottom: 10px;
+    }
+
+    #{$footer} {
+      margin-top: 10px;
+    }
+
+    #{$loading} {
+      position: absolute;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(#fff, 0.5);
     }
   }
 
-  tr {
-    border: none;
-
-    &:first-child {
-      border-top: none;
-    }
-
-    & + tr {
-      border-top: $border;
-    }
-  }
-
-  th, td {
-    padding: $padding;
-    vertical-align: middle;
-    box-sizing: content-box;
-    text-align: inherit;
-  }
-
-  th {
-  }
-
-  td {
-  }
-
-  &--width-auto {
+  @include make-modifier('width-auto') {
     width: auto;
     max-width: 100%;
   }

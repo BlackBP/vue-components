@@ -24,11 +24,6 @@
                 default: 'Загрузка...',
                 required: false
             },
-            visible: {
-                type: Boolean,
-                default: true,
-                required: true
-            },
             elevated: {
                 type: Boolean,
                 default: false,

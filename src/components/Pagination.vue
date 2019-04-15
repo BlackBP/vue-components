@@ -33,13 +33,16 @@
 
     export default {
         name: "c-pagination",
+        model: {
+            event: 'change'
+        },
         components: {CIcon},
         props: {
             value: {
                 type: Number,
                 default: 1
             },
-            last: {
+            total: {
                 type: Number,
                 default: 1,
                 required: true
@@ -60,26 +63,26 @@
                 return this.value;
             },
             isLast() {
-                return Math.abs(this.current) === Math.abs(this.last);
+                return Math.abs(this.current) === Math.abs(this.total);
             },
             isFirst() {
                 return this.current === 1;
             },
             hasPages() {
-                return this.last >= this.current;
+                return this.total >= this.current;
             },
             list() {
                 let list = [];
                 let current = Math.abs(this.current);
-                let last = Math.abs(this.last);
+                let total = Math.abs(this.total);
                 let limit = Math.abs(this.limit);
 
                 // Корректировка текущего индекса
                 current = (current <= 0) ? 1 : current;
-                current = (current > last) ? last : current;
+                current = (current > total) ? total : current;
 
                 // Если количество видимых больше количества страниц, то уравниваем их
-                limit = (limit > last) ? last : limit;
+                limit = (limit > total) ? total : limit;
 
                 // Вычисление смещение относительно текущего индекса
                 let offset = Math.floor(Math.abs(limit / 2));
@@ -93,7 +96,7 @@
 
                 // Находим конечный индекс
                 let endItem = startItem + size;
-                endItem = (endItem > last) ? last : endItem;
+                endItem = (endItem > total) ? total : endItem;
 
                 // Корректируем начальный индекс
                 startItem = (size > endItem - startItem) ? endItem - size : startItem;
@@ -114,85 +117,10 @@
             handleChange(value) {
                 value = Math.abs(value);
                 value = (value <= 0) ? 1 : value;
-                value = (value >= this.last) ? this.last : value;
+                value = (value >= this.total) ? this.total : value;
 
-                this.$emit('change', value)
+                this.$emit('change', value);
             }
         }
     }
 </script>
-
-<style lang="scss">
-    .c-pagination {
-        display: inline-flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: center;
-        line-height: 1;
-        text-align: center;
-        font-size: 1.125rem;
-
-        $hover-background: rgba(#000, 0.15);
-        $active-background: rgba(#000, 0.25);
-
-        &__list {
-            display: inline-flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        &__btn,
-        &__item {
-            display: inline-block;
-            width: 2em;
-            height: 2em;
-            border-radius: calc(2em / 2);
-            line-height: 2em;
-            cursor: pointer;
-            transition: $g-transition;
-
-            &:hover,
-            &:focus {
-                text-decoration: none;
-                background-color: $hover-background;
-            }
-
-            &:active {
-                background-color: $active-background;
-            }
-        }
-
-        &__btn {
-            display: inline-block;
-            width: 2em;
-            height: 2em;
-            padding: 0;
-            background: transparent;
-            border: none;
-            appearance: none;
-
-            &[disabled],
-            &[disabled="disabled"] {
-                color: rgba(#000, 0.3);
-                cursor: not-allowed;
-
-                &:hover,
-                &:focus {
-                    background-color: transparent;
-                }
-            }
-        }
-
-        &__item {
-            margin-left: 3px;
-            margin-right: 3px;
-            text-decoration: none;
-
-            &.is-active {
-                background-color: $color-primary;
-                color: #fff;
-            }
-        }
-    }
-</style>

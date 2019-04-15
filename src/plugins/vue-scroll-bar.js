@@ -6,7 +6,7 @@ Vue.use(VueScroll, {
     ops: {
         rail: {
             background: '#c1c1c1',
-            opacity: 0.15,
+            opacity: 0,
             /** Rail's size(Height/Width) , default -> 6px */
             size: '6px',
             /** Specify rail and bar's border-radius, or the border-radius of rail and bar will be equal to the rail's size. default -> false **/
@@ -16,7 +16,7 @@ Vue.use(VueScroll, {
             /** Rail the distance from the side of container. **/
             gutterOfSide: '2px',
             /** Whether to keep rail show or not, default -> false, event content height is not enough */
-            keepShow: true
+            keepShow: false
         },
         bar: {
             /** Whether to show bar on scrolling, default -> true */
@@ -24,7 +24,7 @@ Vue.use(VueScroll, {
             /** Whether to keep show or not, default -> false */
             keepShow: false,
             /** Bar's background , default -> #00a650 */
-            background: '#61bd4f',
+            background: '#F44336',
             /** Bar's opacity, default -> 1  */
             opacity: 1
         }

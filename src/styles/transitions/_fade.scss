@@ -1,34 +1,115 @@
-@keyframes fade-in-scale {
+/*
+** Fade
+*/
+@keyframes fade-in {
   0% {
     opacity: 0;
-    transform: scale(0.9);
   }
 
   100% {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
-@keyframes fade-out-scale {
+/*
+** Zoom
+*/
+// Entrance
+@keyframes zoom-in {
   0% {
-    opacity: 1;
-    transform: scale(1);
+    transform: scale(0.95);
   }
-
   100% {
-    opacity: 0;
-    transform: scale(1.1);
+    transform: scale(1);
   }
 }
 
+// Exits
+@keyframes zoom-out {
+  0% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
-.fade-in {
-  &-enter-active {
-    animation: fade-in-scale .3s;
+/*
+** Slide
+*/
+// Entrance
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/*
+** Slide
+*/
+// Exits
+@keyframes slide-out-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}
+
+/*
+** Vue transitions
+*/
+.trans {
+  $duration: .2s;
+
+  @mixin enter-active() {
+    &-enter-active {
+      @content
+    }
   }
 
-  &-leave-active {
-    animation: fade-out-scale .3s;
+  @mixin leave-active() {
+    &-leave-active {
+      @content
+    }
+  }
+
+  /*
+  ** Fade
+  */
+  &-fade-in {
+    @include enter-active {
+      animation: fade-in $duration;
+    }
+    @include leave-active {
+      animation: fade-in $duration reverse;
+    }
+  }
+
+  &-fade-in-zoom {
+    @include enter-active {
+      animation: fade-in $duration, zoom-in $duration;
+    }
+
+    @include leave-active {
+      animation: fade-in $duration reverse, zoom-in $duration reverse;
+    }
+  }
+
+  /*
+  ** Slide
+  */
+  &-slide-left {
+    @include enter-active {
+      animation: fade-in $duration, slide-in-left $duration;
+    }
+
+    @include leave-active {
+      animation: fade-in $duration reverse, slide-out-right $duration;
+    }
   }
 }

@@ -1,24 +1,16 @@
-<template>
-    <div class="c-card">
+<template functional>
+    <div v-bind="data.attrs"
+         v-on="listeners"
+         class="c-card"
+         :class="[data.staticClass]"
+         :style="data.staticStyle">
 
-        <div v-if="hasHeader && !loading"
-             class="c-card__header">
-            <slot name="header"></slot>
-        </div>
-
-        <div class="c-card__body">
-            <template v-if="loading">
-                <c-loading :visible="true" />
-            </template>
-            <template v-else>
-                <slot></slot>
-            </template>
-        </div>
-
-        <div v-if="hasFooter && !loading"
-             class="c-card__footer">
-            <slot name="footer"></slot>
-        </div>
+        <template v-if="props.loading">
+            <c-loading style="margin: auto;"/>
+        </template>
+        <template v-else>
+            <slot></slot>
+        </template>
 
     </div>
 </template>
@@ -38,14 +30,6 @@
                 type: Boolean,
                 default: false,
                 required: false,
-            }
-        },
-        computed: {
-            hasHeader() {
-                return !!this.$slots.header;
-            },
-            hasFooter() {
-                return !!this.$slots.footer;
             }
         }
     }
