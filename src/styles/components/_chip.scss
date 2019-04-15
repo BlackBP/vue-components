@@ -9,7 +9,14 @@
 
   $background: $color-grey;
   $font-color: $g-font-color;
-  $border-radius: $g-border-radius / 2;
+  $border-radius: $g-border-radius;
+
+  @mixin make-colored($name, $background, $font-color: #fff) {
+    @include make-modifier($name) {
+      background-color: $background;
+      color: $font-color
+    }
+  }
 
   @at-root {
     #{$self} {
@@ -45,6 +52,15 @@
       width: auto;
       height: auto;
       margin: auto 0 auto $icon-gap;
+    }
+
+    #{$self} {
+      @include make-colored('primary', $color-primary);
+      @include make-colored('secondary', $color-secondary);
+      @include make-colored('success', $color-success);
+      @include make-colored('error', $color-error);
+      @include make-colored('warn', $color-warn);
+      @include make-colored('info', $color-info);
     }
 
   }

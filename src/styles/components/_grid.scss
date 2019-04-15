@@ -93,6 +93,12 @@ html {
     #{$self}-auto {
       @extend %columnStyle;
     }
+
+    @for $columnIndex from 1 through $grid-columns-count {
+      #{$self}-#{$columnIndex} {
+        @extend %columnStyle;
+      }
+    }
   }
 
   @each $breakpoint in $breakpoints {

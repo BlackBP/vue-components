@@ -36,9 +36,13 @@ $g-border-width: nth($g-border, 1) !default;
 $g-border-style: nth($g-border, 2) !default;
 $g-border-color: nth($g-border, 3) !default;
 $g-border-radius: 6px !default;
+$g-border-radius-lg: 10px !default;
 
 // Transition
 $g-transition: 0.2s ease !default;
+
+// Gutter
+$g-gutter: 15px;
 
 // Disabled state
 $disabled-background: #DDD !default;

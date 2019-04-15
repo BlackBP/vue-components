@@ -7,7 +7,7 @@
                 :name="leading" />
 
         <div class="c-chip__text">
-            {{ text }}
+            <slot></slot>
         </div>
 
         <c-icon v-if="hasTrailing"
@@ -25,11 +25,6 @@
         name: "c-chip",
         components: {CIcon},
         props: {
-            text: {
-                type: String,
-                default: '',
-                required: true
-            },
             leading: {
                 type: String,
                 default: '',

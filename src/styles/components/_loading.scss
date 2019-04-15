@@ -15,7 +15,7 @@
   $spinner: #{$self}__spinner;
   $text: #{$self}__text;
 
-  $border: $g-border;
+  $border: none;
   $border-radius: 10px;
 
   $spinner-size: 45px;
@@ -39,7 +39,6 @@
       text-align: center;
       color: $text-color;
       overflow: hidden;
-      @include box-elevation()
     }
 
     #{$spinner} {
@@ -83,6 +82,12 @@
       margin-left: 1rem;
       font-weight: bold;
       font-size: $text-size;
+    }
+
+    #{$self} {
+      @include make-modifier('elevated') {
+        @include box-elevation();
+      }
     }
   }
 }

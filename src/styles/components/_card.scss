@@ -1,0 +1,52 @@
+.c-card {
+  $self: #{&};
+
+  $header: #{$self}__header;
+  $body: #{$self}__body;
+  $footer: #{$self}__footer;
+
+  $title: #{$self}__title;
+  $icon: #{$self}__icon;
+
+  $padding: $g-gutter;
+
+  @at-root {
+
+    #{$self} {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      background-color: #fff;
+      border-radius: $g-border-radius;
+    }
+
+    #{$header},
+    #{$body},
+    #{$footer} {
+      display: block;
+      width: 100%;
+      background-color: transparent;
+    }
+
+    #{$header} {
+      padding: $padding $padding 0;
+    }
+
+    #{$body} {
+      padding: $padding;
+      height: 100%;
+    }
+
+    #{$footer} {
+      padding: 0 $padding $padding;
+    }
+
+    /* */
+    #{$title} {
+      font-weight: bold;
+      font-size: 1.125rem;
+    }
+
+  }
+
+}

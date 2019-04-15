@@ -9,7 +9,7 @@ module.exports = {
         modules: false,
         loaderOptions: {
             sass: {
-                data: `@import "@/styles/_variables.scss"; @import "@/styles/_mixins.scss";`
+                data: `@import "@/styles/base/_variables.scss"; @import "@/styles/base/_mixins.scss";`
             }
         }
     }

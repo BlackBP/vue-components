@@ -1,0 +1,30 @@
+.app-layout {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  height: 100vh;
+  padding: 0 $layout-gutter;
+  background-color: $layout-background;
+
+  &__container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    padding-top: $layout-gutter;
+  }
+}
+
+.app-content {
+  flex: 1 1 auto;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0 0 $layout-gutter $layout-gutter;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

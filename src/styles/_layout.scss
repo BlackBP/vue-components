@@ -1,0 +1,22 @@
+$layout-gutter: $g-gutter;
+$layout-background: rgba(#000, 0.45);
+$layout-element-background: rgba(#fff, 1);
+$layout-element-font-color: #333;
+
+@import "./layout/main";
+@import "./layout/drawer";
+@import "./layout/header";
+
+html,
+body {
+  background-color: $color-grey-light;
+}
+
+body {
+  background-position: 0 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: url(https://chin-chin27.ru/images/background/light-4.jpg);
+}
+
