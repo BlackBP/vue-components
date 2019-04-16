@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import CTextInput from "../../components/TextInput";
+    import CTextInput from "../../components/base/TextInput";
     export default {
         name: "view-product-mods-form",
         components: {

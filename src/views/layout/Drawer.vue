@@ -46,8 +46,8 @@
     import {mapState} from 'vuex';
     import {META} from '../../router/routes';
 
-    import CIcon from "../../components/Icon";
-    import CChip from "../../components/Chip";
+    import CIcon from "../../components/base/Icon";
+    import CChip from "../../components/base/Chip";
 
     /**
      *

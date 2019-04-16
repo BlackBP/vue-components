@@ -16,7 +16,8 @@
             <c-icon class="c-checkbox__icon"
                     :name="checked ? 'checkbox-marked' : 'checkbox-blank-outline'"/>
 
-            <span class="c-checkbox__content">
+            <span v-if="$slots.default"
+                  class="c-checkbox__content">
                 <slot></slot>
             </span>
 

@@ -5,14 +5,14 @@
          :class="[data.staticClass, data.class]"
          :style="data.staticStyle">
 
-        <div v-if="!!$slots.start"
+        <div v-if="$slots.start"
              class="c-list-item__start">
             <slot name="start"></slot>
         </div>
         <div class="c-list-item__body">
             <slot></slot>
         </div>
-        <div v-if="!!$slots.end"
+        <div v-if="$slots.end"
              class="c-list-item__end">
             <slot name="end"></slot>
         </div>

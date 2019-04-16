@@ -86,31 +86,29 @@
 </template>
 
 <script>
-    import CCard from "../components/Card";
-    import CPagination from "../components/Pagination";
-    import CIcon from "../components/Icon";
-    import CTable from "../components/Table";
-    import CChip from "../components/Chip";
-    import CScrollView from "../components/ScrollView";
-    import CCardSection from "../components/CardSection";
-    import CIconBtn from "../components/IconButton";
-    import CCheckbox from "../components/Checkbox";
-    import CTextInput from "../components/TextInput";
-    import CBtnGroup from "../components/ButtonGroup";
+    import CCard from "../components/base/Card";
+    import CIcon from "../components/base/Icon";
+    import CChip from "../components/base/Chip";
+    import CScrollView from "../components/base/ScrollView";
+    import CCardSection from "../components/base/CardSection";
+    import CIconBtn from "../components/base/IconButton";
+    import CBtnGroup from "../components/base/ButtonGroup";
+    import CTable from "../components/base/Table";
+    import CTextInput from "../components/base/TextInput";
+    import CPagination from "../components/base/Pagination";
 
     export default {
         name: "view-logs",
         components: {
-            CBtnGroup,
+            CPagination,
             CTextInput,
-            CCheckbox,
+            CTable,
+            CBtnGroup,
             CIconBtn,
             CCardSection,
             CScrollView,
             CChip,
-            CTable,
             CIcon,
-            CPagination,
             CCard
         },
         data() {

@@ -58,8 +58,8 @@
 </template>
 
 <script>
-    import CCard from "../components/Card";
-    import CScrollView from "../components/ScrollView";
+    import CCard from "../components/base/Card";
+    import CScrollView from "../components/base/ScrollView";
 
     export default {
         name: "view-home",
