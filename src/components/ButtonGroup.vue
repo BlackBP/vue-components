@@ -3,7 +3,7 @@
          v-on="listeners"
          class="c-btn-group"
          :style="data.staticStyle"
-         :class="[data.staticClass]">
+         :class="[data.staticClass, data.class]">
         <slot></slot>
     </div>
 </template>

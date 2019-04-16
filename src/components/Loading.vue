@@ -1,7 +1,7 @@
 <template functional>
     <div v-on="listeners"
          v-bind="data.attrs"
-         :class="[data.staticClass, {
+         :class="[data.staticClass, data.class, {
             'c-loading--elevated': props.elevated
          }]"
          :style="data.staticStyle"

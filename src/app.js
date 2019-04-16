@@ -7,6 +7,7 @@ import router from './router';
 
 // Plugins
 import './plugins/vue-scroll-bar';
+import './plugins/routes';
 
 // View
 import App from './views/App.vue';

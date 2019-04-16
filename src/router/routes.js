@@ -1,7 +1,8 @@
 import Home from '../views/Home';
 import Orders from '../views/Orders';
 import Logs from '../views/Logs';
-import Products from "../views/Products";
+import Products from '../views/product/List';
+import ProductEditor from '../views/product/Editor';
 
 // == Мета-данные маршрутов
 export const META = {
@@ -72,5 +73,15 @@ export default [
     createRoute(META.home, Home),
     createRoute(META.orders, Orders),
     createRoute(META.products, Products),
+    createRoute(META.productAdd, ProductEditor, {
+        props: {
+            isEdit: false
+        }
+    }),
+    createRoute(META.productEdit, ProductEditor, {
+        props: {
+            isEdit: true
+        }
+    }),
     createRoute(META.logs, Logs)
 ]

@@ -3,7 +3,7 @@
     <div v-bind="data.attrs"
          v-on="listeners"
          class="c-card-sect"
-         :class="[data.staticClass]"
+         :class="[data.staticClass, data.class]"
          :style="data.staticStyle">
 
         <slot></slot>
