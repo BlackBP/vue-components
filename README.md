@@ -1,4 +1,4 @@
-# vue-bbp-ui
+# VueJS based components library
 
 ## Project setup
 ```
