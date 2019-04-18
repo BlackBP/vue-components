@@ -1,16 +1,7 @@
-# vue-bbp-ui
+# An components library based on Vue.js.
 
-## Project setup
+## To run example of usage
 ```
 yarn install
-```
-
-### Compiles and hot-reloads for development
-```
 yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
 ```
