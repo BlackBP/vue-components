@@ -3,8 +3,8 @@
     <div class="c-form-field"
          :class="className"
          @keypress="handleKeyPress"
-         @focus="handleFocus"
-         @blur="handleBlur"
+         @focus.self="handleFocus"
+         @blur.self="handleBlur"
          @click="handleClick">
 
         <div class="c-form-field__content"

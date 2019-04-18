@@ -15,22 +15,18 @@
                             <div class="row u-flex-content-between">
                                 <div class="col-auto">
                                     <c-btn-group>
-
-                                        <c-icon-btn icon="checkbox-blank-outline"
-                                                    :transparent="true"
-                                                    style="margin-right: 5px;"/>
                                         <c-icon-btn icon="refresh"
                                                     :transparent="true"/>
                                     </c-btn-group>
                                 </div>
-                                <div class="col">
+                                <div class="col-auto">
                                     <c-text-input v-model="query"
                                                   placeholder="Поиск"/>
                                 </div>
                                 <div class="col-auto">
                                     <c-pagination v-model="current"
                                                   :total="total"
-                                                  @change="goToPage"/>
+                                                  @change="getData"/>
                                 </div>
                             </div>
                         </template>
@@ -117,7 +113,8 @@
                 current: 1,
                 total: 20,
                 list: [],
-                query: ''
+                query: '',
+                params: {}
             }
         },
         computed: {
@@ -149,9 +146,6 @@
             }
         },
         methods: {
-            goToPage(page) {
-                this.getData(page);
-            },
             api(page = 1, limit = 20, filters = {}) {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
@@ -178,7 +172,9 @@
                     }, 500)
                 })
             },
-            async getData(page = 1) {
+            async getData(page = 1, params = {}) {
+                params = _.defaultsDeep(params, this.params);
+
                 try {
                     this.loading = true;
 

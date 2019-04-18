@@ -1,6 +1,7 @@
 <template>
 
-    <div :class="className">
+    <div :class="className"
+         @click="handleClick">
 
         <c-icon v-if="hasLeading"
                 class="c-chip__leading"
@@ -43,10 +44,10 @@
         },
         computed: {
             hasLeading() {
-                return this.leading !== ''
+                return typeof this.leading === 'string' && this.leading !== ''
             },
             hasTrailing() {
-                return this.trailing !== ''
+                return typeof this.trailing === 'string' && this.trailing !== ''
             },
             className() {
                 let baseClass = 'c-chip';
@@ -57,6 +58,11 @@
                 }
 
                 return className;
+            }
+        },
+        methods: {
+            handleClick(event) {
+                this.$emit('click', event);
             }
         }
     }

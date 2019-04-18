@@ -11,6 +11,11 @@
                :show-counter="showCounter"
                :show-helper="true">
 
+        <c-icon v-if="leading"
+                class="c-text-input__leading"
+                :title="title"
+                :name="leading" />
+
         <input v-model="model"
                ref="field"
                class="c-text-input__field"
@@ -25,26 +30,27 @@
                @focus="focused = true"
                @blur="focused = false">
 
+        <c-icon v-if="trailing"
+                class="c-text-input__trailing"
+                :name="trailing" />
+
     </FormField>
 </template>
 
 <script>
     import FormField from "./FormField";
+    import CIcon from "./Icon";
 
     export default {
         name: "c-text-input",
         components: {
+            CIcon,
             FormField
         },
         props: {
             type: {
                 type: String,
                 default: 'text',
-                required: false
-            },
-            label: {
-                type: String,
-                default: '',
                 required: false
             },
             placeholder: {
@@ -59,8 +65,7 @@
             },
             value: {
                 type: null,
-                default: '',
-                required: false
+                default: ''
             },
             mask: {
                 type: [String, Boolean, Object],
@@ -95,6 +100,16 @@
             maxLength: {
                 type: Number,
                 default: 100,
+                require: false
+            },
+            leading: {
+                type: String,
+                default: '',
+                require: false
+            },
+            trailing: {
+                type: String,
+                default: '',
                 require: false
             }
         },

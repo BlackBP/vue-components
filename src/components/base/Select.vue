@@ -11,66 +11,81 @@
                   :count-max="maxItems"
                   :show-counter="showCounter"
                   :show-helper="true"
-                  @focus="showList"
-                  @blur="hideList">
+                  @focus="handleShow('root.focus')"
+                  @blur="searchable ? false : handleHide('root.blur')"
+                  @keyup.esc="handleHide('root.keyup.esc')">
 
         <div class="c-select__field">
 
-            <div v-show="labelVisible"
-                 class="c-select__field-label c-select__label--single">
-                {{ model[optionLabel] }}
+            <div v-show="labelVisibility"
+                 class="c-select__label">
+
+                <template v-if="multiple">
+                    <c-chip v-for="option in value"
+                            trailing="close"
+                            color="primary"
+                            class="c-select__chip"
+                            :key="`selected-option-${option[trackBy]}`"
+                            @click.stop="labelClick(option)">
+                        {{ option[optionLabel] }}
+                    </c-chip>
+                </template>
+
+                <template v-else>
+                    {{ value[optionLabel] }}
+                </template>
+
             </div>
 
-            <div v-show="placeholderVisible"
-                 class="c-select__field-placeholder">
-                {{ placeholder }}
-            </div>
-
-            <input v-show="searchFieldVisible"
+            <input v-show="searchVisibility"
                    ref="search"
                    type="text"
                    class="c-select__field-input"
                    :disabled="disabled"
                    :readonly="!searchable"
-                   :placeholder="focused ? focusPlaceholder : placeholder"
+                   :placeholder="focused ? searchable ? focusPlaceholder : placeholder : placeholder"
                    :value="query"
-                   @focus.prevent="showList"
-                   @blur.prevent="hideList"
-                   @keyup.esc="hideList"
-                   @keypress="handleKeyPress"
+                   @focus.prevent="handleShow('search.focus')"
+                   @blur.prevent="handleHide('search.blur')"
+                   @keyup.esc="handleHide('search.keyup.esc')"
                    @input="handleQuery">
 
             <c-icon class="c-select__field-icon"
+                    :class="loading ? 'mdi-spin' : ''"
                     :name="iconClassName"/>
 
         </div>
 
-        <div v-show="focused"
-             tabindex="-1"
-             class="c-select__list">
+        <transition name="c-select-trans">
+            <div v-show="focused"
+                 tabindex="1"
+                 class="c-select__list"
+                 @focus="showList">
 
-            <div v-show="!hasOptions"
-                 class="c-select__list-placeholder">
-                {{ emptyPlaceholder }}
-            </div>
+                <div v-show="!hasOptions"
+                     class="c-select__list-placeholder">
+                    {{ emptyPlaceholder }}
+                </div>
 
-            <div class="c-select__list-options"
-                 @mousedown.prevent>
+                <div class="c-select__list-options">
 
-                <div v-for="option in list"
-                     tabindex="0"
-                     class="c-select__option"
-                     :class="model === option ? 'is-selected' : ''"
-                     :key="`option-item-${option[trackBy]}`"
-                     @keypress.esc="hideList"
-                     @keypress.prevent.stop.enter.space="() => {optionClick(option)}"
-                     @click.prevent.stop="() => {optionClick(option)}">
-                    {{ option[optionLabel] }}
+                    <div v-for="option in list"
+                         tabindex="0"
+                         class="c-select__option"
+                         :class="{
+                        'is-selected': checkIsActive(option),
+                        'is-group': checkIsGroup(option)
+                     }"
+                         :key="`option-item-${option[trackBy]}`"
+                         @keypress.stop.enter.space="optionClick(option)"
+                         @click.stop="optionClick(option)">
+                        {{ option[optionLabel] }}
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
+        </transition>
 
     </c-form-field>
 
@@ -79,28 +94,47 @@
 <script>
     import CFormField from "./FormField";
     import CIcon from "./Icon";
+    import CChip from "./Chip";
+
+    function LOG(...rest) {
+        console.log('[c-select]', ...rest);
+    }
 
     export default {
         name: "c-select",
         components: {
+            CChip,
             CIcon,
             CFormField
+        },
+        model: {
+            event: 'change'
         },
         props: {
             options: {
                 type: Array,
-                default: () => [],
+                default: () => ([]),
                 required: true
             },
             trackBy: {
                 type: String,
-                default: "id",
+                default: 'id',
                 required: true
             },
             optionLabel: {
                 type: String,
-                default: "label",
+                default: 'label',
                 required: true
+            },
+            groupValues: {
+                type: String,
+                default: '',
+                required: false
+            },
+            groupLabel: {
+                type: String,
+                default: '',
+                required: false
             },
             multiple: {
                 type: Boolean,
@@ -135,7 +169,7 @@
             },
             maxItems: {
                 type: [Number, String],
-                default: '',
+                default: 0,
                 require: false
             },
             showCounter: {
@@ -144,16 +178,6 @@
                 required: false
             },
             icon: {
-                type: String,
-                default: '',
-                required: false
-            },
-            iconTitle: {
-                type: String,
-                default: '',
-                required: false
-            },
-            label: {
                 type: String,
                 default: '',
                 required: false
@@ -185,12 +209,12 @@
             },
             errors: {
                 type: Array,
-                default: () => [],
+                default: () => ([]),
                 required: false
             },
             value: {
                 type: null,
-                default: ""
+                default: ''
             }
         },
         data() {
@@ -198,26 +222,12 @@
                 focused: false,
                 loading: false,
                 query: '',
-                list: this.options,
-                proxy: this.value
+                list: []
             };
         },
-        watch: {
-            options(after) {
-                this.list = _.clone(after);
-            }
-        },
         computed: {
-            model: {
-                get() {
-                    return this.value;
-                },
-                set(value) {
-                    this.proxy = value;
-                }
-            },
             hasSelected() {
-                return !_.isEmpty(this.model);
+                return !_.isEmpty(this.value);
             },
             hasOptions() {
                 return !_.isEmpty(this.list);
@@ -237,107 +247,141 @@
             itemsCount() {
                 let count = 0;
 
-                if (_.isArray(this.model)) {
-                    count = this.model.length;
+                if (_.isArray(this.value)) {
+                    count = this.value.length;
                 }
-                if (_.isObjectLike(this.model)) {
+                if (_.isObjectLike(this.value)) {
                     count = 1;
                 }
 
                 return count;
             },
-            searchFieldVisible() {
-                let value = false;
-
-                if (this.searchable) {
-                    value = this.focused;
-                }
-
-                return value;
-            },
-            labelVisible() {
-                let value = false;
-
-                value = this.hasSelected;
-                value = !this.searchFieldVisible;
-
-                return value;
-            },
-            placeholderVisible() {
-                let value = true;
-
-                if (this.searchFieldVisible) {
-                    value = false;
-                }
-
-                if (this.hasSelected) {
-                    value = false;
-                }
-
-                return value;
-            },
             iconClassName() {
-                if (this.loading) {
-                    return 'mdi mdi-spin mdi-loading'
+                if(this.loading) return 'loading';
+
+                return this.focused ? 'menu-up' : 'menu-down'
+            },
+            labelVisibility() {
+                if(this.multiple) {
+                    return this.hasSelected
                 }
 
-                return this.focused ? 'mdi mdi-menu-up' : 'mdi mdi-menu-down'
-            }
+                if(this.searchable) {
+                    if(this.focused) {
+                        return false
+                    } else {
+                        return this.hasSelected
+                    }
+                } else {
+                    return this.hasSelected
+                }
+            },
+            searchVisibility() {
+                if(this.multiple) {
+                    return true
+                }
+
+                if(this.searchable) {
+                    if(this.focused) {
+                        return true
+                    } else {
+                        return !this.hasSelected
+                    }
+                } else {
+                    return !this.hasSelected
+                }
+            },
+            parsedOptions() {
+                let options = _.isArray(this.options) ? this.options : [];
+
+                if (this.groupValues !== '') {
+                    return _.reduce(options, (total, group) => {
+                        total.push(group);
+                        total = _.concat(total, _.get(group, this.groupValues, []));
+                        return total
+                    }, [])
+                } else {
+                    return _.map(options, option => option);
+                }
+            },
         },
         methods: {
-            hideSpinner() {
-                this.loading = false;
-            },
-            showSpinner() {
-                this.loading = true;
-            },
-            focus() {
-                this.$el.focus();
-            },
-            focusSearch() {
-                this.$refs.search.focus();
-            },
-            optionClick(option) {
+            // Option interactions
+            /**
+             * Handles a click event of the option
+             *
+             * @param option
+             */
+            optionClick(option = {}) {
+                let isGroup = this.checkIsGroup(option);
+
+                if (isGroup) return;
+
+                let hasSelected = this.checkIsActive(option);
+
                 if (this.multiple) {
+                    let selected = _.isArray(this.value) ? this.value : [];
 
+                    if (hasSelected) {
+                        selected = this.removeItem(option, selected);
+                    } else {
+                        selected.push(option)
+                    }
+
+                    option = _.uniqBy(selected, this.trackBy);
                 } else {
-                    this.model = option;
-                    this.hideList();
-
-                    if (this.toggleable) {
-                        let current = _.get(this.model, this.trackBy, 1);
-                        let selected = _.get(option, this.trackBy, 0);
-
-                        if (current === selected) {
-                            this.model = '';
-                        }
+                    if(this.toggleable) {
+                        option = hasSelected ? {} : option
                     }
                 }
 
-                if (this.searchable) {
-                    this.query = _.get(option, this.optionLabel, '');
+                this.handleHide('option.click');
+                this.handleChange(option);
+            },
+
+            /**
+             *
+             * @param option
+             */
+            checkIsActive(option = {}) {
+                let trackBy = this.trackBy;
+
+                if (this.multiple) {
+                    return _.some(this.value, {[trackBy]: option[trackBy]})
                 }
 
-                this.$emit("input", this.proxy);
+                return this.value[trackBy] === option[trackBy]
             },
-            clearQuery() {
-                this.query = '';
+
+            /**
+             * @param option
+             */
+            checkIsGroup(option = {}) {
+                let values = _.get(option, this.groupValues, []);
+
+                return values.length > 0
             },
+
+            // List interactions
+
+            /**
+             * Filters the list by query string
+             *
+             * @param query
+             */
             filterByQuery: _.debounce(function (query) {
                 if (this.customSearch) {
                     this.customSearchCallback(query)
                         .then(result => {
                             this.hideSpinner();
-
                             this.setList(result)
                         })
                         .catch(() => {
                             this.hideSpinner();
-
                             this.setList([]);
                         })
                 } else {
-                    let result = _.filter(this.options, (item) => {
+                    let result = _.filter(this.parsedOptions, item => {
                         let label = _.lowerCase(_.get(item, this.optionLabel, ''));
 
                         if (label !== '') {
@@ -347,31 +391,70 @@
                         return true;
                     });
 
-                    this.setList(result);
                     this.hideSpinner();
+                    this.setList(result);
                 }
             }, 300),
+
+            /**
+             * Removes a option from the list
+             *
+             * @param option
+             * @param list
+             */
+            removeItem(option = {}, list = []) {
+                list = _.isArray(list) ? list : [];
+
+                if (_.isEmpty(list)) return;
+
+                let optionId = _.get(option, this.trackBy, null);
+
+                return _.filter(list, item => {
+                    return optionId !== _.get(item, this.trackBy, null)
+                })
+            },
+
+            /**
+             * Sets the list, with type check
+             *
+             * @param newList
+             */
             setList(newList = []) {
                 newList = _.isArray(newList) ? newList : [];
                 this.list = newList;
             },
+
+            /**
+             * Resets the list
+             */
+            resetList() {
+                this.setList(this.parsedOptions)
+            },
+
+            /**
+             * Hides the list
+             */
             hideList() {
                 if (!this.focused) return;
 
                 this.focused = false;
-                this.resetList();
+                this.clearQuery();
 
                 if (this.searchable) {
                     this.$refs.search.blur();
-                    this.clearQuery();
                 } else {
                     this.$el.blur();
                 }
             },
+
+            /**
+             * Shows the list
+             */
             showList() {
                 if (this.focused || this.disabled) return;
 
                 this.focused = true;
+                this.resetList();
 
                 if (this.searchable) {
                     this.$nextTick(() => {
@@ -381,36 +464,79 @@
                     this.$el.focus();
                 }
             },
-            toggleList() {
-                if (this.focused) {
-                    this.hideList();
-                    this.resetList();
-                } else {
-                    this.showList();
-                }
+
+            // Label interactions
+
+            /**
+             *
+             * @param option
+             */
+            labelClick(option) {
+                this.handleChange(this.removeItem(option, this.value));
             },
-            resetList() {
-                this.setList(_.map(this.options, item => item));
-            },
+
+            // Handlers
+            /**
+             * Handles the query string change
+             *
+             * @param event
+             */
             handleQuery(event) {
                 this.query = event.target.value;
                 this.$nextTick(() => {
-                    this.handleSearch()
+                    if (this.searchable) {
+                        this.showSpinner();
+                        this.filterByQuery(this.query);
+                    }
                 })
             },
-            handleSearch(event) {
-                if (this.searchable) {
-                    this.showSpinner();
-                    this.filterByQuery(this.query);
-                }
-            },
-            handleKeyPress(event) {
-                if (event.keyCode === 13) {
-                    this.hideList();
-                }
 
-                this.$emit('keypress', event);
-            }
+            /**
+             * Emits the change event
+             *
+             * @param value - payload
+             */
+            handleChange(value) {
+                this.$emit('change', value);
+            },
+
+            handleShow(event) {
+                this.showList();
+            },
+
+            handleHide(event) {
+                this.hideList();
+            },
+
+            // Spinner interactions
+            /**
+             * Hides the spinner
+             */
+            hideSpinner() {
+                this.loading = false;
+            },
+
+            /**
+             * Show the spinner
+             */
+            showSpinner() {
+                this.loading = true;
+            },
+
+            // Misc
+            focus() {
+                this.$el.focus();
+            },
+
+            /**
+             * Clears the query string
+             */
+            clearQuery() {
+                this.query = '';
+            },
+        },
+        mounted() {
+            this.list = this.parsedOptions
         }
     };
 </script>
