@@ -45,6 +45,7 @@
                       :options="categories"
                       :multiple="true"
                       :searchable="true"
+                      :show-counter="true"
                       :errors="errors.categories"/>
         </c-form-row>
 
@@ -54,9 +55,10 @@
                       track-by="id"
                       placeholder="Группы"
                       :options="groups"
-                      :multiple="false"
+                      :multiple="true"
                       :searchable="true"
                       :toggleable="true"
+                      :max-items="1"
                       :errors="errors.groups"/>
         </c-form-row>
 
@@ -66,7 +68,7 @@
                       track-by="id"
                       placeholder="Наклейки"
                       :options="stickers"
-                      :multiple="false"
+                      :toggleable="true"
                       :searchable="false"
                       :errors="errors.stickers"/>
         </c-form-row>
@@ -280,6 +282,11 @@
                         "id": 1,
                         "name": "Хиты продаж",
                         "code": "hity-prodazh"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Хиты продаж 2",
+                        "code": "hity-prodazh 2"
                     }
                 ]
             },

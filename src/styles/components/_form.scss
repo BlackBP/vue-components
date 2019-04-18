@@ -266,7 +266,7 @@ $field-readonly-color: #555;
   $field-label: #{$field}-label;
 
   $list: #{$self}__list;
-  $list-placeholder: #{$self}__list-placeholder;
+  $list-info: #{$self}__list-info;
   $list-options: #{$self}__list-options;
 
   $option: #{$self}__option;
@@ -354,15 +354,12 @@ $field-readonly-color: #555;
       height: auto;
       max-height: 300px;
       background: #fff;
-      border-style: solid;
-      border-color: $field-border-color;
-      border-width: 0 1px 1px;
       box-shadow: 0 5px 10px 0 rgba(#000, 0.3);
       overflow-x: hidden;
       overflow-y: auto;
     }
 
-    #{$list-placeholder} {
+    #{$list-info} {
       padding: nth($field-padding, 2);
       color: $field-placeholder-color;
     }

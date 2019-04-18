@@ -9,7 +9,7 @@
                   :disabled="disabled"
                   :count="itemsCount"
                   :count-max="maxItems"
-                  :show-counter="showCounter"
+                  :show-counter="maxItems > 0"
                   :show-helper="true"
                   @focus="handleShow('root.focus')"
                   @blur="searchable ? false : handleHide('root.blur')"
@@ -48,6 +48,7 @@
                    @focus.prevent="handleShow('search.focus')"
                    @blur.prevent="handleHide('search.blur')"
                    @keyup.esc="handleHide('search.keyup.esc')"
+                   @keyup.delete="() => {query === '' ? removeLastItem() : false}"
                    @input="handleQuery">
 
             <c-icon class="c-select__field-icon"
@@ -62,20 +63,24 @@
                  class="c-select__list"
                  @focus="showList">
 
-                <div v-show="!hasOptions"
-                     class="c-select__list-placeholder">
-                    {{ emptyPlaceholder }}
+                <div v-show="!hasOptions || hasMaxItems"
+                     class="c-select__list-info">
+                    <template v-if="!hasOptions">{{ emptyPlaceholder }}</template>
+                    <template v-if="hasMaxItems">
+                        {{ maxItemsMessage }} ({{ itemsCount }}/{{ maxItems }})
+                    </template>
                 </div>
 
-                <div class="c-select__list-options">
+                <div v-show="!hasMaxItems && hasOptions"
+                     class="c-select__list-options">
 
                     <div v-for="option in list"
                          tabindex="0"
                          class="c-select__option"
                          :class="{
-                        'is-selected': checkIsActive(option),
-                        'is-group': checkIsGroup(option)
-                     }"
+                            'is-selected': option.isSelected,
+                            'is-group': option.isGroup
+                         }"
                          :key="`option-item-${option[trackBy]}`"
                          @keypress.stop.enter.space="optionClick(option)"
                          @click.stop="optionClick(option)">
@@ -99,6 +104,12 @@
     function LOG(...rest) {
         console.log('[c-select]', ...rest);
     }
+
+    const OPTION_KEY = {
+        isGroup: 'isGroup',
+        isSelected: 'isSelected',
+        value: 'value'
+    };
 
     export default {
         name: "c-select",
@@ -172,22 +183,7 @@
                 default: 0,
                 require: false
             },
-            showCounter: {
-                type: Boolean,
-                default: false,
-                required: false
-            },
-            icon: {
-                type: String,
-                default: '',
-                required: false
-            },
             helper: {
-                type: String,
-                default: '',
-                required: false
-            },
-            title: {
                 type: String,
                 default: '',
                 required: false
@@ -200,6 +196,11 @@
             emptyPlaceholder: {
                 type: String,
                 default: 'Список пуст',
+                required: false
+            },
+            maxItemsMessage: {
+                type: String,
+                default: 'Выбрано максимальное количество элементов!',
                 required: false
             },
             focusPlaceholder: {
@@ -225,7 +226,62 @@
                 list: []
             };
         },
+        watch: {
+            value() {
+                this.setList(this.parsedOptions)
+            }
+        },
         computed: {
+            parsedOptions() {
+                LOG('getter.parsedOptions');
+
+                let selectedOptions = this.value;
+                let options = _.isArray(this.options) ? [...this.options] : [];
+                let trackBy = this.trackBy;
+                let optionLabel = this.optionLabel;
+                let groupValues = this.groupValues;
+                let groupLabel = this.groupLabel;
+
+                if (groupValues !== '') {
+                    options = _.reduce(options, (total, option) => {
+                        let values = _.get(option, groupValues, []);
+
+                        total.push({
+                            [trackBy]: _.get(option, trackBy, ''),
+                            [optionLabel]: _.get(option, groupLabel, ''),
+                            [OPTION_KEY.value]: values,
+                            [OPTION_KEY.isGroup]: values.length > 0
+                        });
+
+                        return _.concat(total, values);
+                    }, []);
+                }
+
+                return _.map(options, option => {
+                    let isGroup = _.get(option, OPTION_KEY.isGroup, false);
+                    let itemId = _.get(option, trackBy, '');
+                    let isSelected = false;
+
+                    if(this.multiple) {
+                        isSelected = _.some(selectedOptions, {[trackBy]: itemId})
+                    } else {
+                        isSelected = itemId === _.get(selectedOptions, trackBy, null);
+                    }
+
+                    if(isGroup) {
+                        option[OPTION_KEY.isSelected] = isSelected;
+                        return option;
+                    }
+
+                    return {
+                        [trackBy]: itemId,
+                        [optionLabel]: _.get(option, optionLabel, ''),
+                        [OPTION_KEY.value]: option,
+                        [OPTION_KEY.isGroup]: isGroup,
+                        [OPTION_KEY.isSelected]: isSelected
+                    }
+                });
+            },
             hasSelected() {
                 return !_.isEmpty(this.value);
             },
@@ -245,16 +301,20 @@
                 return text;
             },
             itemsCount() {
-                let count = 0;
-
-                if (_.isArray(this.value)) {
-                    count = this.value.length;
-                }
-                if (_.isObjectLike(this.value)) {
-                    count = 1;
+                if(this.multiple) {
+                    return this.value.length
                 }
 
-                return count;
+                if(!_.isEmpty(this.value)) {
+                    return 1;
+                }
+            },
+            hasMaxItems() {
+                if(this.maxItems > 0) {
+                    return this.itemsCount === this.maxItems
+                }
+
+                return false;
             },
             iconClassName() {
                 if(this.loading) return 'loading';
@@ -290,20 +350,7 @@
                 } else {
                     return !this.hasSelected
                 }
-            },
-            parsedOptions() {
-                let options = _.isArray(this.options) ? this.options : [];
-
-                if (this.groupValues !== '') {
-                    return _.reduce(options, (total, group) => {
-                        total.push(group);
-                        total = _.concat(total, _.get(group, this.groupValues, []));
-                        return total
-                    }, [])
-                } else {
-                    return _.map(options, option => option);
-                }
-            },
+            }
         },
         methods: {
             // Option interactions
@@ -313,63 +360,57 @@
              * @param option
              */
             optionClick(option = {}) {
-                let isGroup = this.checkIsGroup(option);
+                let optionValue = option[OPTION_KEY.value];
+                let isGroup = option[OPTION_KEY.isGroup];
+                let isSelected = option[OPTION_KEY.isSelected];
 
-                if (isGroup) return;
-
-                let hasSelected = this.checkIsActive(option);
+                /* The Groups is not selectable */
+                // TODO: make the groups selectable
+                if (isGroup) {
+                    this.handleShow();
+                    return
+                }
 
                 if (this.multiple) {
-                    let selected = _.isArray(this.value) ? this.value : [];
+                    let selected = _.isArray(this.value) ? [...this.value] : [];
 
-                    if (hasSelected) {
-                        selected = this.removeItem(option, selected);
+                    if (isSelected) {
+                        selected = this.removeItem(optionValue);
                     } else {
-                        selected.push(option)
+                        selected.push(optionValue)
                     }
 
-                    option = _.uniqBy(selected, this.trackBy);
+                    optionValue = _.uniqBy(selected, this.trackBy);
+
+                    /* if has maximum items prevent option select */
+                    if (this.hasMaxItems) {
+                        return;
+                    }
+
+                    this.handleChange(optionValue);
                 } else {
-                    if(this.toggleable) {
-                        option = hasSelected ? {} : option
+                    if (this.toggleable) {
+                        optionValue = isSelected ? {} : optionValue
                     }
+
+                    /* if has maximum items prevent option select */
+                    if (this.hasMaxItems && !_.isEmpty(optionValue)) {
+                        return;
+                    }
+
+                    this.handleChange(optionValue);
                 }
 
-                this.handleHide('option.click');
-                this.handleChange(option);
-            },
 
-            /**
-             *
-             * @param option
-             */
-            checkIsActive(option = {}) {
-                let trackBy = this.trackBy;
-
-                if (this.multiple) {
-                    return _.some(this.value, {[trackBy]: option[trackBy]})
-                }
-
-                return this.value[trackBy] === option[trackBy]
-            },
-
-            /**
-             * @param option
-             */
-            checkIsGroup(option = {}) {
-                let values = _.get(option, this.groupValues, []);
-
-                return values.length > 0
             },
 
             // List interactions
-
             /**
              * Filters the list by query string
              *
-             * @param query
+             * @param {String} query
              */
-            filterByQuery: _.debounce(function (query) {
+            filterByQuery: _.debounce(function (query = '') {
                 if (this.customSearch) {
                     this.customSearchCallback(query)
                         .then(result => {
@@ -399,19 +440,29 @@
             /**
              * Removes a option from the list
              *
-             * @param option
-             * @param list
+             * @param {Object} option
              */
-            removeItem(option = {}, list = []) {
-                list = _.isArray(list) ? list : [];
+            removeItem(option = {}) {
+                // LOG('removeItem', option);
+
+                let list = _.isArray(this.value) ? [...this.value] : [];
 
                 if (_.isEmpty(list)) return;
 
-                let optionId = _.get(option, this.trackBy, null);
+                let optionId = _.get(option, this.trackBy, false);
 
-                return _.filter(list, item => {
+                let filteredList = _.filter(list, item => {
                     return optionId !== _.get(item, this.trackBy, null)
-                })
+                });
+
+                this.handleChange(filteredList)
+            },
+
+            /**
+             * Removes last item in selected list
+             */
+            removeLastItem() {
+                this.removeItem(_.last(this.value))
             },
 
             /**
@@ -428,6 +479,7 @@
              * Resets the list
              */
             resetList() {
+                LOG('resetList');
                 this.setList(this.parsedOptions)
             },
 
@@ -466,13 +518,12 @@
             },
 
             // Label interactions
-
             /**
              *
              * @param option
              */
             labelClick(option) {
-                this.handleChange(this.removeItem(option, this.value));
+                this.removeItem(option)
             },
 
             // Handlers
@@ -497,14 +548,17 @@
              * @param value - payload
              */
             handleChange(value) {
+                // LOG('handleChange', value);
                 this.$emit('change', value);
             },
 
             handleShow(event) {
+                // LOG('handleShow', event);
                 this.showList();
             },
 
             handleHide(event) {
+                // LOG('handleHide', event);
                 this.hideList();
             },
 
@@ -534,9 +588,6 @@
             clearQuery() {
                 this.query = '';
             },
-        },
-        mounted() {
-            this.list = this.parsedOptions
         }
     };
 </script>
