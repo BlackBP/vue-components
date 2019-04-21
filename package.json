@@ -29,7 +29,6 @@
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.10",
-    "vue-infinite-loading": "^2.4.4",
     "vue-router": "^3.0.4",
     "vuedraggable": "^2.20.0",
     "vuescroll": "^4.12.1",
