@@ -57,6 +57,14 @@
         }
       }
 
+      tfoot {
+        tr,
+        td,
+        th {
+          padding: 0;
+        }
+      }
+
       tr {
         border: none;
 

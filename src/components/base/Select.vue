@@ -59,7 +59,7 @@
 
         <transition name="c-select-trans">
             <div v-show="focused"
-                 tabindex="1"
+                 tabindex="-1"
                  class="c-select__list"
                  @focus="showList">
 
@@ -75,7 +75,7 @@
                      class="c-select__list-options">
 
                     <div v-for="option in list"
-                         tabindex="0"
+                         tabindex="-1"
                          class="c-select__option"
                          :class="{
                             'is-selected': option.isSelected,
@@ -101,9 +101,9 @@
     import CIcon from "./Icon";
     import CChip from "./Chip";
 
-    function LOG(...rest) {
-        console.log('[c-select]', ...rest);
-    }
+    // function LOG(...rest) {
+    //     console.log('[c-select]', ...rest);
+    // }
 
     const OPTION_KEY = {
         isGroup: 'isGroup',
@@ -233,7 +233,7 @@
         },
         computed: {
             parsedOptions() {
-                LOG('getter.parsedOptions');
+                // LOG('getter.parsedOptions');
 
                 let selectedOptions = this.value;
                 let options = _.isArray(this.options) ? [...this.options] : [];
@@ -479,7 +479,7 @@
              * Resets the list
              */
             resetList() {
-                LOG('resetList');
+                // LOG('resetList');
                 this.setList(this.parsedOptions)
             },
 

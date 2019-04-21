@@ -37,6 +37,7 @@
       border: $border;
       border-radius: $border-radius;
       text-align: center;
+      font-size: $text-size;
       color: $text-color;
       overflow: hidden;
     }
@@ -79,15 +80,28 @@
 
     #{$text} {
       display: block;
-      margin-left: 1rem;
+      margin-left: 1em;
       font-weight: bold;
-      font-size: $text-size;
+      font-size: 1em;
     }
 
     #{$self} {
+
       @include make-modifier('elevated') {
         @include box-elevation();
       }
+
+      @include make-modifier('dense') {
+        padding: 5px;
+        font-size: 1rem;
+
+        #{$spinner} {
+          font-size: 30px;
+        }
+      }
+
     }
+
   }
+
 }

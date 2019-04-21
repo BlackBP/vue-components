@@ -39,7 +39,7 @@
         components: {CIcon},
         props: {
             value: {
-                type: Number,
+                type: [String, Number],
                 default: 1
             },
             total: {
@@ -60,7 +60,7 @@
         },
         computed: {
             current() {
-                return this.value;
+                return parseInt(this.value);
             },
             isLast() {
                 return Math.abs(this.current) === Math.abs(this.total);

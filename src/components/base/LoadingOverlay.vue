@@ -4,7 +4,9 @@
         <transition name="trans-fade-in">
             <div v-show="loading"
                  class="c-loading-overlay__loading">
-                <c-loading :elevated="true" />
+                <c-loading :elevated="true"
+                           :text="loadingText"
+                           :dense="loadingDense" />
             </div>
         </transition>
 
@@ -26,6 +28,16 @@
                 type: Boolean,
                 default: false,
                 required: true
+            },
+            loadingText: {
+                type: String,
+                default: 'Загрузка...',
+                required: false
+            },
+            loadingDense: {
+                type: Boolean,
+                default: false,
+                required: false
             }
         },
     }

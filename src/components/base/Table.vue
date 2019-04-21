@@ -1,12 +1,14 @@
 <template>
     <div class="c-table">
 
-        <div v-if="$slots['table-header']"
+        <div v-if="$slots['header']"
              class="c-table__header">
-            <slot name="table-header"></slot>
+            <slot name="header"></slot>
         </div>
 
-        <c-scroll-view class="c-table__wrap">
+        <c-scroll-view class="c-table__wrap"
+                       @change="handleLoading"
+                       :infinite-scroll="infiniteScroll">
             <table class="c-table__table">
 
                 <colgroup>
@@ -23,7 +25,7 @@
                         class="u-text-center">
                         <c-icon-btn :icon="selectIcon"
                                     :transparent="true"
-                                    @click="selectAll" />
+                                    @click="selectAll"/>
                     </th>
 
                     <th v-if="draggable"
@@ -50,7 +52,7 @@
                         <td v-if="selectable"
                             class="u-text-center">
                             <c-checkbox v-model="selected"
-                                        :value="row" />
+                                        :value="row"/>
                         </td>
 
                         <td v-if="draggable"
@@ -88,12 +90,11 @@
                 </tbody>
 
             </table>
-
         </c-scroll-view>
 
-        <div v-if="$slots['table-footer']"
+        <div v-if="$slots['footer']"
              class="c-table__footer">
-            <slot name="table-footer"></slot>
+            <slot name="footer"></slot>
         </div>
 
         <transition name="trans-fade-in">
@@ -107,7 +108,6 @@
 </template>
 
 <script>
-    import InfiniteLoading from 'vue-infinite-loading';
     import Draggable from 'vuedraggable';
 
     import CLoading from "./Loading";
@@ -126,7 +126,6 @@
             CScrollView,
             CChip,
             CLoading,
-            InfiniteLoading,
             Draggable
         },
         props: {
@@ -156,6 +155,11 @@
                 required: false
             },
             draggable: {
+                type: Boolean,
+                default: false,
+                required: false
+            },
+            infiniteScroll: {
                 type: Boolean,
                 default: false,
                 required: false
@@ -189,7 +193,7 @@
                     icon = 'checkbox-blank-outline';
                 }
 
-                if(this.selected.length > 0 && this.selected.length < this.data.length) {
+                if (this.selected.length > 0 && this.selected.length < this.data.length) {
                     icon = 'minus-box';
                 }
 
@@ -207,6 +211,9 @@
             },
             resetSelected() {
                 this.selected = [];
+            },
+            handleLoading($state) {
+                this.$emit('loading', $state);
             }
         }
     }

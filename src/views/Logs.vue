@@ -1,83 +1,77 @@
 <template>
 
-    <div class="container-fluid u-h100">
+    <c-card class="u-h100">
+
         <div class="row u-h100">
 
             <div class="col-8 u-h100">
 
-                <c-card class="c-elevate-3 u-h100">
-                    <c-table class="u-h100"
-                             :data="list"
-                             :headers="tableHeaders"
-                             :loading="loading">
+                <c-table class="u-h100"
+                         :data="list"
+                         :headers="tableHeaders"
+                         :loading="loading">
 
-                        <template slot="table-header">
-                            <div class="row u-flex-content-between">
-                                <div class="col-auto">
-                                    <c-btn-group>
-                                        <c-icon-btn icon="refresh"
-                                                    :transparent="true"/>
-                                    </c-btn-group>
-                                </div>
-                                <div class="col-auto">
-                                    <c-text-input v-model="query"
-                                                  placeholder="Поиск"/>
-                                </div>
-                                <div class="col-auto">
-                                    <c-pagination v-model="current"
-                                                  :total="total"
-                                                  @change="getData"/>
-                                </div>
+                    <template slot="header">
+                        <div class="row u-flex-content-between">
+                            <div class="col-auto">
+                                <c-btn-group>
+                                    <c-icon-btn icon="refresh"
+                                                :transparent="true"/>
+                                </c-btn-group>
                             </div>
-                        </template>
+                            <div class="col">
+                                <c-text-input v-model="query"
+                                              placeholder="Поиск"/>
+                            </div>
+                            <div class="col-auto">
+                                <c-pagination v-model="current"
+                                              :total="total"
+                                              @change="getData"/>
+                            </div>
+                        </div>
+                    </template>
 
-                        <template slot="col-date"
-                                  slot-scope="colDate">
-                            <c-chip color="info">
-                                {{ colDate.value }}
-                            </c-chip>
-                        </template>
+                    <template slot="col-date"
+                              slot-scope="colDate">
+                        <c-chip color="info">
+                            {{ colDate.value }}
+                        </c-chip>
+                    </template>
 
-                    </c-table>
-
-                </c-card>
+                </c-table>
 
             </div>
 
             <div class="col-4 u-h100">
                 <c-scroll-view>
-                    <c-card>
-                        <h3 class="u-text-bold">
-                            <c-icon name="chart-bar"/>
-                            Статистика
-                        </h3>
+                    <h3 class="u-text-bold">
+                        <c-icon name="chart-bar"/>
+                        Статистика
+                    </h3>
+                    <div v-for="(item, index) in Array(10)"
+                         :key="`item-${index}`">
+                        <div class="u-flex u-flex-row u-flex-nowrap u-flex-content-between u-flex-items-end">
+                            <h4 class="u-text-bold u-m0">
+                                <c-icon name="calendar"/>
+                                По дням
+                            </h4>
+                            <c-icon-btn icon="plus"
+                                        :dense="true"
+                                        :transparent="true"/>
+                        </div>
 
-                        <c-card-section v-for="(item, index) in Array(10)"
-                                        :key="`item-${index}`">
-                            <div class="u-flex u-flex-row u-flex-nowrap u-flex-content-between u-flex-items-end">
-                                <h4 class="u-text-bold u-m0">
-                                    <c-icon name="calendar"/>
-                                    По дням
-                                </h4>
-                                <c-icon-btn icon="plus"
-                                            :dense="true"
-                                            :transparent="true"/>
-                            </div>
+                        <hr>
 
-                            <hr>
-
-                            <p style="margin: 0;">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam delectus laborum maxime quaerat vel. Cum delectus
-                                harum nostrum ratione. Cumque ducimus est natus sed. Culpa doloribus officiis sequi voluptas! Molestiae.
-                            </p>
-                        </c-card-section>
-
-                    </c-card>
+                        <p style="margin: 0;">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam delectus laborum maxime quaerat vel. Cum delectus
+                            harum nostrum ratione. Cumque ducimus est natus sed. Culpa doloribus officiis sequi voluptas! Molestiae.
+                        </p>
+                    </div>
                 </c-scroll-view>
             </div>
 
         </div>
-    </div>
+    </c-card>
 
 </template>
 
@@ -111,7 +105,7 @@
             return {
                 loading: false,
                 current: 1,
-                total: 20,
+                total: 2,
                 list: [],
                 query: '',
                 params: {}
@@ -167,7 +161,7 @@
                         resolve({
                             data: data,
                             current: (page + 1 > 20) ? 20 : page + 1,
-                            last_page: 20
+                            last_page: 2
                         })
                     }, 500)
                 })

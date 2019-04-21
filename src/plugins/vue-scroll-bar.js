@@ -24,7 +24,7 @@ Vue.use(VueScroll, {
             /** Whether to keep show or not, default -> false */
             keepShow: false,
             /** Bar's background , default -> #00a650 */
-            background: '#F44336',
+            background: '#61BD4F',
             /** Bar's opacity, default -> 1  */
             opacity: 1
         }

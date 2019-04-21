@@ -12,7 +12,7 @@
             <slot></slot>
         </div>
 
-        <div v-show="showCounter || showHelper"
+        <div v-show="showCounter || showHelper && hasHelper"
              class="c-form-field__footer">
 
             <div v-if="showHelper"
@@ -95,6 +95,9 @@
                     'is-disabled': this.disabled,
                     'is-readonly': this.readonly,
                 };
+            },
+            hasHelper() {
+                return typeof this.helperText === 'string' && this.helperText !== '';
             }
         },
         methods: {

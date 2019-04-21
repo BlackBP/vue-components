@@ -7,7 +7,6 @@
             <div class="col-2 u-h100">
                 <c-scroll-view>
                     <c-card>
-
                         <c-card-section>
                             <c-btn color="primary"
                                    icon-left="plus"
@@ -16,7 +15,7 @@
                                 Новый товар
                             </c-btn>
                             <hr>
-                            <c-btn color="success"
+                            <c-btn color="secondary"
                                    icon-left="folder-multiple"
                                    :block="true">
                                 Все товары
@@ -24,23 +23,14 @@
                         </c-card-section>
 
                         <c-card-section>
-                            <h4 class="u-flex u-flex-content-between u-flex-items-center">
-                                <b>Категории</b>
-                                <c-icon-btn icon="plus"
-                                            :dense="true"
-                                            :transparent="true"/>
-                            </h4>
+                            <widget-categories-tree :active="params.category_id"
+                                                    @change="onCategoryChange"/>
                         </c-card-section>
 
                         <c-card-section>
-                            <h4 class="u-flex u-flex-content-between u-flex-items-center">
-                                <b>Группы</b>
-                                <c-icon-btn icon="plus"
-                                            :dense="true"
-                                            :transparent="true"/>
-                            </h4>
+                            <widget-groups-tree :active="params.group_id"
+                                                @change="onGroupChange"/>
                         </c-card-section>
-
                     </c-card>
                 </c-scroll-view>
             </div>
@@ -51,11 +41,13 @@
                          :data="list"
                          :headers="tableHeaders"
                          :loading="loading"
-                         :selectable="true"
-                         :draggable="true">
+                         :selectable="false"
+                         :draggable="false"
+                         :infinite-scroll="true"
+                         @loading="infScroll">
 
-                    <template slot="table-header">
-                        <div class="row u-flex-content-between">
+                    <template slot="header">
+                        <div class="row u-flex-content-between u-flex-items-center">
                             <div class="col-auto">
                                 <c-btn-group>
                                     <c-icon-btn icon="refresh"
@@ -63,18 +55,19 @@
                                 </c-btn-group>
                             </div>
                             <div class="col">
-                                <c-text-input v-model="query"
-                                              placeholder="Поиск"/>
+                                <c-text-input v-model="params.query"
+                                              leading="magnify"
+                                              placeholder="Поиск"
+                                              @input="handleSearch"/>
                             </div>
                             <div class="col-auto">
-                                <c-pagination v-model="current"
-                                              :total="total"
-                                              @change="goToPage"/>
+                                <c-chip>Страница {{ params.page }} из {{ total }}</c-chip>
                             </div>
                         </div>
                     </template>
 
                 </c-table>
+
             </div>
 
 
@@ -85,6 +78,8 @@
 </template>
 
 <script>
+    import InfiniteLoading from 'vue-infinite-loading';
+
     import CCard from "../../components/base/Card";
     import CScrollView from "../../components/base/ScrollView";
     import CBtnGroup from "../../components/base/ButtonGroup";
@@ -97,9 +92,16 @@
     import CBtn from "../../components/base/Button";
     import CCardSection from "../../components/base/CardSection";
 
+    // Widgets
+    import WidgetCategoriesTree from "./CategoriesTree";
+    import WidgetGroupsTree from "./GroupsTree";
+
     export default {
         name: "view-products",
         components: {
+            InfiniteLoading,
+            WidgetCategoriesTree,
+            WidgetGroupsTree,
             CCardSection,
             CBtn,
             CChip,
@@ -115,10 +117,15 @@
         data() {
             return {
                 loading: false,
-                current: 1,
                 total: 20,
                 list: [],
-                query: ''
+                infLoadCounter: +new Date(),
+                params: {
+                    page: 1,
+                    query: '',
+                    category_id: '',
+                    group_id: '',
+                }
             }
         },
         computed: {
@@ -133,6 +140,25 @@
             }
         },
         methods: {
+            setQuery() {
+                let query = _.reduce(this.params, (total, value, name) => {
+
+                    if (_.isNumber(value) && !_.isNaN(value)) {
+                        total[name] = value;
+                    } else {
+                        if (!_.isEmpty(value)) {
+                            total[name] = value;
+                        }
+                    }
+
+                    return total;
+                }, {});
+
+                this.$router.push({
+                    path: '',
+                    query: query
+                })
+            },
             addProduct() {
                 this.$router.push({
                     name: this.$appRoute.productAdd.name
@@ -141,43 +167,75 @@
             goToPage(page) {
                 this.getData(page);
             },
-            api(page = 1, limit = 20, filters = {}) {
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        let data = _.map(Array(limit), item => {
-                            return {
-                                id: _.random(999),
-                                active: !!_.random(1),
-                                sku: `item-${_.random(999)}`,
-                                name: `Product-${_.random(999)}`,
-                                price: _.random(9999, true),
-                            }
-                        });
+            getData(page) {
+                page = +page;
+                page = _.isNaN(page) ? this.params.page : page;
 
-                        resolve({
-                            data: data,
-                            current: (page + 1 > 20) ? 20 : page + 1,
-                            last_page: 20
-                        })
-                    }, 500)
+                return new Promise((resolve, reject) => {
+                    this.loading = true;
+                    this.params.page = page;
+
+                    this.$nextTick(async () => {
+                        try {
+                            this.setQuery();
+
+                            let res = await this.$api.product.getList(page);
+
+                            this.list = [...res.data];
+                            this.total = res.last_page;
+                            this.loading = false;
+
+                            resolve(res.data)
+                        } catch (e) {
+                            this.loading = false;
+                            reject(e);
+                        }
+                    })
                 })
             },
-            async getData(page = 1) {
-                try {
-                    this.loading = true;
+            infScroll($state) {
+                let nextPage = this.params.page + 1;
 
-                    let res = await this.api(page + 1);
+                if (nextPage <= this.total) {
+                    this.params.page = nextPage;
 
-                    this.list = res.data;
-                    this.total = res.last_page;
-                    this.loading = false;
-                } catch (e) {
-                    this.loading = false;
+                    this.getData()
+                        .then(data => {
+                            if (this.params.page <= this.total) {
+                                this.list = _.concat(this.list, data);
+                                $state.loaded();
+                            } else {
+                                $state.completed()
+                            }
+                        })
+                } else {
+                    $state.completed()
                 }
             },
+            onCategoryChange(category_id) {
+                this.params.category_id = category_id;
+                this.params.group_id = '';
+                this.getData(1);
+            },
+            onGroupChange(group_id) {
+                this.params.group_id = group_id;
+                this.params.category_id = '';
+                this.getData(1);
+            },
+            handleSearch: _.debounce(function (query = '') {
+                this.params.group_id = '';
+                this.params.category_id = '';
+                this.getData(1)
+            }, 400)
         },
         mounted() {
-            this.getData(1)
+            _.each(this.$route.query, (value, name) => {
+                if (_.has(this.params, name)) {
+                    this.params[name] = _.isNumber(parseInt(value)) ? parseInt(value) : value;
+                }
+            });
+
+            this.getData();
         }
     }
 </script>

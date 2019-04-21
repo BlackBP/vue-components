@@ -2,7 +2,8 @@
     <div v-on="listeners"
          v-bind="data.attrs"
          :class="[data.staticClass, data.class, {
-            'c-loading--elevated': props.elevated
+            'c-loading--elevated': props.elevated,
+            'c-loading--dense': props.dense
          }]"
          :style="data.staticStyle"
          class="c-loading">
@@ -25,6 +26,11 @@
                 required: false
             },
             elevated: {
+                type: Boolean,
+                default: false,
+                required: false
+            },
+            dense: {
                 type: Boolean,
                 default: false,
                 required: false
