@@ -61,7 +61,7 @@
                                               @input="handleSearch"/>
                             </div>
                             <div class="col-auto">
-                                <c-chip>Страница {{ params.page }} из {{ total }}</c-chip>
+                                <c-chip>Страница {{ params.page }} из {{ total }} ({{ list.length }})</c-chip>
                             </div>
                         </div>
                     </template>
@@ -78,8 +78,6 @@
 </template>
 
 <script>
-    import InfiniteLoading from 'vue-infinite-loading';
-
     import CCard from "../../../components/Card";
     import CScrollView from "../../../components/ScrollView";
     import CBtnGroup from "../../../components/ButtonGroup";
@@ -99,7 +97,6 @@
     export default {
         name: "view-products",
         components: {
-            InfiniteLoading,
             WidgetCategoriesTree,
             WidgetGroupsTree,
             CCardSection,
@@ -167,7 +164,7 @@
             goToPage(page) {
                 this.getData(page);
             },
-            getData(page) {
+            getData(page, reset = false) {
                 page = +page;
                 page = _.isNaN(page) ? this.params.page : page;
 
@@ -181,7 +178,11 @@
 
                             let res = await this.$api.product.getList(page);
 
-                            this.list = [...res.data];
+                            if(reset) {
+                                this.list = [...res.data];
+                            } else {
+                                this.list = _.concat(this.list, res.data);
+                            }
                             this.total = res.last_page;
                             this.loading = false;
 
@@ -202,7 +203,6 @@
                     this.getData()
                         .then(data => {
                             if (this.params.page <= this.total) {
-                                this.list = _.concat(this.list, data);
                                 $state.loaded();
                             } else {
                                 $state.completed()
@@ -215,17 +215,17 @@
             onCategoryChange(category_id) {
                 this.params.category_id = category_id;
                 this.params.group_id = '';
-                this.getData(1);
+                this.getData(1, true);
             },
             onGroupChange(group_id) {
                 this.params.group_id = group_id;
                 this.params.category_id = '';
-                this.getData(1);
+                this.getData(1, true);
             },
             handleSearch: _.debounce(function (query = '') {
                 this.params.group_id = '';
                 this.params.category_id = '';
-                this.getData(1)
+                this.getData(1, true);
             }, 400)
         },
         mounted() {

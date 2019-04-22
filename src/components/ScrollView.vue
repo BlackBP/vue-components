@@ -26,6 +26,7 @@
         },
         data() {
             return {
+                resolve: true,
                 loading: false,
                 completed: false
             }
@@ -46,26 +47,35 @@
                 let clientHeight = target.clientHeight;
                 let maxScroll = scrollHeight - clientHeight - threshold;
                 let vScroll = vertical.scrollTop;
+                let canLoad = vScroll >= maxScroll;
+
+                this.resolve = canLoad;
 
                 if(!this.completed) {
-                    if(vScroll >= maxScroll) {
-                        this.setLoading(true);
+                    if(canLoad) {
+                        this.emitLoad(true);
                     }
                 } else {
                     this.loading = false
                 }
             },
-            setLoading: _.debounce(function (state) {
-                this.loading = !!state;
-                this.$emit('change', {
-                    loaded: () => this.setLoaded(),
-                    completed: () => this.setCompleted()
-                })
+            emitLoad: _.debounce(function () {
+                if(this.resolve) {
+                    this.resolve = false;
+                    this.loading = true;
+
+                    this.$emit('change', {
+                        loaded: () => this.setLoaded(),
+                        completed: () => this.setCompleted()
+                    })
+                }
             }, 300),
             setLoaded() {
+                this.resolve = true;
                 this.loading = false;
             },
             setCompleted() {
+                this.resolve = false;
                 this.completed = true;
                 this.loading = false;
             }

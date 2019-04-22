@@ -7,8 +7,8 @@ import router from './router';
 
 // Plugins
 import './plugins/vue-scroll-bar';
-import './dashboard/plugins/routes';
-import './dashboard/plugins/api';
+import './plugins/routes';
+import './plugins/api';
 
 // View
 import App from './views/App.vue';
