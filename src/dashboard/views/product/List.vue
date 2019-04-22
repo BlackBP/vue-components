@@ -80,17 +80,17 @@
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
 
-    import CCard from "../../components/base/Card";
-    import CScrollView from "../../components/base/ScrollView";
-    import CBtnGroup from "../../components/base/ButtonGroup";
-    import CIconBtn from "../../components/base/IconButton";
-    import CIcon from "../../components/base/Icon";
-    import CTable from "../../components/base/Table";
-    import CTextInput from "../../components/base/TextInput";
-    import CPagination from "../../components/base/Pagination";
-    import CChip from "../../components/base/Chip";
-    import CBtn from "../../components/base/Button";
-    import CCardSection from "../../components/base/CardSection";
+    import CCard from "../../../components/Card";
+    import CScrollView from "../../../components/ScrollView";
+    import CBtnGroup from "../../../components/ButtonGroup";
+    import CIconBtn from "../../../components/IconButton";
+    import CIcon from "../../../components/Icon";
+    import CTable from "../../../components/Table";
+    import CTextInput from "../../../components/TextInput";
+    import CPagination from "../../../components/Pagination";
+    import CChip from "../../../components/Chip";
+    import CBtn from "../../../components/Button";
+    import CCardSection from "../../../components/CardSection";
 
     // Widgets
     import WidgetCategoriesTree from "./CategoriesTree";

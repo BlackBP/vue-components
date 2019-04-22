@@ -10,7 +10,7 @@
 <script>
     import {mapMutations, mapState} from 'vuex';
 
-    import CIconBtn from "../../components/base/IconButton";
+    import CIconBtn from "../../../components/IconButton";
 
     export default {
         name: "app-header",

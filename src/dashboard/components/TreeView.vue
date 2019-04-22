@@ -49,7 +49,7 @@
 </template>
 
 <script>
-    import CIcon from "./base/Icon";
+    import CIcon from "../../components/Icon";
 
     export default {
         name: "c-tree-view",

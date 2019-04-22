@@ -50,13 +50,13 @@
 </template>
 
 <script>
-    import CCard from "../../components/base/Card";
-    import CScrollView from "../../components/base/ScrollView";
-    import CIconBtn from "../../components/base/IconButton";
-    import CBtn from "../../components/base/Button";
-    import CIcon from "../../components/base/Icon";
-    import CList from "../../components/base/List";
-    import CListItem from "../../components/base/ListItem";
+    import CCard from "../../../components/Card";
+    import CScrollView from "../../../components/ScrollView";
+    import CIconBtn from "../../../components/IconButton";
+    import CBtn from "../../../components/Button";
+    import CIcon from "../../../components/Icon";
+    import CList from "../../../components/List";
+    import CListItem from "../../../components/ListItem";
 
     // Forms
     import FormMain from './FormMain';

@@ -1,5 +1,17 @@
-//$color-primary: #4db3ff;
-$g-font-family: 'Roboto', sans-serif;
+@import "./variables";
 
+// Font
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
-@import "./bundle";
+
+// Bundle
+@import "../../styles/bundle";
+
+// Transitions
+@import "./transitions/fade";
+
+// Custom components
+@import "./components";
+
+// Layout
+@import "./layout";
+

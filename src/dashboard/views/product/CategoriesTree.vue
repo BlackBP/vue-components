@@ -17,8 +17,8 @@
 
 <script>
     import CTreeView from "../../components/TreeView";
-    import CLoadingOverlay from "../../components/base/LoadingOverlay";
-    import CIconBtn from "../../components/base/IconButton";
+    import CLoadingOverlay from "../../../components/LoadingOverlay";
+    import CIconBtn from "../../../components/IconButton";
 
     export default {
         name: "widget-categories-tree",

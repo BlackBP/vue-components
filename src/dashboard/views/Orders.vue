@@ -124,10 +124,10 @@
 </template>
 
 <script>
-    import CCard from "../components/base/Card";
-    import CScrollView from "../components/base/ScrollView";
-    import CBtnGroup from "../components/base/ButtonGroup";
-    import CIconBtn from "../components/base/IconButton";
+    import CCard from "../../components/Card";
+    import CScrollView from "../../components/ScrollView";
+    import CBtnGroup from "../../components/ButtonGroup";
+    import CIconBtn from "../../components/IconButton";
 
     export default {
         name: "view-orders",

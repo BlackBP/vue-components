@@ -3,9 +3,9 @@ $layout-background: rgba(#000, 0.45);
 $layout-element-background: rgba(#fff, 1);
 $layout-element-font-color: #333;
 
-@import "./layout/main";
-@import "./layout/drawer";
-@import "./layout/header";
+@import "layout/main";
+@import "layout/drawer";
+@import "layout/header";
 
 html,
 body {

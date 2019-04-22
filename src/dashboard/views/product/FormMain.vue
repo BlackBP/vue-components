@@ -96,13 +96,13 @@
 </template>
 
 <script>
-    import CTextInput from "../../components/base/TextInput";
-    import CFormRow from "../../components/base/FormRow";
-    import CTextarea from "../../components/base/TextArea";
-    import CSwitch from "../../components/base/Switch";
-    import CLoadingOverlay from "../../components/base/LoadingOverlay";
-    import CSelect from "../../components/base/Select";
-    import CIconBtn from "../../components/base/IconButton";
+    import CTextInput from "../../../components/TextInput";
+    import CFormRow from "../../../components/FormRow";
+    import CTextarea from "../../../components/TextArea";
+    import CSwitch from "../../../components/Switch";
+    import CLoadingOverlay from "../../../components/LoadingOverlay";
+    import CSelect from "../../../components/Select";
+    import CIconBtn from "../../../components/IconButton";
 
     import ServiceFormValidate from "../../components/ServiceFormValidate";
 
