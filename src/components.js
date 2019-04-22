@@ -16,6 +16,7 @@ import Pagination from './components/Pagination.vue';
 import Radio from './components/Radio.vue';
 import ScrollView from './components/ScrollView.vue';
 import Select from './components/Select.vue';
+import ServiceFormValidate from './components/ServiceFormValidate.vue';
 import Switch from './components/Switch.vue';
 import Table from './components/Table.vue';
 import TextArea from './components/TextArea.vue';
@@ -40,6 +41,7 @@ export {
     Radio,
     ScrollView,
     Select,
+    ServiceFormValidate,
     Switch,
     Table,
     TextArea,

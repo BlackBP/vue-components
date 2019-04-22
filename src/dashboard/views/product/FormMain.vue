@@ -104,7 +104,7 @@
     import CSelect from "../../../components/Select";
     import CIconBtn from "../../../components/IconButton";
 
-    import ServiceFormValidate from "../../components/ServiceFormValidate";
+    import ServiceFormValidate from "../../../components/ServiceFormValidate";
 
     export default {
         name: "view-product-main-form",
