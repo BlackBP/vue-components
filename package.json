@@ -11,11 +11,11 @@
     "vue",
     "ui"
   ],
-  "version": "0.2.9",
+  "version": "0.3.0",
   "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve src/app.js",
-    "serve-local": "vue-cli-service serve --host 192.168.1.70 src/app.js",
+    "serve": "vue-cli-service serve src/dashboard/app.js",
+    "serve-local": "vue-cli-service serve --host 192.168.1.70 src/dashboard/app.js",
     "build": "vue-cli-service build --target lib --name bbp-ui src/components.js"
   },
   "main": "./src/components.js",
