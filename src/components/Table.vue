@@ -71,17 +71,6 @@
                             </td>
                         </template>
 
-
-                        <td v-for="(column, columnKey) in row"
-                            :key="`table-col-${columnKey}`">
-
-                            <slot v-bind="{rowData: row, value: column}"
-                                  :name="`col-${columnKey}`">
-                                {{ column }}
-                            </slot>
-
-                        </td>
-
                     </tr>
 
                 </template>
