@@ -48,7 +48,8 @@
 
                     <tr v-for="(row, rowIndex) in data"
                         :key="`table-row-${rowIndex}`"
-                        :class="rowClass">
+                        :class="rowClass"
+                        @click="$emit('rowclick', row)">
 
                         <td v-if="selectable"
                             class="u-text-center">
