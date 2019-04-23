@@ -61,6 +61,17 @@
                                         :transparent="true"/>
                         </td>
 
+                        <template v-for="(header, headerKey) in headers">
+                            <td v-if="headerKey in row"
+                                :key="`table-col-${rowIndex}-${headerKey}`">
+                                <slot v-bind="{rowData: row, value: row[headerKey]}"
+                                      :name="`col-${headerKey}`">
+                                    {{ row[headerKey] }}
+                                </slot>
+                            </td>
+                        </template>
+
+
                         <td v-for="(column, columnKey) in row"
                             :key="`table-col-${columnKey}`">
 
