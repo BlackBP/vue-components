@@ -1,5 +1,6 @@
 <template>
-    <vue-scroll @handle-scroll="handleScroll">
+    <vue-scroll ref="vuescroll"
+                @handle-scroll="handleScroll">
         <slot></slot>
     </vue-scroll>
 </template>
@@ -32,6 +33,12 @@
             }
         },
         methods: {
+            scrollTo(x = 0, y = 0) {
+                this.$refs.vuescroll.scrollTo({
+                    x,
+                    y
+                })
+            },
             handleScroll(vertical, horizontal, nativeEvent) {
                 if(!this.infiniteScroll) {
                     return

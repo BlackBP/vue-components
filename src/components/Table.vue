@@ -6,7 +6,8 @@
             <slot name="header"></slot>
         </div>
 
-        <c-scroll-view class="c-table__wrap"
+        <c-scroll-view ref="scrollView"
+                       class="c-table__wrap"
                        @change="handleLoading"
                        :infinite-scroll="infiniteScroll">
             <table class="c-table__table">
@@ -211,6 +212,12 @@
             },
             resetSelected() {
                 this.selected = [];
+            },
+            scrollTo(x = 0, y = 0) {
+                this.$refs.scrollView.scrollTo(x, y);
+            },
+            resetScroll() {
+                this.$refs.scrollView.scrollTo(0, 0)
             },
             handleLoading($state) {
                 this.$emit('loading', $state);
