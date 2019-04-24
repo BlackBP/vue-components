@@ -42,7 +42,7 @@
                 type: [String, Number],
                 default: 1
             },
-            total: {
+            last: {
                 type: Number,
                 default: 1,
                 required: true
@@ -63,26 +63,26 @@
                 return parseInt(this.value);
             },
             isLast() {
-                return Math.abs(this.current) === Math.abs(this.total);
+                return Math.abs(this.current) === Math.abs(this.last);
             },
             isFirst() {
                 return this.current === 1;
             },
             hasPages() {
-                return this.total >= this.current;
+                return this.last >= this.current;
             },
             list() {
                 let list = [];
                 let current = Math.abs(this.current);
-                let total = Math.abs(this.total);
+                let last = Math.abs(this.last);
                 let limit = Math.abs(this.limit);
 
                 // Корректировка текущего индекса
                 current = (current <= 0) ? 1 : current;
-                current = (current > total) ? total : current;
+                current = (current > last) ? last : current;
 
                 // Если количество видимых больше количества страниц, то уравниваем их
-                limit = (limit > total) ? total : limit;
+                limit = (limit > last) ? last : limit;
 
                 // Вычисление смещение относительно текущего индекса
                 let offset = Math.floor(Math.abs(limit / 2));
@@ -96,7 +96,7 @@
 
                 // Находим конечный индекс
                 let endItem = startItem + size;
-                endItem = (endItem > total) ? total : endItem;
+                endItem = (endItem > last) ? last : endItem;
 
                 // Корректируем начальный индекс
                 startItem = (size > endItem - startItem) ? endItem - size : startItem;
@@ -117,7 +117,7 @@
             handleChange(value) {
                 value = Math.abs(value);
                 value = (value <= 0) ? 1 : value;
-                value = (value >= this.total) ? this.total : value;
+                value = (value >= this.last) ? this.last : value;
 
                 this.$emit('change', value);
             }
