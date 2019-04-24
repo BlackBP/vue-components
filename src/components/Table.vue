@@ -8,8 +8,8 @@
 
         <c-scroll-view ref="scrollView"
                        class="c-table__wrap"
-                       @change="handleLoading"
-                       :infinite-scroll="infiniteScroll">
+                       :infinite-scroll="infiniteScroll"
+                       @change="handleLoading">
             <table class="c-table__table">
 
                 <colgroup>
