@@ -9,59 +9,65 @@
 
             <div class="c-modal-container__wrap">
 
-                <transition :name="modalTransitionClassName">
+                <template v-if="loading">
+                    <c-loading :visible="true" />
+                </template>
 
-                    <template v-if="customContent">
-                        <div v-show="visible"
-                             class="c-modal"
-                             @click.stop>
-                            <slot :closeModal="close"></slot>
-                        </div>
-                    </template>
+                <template v-else>
+                    <transition :name="modalTransitionClassName">
 
-                    <template v-else>
-                        <div v-show="visible"
-                             :class="modalClassName"
-                             :style="modalStyle"
-                             @click.stop>
-
-                            <header v-if="hasTitle || hasIcon"
-                                    class="c-modal__header">
-
-                                <c-icon v-if="hasIcon"
-                                        :name="icon"
-                                        class="c-modal__header-icon"/>
-
-                                <div v-if="hasTitle"
-                                     class="c-modal__header-title">
-                                    {{ title }}
-                                </div>
-
-                                <div class="c-modal__close-icon">
-                                    <c-icon-btn v-show="allowDismiss"
-                                                icon="close"
-                                                :dense="true"
-                                                :transparent="true"
-                                                @click="close" />
-                                </div>
-
-                            </header>
-
-                            <div class="c-modal__body">
+                        <template v-if="customContent">
+                            <div v-show="visible"
+                                 class="c-modal"
+                                 @click.stop>
                                 <slot :closeModal="close"></slot>
                             </div>
+                        </template>
 
-                            <footer v-show="showFooter"
-                                    class="c-modal__footer">
-                                <slot name="footer"
-                                      :closeModal="close">
-                                </slot>
-                            </footer>
+                        <template v-else>
+                            <div v-show="visible"
+                                 :class="modalClassName"
+                                 :style="modalStyle"
+                                 @click.stop>
 
-                        </div>
-                    </template>
+                                <header v-if="hasTitle || hasIcon"
+                                        class="c-modal__header">
 
-                </transition>
+                                    <c-icon v-if="hasIcon"
+                                            :name="icon"
+                                            class="c-modal__header-icon"/>
+
+                                    <div v-if="hasTitle"
+                                         class="c-modal__header-title">
+                                        {{ title }}
+                                    </div>
+
+                                    <div class="c-modal__close-icon">
+                                        <c-icon-btn v-show="allowDismiss"
+                                                    icon="close"
+                                                    :dense="true"
+                                                    :transparent="true"
+                                                    @click="close" />
+                                    </div>
+
+                                </header>
+
+                                <div class="c-modal__body">
+                                    <slot :closeModal="close"></slot>
+                                </div>
+
+                                <footer v-show="showFooter"
+                                        class="c-modal__footer">
+                                    <slot name="footer"
+                                          :closeModal="close">
+                                    </slot>
+                                </footer>
+
+                            </div>
+                        </template>
+
+                    </transition>
+                </template>
 
             </div>
 
@@ -73,6 +79,7 @@
 <script>
     import CIcon from "./Icon";
     import CIconBtn from "./IconButton";
+    import CLoading from "./Loading";
 
     const $html = document.querySelector('html');
 
@@ -106,6 +113,7 @@
     export default {
         name: "c-modal",
         components: {
+            CLoading,
             CIconBtn,
             CIcon
         },
@@ -145,7 +153,7 @@
             },
             showFooter: {
                 type: Boolean,
-                default: true,
+                default: false,
                 required: false
             },
             flex: {
@@ -161,6 +169,11 @@
             maxWidth: {
                 type: String,
                 default: '400px',
+                required: false
+            },
+            loading: {
+                type: Boolean,
+                default: false,
                 required: false
             }
         },
