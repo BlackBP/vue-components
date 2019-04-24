@@ -11,7 +11,7 @@
     "vue",
     "ui"
   ],
-  "version": "0.4.5",
+  "version": "0.4.6",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve src/dashboard/app.js",
@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "@mdi/font": "^3.5.95",
+    "inputmask": "^4.0.6",
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.10",
