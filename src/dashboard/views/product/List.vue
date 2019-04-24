@@ -44,7 +44,7 @@
                          :selectable="false"
                          :draggable="false"
                          :infinite-scroll="true"
-                         @loading="infScroll">
+                         @infinite="infScroll">
 
                     <template slot="header">
                         <div class="row u-flex-content-between u-flex-items-center">

@@ -9,7 +9,7 @@
         <c-scroll-view ref="scrollView"
                        class="c-table__wrap"
                        :infinite-scroll="infiniteScroll"
-                       @change="handleLoading">
+                       @change="handleInfiniteScroll">
             <table class="c-table__table">
 
                 <colgroup>
@@ -220,8 +220,8 @@
             resetScroll() {
                 this.$refs.scrollView.scrollTo(0, 0)
             },
-            handleLoading($state) {
-                this.$emit('loading', $state);
+            handleInfiniteScroll($state) {
+                this.$emit('infinite', $state);
             }
         }
     }
