@@ -157,6 +157,9 @@
                 return {
                     alias: this.mask
                 }
+            },
+            fieldRef() {
+                return this.$refs.field;
             }
         },
         methods: {
