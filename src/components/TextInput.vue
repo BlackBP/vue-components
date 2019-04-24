@@ -149,23 +149,6 @@
             hasMask() {
                 return _.isObjectLike(this.mask)
             },
-            inputMask() {
-                if (_.isBoolean(this.mask)) {
-                    return false;
-                }
-
-                if (_.isObjectLike(this.mask)) {
-                    return this.mask
-                }
-
-                if(_.isString(this.mask)) {
-                    return  {
-                        alias: this.mask
-                    }
-                }
-
-                return false
-            },
             fieldRef() {
                 return this.$refs.field;
             }
@@ -183,32 +166,7 @@
         },
         mounted() {
             if(this.hasMask) {
-                Inputmask.extendAliases({
-                    tel: {
-                        mask: '+7 (999) 999-99-99',
-                    },
-                    date: {
-                        mask: '99.99.9999',
-                        placeholder: '_'
-                    },
-                    datetime: {
-                        mask: '99.99.9999 99:99',
-                        placeholder: '_'
-                    },
-                    numbers: {
-                        mask: '9{0,}'
-                    },
-                    price: {
-                        mask: '9{0,}[.9{1,2}]',
-                        greedy: false
-                    },
-                    code: {
-                        mask: '9 9 9 - 9 9 9',
-                        placeholder: '_',
-                    }
-                });
-
-                new Inputmask(this.inputMask).mask(this.$refs.field);
+                new Inputmask(this.mask).mask(this.$refs.field);
             }
         },
         beforeDestroy() {
