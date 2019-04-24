@@ -10,7 +10,8 @@
             <div class="c-modal-container__wrap">
 
                 <template v-if="loading">
-                    <c-loading :visible="true" />
+                    <c-loading :visible="true"
+                               style="margin: auto;"/>
                 </template>
 
                 <template v-else>
@@ -47,7 +48,7 @@
                                                     icon="close"
                                                     :dense="true"
                                                     :transparent="true"
-                                                    @click="close" />
+                                                    @click="close"/>
                                     </div>
 
                                 </header>
@@ -91,12 +92,12 @@
             base: 'c-modal',
             transition: {
                 scale: 'modal-scale',
-                slideY : 'modal-slideY',
-                slideUpY : 'modal-slideUpY',
-                slideX : 'modal-slideX',
-                slideRightX : 'modal-slideRightX',
-                rotateX : 'modal-rotateX',
-                rotateY : 'modal-rotateY'
+                slideY: 'modal-slideY',
+                slideUpY: 'modal-slideUpY',
+                slideX: 'modal-slideX',
+                slideRightX: 'modal-slideRightX',
+                rotateX: 'modal-rotateX',
+                rotateY: 'modal-rotateY'
             }
         }
     };
