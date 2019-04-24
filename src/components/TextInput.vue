@@ -67,11 +67,6 @@
                 type: null,
                 default: ''
             },
-            mask: {
-                type: [String, Boolean, Object],
-                default: false,
-                required: false
-            },
             title: {
                 type: String,
                 default: '',
@@ -144,19 +139,6 @@
                 }
 
                 return text;
-            },
-            inputMask() {
-                if (_.isBoolean(this.mask)) {
-                    return false;
-                }
-
-                if(_.isObjectLike(this.mask)) {
-                    return this.mask
-                }
-
-                return {
-                    alias: this.mask
-                }
             },
             fieldRef() {
                 return this.$refs.field;
