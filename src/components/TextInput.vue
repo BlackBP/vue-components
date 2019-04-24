@@ -14,7 +14,7 @@
         <c-icon v-if="leading"
                 class="c-text-input__leading"
                 :title="title"
-                :name="leading" />
+                :name="leading"/>
 
         <input v-model="model"
                ref="field"
@@ -32,12 +32,13 @@
 
         <c-icon v-if="trailing"
                 class="c-text-input__trailing"
-                :name="trailing" />
+                :name="trailing"/>
 
     </FormField>
 </template>
 
 <script>
+    import Inputmask from "inputMask";
     import FormField from "./FormField";
     import CIcon from "./Icon";
 
@@ -66,6 +67,11 @@
             value: {
                 type: null,
                 default: ''
+            },
+            mask: {
+                type: [String, Boolean, Object],
+                default: false,
+                required: false
             },
             title: {
                 type: String,
@@ -125,7 +131,7 @@
                 }
             },
             hasErrors() {
-                if(_.isArray(this.errors)) {
+                if (_.isArray(this.errors)) {
                     return !_.isEmpty(this.errors)
                 }
 
@@ -140,6 +146,26 @@
 
                 return text;
             },
+            hasMask() {
+                return _.isObjectLike(this.mask)
+            },
+            inputMask() {
+                if (_.isBoolean(this.mask)) {
+                    return false;
+                }
+
+                if (_.isObjectLike(this.mask)) {
+                    return this.mask
+                }
+
+                if(_.isString(this.mask)) {
+                    return  {
+                        alias: this.mask
+                    }
+                }
+
+                return false
+            },
             fieldRef() {
                 return this.$refs.field;
             }
@@ -153,6 +179,45 @@
             },
             handleChange(event) {
                 this.$emit('change', event)
+            }
+        },
+        mounted() {
+            if(this.hasMask) {
+                Inputmask.extendAliases({
+                    tel: {
+                        mask: '+7 (999) 999-99-99',
+                    },
+                    date: {
+                        mask: '99.99.9999',
+                        placeholder: '_'
+                    },
+                    datetime: {
+                        mask: '99.99.9999 99:99',
+                        placeholder: '_'
+                    },
+                    numbers: {
+                        mask: '9{0,}'
+                    },
+                    price: {
+                        mask: '9{0,}[.9{1,2}]',
+                        greedy: false
+                    },
+                    code: {
+                        mask: '9 9 9 - 9 9 9',
+                        placeholder: '_',
+                    }
+                });
+
+                new Inputmask(this.inputMask).mask(this.$refs.field);
+            }
+        },
+        beforeDestroy() {
+            if(this.hasMask) {
+                let field = this.$refs.field;
+
+                if (field.inputmask) {
+                    field.inputmask.remove()
+                }
             }
         }
     }
