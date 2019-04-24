@@ -375,7 +375,9 @@
                     let selected = _.isArray(this.value) ? [...this.value] : [];
 
                     if (isSelected) {
-                        selected = this.removeItem(optionValue);
+                        selected = _.filter(selected, item => {
+                            return item[this.trackBy] !== optionValue[this.trackBy]
+                        });
                     } else {
                         selected.push(optionValue)
                     }

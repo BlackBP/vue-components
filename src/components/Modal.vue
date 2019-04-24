@@ -10,8 +10,8 @@
             <div class="c-modal-container__wrap">
 
                 <template v-if="loading">
-                    <c-loading :visible="true"
-                               style="margin: auto;"/>
+                    <c-loading style="margin: auto;"
+                               :visible="true"/>
                 </template>
 
                 <template v-else>
