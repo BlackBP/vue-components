@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    import Inputmask from "inputMask";
+    import Inputmask from "inputmask";
     import FormField from "./FormField";
     import CIcon from "./Icon";
 

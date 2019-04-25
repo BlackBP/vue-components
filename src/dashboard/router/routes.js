@@ -1,22 +1,10 @@
 import Home from '../views/Home';
-import Orders from '../views/Orders';
-import Logs from '../views/Logs';
-import Products from '../views/product/List';
-import ProductEditor from '../views/product/Editor';
+import TasksList from '../views/Tasks';
 
 // == Мета-данные маршрутов
 export const META = {
     home: createMeta('/', 'home', 'Главная', 'home'),
-    orders: createMeta('/orders', 'orders-list', 'Заказы', 'clipboard-check'),
-    products: createMeta('/products', 'products-list', 'Товары', 'cart'),
-    productAdd: createMeta('/products/add', 'product-add', 'Новый товар'),
-    productEdit: createMeta('/products/edit/:id', 'product-edit', 'Редактирование товара'),
-    modifiers: createMeta('/modifiers', 'modifiers-list', 'Модификаторы', 'file-tree'),
-    modifierAdd: createMeta('/modifiers/add', 'modifiers-add', 'Новый модификатор'),
-    modifierEdit: createMeta('/modifiers/edit', 'modifiers-edit', 'Редактирование модификатора'),
-    props: createMeta('/props', 'props-list', 'Характеристики товара', 'shape-plus'),
-    reports: createMeta('/reports', 'reports-list', 'Отчёты', 'chart-bar'),
-    logs: createMeta('/logs', 'system-logs', 'Журналы', 'library-books')
+    tasks: createMeta('/tasks', 'tasks', 'Заявки', 'format-list-checkbox'),
 };
 
 /**
@@ -71,17 +59,5 @@ function createRoute(metaData, component, rest = {}) {
 
 export default [
     createRoute(META.home, Home),
-    createRoute(META.orders, Orders),
-    createRoute(META.products, Products),
-    createRoute(META.productAdd, ProductEditor, {
-        props: {
-            isEdit: false
-        }
-    }),
-    createRoute(META.productEdit, ProductEditor, {
-        props: {
-            isEdit: true
-        }
-    }),
-    createRoute(META.logs, Logs)
+    createRoute(META.tasks, TasksList)
 ]

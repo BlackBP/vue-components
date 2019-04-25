@@ -57,7 +57,7 @@
      * @param rest
      * @return {{}&{path: string, icon: string, title: string}}
      */
-    function createMenuItem(path = '/',icon = '', title = '', rest = {}) {
+    function createMenuItem(path = '/', title = '', icon = '', rest = {}) {
         return {
             path,
             icon,
@@ -74,19 +74,17 @@
         },
         computed: {
             ...mapState({
-                isOpen: state => state.drawer.isOpen
+                isOpen: state => state.drawer.isOpen,
+                newTasksCount: state => state.tasks.count.new
             }),
             menu() {
                 return {
-                    home: createMenuItem(META.home.path, 'home', 'Главная', {
+                    home: createMenuItem(META.home.path, META.home.title, META.home.icon,  {
                         exact: true
                     }),
-                    orders: createMenuItem(META.orders.path, 'clipboard-check', 'Заказы', {
-                        tail: 15
-                    }),
-                    products: createMenuItem(META.products.path, 'cart', 'Товары'),
-                    reports: createMenuItem(META.reports.path, 'chart-bar', 'Отчёты'),
-                    logs: createMenuItem(META.logs.path, 'library-books', 'Журналы'),
+                    orders: createMenuItem(META.tasks.path, META.tasks.title, META.tasks.icon,  {
+                        tail: this.newTasksCount
+                    })
                 }
             }
         }
