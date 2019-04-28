@@ -80,11 +80,17 @@
             setLoaded() {
                 this.resolve = true;
                 this.loading = false;
+                this.completed = false;
             },
             setCompleted() {
                 this.resolve = false;
-                this.completed = true;
                 this.loading = false;
+                this.completed = true;
+            },
+            resetInfiniteScroll() {
+                this.resolve = true;
+                this.loading = false;
+                this.completed = false;
             }
         }
     }

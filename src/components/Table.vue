@@ -222,6 +222,9 @@
             },
             handleInfiniteScroll($state) {
                 this.$emit('infinite', $state);
+            },
+            resetInfiniteScroll() {
+                this.$refs.scrollView.resetInfiniteScroll();
             }
         }
     }
