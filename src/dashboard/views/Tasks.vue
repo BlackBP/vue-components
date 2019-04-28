@@ -83,7 +83,7 @@
     import CFiltersForm from "../components/Filters";
 
     function LOG(...rest) {
-        console.log('[Tasks] ', ...rest)
+        console.log('[Tasks]', ...rest)
     }
 
     export default {
@@ -120,11 +120,29 @@
         },
         watch: {
             $route(data) {
-                let query = _.get(data, 'query', {});
-                this.getData(query);
+                this.getData(this.queryParams);
             }
         },
         computed: {
+            queryParams() {
+                let query = _.get(this.$route, 'query', {});
+
+                query = _.reduce(query, (total, value, key) => {
+
+                    if(key === 'page') {
+                        value = parseInt(value);
+                        value = _.isNumber(value) && !_.isNaN(value) ? value : 1;
+                    }
+
+                    total[key] = value;
+
+                    return total
+                }, {});
+
+                LOG('queryParams() =>', query);
+
+                return query
+            },
             tableHeaders() {
                 return {
                     id: 'ID',
@@ -213,6 +231,7 @@
                 let currentPage = this.meta.current_page;
                 let params = this.getParams();
 
+                queryPage = parseInt(queryPage);
                 queryPage = _.isNumber(queryPage) && !_.isNaN(queryPage) ? queryPage : 1;
 
                 let isSamePage = queryPage === currentPage;
@@ -238,8 +257,7 @@
             }
         },
         mounted() {
-            let query = _.get(this.$route, 'query', {});
-            this.getData(query);
+            this.getData(this.queryParams);
         }
     }
 </script>
