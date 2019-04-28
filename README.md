@@ -1,6 +1,6 @@
 # An components library based on Vue.js.
 
-## To run example of usage
+## To run dashboard template
 ```
 yarn install
 yarn run serve
