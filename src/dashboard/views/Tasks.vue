@@ -25,29 +25,78 @@
                                     :transparent="true"
                                     @click="handleReload"/>
 
-                        <c-icon-btn icon="filter"
-                                    style="margin-right: 5px;"
-                                    :transparent="true"
-                                    @click="viewFilters"/>
-
                         <c-icon-btn icon="file-excel"
                                     :transparent="true"/>
                     </div>
 
                     <div class="col-auto">
-                        <c-pagination v-model="meta.current_page"
+                        <c-pagination v-model="query.page"
                                       :last="meta.last_page"
                                       @change="handlePageChange"/>
                     </div>
                 </div>
+
+                <c-divider />
+
+                <div class="row u-flex-items-center">
+                    <div class="col-2">
+                        <c-text-input v-model="query.customer_phone"
+                                      leading="phone"
+                                      placeholder="Телефон"
+                                      :mask="{mask: '+7 (999) 999-99-99'}"/>
+                    </div>
+                    <div class="col-2">
+                        <c-text-input v-model="query.customer_id"
+                                      leading="account"
+                                      placeholder="ID заказчика" />
+                    </div>
+                    <div class="col-2">
+                        <c-text-input v-model="query.performer_id"
+                                      leading="account"
+                                      placeholder="ID мастера" />
+                    </div>
+                    <div class="col-2">
+                        <c-text-input v-model="query.created_at"
+                                      leading="calendar"
+                                      placeholder="Дата создания"
+                                      :mask="{mask: '99.99.9999 - 99.99.9999'}" />
+                    </div>
+                    <div class="col-auto">
+                        <c-checkbox v-model="query.active">
+                            Активность
+                        </c-checkbox>
+                    </div>
+
+                    <div class="col-auto">
+                        <c-btn color="primary"
+                               style="margin-right: 5px;"
+                               @click="applyFilters">
+                            Применить
+                        </c-btn>
+                        <c-btn color="warn"
+                               @click="resetFilters">
+                            Сбросить
+                        </c-btn>
+                    </div>
+                </div>
+
                 <c-divider/>
+
+                <div>
+                    <b>query: </b>{{ query }}
+                    <br>
+                    <b>$route.query: </b>{{ $route.query }}
+                </div>
+
+                <c-divider/>
+
             </template>
 
             <template slot="footer">
                 <c-divider/>
                 <div class="row u-flex-content-between">
                     <div class="col-auto">
-                        <b>Страница: </b>{{ meta.current_page }} из {{ meta.last_page }}
+                        <b>Страница: </b>{{ query.page }} из {{ meta.last_page }}
                     </div>
                     <div class="col-auto">
                         <b>Показано: </b>{{ meta.per_page }} из {{ meta.total }}
@@ -56,16 +105,6 @@
             </template>
 
         </c-table>
-
-        <c-modal ref="filters"
-                 title="Фильтры"
-                 icon="filter"
-                 :allow-dismiss="true"
-                 :outside-dismiss="false">
-            <c-filters-form v-model="filters"
-                            :config="filtersConfig"
-                            @change="handleFilters"/>
-        </c-modal>
 
     </c-card>
 
@@ -80,7 +119,9 @@
     import CPagination from "../../components/Pagination";
     import CTable from "../../components/Table";
     import CModal from "../../components/Modal";
-    import CFiltersForm from "../components/Filters";
+    import CTextInput from "../../components/TextInput";
+    import CCheckbox from "../../components/Checkbox";
+    import CBtn from "../../components/Button";
 
     function LOG(...rest) {
         console.log('[Tasks]', ...rest)
@@ -89,7 +130,9 @@
     export default {
         name: "view-orders",
         components: {
-            CFiltersForm,
+            CBtn,
+            CCheckbox,
+            CTextInput,
             CModal,
             CTable,
             CPagination,
@@ -103,46 +146,22 @@
             return {
                 loading: true,
                 list: [],
-                filters: {
+                meta: {
+                    last_page: 20,
+                    per_page: 40,
+                    total: 875
+                },
+                query: {
+                    page: 1,
                     customer_phone: '',
                     customer_id: '',
                     performer_id: '',
                     created_at: '',
                     active: false,
-                },
-                meta: {
-                    current_page: 1,
-                    last_page: 20,
-                    per_page: 40,
-                    total: 875
                 }
             }
         },
-        watch: {
-            $route(data) {
-                this.getData(this.queryParams);
-            }
-        },
         computed: {
-            queryParams() {
-                let query = _.get(this.$route, 'query', {});
-
-                query = _.reduce(query, (total, value, key) => {
-
-                    if(key === 'page') {
-                        value = parseInt(value);
-                        value = _.isNumber(value) && !_.isNaN(value) ? value : 1;
-                    }
-
-                    total[key] = value;
-
-                    return total
-                }, {});
-
-                LOG('queryParams() =>', query);
-
-                return query
-            },
             tableHeaders() {
                 return {
                     id: 'ID',
@@ -154,51 +173,32 @@
                     city: 'Город',
                     comment: 'Комментарий'
                 }
-            },
-            filtersConfig() {
-                return {
-                    customer_phone: {
-                        type: 'input',
-                        props: {
-                            placeholder: 'Номер телефона',
-                            mask: {
-                                mask: '+7 (999) 999-99-99',
-                            }
-                        }
-                    },
-                    customer_id: {
-                        type: 'input',
-                        props: {
-                            placeholder: 'ID заказчика'
-                        }
-                    },
-                    active: {
-                        type: 'checkbox',
-                        label: 'Активность'
-                    }
-                }
+            }
+        },
+        watch: {
+            $route(data) {
+                this.syncQuery();
+                this.getData();
             }
         },
         methods: {
-            updateQuery() {
-                this.$router.push({
-                    path: '',
-                    query: this.getParams()
-                })
-            },
-            getParams() {
-                let query = _.reduce(this.filters, (total, value, key) => {
+            syncQuery() {
+                let query = _.get(this.$route, 'query', {});
+                query = _.defaultsDeep(query, {...this.query});
 
-                    if (!_.isEmpty(value)) {
-                        total[key] = value
+                _.each(query, (value, key) => {
+
+                    if(key === 'active') {
+                        value = _.toLower(value) === 'true'
                     }
 
-                    return total
-                }, {});
+                    if(key === 'page') {
+                        value = parseInt(value);
+                        value = _.isNumber(value) && !_.isNaN(value) ? value : 1;
+                    }
 
-                return _.defaultsDeep({
-                    page: this.meta.current_page
-                }, query);
+                    this.query[key] = value
+                });
             },
             getData(params = {}) {
                 this.loading = true;
@@ -226,38 +226,42 @@
                     this.loading = false;
                 }, 1000)
             },
-            handleReload() {
-                let queryPage = _.get(this.$route, 'query.page', 1);
-                let currentPage = this.meta.current_page;
-                let params = this.getParams();
-
-                queryPage = parseInt(queryPage);
-                queryPage = _.isNumber(queryPage) && !_.isNaN(queryPage) ? queryPage : 1;
-
-                let isSamePage = queryPage === currentPage;
-
-                if (isSamePage) {
-                    this.getData(params);
-                } else {
-                    this.handlePageChange(1)
-                }
+            getParams() {
+                return _.pickBy(this.query, value => value !== '')
             },
-            handlePageChange(page) {
-                this.meta.current_page = page;
-                this.$nextTick(() => {
-                    this.updateQuery()
+            applyFilters() {
+                this.$router.push({
+                    path: '',
+                    query: this.getParams()
                 })
             },
-            viewFilters() {
-                this.$refs.filters.open();
+            resetFilters() {
+                this.$router.push({
+                    path: '',
+                    query: {}
+                })
             },
-            handleFilters() {
-                this.$refs.filters.close();
-                this.handlePageChange(1);
+            handleReload() {
+                this.getData()
+            },
+            handlePageChange() {
+                this.$router.push({
+                    path: '',
+                    query: this.getParams()
+                })
             }
         },
         mounted() {
-            this.getData(this.queryParams);
+            _.each(this.$route.query, (value, key) => {
+
+                if(key === 'active') {
+                    value = _.toLower(value) === 'true'
+                }
+
+                this.query[key] = value
+            });
+
+            this.getData()
         }
     }
 </script>

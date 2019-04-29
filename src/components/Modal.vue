@@ -111,6 +111,19 @@
         }
     };
 
+    const dataKeys = {
+        modalOpenCount: 'modalOpenCount'
+    };
+
+    function getModalCount() {
+        let modalCount = parseInt($html.dataset[dataKeys.modalOpenCount]);
+        return  _.isNaN(modalCount) ? 0 : modalCount;
+    }
+
+    function setModalCount(value) {
+        $html.dataset[dataKeys.modalOpenCount] = value;
+    }
+
     export default {
         name: "c-modal",
         components: {
@@ -210,15 +223,28 @@
         },
         methods: {
             open() {
-                setTimeout(() => {
-                    $html.classList.add(CssClass.html.modalOpened);
-                }, 100);
+                let modalCount = getModalCount();
+
+                if(modalCount <= 0) {
+                    setModalCount(1);
+                } else {
+                    setModalCount(modalCount + 1)
+                }
+
+                $html.classList.add(CssClass.html.modalOpened);
 
                 this.visible = true;
                 this.$emit(Events.open.name);
             },
             close() {
-                $html.classList.remove(CssClass.html.modalOpened);
+                let modalCount = getModalCount();
+
+                if(modalCount > 1) {
+                    setModalCount(modalCount - 1)
+                } else {
+                    setModalCount(0);
+                    $html.classList.remove(CssClass.html.modalOpened);
+                }
 
                 this.visible = false;
                 this.$emit(Events.close.name);
