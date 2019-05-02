@@ -19,21 +19,16 @@
                 required: false
             }
         },
-        render(createElement, context) {
-            let props = context.props;
-            let data = {
-                class: {
-                    'c-icon': true,
-                    [`${props.vendorPrefix}${props.name}`]: true
-                },
-                style: {}
-            };
+        render(createElement, {data, props}) {
+            let baseClass = 'c-icon';
 
-            if (props.size) {
-                data.style.fontSize = props.size;
+            data.class = [data.class, baseClass, `${props.vendorPrefix}${props.name}`];
+
+            if(props.size) {
+                data.style = [data.style, {
+                    fontSize: props.size
+                }];
             }
-
-            data = _.defaultsDeep(data, context.data);
 
             return createElement('i', data);
         }

@@ -2,16 +2,12 @@
     export default {
         name: "c-divider",
         functional: true,
-        render(createElement, context) {
-            let data = {
-                class: {
-                    'c-divider': true
-                }
-            };
+        render(createElement, {data}) {
+            let baseClass = 'c-divider';
 
-            data = _.defaultsDeep(data, context.data);
+            data.class = [data.class, baseClass];
 
-            return createElement('div', data, context.children)
+            return createElement('div', data)
         }
     }
 </script>

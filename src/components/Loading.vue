@@ -19,16 +19,8 @@
                 required: false
             }
         },
-        render(createElement, context) {
-            let props = context.props;
+        render(createElement, {props, data}) {
             let baseClass = 'c-loading';
-            let data = {
-                class: {
-                    [`${baseClass}`]: true,
-                    [`${baseClass}--elevated`]: props.elevated,
-                    [`${baseClass}--dense`]: props.dense
-                }
-            };
             let children = [
                 createElement('div', {class: `${baseClass}__spinner`})
             ];
@@ -39,7 +31,11 @@
                 }, props.text))
             }
 
-            data = _.defaultsDeep(data, context.data);
+            data.class = [data.class, {
+                [`${baseClass}`]: true,
+                [`${baseClass}--elevated`]: props.elevated,
+                [`${baseClass}--dense`]: props.dense
+            }];
 
             return createElement('div', data, children);
         }

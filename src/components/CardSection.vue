@@ -2,16 +2,12 @@
     export default {
         name: "c-card-section",
         functional: true,
-        render(createElement, context) {
-            let data = {
-                class: {
-                    'c-card-sect': true
-                }
-            };
+        render(createElement, {data, children}) {
+            let baseClass = 'c-card-sect';
 
-            data = _.defaultsDeep(data, context.data);
+            data.class = [data.class, baseClass];
 
-            return createElement('div', data, context.children)
+            return createElement('div', data, children)
         }
     }
 </script>
