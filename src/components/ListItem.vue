@@ -1,27 +1,45 @@
-<template functional>
-    <div v-bind="data.attrs"
-         v-on="listeners"
-         class="c-list-item"
-         :class="[data.staticClass, data.class]"
-         :style="data.staticStyle">
-
-        <div v-if="$slots.start"
-             class="c-list-item__start">
-            <slot name="start"></slot>
-        </div>
-        <div class="c-list-item__body">
-            <slot></slot>
-        </div>
-        <div v-if="$slots.end"
-             class="c-list-item__end">
-            <slot name="end"></slot>
-        </div>
-
-    </div>
-</template>
-
 <script>
     export default {
-        name: "c-list-item"
+        name: "c-list-item",
+        functional: true,
+        render(createElement, context) {
+            let baseClass = 'c-list-item';
+            let $slots = context.slots();
+            let data = {
+                class: {
+                    [`${baseClass}`]: true
+                }
+            };
+            let children = [];
+
+            //
+            if($slots.start) {
+                children.push(createElement('div', {
+                    class: {
+                        [`${baseClass}__start`]: true
+                    }
+                }, $slots.start))
+            }
+
+            //
+            children.push(createElement('div', {
+                class: {
+                    [`${baseClass}__body`]: true
+                }
+            }, $slots.default));
+
+            //
+            if($slots.end) {
+                children.push(createElement('div', {
+                    class: {
+                        [`${baseClass}__end`]: true
+                    }
+                }, $slots.end))
+            }
+
+            data = _.defaultsDeep(data, context.data);
+
+            return createElement('div', data, children)
+        }
     }
 </script>

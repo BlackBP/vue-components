@@ -1,17 +1,7 @@
-<template functional>
-
-    <i v-bind="data.attrs"
-       v-on="listeners"
-       class="c-icon"
-       :class="[data.staticClass, data.class, `${props.vendorPrefix}${props.name}`]"
-       :style="[data.staticStyle, !!props.size && {fontSize: props.size}]">
-    </i>
-
-</template>
-
 <script>
     export default {
         name: "c-icon",
+        functional: true,
         props: {
             name: {
                 type: String,
@@ -28,6 +18,24 @@
                 default: 'mdi mdi-',
                 required: false
             }
+        },
+        render(createElement, context) {
+            let props = context.props;
+            let data = {
+                class: {
+                    'c-icon': true,
+                    [`${props.vendorPrefix}${props.name}`]: true
+                },
+                style: {}
+            };
+
+            if (props.size) {
+                data.style.fontSize = props.size;
+            }
+
+            data = _.defaultsDeep(data, context.data);
+
+            return createElement('i', data);
         }
     }
 </script>

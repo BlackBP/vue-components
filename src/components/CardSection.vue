@@ -1,19 +1,17 @@
-<template functional>
-
-    <div v-bind="data.attrs"
-         v-on="listeners"
-         class="c-card-sect"
-         :class="[data.staticClass, data.class]"
-         :style="data.staticStyle">
-
-        <slot></slot>
-
-    </div>
-
-</template>
-
 <script>
     export default {
-        name: "c-card-section"
+        name: "c-card-section",
+        functional: true,
+        render(createElement, context) {
+            let data = {
+                class: {
+                    'c-card-sect': true
+                }
+            };
+
+            data = _.defaultsDeep(data, context.data);
+
+            return createElement('div', data, context.children)
+        }
     }
 </script>

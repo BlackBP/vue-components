@@ -1,15 +1,17 @@
-<template functional>
-    <div v-bind="data.attrs"
-         v-on="listeners"
-         class="c-form-row"
-         :class="[data.staticClass, data.class]"
-         :style="[data.staticStyle]">
-        <slot></slot>
-    </div>
-</template>
-
 <script>
     export default {
-        name: "c-form-row"
+        name: "c-form-row",
+        functional: true,
+        render(createElement, context) {
+            let data = {
+                class: {
+                    'c-form-row': true
+                }
+            };
+
+            data = _.defaultsDeep(data, context.data);
+
+            return createElement('div', data, context.children)
+        }
     }
 </script>

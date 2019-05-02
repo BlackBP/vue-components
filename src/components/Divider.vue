@@ -1,11 +1,11 @@
 <script>
     export default {
-        name: "c-btn-group",
+        name: "c-divider",
         functional: true,
         render(createElement, context) {
             let data = {
                 class: {
-                    'c-btn-group': true
+                    'c-divider': true
                 }
             };
 

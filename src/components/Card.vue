@@ -13,14 +13,12 @@
 </template>
 
 <script>
-    import CIcon from "./Icon";
     import CLoading from "./Loading";
 
     export default {
         name: "c-card",
         components: {
-            CLoading,
-            CIcon
+            CLoading
         },
         props: {
             loading: {

@@ -6,13 +6,8 @@
 </template>
 
 <script>
-    import CLoading from "./Loading";
-
     export default {
         name: "c-scroll-view",
-        components: {
-            CLoading
-        },
         props: {
             infiniteScroll: {
                 type: Boolean,
