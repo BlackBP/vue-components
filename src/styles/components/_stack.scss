@@ -1,0 +1,82 @@
+.c-stack {
+  $self: #{&};
+  $item: #{$self}-item;
+
+  $items-gap: 10px;
+
+  @at-root {
+
+    #{$self} {
+      display: flex;
+      flex-flow: row nowrap;
+
+      & > #{$item} {
+        margin-right: $items-gap;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      @include make-modifier('inline') {
+        display: inline-flex;
+      }
+
+      @include make-modifier('column') {
+        flex-direction: column;
+
+        & > #{$item} {
+          margin-bottom: $items-gap;
+          margin-right: auto;
+
+          &:last-child {
+            margin-bottom: 0;
+            margin-right: auto;
+          }
+        }
+      }
+
+      @include make-modifier('wrap') {
+        flex-wrap: wrap;
+      }
+
+      // Align content
+      @include make-modifier('content-between') {
+        justify-content: space-between;
+      }
+
+      @include make-modifier('content-start') {
+        justify-content: flex-start;
+      }
+
+      @include make-modifier('content-end') {
+        justify-content: flex-end;
+      }
+
+      // Align items
+      @include make-modifier('items-center') {
+        align-items: center;
+      }
+
+      @include make-modifier('items-start') {
+        align-items: flex-start;
+      }
+
+      @include make-modifier('items-end') {
+        align-items: flex-end;
+      }
+    }
+
+    #{$item} {
+      flex: 0 0 auto;
+      display: block;
+
+      @include make-modifier('flex') {
+        flex: 1 1 auto;
+        width: 100%;
+      }
+    }
+
+  }
+
+}
