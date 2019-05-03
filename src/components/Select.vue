@@ -222,7 +222,6 @@
                 focused: false,
                 loading: false,
                 query: '',
-                queryOptions: [],
                 list: []
             };
         },
