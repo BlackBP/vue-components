@@ -103,10 +103,6 @@
     import CIcon from "./Icon";
     import CChip from "./Chip";
 
-    // function LOG(...rest) {
-    //     console.log('[c-select]', ...rest);
-    // }
-
     const OPTION_KEY = {
         isGroup: 'isGroup',
         isSelected: 'isSelected',
@@ -172,6 +168,7 @@
             customSearchCallback: {
                 type: Function,
                 default() {
+                    return []
                 },
                 required: false
             },
@@ -225,15 +222,16 @@
                 focused: false,
                 loading: false,
                 query: '',
+                queryOptions: [],
                 list: []
             };
         },
         watch: {
             value() {
-                this.setList(this.parseOptions())
+                this.parseOptions()
             },
             options() {
-                this.setList(this.parseOptions())
+                this.parseOptions()
             }
         },
         computed: {
@@ -256,33 +254,33 @@
                 return text;
             },
             itemsCount() {
-                if(this.multiple) {
+                if (this.multiple) {
                     return this.value.length
                 }
 
-                if(!_.isEmpty(this.value)) {
+                if (!_.isEmpty(this.value)) {
                     return 1;
                 }
             },
             hasMaxItems() {
-                if(this.maxItems > 0) {
+                if (this.maxItems > 0) {
                     return this.itemsCount === this.maxItems
                 }
 
                 return false;
             },
             iconClassName() {
-                if(this.loading) return 'loading';
+                if (this.loading) return 'loading';
 
                 return this.focused ? 'menu-up' : 'menu-down'
             },
             labelVisibility() {
-                if(this.multiple) {
+                if (this.multiple) {
                     return this.hasSelected
                 }
 
-                if(this.searchable) {
-                    if(this.focused) {
+                if (this.searchable) {
+                    if (this.focused) {
                         return false
                     } else {
                         return this.hasSelected
@@ -292,12 +290,12 @@
                 }
             },
             searchVisibility() {
-                if(this.multiple) {
+                if (this.multiple) {
                     return true
                 }
 
-                if(this.searchable) {
-                    if(this.focused) {
+                if (this.searchable) {
+                    if (this.focused) {
                         return true
                     } else {
                         return !this.hasSelected
@@ -319,8 +317,7 @@
                 let isGroup = option[OPTION_KEY.isGroup];
                 let isSelected = option[OPTION_KEY.isSelected];
 
-                /* The Groups is not selectable */
-                // TODO: make the groups selectable
+                /* The Groups is not selectable. TODO: make the groups selectable */
                 if (isGroup) {
                     this.handleShow();
                     return
@@ -357,8 +354,6 @@
 
                     this.handleChange(optionValue);
                 }
-
-
             },
 
             // List interactions
@@ -370,27 +365,16 @@
             filterByQuery: _.debounce(function (query = '') {
                 if (this.customSearch) {
                     this.customSearchCallback(query)
-                        .then(result => {
-                            this.hideSpinner();
-                            this.setList(result)
+                        .then(() => {
+                            this.hideSpinner()
                         })
                         .catch(() => {
                             this.hideSpinner();
                             this.setList([]);
                         })
                 } else {
-                    let result = _.filter(this.parseOptions(), item => {
-                        let label = _.lowerCase(_.get(item, this.optionLabel, ''));
-
-                        if (label !== '') {
-                            return label.match(_.lowerCase(query))
-                        }
-
-                        return true;
-                    });
-
+                    this.parseOptions();
                     this.hideSpinner();
-                    this.setList(result);
                 }
             }, 300),
 
@@ -400,8 +384,6 @@
              * @param {Object} option
              */
             removeItem(option = {}) {
-                // LOG('removeItem', option);
-
                 let list = _.isArray(this.value) ? [...this.value] : [];
 
                 if (_.isEmpty(list)) return;
@@ -432,6 +414,7 @@
                 let optionLabel = this.optionLabel;
                 let groupValues = this.groupValues;
                 let groupLabel = this.groupLabel;
+                let queryString = this.query;
 
                 if (groupValues !== '') {
                     options = _.reduce(options, (total, option) => {
@@ -448,18 +431,18 @@
                     }, []);
                 }
 
-                return _.map(options, option => {
+                let list = _.map(options, option => {
                     let isGroup = _.get(option, OPTION_KEY.isGroup, false);
                     let itemId = _.get(option, trackBy, '');
                     let isSelected = false;
 
-                    if(this.multiple) {
+                    if (this.multiple) {
                         isSelected = _.some(selectedOptions, {[trackBy]: itemId})
                     } else {
                         isSelected = itemId === _.get(selectedOptions, trackBy, null);
                     }
 
-                    if(isGroup) {
+                    if (isGroup) {
                         option[OPTION_KEY.isSelected] = isSelected;
                         return option;
                     }
@@ -472,6 +455,20 @@
                         [OPTION_KEY.isSelected]: isSelected
                     }
                 });
+
+                if(this.searchable && queryString !== '') {
+                    list = _.filter(list, item => {
+                        let label = _.toLower(_.get(item, optionLabel, ''));
+
+                        if (label !== '') {
+                            return label.match(_.toLower(queryString))
+                        }
+
+                        return true;
+                    });
+                }
+
+                this.setList(list);
             },
 
             /**
@@ -488,8 +485,7 @@
              * Resets the list
              */
             resetList() {
-                // LOG('resetList');
-                this.setList(this.parseOptions())
+                this.parseOptions()
             },
 
             /**
@@ -557,17 +553,14 @@
              * @param value - payload
              */
             handleChange(value) {
-                // LOG('handleChange', value);
                 this.$emit('change', value);
             },
 
             handleShow(event) {
-                // LOG('handleShow', event);
                 this.showList();
             },
 
             handleHide(event) {
-                // LOG('handleHide', event);
                 this.hideList();
             },
 
