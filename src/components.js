@@ -1,5 +1,4 @@
 import Btn from './components/Button.vue';
-import BtnGroup from './components/ButtonGroup.vue';
 import Card from './components/Card.vue';
 import CardSection from './components/CardSection.vue';
 import Checkbox from './components/Checkbox.vue';
@@ -18,6 +17,8 @@ import Radio from './components/Radio.vue';
 import ScrollView from './components/ScrollView.vue';
 import Select from './components/Select.vue';
 import ServiceFormValidate from './components/ServiceFormValidate.vue';
+import StackGroup from './components/StackGroup.vue';
+import StackItem from './components/StackItem.vue';
 import Switch from './components/Switch.vue';
 import Table from './components/Table.vue';
 import TextArea from './components/TextArea.vue';
@@ -25,7 +26,6 @@ import TextInput from './components/TextInput.vue';
 
 export {
     Btn,
-    BtnGroup,
     Card,
     CardSection,
     Checkbox,
@@ -44,6 +44,8 @@ export {
     ScrollView,
     Select,
     ServiceFormValidate,
+    StackGroup,
+    StackItem,
     Switch,
     Table,
     TextArea,
