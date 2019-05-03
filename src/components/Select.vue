@@ -230,60 +230,13 @@
         },
         watch: {
             value() {
-                this.setList(this.parsedOptions)
+                this.setList(this.parseOptions())
+            },
+            options() {
+                this.setList(this.parseOptions())
             }
         },
         computed: {
-            parsedOptions() {
-                // LOG('getter.parsedOptions');
-
-                let selectedOptions = this.value;
-                let options = _.isArray(this.options) ? [...this.options] : [];
-                let trackBy = this.trackBy;
-                let optionLabel = this.optionLabel;
-                let groupValues = this.groupValues;
-                let groupLabel = this.groupLabel;
-
-                if (groupValues !== '') {
-                    options = _.reduce(options, (total, option) => {
-                        let values = _.get(option, groupValues, []);
-
-                        total.push({
-                            [trackBy]: _.get(option, trackBy, ''),
-                            [optionLabel]: _.get(option, groupLabel, ''),
-                            [OPTION_KEY.value]: values,
-                            [OPTION_KEY.isGroup]: values.length > 0
-                        });
-
-                        return _.concat(total, values);
-                    }, []);
-                }
-
-                return _.map(options, option => {
-                    let isGroup = _.get(option, OPTION_KEY.isGroup, false);
-                    let itemId = _.get(option, trackBy, '');
-                    let isSelected = false;
-
-                    if(this.multiple) {
-                        isSelected = _.some(selectedOptions, {[trackBy]: itemId})
-                    } else {
-                        isSelected = itemId === _.get(selectedOptions, trackBy, null);
-                    }
-
-                    if(isGroup) {
-                        option[OPTION_KEY.isSelected] = isSelected;
-                        return option;
-                    }
-
-                    return {
-                        [trackBy]: itemId,
-                        [optionLabel]: _.get(option, optionLabel, ''),
-                        [OPTION_KEY.value]: option,
-                        [OPTION_KEY.isGroup]: isGroup,
-                        [OPTION_KEY.isSelected]: isSelected
-                    }
-                });
-            },
             hasSelected() {
                 return !_.isEmpty(this.value);
             },
@@ -426,7 +379,7 @@
                             this.setList([]);
                         })
                 } else {
-                    let result = _.filter(this.parsedOptions, item => {
+                    let result = _.filter(this.parseOptions(), item => {
                         let label = _.lowerCase(_.get(item, this.optionLabel, ''));
 
                         if (label !== '') {
@@ -470,6 +423,58 @@
             },
 
             /**
+             * @return {Array}
+             */
+            parseOptions() {
+                let selectedOptions = this.value;
+                let options = _.isArray(this.options) ? [...this.options] : [];
+                let trackBy = this.trackBy;
+                let optionLabel = this.optionLabel;
+                let groupValues = this.groupValues;
+                let groupLabel = this.groupLabel;
+
+                if (groupValues !== '') {
+                    options = _.reduce(options, (total, option) => {
+                        let values = _.get(option, groupValues, []);
+
+                        total.push({
+                            [trackBy]: _.get(option, trackBy, ''),
+                            [optionLabel]: _.get(option, groupLabel, ''),
+                            [OPTION_KEY.value]: values,
+                            [OPTION_KEY.isGroup]: values.length > 0
+                        });
+
+                        return _.concat(total, values);
+                    }, []);
+                }
+
+                return _.map(options, option => {
+                    let isGroup = _.get(option, OPTION_KEY.isGroup, false);
+                    let itemId = _.get(option, trackBy, '');
+                    let isSelected = false;
+
+                    if(this.multiple) {
+                        isSelected = _.some(selectedOptions, {[trackBy]: itemId})
+                    } else {
+                        isSelected = itemId === _.get(selectedOptions, trackBy, null);
+                    }
+
+                    if(isGroup) {
+                        option[OPTION_KEY.isSelected] = isSelected;
+                        return option;
+                    }
+
+                    return {
+                        [trackBy]: itemId,
+                        [optionLabel]: _.get(option, optionLabel, ''),
+                        [OPTION_KEY.value]: option,
+                        [OPTION_KEY.isGroup]: isGroup,
+                        [OPTION_KEY.isSelected]: isSelected
+                    }
+                });
+            },
+
+            /**
              * Sets the list, with type check
              *
              * @param newList
@@ -484,7 +489,7 @@
              */
             resetList() {
                 // LOG('resetList');
-                this.setList(this.parsedOptions)
+                this.setList(this.parseOptions())
             },
 
             /**
