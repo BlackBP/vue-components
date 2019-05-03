@@ -18,8 +18,8 @@
             </template>
 
             <template slot="header">
-                <div class="row u-flex-content-between">
-                    <div class="col-auto">
+                <c-grid-row justify="between">
+                    <c-grid-col>
                         <c-icon-btn icon="refresh"
                                     style="margin-right: 5px;"
                                     :transparent="true"
@@ -27,47 +27,48 @@
 
                         <c-icon-btn icon="file-excel"
                                     :transparent="true"/>
-                    </div>
+                    </c-grid-col>
 
-                    <div class="col-auto">
+                    <c-grid-col>
                         <c-pagination v-model="query.page"
                                       :last="meta.last_page"
                                       @change="handlePageChange"/>
-                    </div>
-                </div>
+                    </c-grid-col>
+                </c-grid-row>
 
-                <c-divider />
+                <c-divider/>
 
-                <div class="row u-flex-items-center">
-                    <div class="col-2">
+                <c-grid-row align-items="center">
+                    <c-grid-col xs="2">
                         <c-text-input v-model="query.customer_phone"
                                       leading="phone"
                                       placeholder="Телефон"
                                       :mask="{mask: '+7 (999) 999-99-99'}"/>
-                    </div>
-                    <div class="col-2">
+                    </c-grid-col>
+                    <c-grid-col xs="2">
                         <c-text-input v-model="query.customer_id"
                                       leading="account"
-                                      placeholder="ID заказчика" />
-                    </div>
-                    <div class="col-2">
+                                      placeholder="ID заказчика"/>
+                    </c-grid-col>
+                    <c-grid-col xs="2">
                         <c-text-input v-model="query.performer_id"
                                       leading="account"
-                                      placeholder="ID мастера" />
-                    </div>
-                    <div class="col-2">
+                                      placeholder="ID мастера"/>
+                    </c-grid-col>
+                    <c-grid-col xs="2">
                         <c-text-input v-model="query.created_at"
                                       leading="calendar"
                                       placeholder="Дата создания"
-                                      :mask="{mask: '99.99.9999 - 99.99.9999'}" />
-                    </div>
-                    <div class="col-auto">
+                                      :mask="{mask: '99.99.9999 - 99.99.9999'}"/>
+                    </c-grid-col>
+
+                    <c-grid-col>
                         <c-checkbox v-model="query.active">
                             Активность
                         </c-checkbox>
-                    </div>
+                    </c-grid-col>
 
-                    <div class="col-auto">
+                    <c-grid-col>
                         <c-btn color="primary"
                                style="margin-right: 5px;"
                                @click="applyFilters">
@@ -77,8 +78,8 @@
                                @click="resetFilters">
                             Сбросить
                         </c-btn>
-                    </div>
-                </div>
+                    </c-grid-col>
+                </c-grid-row>
 
                 <c-divider/>
 
@@ -94,14 +95,14 @@
 
             <template slot="footer">
                 <c-divider/>
-                <div class="row u-flex-content-between">
-                    <div class="col-auto">
+                <c-grid-row align-content="between">
+                    <c-grid-col>
                         <b>Страница: </b>{{ query.page }} из {{ meta.last_page }}
-                    </div>
-                    <div class="col-auto">
+                    </c-grid-col>
+                    <c-grid-col>
                         <b>Показано: </b>{{ meta.per_page }} из {{ meta.total }}
-                    </div>
-                </div>
+                    </c-grid-col>
+                </c-grid-row>
             </template>
 
         </c-table>
@@ -130,6 +131,8 @@
     export default {
         name: "view-orders",
         components: {
+            CGridCol,
+            CGridRow,
             CBtn,
             CCheckbox,
             CTextInput,
@@ -187,11 +190,11 @@
 
                 _.each(query, (value, key) => {
 
-                    if(key === 'active') {
+                    if (key === 'active') {
                         value = _.toLower(value) === 'true'
                     }
 
-                    if(key === 'page') {
+                    if (key === 'page') {
                         value = parseInt(value);
                         value = _.isNumber(value) && !_.isNaN(value) ? value : 1;
                     }

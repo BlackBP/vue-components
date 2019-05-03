@@ -1,13 +1,21 @@
-<template>
-    $END$
-</template>
-
 <script>
     export default {
-        name: "GridContainer"
+        name: "c-grid-container",
+        functional: true,
+        props: {
+            fluid: {
+                type: Boolean,
+                default: false
+            }
+        },
+        render(createElement, {data, props, children}) {
+            let baseClass = 'c-grid-container';
+
+            data.class = [data.class, baseClass, {
+                [`${baseClass}--fluid`]: props.fluid
+            }];
+
+            return createElement('div', data, children)
+        }
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -15,7 +15,7 @@
                 type: String,
                 default: 'center'
             },
-            alignContent: {
+            justify: {
                 type: String,
                 default: 'between',
             },
@@ -31,7 +31,7 @@
                 [`${baseClass}--inline`]: props.inline,
                 [`${baseClass}--column`]: props.column,
                 [`${baseClass}--items-${props.alignItems}`]: true,
-                [`${baseClass}--content-${props.alignContent}`]: true,
+                [`${baseClass}--justify-${props.justify}`]: true,
                 [`${baseClass}--wrap`]: props.wrap,
             }];
 
