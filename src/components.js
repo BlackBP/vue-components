@@ -4,6 +4,7 @@ import Card from './components/Card.vue';
 import CardSection from './components/CardSection.vue';
 import Checkbox from './components/Checkbox.vue';
 import Chip from './components/Chip.vue';
+import FormField from './components/FormField.vue';
 import FormRow from './components/FormRow.vue';
 import Icon from './components/Icon.vue';
 import IconBtn from './components/IconButton.vue';
@@ -29,6 +30,7 @@ export {
     CardSection,
     Checkbox,
     Chip,
+    FormField,
     FormRow,
     Icon,
     IconBtn,

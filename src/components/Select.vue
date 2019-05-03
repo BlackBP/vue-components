@@ -26,6 +26,7 @@
                             color="primary"
                             class="c-select__chip"
                             :key="`selected-option-${option[trackBy]}`"
+                            @mousedown.prevent
                             @click.stop="labelClick(option)">
                         {{ option[optionLabel] }}
                     </c-chip>
@@ -61,6 +62,7 @@
             <div v-show="focused"
                  tabindex="-1"
                  class="c-select__list"
+                 @mousedown.prevent
                  @focus="showList">
 
                 <div v-show="!hasOptions || hasMaxItems"
@@ -493,11 +495,12 @@
 
                 this.focused = false;
                 this.clearQuery();
+                this.resetList();
 
                 if (this.searchable) {
-                    this.$refs.search.blur();
+                    this.blurSearch();
                 } else {
-                    this.$el.blur();
+                    this.blur();
                 }
             },
 
@@ -508,14 +511,13 @@
                 if (this.focused || this.disabled) return;
 
                 this.focused = true;
-                this.resetList();
 
                 if (this.searchable) {
                     this.$nextTick(() => {
-                        this.$refs.search.focus();
+                        this.focusSearch();
                     });
                 } else {
-                    this.$el.focus();
+                    this.focus();
                 }
             },
 
@@ -580,8 +582,20 @@
             },
 
             // Misc
+            focusSearch() {
+                this.$refs.search.focus();
+            },
+
+            blurSearch() {
+                this.$refs.search.blur();
+            },
+
             focus() {
                 this.$el.focus();
+            },
+
+            blur() {
+                this.$el.blur();
             },
 
             /**
@@ -590,6 +604,9 @@
             clearQuery() {
                 this.query = '';
             },
+        },
+        mounted() {
+            this.resetList();
         }
     };
 </script>
