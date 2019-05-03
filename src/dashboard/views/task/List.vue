@@ -138,7 +138,6 @@
             CPagination,
             CDivider,
             CIconBtn,
-            CBtnGroup,
             CScrollView,
             CCard
         },
