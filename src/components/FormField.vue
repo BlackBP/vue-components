@@ -34,7 +34,7 @@
 
 <script>
     export default {
-        name: "FormField",
+        name: "c-form-field",
         props: {
             contentClass: {
                 type: String,
