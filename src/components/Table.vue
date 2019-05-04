@@ -42,11 +42,18 @@
                 </tr>
                 </thead>
 
-                <tbody>
+                <draggable tag="tbody"
+                           draggable=".drag-item"
+                           handle=".drag-handle"
+                           :list="data"
+                           :disabled="!draggable"
+                           @start="onDragStart"
+                           @end="onDragEnd">
 
                 <template v-if="hasData">
 
                     <tr v-for="(row, rowIndex) in data"
+                        class="drag-item"
                         :key="`table-row-${rowIndex}`"
                         :class="rowClass"
                         @click="$emit('rowclick', row)">
@@ -60,6 +67,7 @@
                         <td v-if="draggable"
                             class="u-text-center">
                             <c-icon-btn icon="drag"
+                                        class="drag-handle"
                                         :transparent="true"/>
                         </td>
 
@@ -89,7 +97,7 @@
                     </tr>
                 </template>
 
-                </tbody>
+                </draggable>
 
             </table>
         </c-scroll-view>
@@ -225,6 +233,40 @@
             },
             resetInfiniteScroll() {
                 this.$refs.scrollView.resetInfiniteScroll();
+            },
+
+            // Draggable methods
+            /**
+             * @param event
+             */
+            onDragStart(event) {
+                let itemIndex = event.oldIndex;
+                let item = this.data[itemIndex];
+
+                this.$emit('dragstart', event, {
+                    item
+                });
+            },
+
+            /**
+             * @param event
+             */
+            onDragEnd(event) {
+                let newIndex = event.newIndex;
+                let nextItemIndex = newIndex + 1;
+                let prevItemIndex = newIndex - 1;
+
+                prevItemIndex = prevItemIndex <= 0 ? 0 : prevItemIndex;
+
+                let item = this.data[newIndex];
+                let nextItem = this.data[nextItemIndex];
+                let prevItem = this.data[prevItemIndex];
+
+                this.$emit('dragend', event, {
+                    item,
+                    nextItem,
+                    prevItem
+                });
             }
         }
     }

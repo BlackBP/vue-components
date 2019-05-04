@@ -5,6 +5,9 @@ import Checkbox from './components/Checkbox.vue';
 import Chip from './components/Chip.vue';
 import FormField from './components/FormField.vue';
 import FormRow from './components/FormRow.vue';
+import GridCol from './components/GridCol.vue';
+import GridContainer from './components/GridContainer.vue';
+import GridRow from './components/GridRow.vue';
 import Icon from './components/Icon.vue';
 import IconBtn from './components/IconButton.vue';
 import List from './components/List.vue';
@@ -32,6 +35,9 @@ export {
     Chip,
     FormField,
     FormRow,
+    GridCol,
+    GridContainer,
+    GridRow,
     Icon,
     IconBtn,
     List,
