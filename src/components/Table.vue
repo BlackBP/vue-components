@@ -24,13 +24,19 @@
                 <tr>
                     <th v-if="selectable"
                         class="u-text-center">
-                        <c-icon-btn :icon="selectIcon"
-                                    :transparent="true"
+                        <c-icon-btn :color="hasSelected ? 'primary' : ''"
+                                    :icon="selectIcon"
+                                    :transparent="!hasSelected"
                                     @click="selectAll"/>
                     </th>
 
                     <th v-if="draggable"
-                        class="u-text-center"></th>
+                        class="u-text-center">
+                        <c-icon-btn icon="sort"
+                                    :color="draggableEnabled ? 'primary' : ''"
+                                    :transparent="!draggableEnabled"
+                                    @click="toggleDraggable" />
+                    </th>
 
                     <th v-for="(header, key) in headers"
                         :key="`table-header-${key}`">
@@ -46,7 +52,7 @@
                            draggable=".drag-item"
                            handle=".drag-handle"
                            :list="data"
-                           :disabled="!draggable"
+                           :disabled="!draggableEnabled"
                            @start="onDragStart"
                            @end="onDragEnd">
 
@@ -64,10 +70,11 @@
                                         :value="row"/>
                         </td>
 
-                        <td v-if="draggable"
-                            class="u-text-center">
-                            <c-icon-btn icon="drag"
+                        <td class="u-text-center">
+                            <c-icon-btn v-show="draggableEnabled"
+                                        icon="drag"
                                         class="drag-handle"
+                                        :disabled="!draggableEnabled"
                                         :transparent="true"/>
                         </td>
 
@@ -178,7 +185,7 @@
         data() {
             return {
                 selected: [],
-                allSelected: false
+                draggableEnabled: false
             }
         },
         watch: {
@@ -186,13 +193,18 @@
                 this.resetSelected();
             },
             selected(selected) {
-                this.allSelected = this.data.length === this.selected.length;
                 this.$emit('select', selected);
             }
         },
         computed: {
             hasData() {
                 return this.data instanceof Array && this.data.length > 0;
+            },
+            allSelected() {
+                return this.data.length === this.selected.length
+            },
+            hasSelected() {
+                return this.selected.length > 0
             },
             selectIcon() {
                 let icon = 'checkbox-blank-outline';
@@ -233,6 +245,9 @@
             },
             resetInfiniteScroll() {
                 this.$refs.scrollView.resetInfiniteScroll();
+            },
+            toggleDraggable() {
+                this.draggableEnabled = !this.draggableEnabled
             },
 
             // Draggable methods
