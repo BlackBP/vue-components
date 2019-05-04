@@ -32,7 +32,7 @@
 
                     <th v-if="draggable"
                         class="u-text-center">
-                        <c-icon-btn icon="sort"
+                        <c-icon-btn icon="swap-vertical"
                                     :color="draggableEnabled ? 'primary' : ''"
                                     :transparent="!draggableEnabled"
                                     @click="toggleDraggable" />
@@ -70,7 +70,8 @@
                                         :value="row"/>
                         </td>
 
-                        <td class="u-text-center">
+                        <td v-if="draggable"
+                            class="u-text-center">
                             <c-icon-btn v-show="draggableEnabled"
                                         icon="drag"
                                         class="drag-handle"
