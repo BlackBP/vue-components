@@ -21,7 +21,7 @@
                  class="c-select__label">
 
                 <template v-if="multiple">
-                    <c-chip v-for="option in value"
+                    <c-chip v-for="option in selected"
                             trailing="close"
                             color="primary"
                             class="c-select__chip"
@@ -33,7 +33,7 @@
                 </template>
 
                 <template v-else>
-                    {{ value[optionLabel] }}
+                    {{ selected[optionLabel] }}
                 </template>
 
             </div>
@@ -234,8 +234,15 @@
             }
         },
         computed: {
+            selected() {
+                if(this.multiple) {
+                    return _.isArray(this.value) ? this.value : []
+                } else {
+                    return _.isObjectLike(this.value) ? this.value : {}
+                }
+            },
             hasSelected() {
-                return !_.isEmpty(this.value);
+                return !_.isEmpty(this.selected)
             },
             hasOptions() {
                 return !_.isEmpty(this.list);
@@ -254,10 +261,10 @@
             },
             itemsCount() {
                 if (this.multiple) {
-                    return this.value.length
+                    return this.selected.length
                 }
 
-                if (!_.isEmpty(this.value)) {
+                if (this.hasSelected) {
                     return 1;
                 }
             },
@@ -323,7 +330,7 @@
                 }
 
                 if (this.multiple) {
-                    let selected = _.isArray(this.value) ? [...this.value] : [];
+                    let selected = [...this.selected];
 
                     if (isSelected) {
                         selected = _.filter(selected, item => {
@@ -344,6 +351,8 @@
                 } else {
                     if (this.toggleable) {
                         optionValue = isSelected ? {} : optionValue
+                    } else {
+                        this.hideList()
                     }
 
                     /* if has maximum items prevent option select */
@@ -383,13 +392,11 @@
              * @param {Object} option
              */
             removeItem(option = {}) {
-                let list = _.isArray(this.value) ? [...this.value] : [];
-
-                if (_.isEmpty(list)) return;
+                if (_.isEmpty(this.selected)) return;
 
                 let optionId = _.get(option, this.trackBy, false);
 
-                let filteredList = _.filter(list, item => {
+                let filteredList = _.filter(this.selected, item => {
                     return optionId !== _.get(item, this.trackBy, null)
                 });
 
@@ -400,20 +407,27 @@
              * Removes last item in selected list
              */
             removeLastItem() {
-                this.removeItem(_.last(this.value))
+                if(_.isArray(this.selected)) {
+                    this.removeItem(_.last(this.selected))
+                }
             },
 
             /**
-             * @return {Array}
+             *
              */
             parseOptions() {
-                let selectedOptions = this.value;
+                let selectedOptions = this.selected;
                 let options = _.isArray(this.options) ? [...this.options] : [];
                 let trackBy = this.trackBy;
                 let optionLabel = this.optionLabel;
                 let groupValues = this.groupValues;
                 let groupLabel = this.groupLabel;
                 let queryString = this.query;
+
+                if(_.isEmpty(options)) {
+                    this.setList([]);
+                    return;
+                }
 
                 if (groupValues !== '') {
                     options = _.reduce(options, (total, option) => {
