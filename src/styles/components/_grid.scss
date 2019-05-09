@@ -22,7 +22,7 @@ html {
   $row: #{$self}-row;
   $column: #{$self}-col;
 
-  $breakpoints: xs sm md lg xl;
+  $breakpoints: sm md lg xl xs;
   $grid-gutter: 15px !default;
   $grid-columns-count: 12;
 
