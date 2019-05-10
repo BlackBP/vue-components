@@ -95,8 +95,8 @@
 
                 <template v-else>
                     <tr>
-                        <td :colspan="Object.keys(headers).length"
-                            class="u-text-center">
+                        <td class="u-text-center"
+                            :colspan="colsCount">
                             <c-chip color="warn"
                                     leading="information">
                                 Нет данных.
@@ -221,6 +221,18 @@
                 }
 
                 return icon;
+            },
+            colsCount() {
+                let count = Object.keys(this.headers).length;
+
+                if(this.selectable) {
+                    count++;
+                }
+                if(this.draggable) {
+                    count++;
+                }
+
+                return count;
             }
         },
         methods: {
