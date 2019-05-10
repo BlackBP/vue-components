@@ -27,11 +27,11 @@
 
         & > #{$item} {
           margin-bottom: $items-gap;
-          margin-right: auto;
+          margin-right: initial;
 
           &:last-child {
             margin-bottom: 0;
-            margin-right: auto;
+            margin-right: initial;
           }
         }
       }
