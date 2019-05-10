@@ -48,21 +48,21 @@
                 </tr>
                 </thead>
 
-                <draggable tag="tbody"
+                <draggable v-model="list"
+                           tag="tbody"
                            draggable=".drag-item"
                            handle=".drag-handle"
-                           :list="data"
                            :disabled="!draggableEnabled"
                            @start="onDragStart"
                            @end="onDragEnd">
 
                 <template v-if="hasData">
 
-                    <tr v-for="(row, rowIndex) in data"
+                    <tr v-for="(row, rowIndex) in list"
                         class="drag-item"
                         :key="`table-row-${rowIndex}`"
                         :class="rowClass"
-                        @click="$emit('rowclick', row)">
+                        @mouseup="$emit('rowclick', row)">
 
                         <td v-if="selectable"
                             class="u-text-center">
@@ -185,12 +185,14 @@
         },
         data() {
             return {
+                list: [],
                 selected: [],
                 draggableEnabled: false
             }
         },
         watch: {
-            data() {
+            data(value) {
+                this.list = [...value];
                 this.resetSelected();
             },
             selected(selected) {
@@ -199,10 +201,10 @@
         },
         computed: {
             hasData() {
-                return this.data instanceof Array && this.data.length > 0;
+                return this.list instanceof Array && this.list.length > 0;
             },
             allSelected() {
-                return this.data.length === this.selected.length
+                return this.list.length === this.selected.length
             },
             hasSelected() {
                 return this.selected.length > 0
@@ -216,7 +218,7 @@
                     icon = 'checkbox-blank-outline';
                 }
 
-                if (this.selected.length > 0 && this.selected.length < this.data.length) {
+                if (this.selected.length > 0 && this.selected.length < this.list.length) {
                     icon = 'minus-box';
                 }
 
@@ -242,7 +244,7 @@
                     return;
                 }
 
-                this.selected = _.map(this.data, item => item)
+                this.selected = _.map(this.list, item => item)
             },
             resetSelected() {
                 this.selected = [];
@@ -269,7 +271,7 @@
              */
             onDragStart(event) {
                 let itemIndex = event.oldIndex;
-                let item = this.data[itemIndex];
+                let item = this.list[itemIndex];
 
                 this.$emit('dragstart', event, {
                     item
@@ -286,9 +288,9 @@
 
                 prevItemIndex = prevItemIndex <= 0 ? 0 : prevItemIndex;
 
-                let item = this.data[newIndex];
-                let nextItem = this.data[nextItemIndex];
-                let prevItem = this.data[prevItemIndex];
+                let item = this.list[newIndex];
+                let nextItem = this.list[nextItemIndex];
+                let prevItem = this.list[prevItemIndex];
 
                 this.$emit('dragend', event, {
                     item,
