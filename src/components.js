@@ -3,6 +3,7 @@ import Card from './components/Card.vue';
 import CardSection from './components/CardSection.vue';
 import Checkbox from './components/Checkbox.vue';
 import Chip from './components/Chip.vue';
+import Divider from './components/Divider.vue';
 import FormField from './components/FormField.vue';
 import FormRow from './components/FormRow.vue';
 import GridCol from './components/GridCol.vue';
@@ -33,6 +34,7 @@ export {
     CardSection,
     Checkbox,
     Chip,
+    Divider,
     FormField,
     FormRow,
     GridCol,
