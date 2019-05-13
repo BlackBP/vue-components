@@ -34,7 +34,8 @@ function createRoute(metaData, component, rest = {}) {
     }
 }
 
-export default [
-    createRoute(META.home, Home),
-    createRoute(META.tasks, TasksList)
-]
+const routes = [
+    createRoute(Meta.home, Home),
+];
+
+export default routes
