@@ -1,28 +1,5 @@
 import Home from '../views/Home';
-import TasksList from '../views/Tasks';
-
-// == Мета-данные маршрутов
-export const META = {
-    home: createMeta('/', 'home', 'Главная', 'home'),
-    tasks: createMeta('/tasks', 'tasks', 'Заявки', 'format-list-checkbox'),
-};
-
-/**
- *
- * @param {string} path
- * @param {string|null} name
- * @param {string} title
- * @param {string} [icon]
- * @return {{path: string, name: string, icon: string, title: string}}
- */
-function createMeta(path, name, title, icon = '') {
-    return {
-        path,
-        name,
-        title,
-        icon
-    }
-}
+import Meta from './meta';
 
 /**
  *

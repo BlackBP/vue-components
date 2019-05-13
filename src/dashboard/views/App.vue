@@ -22,12 +22,10 @@
     import AppHeader from "./layout/Header";
     import AppDrawer from "./layout/Drawer";
     import AppContent from "./layout/Content";
-    import CBtn from "../../components/Button";
 
     export default {
         name: "App",
         components: {
-            CBtn,
             AppContent,
             AppDrawer,
             AppHeader

@@ -23,13 +23,6 @@
                         <div>{{ item.title }}</div>
                     </div>
 
-                    <div v-if="item.tail"
-                         class="drawer-menu-item__tail show-when-drawer-open">
-                        <c-chip color="info">
-                            {{ item.tail }}
-                        </c-chip>
-                    </div>
-
                 </router-link>
 
             </nav>
@@ -44,7 +37,6 @@
 
 <script>
     import {mapState} from 'vuex';
-    import {META} from '../../router/routes';
 
     import CIcon from "../../../components/Icon";
     import CChip from "../../../components/Chip";
@@ -52,12 +44,13 @@
     /**
      *
      * @param path
-     * @param icon
      * @param title
+     * @param icon
+     * @param metaRest
      * @param rest
      * @return {{}&{path: string, icon: string, title: string}}
      */
-    function createMenuItem(path = '/', title = '', icon = '', rest = {}) {
+    function createMenuItem({path = '/', title = '', icon = ''} = {}, rest = {}) {
         return {
             path,
             icon,
@@ -74,16 +67,12 @@
         },
         computed: {
             ...mapState({
-                isOpen: state => state.drawer.isOpen,
-                newTasksCount: state => state.tasks.count.new
+                isOpen: state => state.drawer.isOpen
             }),
             menu() {
                 return {
-                    home: createMenuItem(META.home.path, META.home.title, META.home.icon,  {
+                    home: createMenuItem(this.$appRoute.home,  {
                         exact: true
-                    }),
-                    orders: createMenuItem(META.tasks.path, META.tasks.title, META.tasks.icon,  {
-                        tail: this.newTasksCount
                     })
                 }
             }

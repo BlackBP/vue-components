@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import {META} from '../router/routes';
+import Meta from '../router/meta';
 
 Vue.use({
     install(vue, options) {
-        vue.prototype.$appRoute = META;
+        vue.prototype.$appRoute = Meta;
     }
 });
