@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/BlackBP/vue-components.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "UI library based on VueJS framework",
   "keywords": [
     "vue",
