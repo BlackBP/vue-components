@@ -62,7 +62,7 @@
                         class="drag-item"
                         :key="`table-row-${rowIndex}`"
                         :class="rowClass"
-                        @mouseup="$emit('rowclick', row)">
+                        @click="$emit('rowclick', row)">
 
                         <td v-if="selectable"
                             class="u-text-center">
