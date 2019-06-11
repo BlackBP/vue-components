@@ -18,13 +18,11 @@ import LoadingOverlay from './components/LoadingOverlay.vue';
 import Modal from './components/Modal.vue';
 import Pagination from './components/Pagination.vue';
 import Radio from './components/Radio.vue';
-import ScrollView from './components/ScrollView.vue';
 import Select from './components/Select.vue';
 import ServiceFormValidate from './components/ServiceFormValidate.vue';
 import StackGroup from './components/StackGroup.vue';
 import StackItem from './components/StackItem.vue';
 import Switch from './components/Switch.vue';
-import Table from './components/Table.vue';
 import TextArea from './components/TextArea.vue';
 import TextInput from './components/TextInput.vue';
 
@@ -49,13 +47,11 @@ export {
     Modal,
     Pagination,
     Radio,
-    ScrollView,
     Select,
     ServiceFormValidate,
     StackGroup,
     StackItem,
     Switch,
-    Table,
     TextArea,
     TextInput
 }
