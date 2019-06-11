@@ -5194,11 +5194,6 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
-lodash-es@^4.17.11:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
-  integrity sha512-DHb1ub+rMjjrxqlB3H56/6MXtm1lSksDp2rA2cNWjG8mlDUYFhUj3Di2Zn5IwSU87xLv8tNIQ7sSwE/YOX/D/Q==
-
 lodash.assign@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
@@ -7787,15 +7782,6 @@ slash@^2.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-2.0.0.tgz#de552851a1759df3a8f206535442f5ec4ddeab44"
   integrity sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
 
-smooth-scrollbar@^8.4.0:
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/smooth-scrollbar/-/smooth-scrollbar-8.4.0.tgz#7871fb0013c15535f9242945658cd95a8e0bc0dc"
-  integrity sha512-ROKPDABrNcCpiR7grzyRMykYtWSP7qyX59Ka/fcSPRYcixYPZhzW5mkg6EuAHMBvvVc9iHst7mOnnuM0+C/kBQ==
-  dependencies:
-    core-js "^2.6.5"
-    lodash-es "^4.17.11"
-    tslib "^1.9.3"
-
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -7853,10 +7839,10 @@ sort-keys@^2.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
-sortablejs@^1.8.4:
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.8.4.tgz#1bbfeafa96d399b83f28e25d8e49d4fbfd867f30"
-  integrity sha512-Brqnzelu1AhFuc0Fn3N/qFex1tlIiuQIUsfu2J8luJ4cRgXYkWrByxa+y5mWEBlj8A0YoABukflIJwvHyrwJ6Q==
+sortablejs@^1.10.0-rc2:
+  version "1.10.0-rc2"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.10.0-rc2.tgz#a3d4e55b1ddfbc28ca36bc06ee2765d8518f2f6f"
+  integrity sha512-162MzYM7acfIAwWh3GpoLwEiB3dVChljDRNOcIlzLsIS2MOwgzv0iifiGuSG/M8AzqrkfubrX93uxm/x0SrWxw==
 
 source-list-map@^2.0.0:
   version "2.0.1"
@@ -8457,7 +8443,7 @@ tryer@^1.0.0:
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
-tslib@^1.9.0, tslib@^1.9.3:
+tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
@@ -8784,18 +8770,6 @@ vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
-
-vuedraggable@^2.20.0:
-  version "2.20.0"
-  resolved "https://registry.yarnpkg.com/vuedraggable/-/vuedraggable-2.20.0.tgz#82eac1f9a32c116ef4cf5215fe18dfb152afa9dd"
-  integrity sha512-mrSWGkzY40nkgLDuuoxrs6/0u+A7VwXtQRruLQYOVjwd8HcT3BZatRvzw4qVCwJczsAYPbaMubkGOEtzDOzhsQ==
-  dependencies:
-    sortablejs "^1.8.4"
-
-vuescroll@^4.12.1:
-  version "4.12.1"
-  resolved "https://registry.yarnpkg.com/vuescroll/-/vuescroll-4.12.1.tgz#cb51bcefee347964f35ea38977ea2611ae7c5513"
-  integrity sha512-P8KZ8ilijeOHoKxS0pMCgd81dylqrvci/OCizE1WE58EQQEzCLdIR9ctqyEWg0XooILV0vUXNnwsS6K7atbvIQ==
 
 vuex@^3.1.0:
   version "3.1.0"
