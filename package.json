@@ -9,7 +9,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "UI library based on VueJS framework",
+  "description": "UI library based on Vue.js framework",
   "keywords": [
     "vue",
     "ui"
@@ -17,7 +17,6 @@
   "version": "0.8.1",
   "scripts": {
     "serve": "vue-cli-service serve src/dashboard/app.js",
-    "serve-local": "vue-cli-service serve --host 192.168.1.70 src/dashboard/app.js",
     "build": "bili --format cjs --format esm"
   },
   "main": "./src/components.js",
