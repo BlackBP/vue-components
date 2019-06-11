@@ -1,11 +1,12 @@
 $layout-gutter: $g-gutter;
-$layout-background: rgba(#000, 0.45);
+$layout-background: rgba(#000, 0.1);
 $layout-element-background: rgba(#fff, 1);
 $layout-element-font-color: #333;
+$layout-element-border-radius: $g-border-radius-lg;
 
-@import "layout/main";
-@import "layout/drawer";
-@import "layout/header";
+@import "./main";
+@import "./drawer";
+@import "./header";
 
 html,
 body {
@@ -13,10 +14,8 @@ body {
 }
 
 body {
-  background-position: 0 0;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-image: url(https://chin-chin27.ru/images/background/light-4.jpg);
+  background: #00b09b;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #96c93d, #00b09b);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #96c93d, #00b09b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 

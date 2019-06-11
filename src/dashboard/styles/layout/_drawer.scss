@@ -6,8 +6,7 @@
   max-width: 73px;
   max-height: 100%;
   background-color: $layout-element-background;
-  border-top-left-radius: $g-border-radius-lg;
-  border-top-right-radius: $g-border-radius-lg;
+  border-radius: $layout-element-border-radius;
   color: $layout-element-font-color;
   transition: max-width $g-transition;
 
@@ -49,6 +48,7 @@
       align-items: center;
       padding: 6px 9px;
       border-radius: 6px;
+      @include word-nowrap;
 
       &:hover,
       &:focus,

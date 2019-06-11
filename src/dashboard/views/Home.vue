@@ -1,15 +1,18 @@
 <template>
-    <c-card>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aut impedit magnam modi nam necessitatibus nemo nobis odit optio quae quam
-            quis quos reprehenderit saepe sapiente, tempora tempore, ullam vel.</p>
+    <c-card class="u-h100">
     </c-card>
 </template>
 
 <script>
+
     import CCard from "../../components/Card";
+    import CBtn from "../../components/Button";
+    import CLoadingOverlay from "../../components/LoadingOverlay";
 
     export default {
         name: "view-home",
-        components: {CCard}
+        components: {
+            CCard
+        }
     }
 </script>
