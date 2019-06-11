@@ -18,7 +18,7 @@
   "scripts": {
     "serve": "vue-cli-service serve src/dashboard/app.js",
     "serve-local": "vue-cli-service serve --host 192.168.1.70 src/dashboard/app.js",
-    "build": "vue-cli-service build --target lib --name components src/components.js"
+    "build": "bili --format cjs --format esm"
   },
   "main": "./src/components.js",
   "files": [
@@ -42,7 +42,9 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
+    "bili": "^4.8.0",
     "node-sass": "^4.9.0",
+    "rollup-plugin-vue": "^5.0.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
   },
