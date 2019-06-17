@@ -39,52 +39,42 @@
             contentClass: {
                 type: String,
                 default: '',
-
             },
             count: {
                 type: [Number, String],
-                default: '',
-                require: false
+                default: ''
             },
             countMax: {
                 type: [Number, String],
-                default: '',
-                require: false
+                default: ''
             },
             helperText: {
                 type: String,
                 default: '',
-
             },
             showHelper: {
                 type: Boolean,
-                default: true,
-                require: false
+                default: true
             },
             showCounter: {
                 type: Boolean,
-                default: false,
-                require: false
+                default: false
             },
             hasError: {
                 type: Boolean,
                 default: false,
-                require: false
             },
             disabled: {
                 type: Boolean,
                 default: false,
-                require: false
             },
             readonly: {
                 type: Boolean,
                 default: false,
-                require: false
             },
             focused: {
                 type: Boolean,
                 default: false,
-
             }
         },
         computed: {

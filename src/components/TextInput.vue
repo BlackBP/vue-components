@@ -101,17 +101,14 @@
             maxLength: {
                 type: Number,
                 default: 100,
-                require: false
             },
             leading: {
                 type: String,
                 default: '',
-                require: false
             },
             trailing: {
                 type: String,
                 default: '',
-                require: false
             }
         },
         data() {
@@ -165,12 +162,12 @@
             }
         },
         mounted() {
-            if(this.hasMask) {
+            if (this.hasMask) {
                 new Inputmask(this.mask).mask(this.$refs.field);
             }
         },
         beforeDestroy() {
-            if(this.hasMask) {
+            if (this.hasMask) {
                 let field = this.$refs.field;
 
                 if (field.inputmask) {

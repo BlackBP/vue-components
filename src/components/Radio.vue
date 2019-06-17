@@ -36,16 +36,9 @@
             event: 'change'
         },
         props: {
-            model: {
-                type: null
-            },
-            value: {
-                type: null
-            },
-            name: {
-                type: String,
-                default: null
-            },
+            model: null,
+            value: null,
+            name: String,
             disabled: {
                 type: Boolean,
                 default: false

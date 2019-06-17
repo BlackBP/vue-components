@@ -29,17 +29,14 @@
             leading: {
                 type: String,
                 default: '',
-
             },
             trailing: {
                 type: String,
                 default: '',
-
             },
             color: {
                 type: String,
                 default: '',
-
             }
         },
         computed: {

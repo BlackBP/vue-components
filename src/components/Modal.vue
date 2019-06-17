@@ -135,12 +135,10 @@
             title: {
                 type: String,
                 default: '',
-
             },
             icon: {
                 type: String,
                 default: '',
-
             },
             allowDismiss: {
                 type: Boolean,
@@ -150,12 +148,10 @@
             outsideDismiss: {
                 type: Boolean,
                 default: true,
-
             },
             modalTransition: {
                 type: String,
                 default: 'scale',
-                ,
                 validator(value) {
                     return Object.keys(CssClass.modal.transition).includes(value);
                 }
@@ -163,32 +159,26 @@
             customContent: {
                 type: Boolean,
                 default: false,
-
             },
             showFooter: {
                 type: Boolean,
                 default: false,
-
             },
             flex: {
                 type: Boolean,
                 default: false,
-
             },
             styleType: {
                 type: String,
                 default: 'default',
-
             },
             maxWidth: {
                 type: String,
                 default: '400px',
-
             },
             loading: {
                 type: Boolean,
                 default: false,
-
             }
         },
         data() {

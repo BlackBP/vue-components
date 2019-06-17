@@ -33,22 +33,12 @@
             event: 'change'
         },
         props: {
-            model: {
-                type: null,
-
-            },
-            value: {
-                type: null,
-
-            },
-            name: {
-                type: String,
-
-            },
+            model: null,
+            value: null,
+            name: String,
             type: {
                 type: String,
                 default: 'checkbox',
-                ,
                 validator(value) {
                     return ['checkbox', 'radio'].includes(value);
                 }
@@ -60,7 +50,7 @@
         },
         computed: {
             checked() {
-                if(this.type === 'radio') {
+                if (this.type === 'radio') {
                     return this.model == this.value;
                 }
 
@@ -76,7 +66,7 @@
         },
         methods: {
             handleChange({target: {checked}}) {
-                if(this.type === 'radio') {
+                if (this.type === 'radio') {
                     this.$emit('change', this.value);
                     return
                 }

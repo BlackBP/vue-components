@@ -39,7 +39,6 @@
             type: {
                 type: String,
                 default: 'button',
-
             },
             iconLeft: {
                 type: String,

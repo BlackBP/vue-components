@@ -22,7 +22,6 @@
             type: {
                 type: String,
                 default: 'button',
-
             },
             icon: {
                 type: String,

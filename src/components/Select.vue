@@ -172,7 +172,6 @@
             maxItems: {
                 type: [Number, String],
                 default: 0,
-                require: false
             },
             helper: {
                 type: String,

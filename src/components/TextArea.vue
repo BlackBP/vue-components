@@ -79,7 +79,6 @@
             maxLength: {
                 type: Number,
                 default: 100,
-                require: false
             },
             rows: {
                 type: Number,
