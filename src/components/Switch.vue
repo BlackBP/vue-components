@@ -35,20 +35,20 @@
         props: {
             model: {
                 type: null,
-                required: false
+
             },
             value: {
                 type: null,
-                required: false
+
             },
             name: {
                 type: String,
-                required: false
+
             },
             type: {
                 type: String,
                 default: 'checkbox',
-                required: false,
+                ,
                 validator(value) {
                     return ['checkbox', 'radio'].includes(value);
                 }

@@ -135,27 +135,27 @@
             title: {
                 type: String,
                 default: '',
-                required: false
+
             },
             icon: {
                 type: String,
                 default: '',
-                required: false
+
             },
             allowDismiss: {
                 type: Boolean,
                 default: true,
-                required: false
+
             },
             outsideDismiss: {
                 type: Boolean,
                 default: true,
-                required: false
+
             },
             modalTransition: {
                 type: String,
                 default: 'scale',
-                required: false,
+                ,
                 validator(value) {
                     return Object.keys(CssClass.modal.transition).includes(value);
                 }
@@ -163,32 +163,32 @@
             customContent: {
                 type: Boolean,
                 default: false,
-                required: false
+
             },
             showFooter: {
                 type: Boolean,
                 default: false,
-                required: false
+
             },
             flex: {
                 type: Boolean,
                 default: false,
-                required: false
+
             },
             styleType: {
                 type: String,
                 default: 'default',
-                required: false
+
             },
             maxWidth: {
                 type: String,
                 default: '400px',
-                required: false
+
             },
             loading: {
                 type: Boolean,
                 default: false,
-                required: false
+
             }
         },
         data() {

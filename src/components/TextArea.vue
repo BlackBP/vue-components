@@ -35,57 +35,46 @@
             value: {
                 type: null,
                 default: '',
-                required: false
             },
             icon: {
                 type: String,
                 default: '',
-                required: false
             },
             iconTitle: {
                 type: String,
                 default: '',
-                required: false
             },
             label: {
                 type: String,
                 default: '',
-                required: false
             },
             helper: {
                 type: String,
                 default: '',
-                required: false
             },
             title: {
                 type: String,
                 default: '',
-                required: false
             },
             placeholder: {
                 type: String,
                 default: '',
-                required: false
             },
             readonly: {
                 type: Boolean,
                 default: false,
-                required: false
             },
             disabled: {
                 type: Boolean,
                 default: false,
-                required: false
             },
             showCounter: {
                 type: Boolean,
                 default: false,
-                required: false
             },
             errors: {
                 type: Array,
                 default: () => [],
-                required: false
             },
             maxLength: {
                 type: Number,
@@ -95,7 +84,6 @@
             rows: {
                 type: Number,
                 default: 10,
-                required: false
             }
         },
         data() {

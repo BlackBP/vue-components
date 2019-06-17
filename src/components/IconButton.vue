@@ -22,7 +22,7 @@
             type: {
                 type: String,
                 default: 'button',
-                required: false
+
             },
             icon: {
                 type: String,
@@ -32,27 +32,27 @@
             color: {
                 type: String,
                 default: '',
-                required: false
+
             },
             disabled: {
                 type: Boolean,
                 default: false,
-                required: false
+
             },
             transparent: {
                 type: Boolean,
                 default: false,
-                required: false
+
             },
             elevated: {
                 type: Boolean,
                 default: false,
-                required: false
+
             },
             dense: {
                 type: Boolean,
                 default: false,
-                required: false
+
             },
         },
         computed: {

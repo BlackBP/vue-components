@@ -50,7 +50,7 @@
             limit: {
                 type: Number,
                 default: 5,
-                required: false
+
             }
         },
         data() {

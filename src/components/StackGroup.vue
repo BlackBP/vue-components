@@ -3,6 +3,10 @@
         name: "c-stack-group",
         functional: true,
         props: {
+            tag: {
+                type: String,
+                default: 'div'
+            },
             inline: {
                 type: Boolean,
                 default: false
@@ -35,7 +39,7 @@
                 [`${baseClass}--wrap`]: props.wrap,
             }];
 
-            return createElement('div', data, children);
+            return createElement(props.tag, data, children);
         }
     }
 </script>

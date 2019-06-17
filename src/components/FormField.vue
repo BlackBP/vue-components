@@ -39,7 +39,7 @@
             contentClass: {
                 type: String,
                 default: '',
-                required: false
+
             },
             count: {
                 type: [Number, String],
@@ -54,7 +54,7 @@
             helperText: {
                 type: String,
                 default: '',
-                required: false
+
             },
             showHelper: {
                 type: Boolean,
@@ -84,7 +84,7 @@
             focused: {
                 type: Boolean,
                 default: false,
-                required: false
+
             }
         },
         computed: {

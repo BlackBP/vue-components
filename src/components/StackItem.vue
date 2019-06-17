@@ -3,6 +3,10 @@
         name: "c-stack-item",
         functional: true,
         props: {
+            tag: {
+                type: String,
+                default: 'div'
+            },
             flex: {
                 type: Boolean,
                 default: false
@@ -15,7 +19,7 @@
                 [`${baseClass}--flex`]: props.flex
             }];
 
-            return createElement('div', data, children)
+            return createElement(props.tag, data, children)
         }
     }
 </script>

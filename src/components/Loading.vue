@@ -6,17 +6,17 @@
             text: {
                 type: String,
                 default: 'Загрузка...',
-                required: false
+
             },
             elevated: {
                 type: Boolean,
                 default: false,
-                required: false
+
             },
             dense: {
                 type: Boolean,
                 default: false,
-                required: false
+
             }
         },
         render(createElement, {props, data}) {

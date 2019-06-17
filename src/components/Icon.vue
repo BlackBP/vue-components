@@ -3,6 +3,10 @@
         name: "c-icon",
         functional: true,
         props: {
+            tag: {
+                type: String,
+                default: 'i'
+            },
             name: {
                 type: String,
                 default: 'dots-horizontal',
@@ -10,13 +14,11 @@
             },
             size: {
                 type: String,
-                default: '',
-                required: false
+                default: ''
             },
             vendorPrefix: {
                 type: String,
-                default: 'mdi mdi-',
-                required: false
+                default: 'mdi mdi-'
             }
         },
         render(createElement, {data, props}) {
@@ -30,7 +32,7 @@
                 }];
             }
 
-            return createElement('i', data);
+            return createElement(props.tag, data);
         }
     }
 </script>

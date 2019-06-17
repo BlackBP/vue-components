@@ -138,44 +138,36 @@
             groupValues: {
                 type: String,
                 default: '',
-                required: false
             },
             groupLabel: {
                 type: String,
                 default: '',
-                required: false
             },
             multiple: {
                 type: Boolean,
                 default: false,
-                required: false
             },
             searchable: {
                 type: Boolean,
                 default: false,
-                required: false
             },
             toggleable: {
                 type: Boolean,
                 default: false,
-                required: false
             },
             customSearch: {
                 type: Boolean,
                 default: false,
-                required: false
             },
             customSearchCallback: {
                 type: Function,
                 default() {
                     return []
                 },
-                required: false
             },
             disabled: {
                 type: Boolean,
                 default: false,
-                required: false
             },
             maxItems: {
                 type: [Number, String],
@@ -185,32 +177,26 @@
             helper: {
                 type: String,
                 default: '',
-                required: false
             },
             placeholder: {
                 type: String,
                 default: '',
-                required: false
             },
             emptyPlaceholder: {
                 type: String,
                 default: 'Список пуст',
-                required: false
             },
             maxItemsMessage: {
                 type: String,
                 default: 'Выбрано максимальное количество элементов!',
-                required: false
             },
             focusPlaceholder: {
                 type: String,
                 default: 'Найти в списке...',
-                required: false
             },
             errors: {
                 type: Array,
                 default: () => ([]),
-                required: false
             },
             value: {
                 type: null,
