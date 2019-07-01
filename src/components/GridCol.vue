@@ -30,7 +30,7 @@
             xs: {
                 type: String,
                 default: ''
-            },
+            }
         },
         render(createElement, {data, props, children}) {
             let baseClass = 'c-grid-col';
@@ -39,13 +39,15 @@
                 [SIZE.lg]: props[SIZE.lg],
                 [SIZE.md]: props[SIZE.md],
                 [SIZE.sm]: props[SIZE.sm],
-                [SIZE.xs]: props[SIZE.xs],
+                [SIZE.xs]: props[SIZE.xs]
             };
 
             sizes = _.reduce(sizes, (total, value, key) => {
 
-                if (value !== '') {
-                    total.push(`${baseClass}-${key}${value}`);
+                if (typeof value === 'string' && value !== '') {
+                    total.push(`--${key}-${value}`);
+                } else if(typeof value === 'boolean' && value) {
+                    total.push(`--${key}`)
                 }
 
                 return total

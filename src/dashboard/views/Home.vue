@@ -1,23 +1,6 @@
 <template>
     <c-card>
 
-        <c-table :headers="tableHeaders"
-                 :data="tableData">
-
-            <template slot="colgroup">
-                <col width="50px" />
-            </template>
-
-            <template slot="col-id"
-                      slot-scope="col">
-                <c-chip color="primary"
-                        @click="alert">
-                    {{ col.value }}
-                </c-chip>
-            </template>
-
-        </c-table>
-
     </c-card>
 </template>
 
@@ -25,10 +8,16 @@
     import CCard from "../../components/Card";
     import CTable from "../../components/Table";
     import CChip from "../../components/Chip";
+    import CGridContainer from "../../components/GridContainer";
+    import CGridRow from "../../components/GridRow";
+    import CGridCol from "../../components/GridCol";
 
     export default {
         name: "view-home",
         components: {
+            CGridCol,
+            CGridRow,
+            CGridContainer,
             CChip,
             CTable,
             CCard
@@ -41,7 +30,7 @@
                 }
             },
             tableData() {
-                return [...Array(300)].map((val, index) => {
+                return [...Array(100)].map((val, index) => {
                     return {
                         id: index + 1,
                         name: `item ${index + 1}`

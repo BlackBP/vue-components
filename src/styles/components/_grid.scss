@@ -15,170 +15,131 @@ html {
   box-sizing: border-box;
 }
 
-// == Container
-.c-grid {
-  $self: #{&};
-  $container: #{$self}-container;
-  $row: #{$self}-row;
-  $column: #{$self}-col;
+$grid-breakpoints: xs sm md lg xl;
+$grid-container-sizes: (xs: 100%, sm: 570px, md: 750px, lg: 990px, xl: 1170px);
 
-  $breakpoints: sm md lg xl xs;
-  $grid-gutter: 15px !default;
-  $grid-columns-count: 12;
+$grid-gutter: 15px !default;
+$grid-columns-count: 12;
 
-  @mixin make-columns() {
-    @for $index from 1 through $grid-columns-count {
-      $width: (100% / $grid-columns-count) * $index;
+$grid-container: #{'.c-grid-container'};
+$grid-row: #{'.c-grid-row'};
+$grid-column: #{'.c-grid-col'};
 
-      &#{$index} {
-        flex: 0 0 $width;
-        max-width: $width;
-      }
+/*
+** Mixins
+ */
+@mixin make-columns() {
+  @for $index from 1 through $grid-columns-count {
+    $width: (100% / $grid-columns-count) * $index;
+
+    &-#{$index} {
+      flex: 0 0 $width;
+      max-width: $width;
+      @content;
+    }
+  }
+}
+
+@mixin make-auto-column() {
+  &-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+    @content;
+  }
+}
+
+/*
+** Styles
+ */
+#{$grid-container} {
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+
+  &.--fluid {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: $grid-gutter;
+    padding-left: $grid-gutter;
+  }
+}
+
+// Row
+#{$grid-row} {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: -$grid-gutter;
+  margin-left: -$grid-gutter;
+
+  &.--items {
+    &-start {
+      align-items: start;
+    }
+
+    &-end {
+      align-items: flex-end;
+    }
+
+    &-center {
+      align-items: center;
+    }
+
+    &-stretch {
+      align-items: stretch;
+    }
+
+    &-baseline {
+      align-items: baseline;
     }
   }
 
-  @at-root {
-    #{$container} {
-      margin-right: auto;
-      margin-left: auto;
-      padding-right: $grid-gutter;
-      padding-left: $grid-gutter;
-
-      @include make-modifier('fluid') {
-        width: 100%;
-        margin-right: auto;
-        margin-left: auto;
-        padding-right: $grid-gutter;
-        padding-left: $grid-gutter;
-      }
+  &.--justify {
+    &-start {
+      justify-content: flex-start;
     }
 
-    // Row
-    #{$row} {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin-right: -$grid-gutter;
-      margin-left: -$grid-gutter;
-
-      @include make-modifier('no-gutters') {
-        margin-right: 0;
-        margin-left: 0;
-
-        & > #{$column} {
-          padding-right: 0;
-          padding-left: 0;
-        }
-      }
-
-      @include make-modifier('no-wrap') {
-        flex-wrap: nowrap;
-      }
-
-      @include make-modifier('items') {
-        &-start {
-          align-items: start;
-        }
-        &-end {
-          align-items: flex-end;
-        }
-        &-center {
-          align-items: center;
-        }
-        &-stretch {
-          align-items: stretch;
-        }
-        &-baseline{
-          align-items: baseline;
-        }
-      }
-
-      @include make-modifier('justify') {
-        &-start {
-          justify-content: flex-start;
-        }
-        &-end {
-          justify-content: flex-end;
-        }
-        &-center {
-          justify-content: center;
-        }
-        &-between {
-          justify-content: space-between;
-        }
-        &-around {
-          justify-content: space-around;
-        }
-      }
+    &-end {
+      justify-content: flex-end;
     }
 
-    // Columns
-    %columnStyle {
-      position: relative;
-      flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
-      min-height: 1px;
-      padding-right: $grid-gutter;
-      padding-left: $grid-gutter;
+    &-center {
+      justify-content: center;
     }
 
-    #{$column} {
-      @extend %columnStyle;
-
-      @each $breakpoint in $breakpoints {
-        &-#{$breakpoint} {
-          @include make-columns();
-        }
-      }
-      // @each.end
+    &-between {
+      justify-content: space-between;
     }
 
-    // Media
-    @include media(sm) {
-      #{$container} {
-        width: 570px;
-        max-width: 100%;
-      }
-
-      #{$column}-sm {
-        @include make-columns();
-      }
+    &-around {
+      justify-content: space-around;
     }
-
-    @include media(md) {
-      #{$container} {
-        width: 750px;
-        max-width: 100%;
-      }
-
-      #{$column}-md {
-        @include make-columns();
-      }
-    }
-
-    @include media(lg) {
-      #{$container} {
-        width: 990px;
-        max-width: 100%;
-      }
-
-      #{$column}-lg {
-        @include make-columns();
-      }
-    }
-
-    @include media(xl) {
-      #{$container} {
-        width: 1170px;
-        max-width: 100%;
-      }
-
-      #{$column}-xl {
-        @include make-columns();
-      }
-    }
-
   }
+}
 
+// Columns
+#{$grid-column} {
+  flex: 1 1 0;
+  width: 100%;
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+}
+
+// Media
+@each $breakpoint, $container-size in $grid-container-sizes {
+  @include media($breakpoint) {
+    #{$grid-container} {
+      width: $container-size;
+    }
+
+    #{$grid-column}.--#{$breakpoint} {
+      @include make-columns;
+      @include make-auto-column;
+    }
+  }
 }
