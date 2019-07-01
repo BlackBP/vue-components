@@ -32,12 +32,10 @@
             loadingText: {
                 type: String,
                 default: 'Загрузка...',
-
             },
             loadingDense: {
                 type: Boolean,
                 default: false,
-
             }
         },
     }
