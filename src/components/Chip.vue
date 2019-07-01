@@ -38,11 +38,6 @@
                 default: '',
             }
         },
-        methods: {
-            handleClick(event) {
-                this.$emit('click', event);
-            }
-        },
         render(createElement, {data, children, props}) {
             let baseClass = 'c-chip',
                 leadingIconClassName = `${baseClass}__leading`,
@@ -61,11 +56,6 @@
             let content = [elText];
 
             data.class = [data.class, className];
-            data.on = {
-                click: (event) => {
-                    this.$emit('click', event)
-                }
-            };
 
             if (hasLeading) {
                 content = [
