@@ -1,31 +1,30 @@
-<template>
-
-    <div :class="className"
-         @click="handleClick">
-
-        <c-icon v-if="hasLeading"
-                class="c-chip__leading"
-                :name="leading"/>
-
-        <div class="c-chip__text">
-            <slot></slot>
-        </div>
-
-        <c-icon v-if="hasTrailing"
-                class="c-chip__trailing"
-                :name="trailing"/>
-
-    </div>
-
-</template>
-
 <script>
     import CIcon from "./Icon";
 
+    /**
+     *
+     * @param createElement
+     * @param iconName
+     * @param className
+     * @return {*}
+     */
+    function createIcon(createElement, iconName, className) {
+        return createElement(CIcon, {
+            class: className,
+            props: {
+                name: iconName
+            }
+        })
+    }
+
     export default {
         name: "c-chip",
-        components: {CIcon},
+        functional: true,
         props: {
+            tag: {
+                type: String,
+                default: 'div'
+            },
             leading: {
                 type: String,
                 default: '',
@@ -39,28 +38,58 @@
                 default: '',
             }
         },
-        computed: {
-            hasLeading() {
-                return typeof this.leading === 'string' && this.leading !== ''
-            },
-            hasTrailing() {
-                return typeof this.trailing === 'string' && this.trailing !== ''
-            },
-            className() {
-                let baseClass = 'c-chip';
-                let className = [baseClass];
-
-                if (typeof this.color === 'string' && this.color !== '') {
-                    className.push(`${baseClass}--${this.color}`);
-                }
-
-                return className;
-            }
-        },
         methods: {
             handleClick(event) {
                 this.$emit('click', event);
             }
+        },
+        render(createElement, {data, children, props}) {
+            let baseClass = 'c-chip',
+                leadingIconClassName = `${baseClass}__leading`,
+                trailingIconClassName = `${baseClass}__trailing`,
+                hasColor = typeof props.color === 'string' && props.color !== '',
+                hasLeading = typeof props.leading === 'string' && props.leading !== '',
+                hasTrailing = typeof props.trailing === 'string' && props.trailing !== '',
+                className = [baseClass, {
+                    [`${baseClass}--${props.color}`]: hasColor
+                }];
+
+            let elText = createElement('div', {
+                class: `${baseClass}__text`
+            }, children);
+
+            let content = [elText];
+
+            data.class = [data.class, className];
+            data.on = {
+                click: (event) => {
+                    this.$emit('click', event)
+                }
+            };
+
+            if (hasLeading) {
+                content = [
+                    createIcon(createElement, props.leading, leadingIconClassName),
+                    elText
+                ];
+            }
+
+            if (hasTrailing) {
+                content = [
+                    elText,
+                    createIcon(createElement, props.trailing, trailingIconClassName),
+                ];
+            }
+
+            if (hasLeading && hasTrailing) {
+                content = [
+                    createIcon(createElement, props.leading, leadingIconClassName),
+                    elText,
+                    createIcon(createElement, props.trailing, trailingIconClassName),
+                ];
+            }
+
+            return createElement(props.tag, data, content);
         }
     }
 </script>
