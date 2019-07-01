@@ -52,17 +52,14 @@
             type: {
                 type: String,
                 default: 'text',
-
             },
             placeholder: {
                 type: String,
                 default: '',
-
             },
             helper: {
                 type: String,
                 default: '',
-
             },
             value: {
                 type: null,
@@ -71,32 +68,26 @@
             mask: {
                 type: [String, Boolean, Object],
                 default: false,
-
             },
             title: {
                 type: String,
                 default: '',
-
             },
             readonly: {
                 type: Boolean,
                 default: false,
-
             },
             disabled: {
                 type: Boolean,
                 default: false,
-
             },
             showCounter: {
                 type: Boolean,
                 default: false,
-
             },
             errors: {
                 type: Array,
                 default: () => [],
-
             },
             maxLength: {
                 type: Number,

@@ -143,7 +143,6 @@
             allowDismiss: {
                 type: Boolean,
                 default: true,
-
             },
             outsideDismiss: {
                 type: Boolean,
