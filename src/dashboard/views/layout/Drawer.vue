@@ -1,6 +1,8 @@
 <template>
-    <aside class="app-drawer c-elevate-3"
-           :class="isOpen ? 'is-open' : ''">
+    <aside class="app-drawer c-elevate-6"
+           :class="isOpen ? 'is-open' : ''"
+           @mouseenter="openDrawer"
+           @mouseleave="closeDrawer">
 
         <div class="app-drawer__header">
 
@@ -36,8 +38,6 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex';
-
     import CIcon from "../../../components/Icon";
     import CChip from "../../../components/Chip";
 
@@ -66,9 +66,9 @@
             CIcon
         },
         computed: {
-            ...mapState({
-                isOpen: state => state.drawer.isOpen
-            }),
+            isOpen() {
+                return this.$store.getters[this.$storeMeta.getter.drawerIsOpen]
+            },
             menu() {
                 return {
                     home: createMenuItem(this.$appRoute.home,  {
@@ -76,6 +76,14 @@
                     })
                 }
             }
+        },
+        methods: {
+            closeDrawer() {
+                this.$store.commit(this.$storeMeta.mutation.closeDrawer)
+            },
+            openDrawer() {
+                this.$store.commit(this.$storeMeta.mutation.openDrawer)
+            },
         }
     }
 </script>

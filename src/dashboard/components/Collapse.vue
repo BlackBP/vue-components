@@ -1,0 +1,27 @@
+<template>
+    <transition-collapse :duration="400">
+        <div v-show="visible" class="c-collapse">
+            <slot />
+        </div>
+    </transition-collapse>
+</template>
+
+<script>
+    import TransitionCollapse from "./transitions/Collapse";
+
+    export default {
+        name: "CCollapse",
+        components: {TransitionCollapse},
+        props: {
+            visible: false
+        }
+    }
+</script>
+
+<style scoped>
+    .c-collapse {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+    }
+</style>

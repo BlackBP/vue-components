@@ -1,15 +1,16 @@
-import _ from 'lodash';
-import Vue from 'vue';
+import _ from 'lodash'
+import Vue from 'vue'
 
 // Vuex store & vue router
-import store from './store';
-import router from './router';
+import store from './store'
+import router from './router'
 
 // Plugins
-import './plugins/routes';
+import './plugins/routes'
+import './plugins/storeMeta'
 
 // View
-import App from './views/App.vue';
+import App from './views/App.vue'
 
 Vue.config.productionTip = false;
 

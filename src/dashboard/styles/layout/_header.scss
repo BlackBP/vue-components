@@ -4,11 +4,17 @@
 
   @at-root {
     #{$self} {
-      display: flex;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: $layout-gutter;
+      right: $layout-gutter;
+      display: none;
       flex-flow: row nowrap;
       justify-content: flex-start;
       align-items: center;
-      width: 100%;
+      width: auto;
+      height: $layout-header-height;
       padding: 7px 15px;
       background-color: $layout-element-background;
       border-bottom-left-radius: $layout-element-border-radius;

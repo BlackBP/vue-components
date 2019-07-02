@@ -1,19 +1,16 @@
 <template>
-    <div id="app"
-         class="app-layout">
+    <div class="app-layout">
 
         <app-header />
 
-        <div class="app-layout__container">
-            <app-drawer />
+        <app-drawer />
 
-            <app-content>
-                <transition name="trans-fade-in-zoom"
-                            mode="out-in">
-                    <router-view></router-view>
-                </transition>
-            </app-content>
-        </div>
+        <app-content>
+            <transition name="trans-fade-in-zoom"
+                        mode="out-in">
+                <router-view></router-view>
+            </transition>
+        </app-content>
 
     </div>
 </template>

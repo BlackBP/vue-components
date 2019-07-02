@@ -1,17 +1,21 @@
 .app-drawer {
-  flex: 0 0 auto;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  bottom: 0;
   display: block;
   width: 100%;
-  height: 100%;
-  max-width: 73px;
+  height: 100vh;
+  max-width: $layout-drawer-width;
   max-height: 100%;
   background-color: $layout-element-background;
-  border-radius: $layout-element-border-radius;
   color: $layout-element-font-color;
+  overflow: hidden auto;
   transition: max-width $g-transition;
 
   &.is-open {
-    max-width: 280px;
+    max-width: $layout-drawer-width-open;
 
     .show-when-drawer-open {
       visibility: visible;
