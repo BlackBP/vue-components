@@ -1,6 +1,7 @@
 <template>
     <transition-collapse>
-        <div v-show="visible" class="c-collapse">
+        <div v-show="visible"
+             class="c-collapse">
             <slot />
         </div>
     </transition-collapse>
@@ -11,9 +12,14 @@
 
     export default {
         name: "CCollapse",
-        components: {TransitionCollapse},
+        components: {
+            TransitionCollapse
+        },
         props: {
-            visible: false
+            visible: {
+                type: Boolean,
+                default: false
+            }
         }
     }
 </script>

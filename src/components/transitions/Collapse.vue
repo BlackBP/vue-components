@@ -1,13 +1,45 @@
 <script>
 
+    const ANIMATED_STYLES = {
+        opacity: [0, 1],
+        transform: ['translateY(-20px)', 'translateY(0px)'],
+    };
+
+    const INITIAL_STYLES = {
+        willChange: 'willChange',
+        backfaceVisibility: 'backfaceVisibility',
+        perspective: 'perspective',
+        transitionProperty: 'transitionProperty',
+        transitionDuration: 'transitionDuration',
+        transitionTimingFunction: 'transitionTimingFunction',
+        overflow: 'overflow',
+        height: 'height',
+        opacity: 'opacity',
+        transform: 'transform',
+    };
+
     /**
-     *
+     * @param element
+     * @param props
      */
     function setInitialStyles(element, props) {
-        element.style.transitionProperty = 'height';
+        element.style.willChange = 'height, opacity, transform';
+        element.style.backfaceVisibility = 'hidden';
+        element.style.perspective = '1000px';
+        element.style.transitionProperty = 'height, opacity, transform';
         element.style.transitionDuration = `${props.duration}ms`;
         element.style.transitionTimingFunction = props.easing;
         element.style.overflow = 'hidden';
+    }
+
+    /**
+     * @param element
+     * @param visibleState
+     */
+    function setAnimatedStyles(element, visibleState = false) {
+        _.each(ANIMATED_STYLES, (value, key) => {
+            element.style[key] = visibleState ? value[1] : value[0]
+        })
     }
 
     /**
@@ -15,11 +47,9 @@
      * @param element
      */
     function clearStyles(element) {
-        element.style.height = null;
-        element.style.transitionProperty = null;
-        element.style.transitionDuration = null;
-        element.style.transitionTimingFunction = null;
-        element.style.overflow = null;
+        _.each(INITIAL_STYLES, value => {
+            element.style[value] = null
+        });
     }
 
     export default {
@@ -33,16 +63,18 @@
             easing: {
                 type: String,
                 default: 'ease-in-out'
-            },
+            }
         },
-        render(createElement, {children, props}) {
+        render(createElement, {props, children}) {
             return createElement('transition', {
                 props: {
-                    type: 'transition'
+                    type: 'transition',
                 },
                 on: {
+                    // Enter
                     beforeEnter(element) {
-                        setInitialStyles(element, props)
+                        setInitialStyles(element, props);
+                        setAnimatedStyles(element, false);
                     },
                     enter(element) {
 
@@ -61,9 +93,9 @@
 
                         // Убираем времееные стили и устанавливаем высоту равную `0`
                         element.style.width = null;
-                        element.style.height = 0;
                         element.style.position = null;
                         element.style.visibility = null;
+                        element.style.height = 0;
 
                         // Trigger the animation.
                         // We use `setTimeout` because we need
@@ -72,13 +104,17 @@
                         // to `0` in the line above.
                         setTimeout(() => {
                             element.style.height = height;
+                            setAnimatedStyles(element, true);
                         });
                     },
                     afterEnter(element) {
                         clearStyles(element)
                     },
+
+                    // Leave
                     beforeLeave(element) {
-                        setInitialStyles(element, props)
+                        setInitialStyles(element, props);
+                        setAnimatedStyles(element, true);
                     },
                     leave(element) {
                         // Устанавливаем "строгую" высоту элемента
@@ -90,22 +126,14 @@
 
                         setTimeout(() => {
                             element.style.height = 0;
+                            setAnimatedStyles(element, false);
                         });
                     },
                     afterLeave(element) {
-                        clearStyles(element)
+                        clearStyles(element);
                     }
                 }
             }, children)
         }
     }
 </script>
-
-<style scoped>
-    * {
-        will-change: height;
-        transform: translateZ(0);
-        backface-visibility: hidden;
-        perspective: 1000px;
-    }
-</style>
