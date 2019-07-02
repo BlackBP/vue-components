@@ -1,5 +1,5 @@
 <template>
-    <transition-collapse :duration="400">
+    <transition-collapse>
         <div v-show="visible" class="c-collapse">
             <slot />
         </div>
