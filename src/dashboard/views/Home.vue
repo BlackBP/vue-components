@@ -1,14 +1,17 @@
 <template>
-    <c-card class="c-elevate-3">
-        <c-card-section v-for="(panel, index) in panels"
-                        :key="panel.id">
+
+    <div>
+        <c-card v-for="(panel, index) in panels"
+                class="c-elevate-3"
+                style="margin-bottom: 15px;"
+                :key="panel.id">
             <div class="u-flex u-flex-row u-flex-items-center u-flex-content-start"
                  style="cursor: pointer"
                  @click="!panel.visible && togglePanels(panel.id)">
+                <b>{{ panel.name }}</b>
                 <c-icon :name="panel.visible ? 'menu-up' : 'menu-down'"
                         size="1.5rem"
-                        style="margin-right: 1rem;"/>
-                <b>{{ panel.name }}</b>
+                        style="margin-left: 1rem;"/>
             </div>
 
             <c-collapse :visible="panel.visible">
@@ -19,9 +22,9 @@
                     sunt suscipit, ullam voluptate.
                 </p>
             </c-collapse>
+        </c-card>
+    </div>
 
-        </c-card-section>
-    </c-card>
 </template>
 
 <script>
