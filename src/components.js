@@ -3,6 +3,7 @@ import Card from './components/Card.vue'
 import CardSection from './components/CardSection.vue'
 import Checkbox from './components/Checkbox.vue'
 import Chip from './components/Chip.vue'
+import Collapse from './components/Collapse.vue'
 import Divider from './components/Divider.vue'
 import FormField from './components/FormField.vue'
 import FormRow from './components/FormRow.vue'
@@ -26,32 +27,35 @@ import Switch from './components/Switch.vue'
 import TextArea from './components/TextArea.vue'
 import TextInput from './components/TextInput.vue'
 
-export {
-    Btn,
-    Card,
-    CardSection,
-    Checkbox,
-    Chip,
-    Divider,
-    FormField,
-    FormRow,
-    GridCol,
-    GridContainer,
-    GridRow,
-    Icon,
-    IconBtn,
-    List,
-    ListItem,
-    Loading,
-    LoadingOverlay,
-    Modal,
-    Pagination,
-    Radio,
-    Select,
-    ServiceFormValidate,
-    StackGroup,
-    StackItem,
-    Switch,
-    TextArea,
-    TextInput
-}
+export const components = {
+    CBtn: Btn,
+    CCard: Card,
+    CCardSection: CardSection,
+    CCheckbox: Checkbox,
+    CChip: Chip,
+    CCollapse: Collapse,
+    CDivider: Divider,
+    CFormField: FormField,
+    CFormRow: FormRow,
+    CGridCol: GridCol,
+    CGridContainer: GridContainer,
+    CGridRow: GridRow,
+    CIcon: Icon,
+    CIconBtn: IconBtn,
+    CList: List,
+    CListItem: ListItem,
+    CLoading: Loading,
+    CLoadingOverlay: LoadingOverlay,
+    CModal: Modal,
+    CPagination: Pagination,
+    CRadio: Radio,
+    CSelect: Select,
+    CServiceFormValidate: ServiceFormValidate,
+    CStackGroup: StackGroup,
+    CStackItem: StackItem,
+    CSwitch: Switch,
+    CTextArea: TextArea,
+    CTextInput: TextInput,
+};
+
+export default components
