@@ -27,7 +27,38 @@ import Switch from './components/Switch.vue'
 import TextArea from './components/TextArea.vue'
 import TextInput from './components/TextInput.vue'
 
-export const components = {
+export {
+    Btn as CBtn,
+    Card as CCard,
+    CardSection as CCardSection,
+    Checkbox as CCheckbox,
+    Chip as CChip,
+    Collapse as CCollapse,
+    Divider as CDivider,
+    FormField as CFormField,
+    FormRow as CFormRow,
+    GridCol as CGridCol,
+    GridContainer as CGridContainer,
+    GridRow as CGridRow,
+    Icon as CIcon,
+    IconBtn as CIconBtn,
+    List as CList,
+    ListItem as CListItem,
+    Loading as CLoading,
+    LoadingOverlay as CLoadingOverlay,
+    Modal as CModal,
+    Pagination as CPagination,
+    Radio as CRadio,
+    Select as CSelect,
+    ServiceFormValidate as CServiceFormValidate,
+    StackGroup as CStackGroup,
+    StackItem as CStackItem,
+    Switch as CSwitch,
+    TextArea as CTextArea,
+    TextInput as CTextInput,
+}
+
+export default {
     CBtn: Btn,
     CCard: Card,
     CCardSection: CardSection,
@@ -56,6 +87,4 @@ export const components = {
     CSwitch: Switch,
     CTextArea: TextArea,
     CTextInput: TextInput,
-};
-
-export default components
+}

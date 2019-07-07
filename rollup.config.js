@@ -2,7 +2,7 @@ import PluginVue from 'rollup-plugin-vue'
 import PluginResolve from 'rollup-plugin-node-resolve'
 import PluginLocalResolve from 'rollup-plugin-local-resolve'
 import PluginCommonjs from 'rollup-plugin-commonjs'
-import { uglify as PluginUglifyJS } from "rollup-plugin-uglify"
+import {terser as PluginTerser} from "rollup-plugin-terser"
 
 export default {
     input: './src/components.js',
@@ -15,6 +15,6 @@ export default {
         PluginLocalResolve(),
         PluginCommonjs(),
         PluginVue(),
-        // PluginUglifyJS(),
+        PluginTerser(),
     ]
 };

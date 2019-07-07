@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {Btn} from '../dist/components'
+import Com from '../dist/components'
 
 export default function (value) {
     return _.parseInt(value);
