@@ -29,7 +29,7 @@
 </template>
 
 <script>
-    import CIcon from "./Icon";
+    import CIcon from "./Icon.vue";
 
     export default {
         name: "c-pagination",

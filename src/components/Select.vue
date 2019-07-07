@@ -99,9 +99,9 @@
 </template>
 
 <script>
-    import CFormField from "./FormField";
-    import CIcon from "./Icon";
-    import CChip from "./Chip";
+    import CFormField from "./FormField.vue";
+    import CIcon from "./Icon.vue";
+    import CChip from "./Chip.vue";
 
     const OPTION_KEY = {
         isGroup: 'isGroup',

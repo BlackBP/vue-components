@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import TransitionCollapse from "./transitions/Collapse";
+    import TransitionCollapse from "./transitions/Collapse.vue";
 
     export default {
         name: "CCollapse",

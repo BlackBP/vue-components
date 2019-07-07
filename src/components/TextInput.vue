@@ -39,8 +39,8 @@
 
 <script>
     import Inputmask from "inputmask";
-    import FormField from "./FormField";
-    import CIcon from "./Icon";
+    import FormField from "./FormField.vue";
+    import CIcon from "./Icon.vue";
 
     export default {
         name: "c-text-input",

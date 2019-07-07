@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import FormField from "./FormField";
+    import FormField from "./FormField.vue";
 
     export default {
         name: "c-textarea",

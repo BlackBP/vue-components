@@ -78,9 +78,9 @@
 </template>
 
 <script>
-    import CIcon from "./Icon";
-    import CIconBtn from "./IconButton";
-    import CLoading from "./Loading";
+    import CIcon from "./Icon.vue";
+    import CIconBtn from "./IconButton.vue";
+    import CLoading from "./Loading.vue";
 
     const $html = document.querySelector('html');
 

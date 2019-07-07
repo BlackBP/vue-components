@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import CLoading from "./Loading";
+    import CLoading from "./Loading.vue";
 
     export default {
         name: "c-loading-overlay",
