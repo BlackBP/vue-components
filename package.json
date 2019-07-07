@@ -14,14 +14,14 @@
     "vue",
     "ui"
   ],
-  "version": "0.8.7",
+  "version": "0.8.8",
   "scripts": {
     "serve": "vue-cli-service serve src/dashboard/app.js",
     "build": "rollup -c"
   },
   "main": "./dist/components.js",
   "files": [
-    "src/*",
+    "dist/*",
     "*.json",
     "*.js"
   ],
