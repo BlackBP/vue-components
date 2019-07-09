@@ -1,5 +1,6 @@
 <script>
-    import CIcon from "./Icon.vue";
+    import {isEmptyString} from '../utils'
+    import CIcon from "./Icon.vue"
 
     /**
      *
@@ -42,9 +43,10 @@
             let baseClass = 'c-chip',
                 leadingIconClassName = `${baseClass}__leading`,
                 trailingIconClassName = `${baseClass}__trailing`,
-                hasColor = typeof props.color === 'string' && props.color !== '',
-                hasLeading = typeof props.leading === 'string' && props.leading !== '',
-                hasTrailing = typeof props.trailing === 'string' && props.trailing !== '',
+                hasColor = !isEmptyString(props.color),
+                hasLeading = !isEmptyString(props.leading),
+                hasTrailing = !isEmptyString(props.trailing),
+                tagName = isEmptyString(props.tag) ? 'div' : props.tag,
                 className = [baseClass, {
                     [`${baseClass}--${props.color}`]: hasColor
                 }];
@@ -57,29 +59,31 @@
 
             data.class = [data.class, className];
 
-            if (hasLeading) {
-                content = [
-                    createIcon(createElement, props.leading, leadingIconClassName),
-                    elText
-                ];
+            if (hasLeading || hasTrailing) {
+                if (hasLeading) {
+                    content = [
+                        createIcon(createElement, props.leading, leadingIconClassName),
+                        elText
+                    ];
+                }
+
+                if (hasTrailing) {
+                    content = [
+                        elText,
+                        createIcon(createElement, props.trailing, trailingIconClassName),
+                    ];
+                }
+
+                if(hasLeading && hasTrailing) {
+                    content = [
+                        createIcon(createElement, props.leading, leadingIconClassName),
+                        elText,
+                        createIcon(createElement, props.trailing, trailingIconClassName),
+                    ];
+                }
             }
 
-            if (hasTrailing) {
-                content = [
-                    elText,
-                    createIcon(createElement, props.trailing, trailingIconClassName),
-                ];
-            }
-
-            if (hasLeading && hasTrailing) {
-                content = [
-                    createIcon(createElement, props.leading, leadingIconClassName),
-                    elText,
-                    createIcon(createElement, props.trailing, trailingIconClassName),
-                ];
-            }
-
-            return createElement(props.tag, data, content);
+            return createElement(tagName, data, content);
         }
     }
 </script>

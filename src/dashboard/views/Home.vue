@@ -9,7 +9,9 @@
             <div class="u-flex u-flex-row u-flex-items-center u-flex-content-start"
                  style="cursor: pointer"
                  @click="panel.visible ? hidePanels() : togglePanels(panel.id)">
-                <b>{{ panel.name }}</b>
+                <c-chip color="success">
+                    <b>{{ panel.name }}</b> #{{ panel.id }}
+                </c-chip>
                 <c-icon :name="panel.visible ? 'menu-up' : 'menu-down'"
                         size="1.5rem"
                         style="margin-left: 1rem;"/>
@@ -24,6 +26,35 @@
                     recusandae vitae? Aliquid beatae blanditiis consectetur deserunt eum, magnam minima, natus omnis
                     sunt suscipit, ullam voluptate.
                 </p>
+
+                <p>
+                    <c-switch v-model="transparent">
+                        Transparent buttons
+                    </c-switch>
+
+                    <c-switch v-model="elevated">
+                        Elevated buttons
+                    </c-switch>
+
+                    <c-switch v-model="bordered">
+                        Bordered buttons
+                    </c-switch>
+                </p>
+
+                <div class="u-flex u-flex-row u-flex-content-start u-flex-items-center"
+                     style="margin: 40px 20px;">
+                    <div class="c-btn-group">
+                        <c-btn v-for="color in ['', 'primary', 'secondary', 'success', 'error', 'warn', 'info']"
+                               icon-left="send"
+                               :key="color"
+                               :elevated="elevated"
+                               :bordered="bordered"
+                               :transparent="transparent"
+                               :color="color">
+                            Click me!
+                        </c-btn>
+                    </div>
+                </div>
             </c-collapse>
         </c-card>
     </div>
@@ -37,10 +68,12 @@
     import CBtn from "../../components/Button";
     import CIcon from "../../components/Icon";
     import CDivider from "../../components/Divider";
+    import CSwitch from "../../components/Switch";
 
     export default {
         name: "view-home",
         components: {
+            CSwitch,
             CDivider,
             CIcon,
             CBtn,
@@ -50,11 +83,13 @@
         },
         data() {
             return {
-                visible: false,
+                bordered: false,
+                elevated: false,
+                transparent: false,
                 panels: [...Array(10)].map((val, index) => {
                     return {
                         id: index + 1,
-                        name: `Panel #${index + 1}`,
+                        name: `Panel`,
                         visible: false
                     }
                 })

@@ -52,6 +52,10 @@
                 type: String,
                 default: ''
             },
+            bordered: {
+                type: Boolean,
+                default: false
+            },
             elevated: {
                 type: Boolean,
                 default: false
@@ -83,6 +87,7 @@
 
                 let modElevated = `${baseClass}--elevated`,
                     modTransparent = `${baseClass}--transparent`,
+                    modBordered = `${baseClass}--bordered`,
                     modBlock = `${baseClass}--block`,
                     modColor = `${baseClass}--${color}`;
 
@@ -92,6 +97,11 @@
                 };
 
                 let className = [baseClass, baseMods];
+
+                if(this.bordered) {
+                    className.push(modBordered);
+                    return className;
+                }
 
                 if (this.transparent) {
                     className.push(modTransparent);

@@ -5,7 +5,7 @@
         transform: ['translateY(-20px)', 'translateY(0px)'],
     };
 
-    const INITIAL_STYLES = {
+    const STYLES_MAP = {
         willChange: 'willChange',
         backfaceVisibility: 'backfaceVisibility',
         perspective: 'perspective',
@@ -47,7 +47,7 @@
      * @param element
      */
     function clearStyles(element) {
-        _.each(INITIAL_STYLES, value => {
+        _.each(STYLES_MAP, value => {
             element.style[value] = null
         });
     }
