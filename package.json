@@ -9,7 +9,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "UI library based on Vue.js framework",
+  "description": "[In developing] UI library based on Vue.js framework",
   "keywords": [
     "vue",
     "ui"
