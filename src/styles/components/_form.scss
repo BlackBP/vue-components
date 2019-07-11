@@ -411,3 +411,14 @@ $field-readonly-color: #555;
 
   }
 }
+
+/*
+** Chrome autofill input background fix
+*/
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  box-shadow: inset 0 0 0 50px white !important;
+}
