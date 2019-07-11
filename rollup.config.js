@@ -5,38 +5,61 @@ import PluginCommonjs from 'rollup-plugin-commonjs'
 import PluginCopy from 'rollup-plugin-copy'
 import {terser as PluginTerser} from "rollup-plugin-terser"
 
+const CONFIG = {
+    input: './src/components.js',
+    output: {
+        fileName: 'lib',
+        dir: '/dist',
+    },
+    plugins: [
+        PluginResolve(),
+        PluginLocalResolve(),
+        PluginCommonjs(),
+        PluginVue(),
+        PluginTerser()
+    ],
+    pluginOpts: {
+        copy: {
+            targets: [
+                {
+                    src: './src/styles',
+                    dest: './dist',
+                    rename: 'sass'
+                }
+            ]
+        }
+    },
+
+    /**
+     *
+     * @param postfix
+     * @return {string}
+     */
+    getFileName(postfix = '') {
+        postfix = typeof postfix === 'string' && postfix !== '' ? `.${postfix}` : '';
+
+        return `${__dirname}/${this.output.dir}/${this.output.fileName}${postfix}.js`
+    }
+};
+
 export default [
     {
-        input: './src/components.js',
+        input: CONFIG.input,
         output: {
-            file: __dirname + '/dist/components.esm.js',
+            file: CONFIG.getFileName('esm'),
             format: 'esm'
         },
         plugins: [
-            PluginResolve(),
-            PluginLocalResolve(),
-            PluginCommonjs(),
-            PluginVue(),
-            PluginTerser(),
-            PluginCopy({
-                targets: [
-                    {src: './src/styles', dest: './dist', rename: 'sass'}
-                ]
-            })
+            ...CONFIG.plugins,
+            PluginCopy(CONFIG.pluginOpts.copy)
         ]
     },
     {
-        input: './src/components.js',
+        input: CONFIG.input,
         output: {
-            file: __dirname + '/dist/components.common.js',
+            file: CONFIG.getFileName('common'),
             format: 'cjs'
         },
-        plugins: [
-            PluginResolve(),
-            PluginLocalResolve(),
-            PluginCommonjs(),
-            PluginVue(),
-            PluginTerser()
-        ]
+        plugins: CONFIG.plugins
     },
 ];
