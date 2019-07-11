@@ -14,12 +14,12 @@
     "vue",
     "ui"
   ],
-  "version": "0.9.1",
+  "version": "0.9.2",
   "scripts": {
     "serve": "vue-cli-service serve src/dashboard/app.js",
-    "build": "rollup --config rollup.config.js"
+    "build": "rollup -c"
   },
-  "main": "./dist/components.common.js",
+  "main": "./dist/lib.common.js",
   "files": [
     "dist/*",
     "src/components/*",
@@ -28,11 +28,9 @@
   ],
   "dependencies": {
     "@mdi/font": "^3.5.95",
-    "flatpickr": "^4.5.7",
     "inputmask": "^4.0.8",
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
-    "rollup-plugin-local-resolve": "^1.0.7",
     "vue": "^2.6.10",
     "vue-router": "^3.0.4",
     "vuex": "^3.1.0"
@@ -47,6 +45,7 @@
     "rollup": "^1.16.6",
     "rollup-plugin-commonjs": "^10.0.1",
     "rollup-plugin-copy": "^3.0.0",
+    "rollup-plugin-local-resolve": "^1.0.7",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-uglify": "^6.0.2",
