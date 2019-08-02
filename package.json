@@ -27,13 +27,13 @@
     "*.js"
   ],
   "dependencies": {
-    "@mdi/font": "^3.5.95",
+    "@mdi/font": "^3.8.95",
     "inputmask": "^4.0.8",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.4",
-    "vuex": "^3.1.0"
+    "vue-router": "^3.0.7",
+    "vuex": "^3.1.1"
   },
   "peerDependencies": {
     "vue": "^2.6.10"
