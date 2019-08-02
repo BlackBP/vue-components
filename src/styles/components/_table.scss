@@ -1,5 +1,6 @@
 .c-table {
   $self: #{&};
+  $wrap: #{$self}-wrap;
 
   $padding: 6px;
   $border: $g-border;
@@ -7,6 +8,14 @@
   $hover-background: rgba(#000, 0.05);
 
   @at-root {
+
+    #{$wrap} {
+      display: block;
+      width: 100%;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
 
     #{$self} {
       width: 100%;

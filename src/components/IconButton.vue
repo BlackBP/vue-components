@@ -31,27 +31,22 @@
             color: {
                 type: String,
                 default: '',
-
             },
             disabled: {
                 type: Boolean,
                 default: false,
-
             },
             transparent: {
                 type: Boolean,
                 default: false,
-
             },
             elevated: {
                 type: Boolean,
                 default: false,
-
             },
             dense: {
                 type: Boolean,
                 default: false,
-
             },
         },
         computed: {

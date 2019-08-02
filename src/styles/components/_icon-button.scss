@@ -9,6 +9,8 @@
   $mod-color-error: #{$self}--error;
   $mod-color-warn: #{$self}--warn;
   $mod-color-info: #{$self}--info;
+  $mod-color-light: #{$self}--light;
+  $mod-color-dark: #{$self}--dark;
 
   $mod-elevated: #{$self}--elevated;
   $mod-dense: #{$self}--dense;
@@ -165,6 +167,8 @@
       @include make-transparent($mod-color-error, $color-error);
       @include make-transparent($mod-color-warn, $color-warn);
       @include make-transparent($mod-color-info, $color-info);
+      @include make-transparent($mod-color-light, $color-light);
+      @include make-transparent($mod-color-dark, $color-dark);
     }
   }
 

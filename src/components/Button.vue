@@ -24,7 +24,6 @@
 <script>
     import CIcon from "./Icon.vue";
 
-
     function isValidString(value) {
         if (typeof value === 'string') {
             return value !== ''
