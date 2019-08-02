@@ -11,6 +11,8 @@
   $mod-color-error: #{$self}--error;
   $mod-color-warn: #{$self}--warn;
   $mod-color-info: #{$self}--info;
+  $mod-color-light: #{$self}--light;
+  $mod-color-dark: #{$self}--dark;
 
   $mod-bordered: #{$self}--bordered;
   $mod-elevated: #{$self}--elevated;
@@ -84,7 +86,7 @@
   /**
    *
    */
-  @mixin make-bordered($mod-name, $color) {
+  @mixin make-bordered($mod-name, $color, $hover-color: #fff) {
     &#{$mod-name} {
       background: transparent;
       border-color: $color;
@@ -93,12 +95,12 @@
       &:hover,
       &:focus {
         background: $color;
-        color: #fff;
+        color: $hover-color;
       }
 
       &:active {
         background: darken($color, 5%);
-        color: #fff;
+        color: $hover-color;
       }
     }
   }
@@ -171,6 +173,8 @@
     @include make-colored($mod-color-error, $color-error);
     @include make-colored($mod-color-warn, $color-warn);
     @include make-colored($mod-color-info, $color-info);
+    @include make-colored($mod-color-light, $color-light, $font-color);
+    @include make-colored($mod-color-dark, $color-dark);
 
     // Elevated
     @include make-modifier($mod-elevated) {
@@ -201,6 +205,8 @@
       @include make-transparent($mod-color-error, $color-error);
       @include make-transparent($mod-color-warn, $color-warn);
       @include make-transparent($mod-color-info, $color-info);
+      @include make-transparent($mod-color-light, $color-light);
+      @include make-transparent($mod-color-dark, $color-dark);
     }
 
     // Bordered
@@ -214,6 +220,8 @@
       @include make-bordered($mod-color-error, $color-error);
       @include make-bordered($mod-color-warn, $color-warn);
       @include make-bordered($mod-color-info, $color-info);
+      @include make-bordered($mod-color-light, $color-light, $font-color);
+      @include make-bordered($mod-color-dark, $color-dark);
     }
 
   }

@@ -41,10 +41,9 @@
                     </c-switch>
                 </p>
 
-                <div class="u-flex u-flex-row u-flex-content-start u-flex-items-center"
-                     style="margin: 40px 20px;">
+                <div style="margin: 40px 20px;">
                     <div class="c-btn-group">
-                        <c-btn v-for="color in ['', 'primary', 'secondary', 'success', 'error', 'warn', 'info']"
+                        <c-btn v-for="color in ['', 'primary', 'secondary', 'success', 'error', 'warn', 'info', 'light', 'dark']"
                                icon-left="send"
                                :key="color"
                                :elevated="elevated"
@@ -53,6 +52,27 @@
                                :color="color">
                             Click me!
                         </c-btn>
+                    </div>
+
+                    <div class="c-btn-group">
+                        <c-icon-btn
+                                v-for="color in ['', 'primary', 'secondary', 'success', 'error', 'warn', 'info', 'light', 'dark']"
+                                icon="plus"
+                                :key="color"
+                                :elevated="elevated"
+                                :transparent="transparent"
+                                :color="color"/>
+                    </div>
+
+                    <div class="c-btn-group">
+                        <c-icon-btn
+                                v-for="color in ['', 'primary', 'secondary', 'success', 'error', 'warn', 'info', 'light', 'dark']"
+                                icon="plus"
+                                :key="color"
+                                :dense="true"
+                                :elevated="elevated"
+                                :transparent="transparent"
+                                :color="color"/>
                     </div>
                 </div>
             </c-collapse>
@@ -69,10 +89,12 @@
     import CIcon from "../../components/Icon";
     import CDivider from "../../components/Divider";
     import CSwitch from "../../components/Switch";
+    import CIconBtn from "../../components/IconButton";
 
     export default {
         name: "view-home",
         components: {
+            CIconBtn,
             CSwitch,
             CDivider,
             CIcon,
@@ -111,3 +133,16 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    .c-btn-group {
+        justify-content: flex-start;
+        margin-bottom: 15px;
+        padding: 15px;
+        background-color: #4CAF50;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+</style>
