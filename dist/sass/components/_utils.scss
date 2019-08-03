@@ -1,0 +1,252 @@
+// == Clearfix
+.u-clearfix {
+  &:after,
+  &:before {
+    display: table;
+    content: "";
+    clear: both;
+  }
+}
+
+// == Lists
+.u-list {
+  &-unstyled {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+}
+
+// == Images
+.u-img {
+  &-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+  }
+
+  &-rounded {
+    display: block;
+    border-radius: 50%;
+    border: 0;
+  }
+}
+
+// == Text
+.u-text {
+
+  // Colors
+  &-primary {
+    color: $color-primary;
+  }
+
+  &-secondary {
+    color: $color-secondary;
+  }
+
+  &-success {
+    color: $color-success;
+  }
+
+  &-info {
+    color: $color-info;
+  }
+
+  &-error {
+    color: $color-error;
+  }
+
+  &-warn {
+    color: $color-warn;
+  }
+
+  // Alignment
+  &-center {
+    text-align: center;
+  }
+
+  &-left {
+    text-align: left;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-justify {
+    text-align: justify;
+  }
+
+  // Transforms
+  &-upper {
+    text-transform: uppercase;
+  }
+
+  &-lower {
+    text-transform: lowercase;
+  }
+
+  &-capitalize {
+    text-transform: capitalize;
+  }
+
+  // Decorations
+  &-underline {
+    text-decoration: underline;
+  }
+
+  // Weights
+  &-hairline {
+    font-weight: 100;
+  }
+
+  &-thin {
+    font-weight: 200;
+  }
+
+  &-light {
+    font-weight: 300;
+  }
+
+  &-regular {
+    font-weight: 400;
+  }
+
+  &-medium {
+    font-weight: 500;
+  }
+
+  &-semibold {
+    font-weight: 600;
+  }
+
+  &-bold {
+    font-weight: 700;
+  }
+
+  &-black {
+    font-weight: 800;
+  }
+
+  &-heavy {
+    font-weight: 900;
+  }
+
+  // Wrap
+  &-nowrap {
+    white-space: nowrap;
+  }
+
+  &-wrap {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    white-space: normal;
+  }
+
+  &-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+// == Aligning
+.u-center-block {
+  display: block;
+  margin: 0 auto;
+}
+
+// == Selection
+.u-no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// == Display
+.u-inline {
+  display: inline;
+}
+
+.u-inline-block {
+  display: inline-block;
+}
+
+.u-flex {
+  display: flex;
+}
+
+.u-inline-flex {
+  display: inline-flex;
+}
+
+// == Flex
+.u-flex-row {
+  flex-direction: row;
+}
+
+.u-flex-column {
+  flex-direction: column;
+}
+
+.u-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.u-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.u-flex-content {
+  &-start {
+    justify-content: flex-start;
+  }
+
+  &-end {
+    justify-content: flex-end;
+  }
+
+  &-center {
+    justify-content: center;
+  }
+
+  &-between {
+    justify-content: space-between;
+  }
+}
+
+.u-flex-items {
+  &-start {
+    align-items: flex-start;
+  }
+
+  &-end {
+    align-items: flex-end;
+  }
+
+  &-center {
+    align-items: center;
+  }
+
+  &-stretch {
+    align-items: stretch;
+  }
+}
+
+// == Misc
+
+//
+.u-h100 {
+  height: 100%;
+}
+.u-m0 {
+  margin: 0;
+}

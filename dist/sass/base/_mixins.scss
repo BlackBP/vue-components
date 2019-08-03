@@ -1,0 +1,132 @@
+// Elevation
+@mixin box-elevation($level: 3, $color: #000, $opacity-boost: 0) {
+
+  @if $level < 0 {
+    $level: 0;
+  }
+  @if $level > 24 {
+    $level: 24;
+  }
+
+  $umbra-color-level: map_get($elevation-umbra-map, $level);
+  $penumbra-color-level: map_get($elevation-penumbra-map, $level);
+  $ambient-color-level: map_get($elevation-ambient-map, $level);
+
+  $umbra-color: rgba($color, $elevation-umbra-opacity + $opacity-boost);
+  $penumbra-color: rgba($color, $elevation-penumbra-opacity + $opacity-boost);
+  $ambient-color: rgba($color, $elevation-ambient-opacity + $opacity-boost);
+
+  box-shadow: #{$umbra-color-level} #{$umbra-color},
+  #{$penumbra-color-level} #{$penumbra-color},
+  #{$ambient-color-level} #{$ambient-color};
+
+}
+
+// Input, TextArea placeholder
+@mixin input-placeholder {
+  &::-webkit-input-placeholder {
+    @content
+  }
+  &:-moz-placeholder {
+    @content
+  }
+  &::-moz-placeholder {
+    @content
+  }
+  &:-ms-input-placeholder {
+    @content
+  }
+}
+
+// Media queries
+@mixin media( $breakpoints ) {
+  @each $breakpoint in $breakpoints {
+
+    @if $breakpoint == xs-s {
+      @media screen and (max-width: 320px) {
+        @content;
+      }
+    }
+    @if $breakpoint == xs-m {
+      @media screen and (min-width: 321px) and (max-width: 375px) {
+        @content;
+      }
+    }
+    @if $breakpoint == xs-l {
+      @media screen and (min-width: 376px) and (max-width: 425px) {
+        @content;
+      }
+    }
+    @if $breakpoint == xs {
+      @media screen and (max-width: 575px) {
+        @content;
+      }
+    }
+    @if $breakpoint == sm {
+      @media screen and (min-width: 576px) and (max-width: 767px) {
+        @content;
+      }
+    }
+    @if $breakpoint == md {
+      @media screen and (min-width: 768px) and (max-width: 991px) {
+        @content;
+      }
+    }
+    @if $breakpoint == lg {
+      @media screen and (min-width: 992px) and (max-width: 1199px) {
+        @content;
+      }
+    }
+    @if $breakpoint == xl {
+      @media screen and (min-width: 1200px) {
+        @content;
+      }
+    }
+
+  }
+}
+
+// Disable user selection
+@mixin no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// Word wrapping
+@mixin word-wrap() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  white-space: normal;
+}
+
+@mixin word-ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin word-nowrap() {
+  white-space: nowrap;
+}
+
+//
+@mixin make-state($state) {
+  &#{$state} {
+    @content;
+  }
+}
+
+//
+@mixin make-modifier($name) {
+  &--#{$name} {
+    @content;
+  }
+}

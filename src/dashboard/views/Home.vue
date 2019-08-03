@@ -9,9 +9,11 @@
             <div class="u-flex u-flex-row u-flex-items-center u-flex-content-start"
                  style="cursor: pointer"
                  @click="panel.visible ? hidePanels() : togglePanels(panel.id)">
+
                 <c-chip color="success">
                     <b>{{ panel.name }}</b> #{{ panel.id }}
                 </c-chip>
+
                 <c-icon :name="panel.visible ? 'menu-up' : 'menu-down'"
                         size="1.5rem"
                         style="margin-left: 1rem;"/>
@@ -75,6 +77,13 @@
                                 :color="color"/>
                     </div>
                 </div>
+
+                <c-grid-row>
+                    <c-grid-col auto>
+                        Auto
+                    </c-grid-col>
+                </c-grid-row>
+
             </c-collapse>
         </c-card>
     </div>
@@ -90,10 +99,14 @@
     import CDivider from "../../components/Divider";
     import CSwitch from "../../components/Switch";
     import CIconBtn from "../../components/IconButton";
+    import CGridRow from "../../components/GridRow";
+    import CGridCol from "../../components/GridCol";
 
     export default {
         name: "view-home",
         components: {
+            CGridCol,
+            CGridRow,
             CIconBtn,
             CSwitch,
             CDivider,

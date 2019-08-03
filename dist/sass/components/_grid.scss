@@ -41,10 +41,12 @@ $grid-column: #{'.c-grid-col'};
 }
 
 @mixin make-auto-column() {
-  flex: 0 0 auto;
-  width: auto;
-  max-width: 100%;
-  @content;
+  &-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+    @content;
+  }
 }
 
 /*
@@ -126,30 +128,18 @@ $grid-column: #{'.c-grid-col'};
   width: 100%;
   padding-right: $grid-gutter;
   padding-left: $grid-gutter;
-
-  &.--auto {
-    @include make-auto-column;
-  }
 }
 
 // Media
 @each $breakpoint, $container-size in $grid-container-sizes {
-
   @include media($breakpoint) {
-
     #{$grid-container} {
       width: $container-size;
     }
 
     #{$grid-column}.--#{$breakpoint} {
       @include make-columns;
-
-      &-auto {
-        @include make-auto-column;
-      }
-
+      @include make-auto-column;
     }
-
   }
-
 }

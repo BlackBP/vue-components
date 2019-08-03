@@ -5,6 +5,7 @@
         md: 'md',
         sm: 'sm',
         xs: 'xs',
+        auto: 'auto',
     };
 
     export default {
@@ -30,6 +31,10 @@
             xs: {
                 type: String,
                 default: ''
+            },
+            auto: {
+                type: Boolean,
+                default: false
             }
         },
         render(createElement, {data, props, children}) {
@@ -39,7 +44,8 @@
                 [SIZE.lg]: props[SIZE.lg],
                 [SIZE.md]: props[SIZE.md],
                 [SIZE.sm]: props[SIZE.sm],
-                [SIZE.xs]: props[SIZE.xs]
+                [SIZE.xs]: props[SIZE.xs],
+                [SIZE.auto]: props[SIZE.auto]
             };
 
             sizes = _.reduce(sizes, (total, value, key) => {

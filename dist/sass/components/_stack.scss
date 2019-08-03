@@ -1,0 +1,92 @@
+.c-stack {
+  $self: #{&};
+  $item: #{$self}-item;
+
+  $items-gap: 10px;
+
+  @at-root {
+
+    #{$self} {
+      display: flex;
+      flex-flow: row nowrap;
+
+      & > #{$item} {
+        margin-right: $items-gap;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      @include make-modifier('inline') {
+        display: inline-flex;
+      }
+
+      @include make-modifier('column') {
+        flex-direction: column;
+
+        & > #{$item} {
+          margin-bottom: $items-gap;
+          margin-right: initial;
+
+          &:last-child {
+            margin-bottom: 0;
+            margin-right: initial;
+          }
+        }
+      }
+
+      @include make-modifier('wrap') {
+        flex-wrap: wrap;
+      }
+
+      @include make-modifier('items') {
+        &-start {
+          align-items: start;
+        }
+        &-end {
+          align-items: flex-end;
+        }
+        &-center {
+          align-items: center;
+        }
+        &-stretch {
+          align-items: stretch;
+        }
+        &-baseline{
+          align-items: baseline;
+        }
+      }
+
+      @include make-modifier('justify') {
+        &-start {
+          justify-content: flex-start;
+        }
+        &-end {
+          justify-content: flex-end;
+        }
+        &-center {
+          justify-content: center;
+        }
+        &-between {
+          justify-content: space-between;
+        }
+        &-around {
+          justify-content: space-around;
+        }
+      }
+    }
+
+    #{$item} {
+      flex: 0 0 auto;
+      display: block;
+
+      @include make-modifier('flex') {
+        flex: 1 1 auto;
+        width: 100%;
+      }
+    }
+
+  }
+
+}

@@ -1,0 +1,27 @@
+.c-card {
+  $self: #{&};
+
+  $section: #{$self}-sect;
+
+  $padding: $g-gutter;
+
+  @at-root {
+
+    #{$self} {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      padding: $padding;
+      background-color: #fff;
+      border-radius: $g-border-radius-lg;
+    }
+
+    #{$section} {
+      & + & {
+        margin-top: $g-gutter;
+      }
+    }
+
+  }
+
+}
