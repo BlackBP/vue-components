@@ -23,11 +23,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .c-collapse {
-        display: block;
-        width: 100%;
-        overflow: hidden;
-    }
-</style>

@@ -18,12 +18,12 @@
         },
         render(createElement, {props, data}) {
             let baseClass = 'c-loading';
-            let children = [
+            let content = [
                 createElement('div', {class: `${baseClass}__spinner`})
             ];
 
             if (props.text) {
-                children.push(createElement('div', {
+                content.push(createElement('div', {
                     class: `${baseClass}__text`
                 }, props.text))
             }
@@ -34,7 +34,7 @@
                 [`${baseClass}--dense`]: props.dense
             }];
 
-            return createElement('div', data, children);
+            return createElement('div', data, content);
         }
     }
 </script>
