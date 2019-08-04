@@ -1,3 +1,4 @@
+import Badge from './components/Badge.vue'
 import Btn from './components/Button.vue'
 import Card from './components/Card.vue'
 import CardSection from './components/CardSection.vue'
@@ -27,7 +28,40 @@ import Switch from './components/Switch.vue'
 import TextArea from './components/TextArea.vue'
 import TextInput from './components/TextInput.vue'
 
+const Components = {
+    CBadge: Badge,
+    CBtn: Btn,
+    CCard: Card,
+    CCardSection: CardSection,
+    CCheckbox: Checkbox,
+    CChip: Chip,
+    CCollapse: Collapse,
+    CDivider: Divider,
+    CFormField: FormField,
+    CFormRow: FormRow,
+    CGridCol: GridCol,
+    CGridContainer: GridContainer,
+    CGridRow: GridRow,
+    CIcon: Icon,
+    CIconBtn: IconBtn,
+    CList: List,
+    CListItem: ListItem,
+    CLoading: Loading,
+    CLoadingOverlay: LoadingOverlay,
+    CModal: Modal,
+    CPagination: Pagination,
+    CRadio: Radio,
+    CSelect: Select,
+    CServiceFormValidate: ServiceFormValidate,
+    CStackGroup: StackGroup,
+    CStackItem: StackItem,
+    CSwitch: Switch,
+    CTextArea: TextArea,
+    CTextInput: TextInput,
+};
+
 export {
+    Badge as CBadge,
     Btn as CBtn,
     Card as CCard,
     CardSection as CCardSection,
@@ -59,32 +93,12 @@ export {
 }
 
 export default {
-    CBtn: Btn,
-    CCard: Card,
-    CCardSection: CardSection,
-    CCheckbox: Checkbox,
-    CChip: Chip,
-    CCollapse: Collapse,
-    CDivider: Divider,
-    CFormField: FormField,
-    CFormRow: FormRow,
-    CGridCol: GridCol,
-    CGridContainer: GridContainer,
-    CGridRow: GridRow,
-    CIcon: Icon,
-    CIconBtn: IconBtn,
-    CList: List,
-    CListItem: ListItem,
-    CLoading: Loading,
-    CLoadingOverlay: LoadingOverlay,
-    CModal: Modal,
-    CPagination: Pagination,
-    CRadio: Radio,
-    CSelect: Select,
-    CServiceFormValidate: ServiceFormValidate,
-    CStackGroup: StackGroup,
-    CStackItem: StackItem,
-    CSwitch: Switch,
-    CTextArea: TextArea,
-    CTextInput: TextInput,
+    install(Vue, options = {}) {
+
+        Object.keys(Components).forEach(name => {
+            Vue.component(name, Components[name]);
+        });
+
+        Vue.prototype.$bbpComponentsConfig = {...options};
+    }
 }

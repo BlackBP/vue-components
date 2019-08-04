@@ -16,11 +16,25 @@
                 default: false,
             }
         },
-        render(createElement, {props, data}) {
+        render(createElement, {props, data, parent}) {
+            const config = parent.$bbpComponentsConfig.loading;
+
             let baseClass = 'c-loading';
-            let content = [
-                createElement('div', {class: `${baseClass}__spinner`})
-            ];
+            let content = [];
+            let spinner = createElement('div', {class: `${baseClass}__spinner`});
+            let {spinner: customSpinner} = config;
+
+            if(customSpinner) {
+                spinner = createElement('div', {class: `${baseClass}__spinner`}, [
+                    createElement('img', {
+                        attrs: {
+                            src: customSpinner
+                        }
+                    })
+                ]);
+            }
+
+            content.push(spinner);
 
             if (props.text) {
                 content.push(createElement('div', {
@@ -30,8 +44,9 @@
 
             data.class = [data.class, {
                 [`${baseClass}`]: true,
-                [`${baseClass}--elevated`]: props.elevated,
-                [`${baseClass}--dense`]: props.dense
+                [`--elevated`]: props.elevated,
+                [`--dense`]: props.dense,
+                [`--default`]: !customSpinner,
             }];
 
             return createElement('div', data, content);
