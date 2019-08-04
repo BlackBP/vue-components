@@ -1,0 +1,42 @@
+.c-badge {
+  $self: #{&};
+  $slot: #{$self}__slot;
+  $badge: #{$self}__badge;
+
+  $min-size: 1.71428em;
+  $offset: -0.57142em;
+
+  @at-root {
+    #{$self} {
+      display: inline-block;
+      line-height: 1;
+      position: relative;
+    }
+
+    #{$badge} {
+      position: absolute;
+      top: $offset;
+      right: $offset;
+      z-index: 2;
+      display: inline-flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      line-height: normal;
+      height: $min-size;
+      min-width: $min-size;
+      font-size: 14px;
+      padding: 0 3px;
+      background: #333;
+      color: #fff;
+      border-radius: 100px;
+    }
+
+    #{$slot} {
+      position: relative;
+      z-index: 1;
+    }
+
+  }
+
+}
