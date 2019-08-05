@@ -1,4 +1,20 @@
 <script>
+    import Vue from 'vue'
+    import LoaderDefault from "./loaders/LoaderDefault.vue";
+
+    /**
+     *
+     * @param {Function} createElement
+     * @param {Object} data
+     * @param {Vue} spinner
+     * @return {*}
+     */
+    function createSpinner(createElement, data, spinner) {
+        return createElement('div', data, [
+            createElement(spinner ? spinner : LoaderDefault)
+        ])
+    }
+
     export default {
         name: "c-loading",
         functional: true,
@@ -17,39 +33,28 @@
             }
         },
         render(createElement, {props, data, parent}) {
-            const config = parent.$bbpComponentsConfig.loading;
+            const config = _.get(parent, '$bbpComponentsConfig.loading', {});
+            const CustomSpinner = config.spinner;
 
             let baseClass = 'c-loading';
             let content = [];
-            let spinner = createElement('div', {class: `${baseClass}__spinner`});
-            let {
-                spinner: customSpinner,
-                text
-            } = config;
+            let spinnerWrapData = {
+                class: `${baseClass}__spinner`
+            };
+            let textWrapData = {
+                class: `${baseClass}__text`
+            };
 
-            if(customSpinner) {
-                spinner = createElement('div', {class: `${baseClass}__spinner`}, [
-                    createElement('img', {
-                        attrs: {
-                            src: customSpinner
-                        }
-                    })
-                ]);
-            }
-
-            content.push(spinner);
+            content.push(createSpinner(createElement, spinnerWrapData, CustomSpinner));
 
             if (props.text) {
-                content.push(createElement('div', {
-                    class: `${baseClass}__text`
-                }, props.text))
+                content.push(createElement('div', textWrapData, props.text))
             }
 
             data.class = [data.class, {
                 [`${baseClass}`]: true,
-                [`--elevated`]: props.elevated,
-                [`--dense`]: props.dense,
-                [`--default`]: !customSpinner,
+                [`--elevated`]: !!props.elevated,
+                [`--dense`]: !!props.dense
             }];
 
             return createElement('div', data, content);

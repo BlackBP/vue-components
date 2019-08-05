@@ -97,12 +97,23 @@ export {
 }
 
 export default {
+    /**
+     *
+     * @param Vue
+     * @param {Object} [options]
+     * @param {Object} [options.loading]
+     * @param {Object} [options.loading.spinner]
+     */
     install(Vue, options = {}) {
 
-        Object.keys(Components).forEach(name => {
-            Vue.component(name, Components[name]);
-        });
+        options = _.defaultsDeep(options, DefaultConfig);
 
-        Vue.prototype.$bbpComponentsConfig = _.defaultsDeep(options, DefaultConfig);
+        if(options.includeAll) {
+            Object.keys(Components).forEach(name => {
+                Vue.component(name, Components[name]);
+            });
+        }
+
+        Vue.prototype.$bbpComponentsConfig = options;
     }
 }

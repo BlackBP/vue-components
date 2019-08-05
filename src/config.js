@@ -1,6 +1,7 @@
 export default {
+    includeAll: true,
     loading: {
         spinner: '',
-        text: 'Загрузка...'
+        defaultText: 'Загрузка...'
     }
 }
