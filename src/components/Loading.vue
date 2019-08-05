@@ -22,7 +22,10 @@
             let baseClass = 'c-loading';
             let content = [];
             let spinner = createElement('div', {class: `${baseClass}__spinner`});
-            let {spinner: customSpinner} = config;
+            let {
+                spinner: customSpinner,
+                text
+            } = config;
 
             if(customSpinner) {
                 spinner = createElement('div', {class: `${baseClass}__spinner`}, [

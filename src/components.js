@@ -1,3 +1,7 @@
+import _ from './utils'
+import DefaultConfig from './config'
+
+// Components
 import Badge from './components/Badge.vue'
 import Btn from './components/Button.vue'
 import Card from './components/Card.vue'
@@ -99,6 +103,6 @@ export default {
             Vue.component(name, Components[name]);
         });
 
-        Vue.prototype.$bbpComponentsConfig = {...options};
+        Vue.prototype.$bbpComponentsConfig = _.defaultsDeep(options, DefaultConfig);
     }
 }

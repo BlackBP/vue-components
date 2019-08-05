@@ -3,7 +3,7 @@
 </template>
 <script>
     export default {
-        name: "service-form-validate",
+        name: "c-service-form-validate",
         model: {
             prop: 'errors',
             event: 'change'
