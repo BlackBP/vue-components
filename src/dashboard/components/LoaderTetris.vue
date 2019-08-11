@@ -1,6 +1,6 @@
 <script>
     export default {
-        name: "TetrisLoader",
+        name: "LoaderTetris",
         functional: true,
         render(createElement, context) {
             let data = {
