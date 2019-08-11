@@ -29,7 +29,7 @@
     import FormField from "./FormField.vue";
 
     export default {
-        name: "c-textarea",
+        name: "c-text-area",
         components: {FormField},
         props: {
             value: {
