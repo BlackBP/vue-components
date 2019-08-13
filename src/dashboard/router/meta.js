@@ -17,4 +17,5 @@ function createMeta(path, name, title, icon = '') {
 
 export default {
     home: createMeta('/', 'home', 'Главная', 'home'),
+    components: createMeta('/components', 'components', 'Компоненты', 'view-dashboard'),
 };

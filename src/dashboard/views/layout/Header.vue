@@ -8,13 +8,8 @@
 </template>
 
 <script>
-    import CIconBtn from "../../../components/IconButton";
-
     export default {
         name: "app-header",
-        components: {
-            CIconBtn
-        },
         computed: {
             drawerIsOpen() {
                 return this.$store.getters[this.$storeMeta.getter.drawerIsOpen]

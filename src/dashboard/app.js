@@ -6,6 +6,8 @@ import store from './store'
 import router from './router'
 
 // Plugins
+import './plugins/components'
+import './plugins/notify'
 import './plugins/routes'
 import './plugins/storeMeta'
 

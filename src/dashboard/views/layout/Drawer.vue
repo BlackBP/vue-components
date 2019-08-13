@@ -38,9 +38,6 @@
 </template>
 
 <script>
-    import CIcon from "../../../components/Icon";
-    import CChip from "../../../components/Chip";
-
     /**
      *
      * @param path
@@ -61,10 +58,6 @@
 
     export default {
         name: "app-drawer",
-        components: {
-            CChip,
-            CIcon
-        },
         computed: {
             isOpen() {
                 return this.$store.getters[this.$storeMeta.getter.drawerIsOpen]
@@ -73,7 +66,8 @@
                 return {
                     home: createMenuItem(this.$appRoute.home,  {
                         exact: true
-                    })
+                    }),
+                    components: createMenuItem(this.$appRoute.components),
                 }
             }
         },
