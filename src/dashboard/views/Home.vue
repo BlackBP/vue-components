@@ -3,17 +3,30 @@
     <div>
         <c-card class="c-elevate-3">
 
-            <div class="u-flex u-flex-row u-flex-items-center u-flex-content-start"
-                 style="cursor: pointer"
-                 @click="visible = !visible">
+            <div style="cursor: pointer"
+                 @click="collapse.visible = !collapse.visible">
 
-                <c-chip color="success">
-                    <b>Collapse</b>
-                </c-chip>
+                <c-stack-group justify="start"
+                               align-items="center">
+                    <c-stack-item>
+                        <c-chip color="success">
+                            <b>Collapse</b>
+                        </c-chip>
+                    </c-stack-item>
 
-                <c-icon :name="visible ? 'menu-up' : 'menu-down'"
-                        size="1.5rem"
-                        style="margin-left: 1rem;"/>
+                    <c-stack-item style="align-self: start">
+                        <c-icon :name="collapse.visible ? 'menu-up' : 'menu-down'"
+                                size="1.5rem"/>
+                    </c-stack-item>
+
+                    <c-stack-item>
+                        <c-switch v-model="collapse.loading"
+                                  @click.native.stop>
+                            Loading
+                        </c-switch>
+                    </c-stack-item>
+
+                </c-stack-group>
             </div>
 
             <c-collapse :visible="visible">
@@ -26,11 +39,11 @@
                             Transparent buttons
                         </c-switch>
 
-                        <c-switch v-model="elevated">
+                        <c-switch v-model="buttons.elevated">
                             Elevated buttons
                         </c-switch>
 
-                        <c-switch v-model="bordered">
+                        <c-switch v-model="buttons.bordered">
                             Bordered buttons
                         </c-switch>
                     </p>
@@ -39,9 +52,9 @@
                         <c-btn v-for="color in ['', 'primary', 'secondary', 'success', 'error', 'warn', 'info', 'light', 'dark']"
                                icon-left="send"
                                :key="color"
-                               :elevated="elevated"
-                               :bordered="bordered"
-                               :transparent="transparent"
+                               :elevated="buttons.elevated"
+                               :bordered="buttons.bordered"
+                               :transparent="buttons.transparent"
                                :color="color">
                             Click me!
                         </c-btn>
@@ -49,22 +62,22 @@
 
                     <div class="c-btn-group">
                         <c-icon-btn
-                                v-for="color in ['', 'primary', 'secondary', 'success', 'error', 'warn', 'info', 'light', 'dark']"
+                                v-for="color in buttons.colors"
                                 icon="plus"
                                 :key="color"
-                                :elevated="elevated"
-                                :transparent="transparent"
+                                :elevated="buttons.elevated"
+                                :transparent="buttons.transparent"
                                 :color="color"/>
                     </div>
 
                     <div class="c-btn-group">
                         <c-icon-btn
-                                v-for="color in ['', 'primary', 'secondary', 'success', 'error', 'warn', 'info', 'light', 'dark']"
+                                v-for="color in buttons.colors"
                                 icon="plus"
                                 :key="color"
                                 :dense="true"
-                                :elevated="elevated"
-                                :transparent="transparent"
+                                :elevated="buttons.elevated"
+                                :transparent="buttons.transparent"
                                 :color="color"/>
                     </div>
 
@@ -96,10 +109,16 @@
         name: "view-home",
         data() {
             return {
-                bordered: false,
-                elevated: false,
-                transparent: false,
-                visible: true,
+                buttons: {
+                    bordered: false,
+                    elevated: false,
+                    transparent: false,
+                    colors: ['', 'primary', 'secondary', 'success', 'error', 'warn', 'info', 'light', 'dark']
+                },
+                collapse: {
+                    visible: true,
+                    loading: false,
+                },
                 badge: 10,
                 drawerOpened: true,
                 notifyMessage: 'Hello world!'
@@ -107,7 +126,7 @@
         },
         methods: {
             addNotify() {
-                this.$notify.add(this.notifyMessage, {
+                this.$notify.add(this.notify.message, {
                     duration: 0,
                 })
             }

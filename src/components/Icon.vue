@@ -1,5 +1,5 @@
 <script>
-    import {getConfig, isEmptyString} from '../utils'
+    import {getConfig} from '../utils'
 
     export default {
         name: "c-icon",
@@ -26,7 +26,7 @@
         render(createElement, {data, props, parent}) {
             const baseClass = 'c-icon';
             const config = getConfig(parent, 'icon');
-            const vendorPrefix = isEmptyString(props.vendorPrefix) ? config.vendorPrefix : props.vendorPrefix;
+            const vendorPrefix = _.isString(props.vendorPrefix) && props.vendorPrefix !== '' ? config.vendorPrefix : props.vendorPrefix;
 
             data.class = [data.class, baseClass, `${vendorPrefix}${props.name}`];
 

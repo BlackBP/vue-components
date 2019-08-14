@@ -82,8 +82,6 @@
     import CIconBtn from "./IconButton.vue";
     import CLoading from "./Loading.vue";
 
-    import {isEmptyString} from "../utils";
-
     const $html = document.querySelector('html');
 
     const CssClass = {
@@ -189,10 +187,10 @@
         },
         computed: {
             hasTitle() {
-                return !isEmptyString(this.title);
+                return _.isString(this.title) && this.title !== '';
             },
             hasIcon() {
-                return !isEmptyString(this.icon);
+                return _.isString(this.icon) && this.icon !== '';
             },
             modalClassName() {
                 let base = CssClass.modal.base;

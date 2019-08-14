@@ -167,6 +167,13 @@
             font-weight: bold;
         }
 
+        &__message {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            word-break: break-word;
+        }
+
         &__close-btn {
             position: absolute;
             z-index: 2;

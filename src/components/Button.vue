@@ -22,7 +22,6 @@
 </template>
 
 <script>
-    import {isEmptyString} from '../utils';
     import CIcon from "./Icon.vue";
 
     export default {
@@ -68,14 +67,14 @@
         },
         computed: {
             hasLeftIcon() {
-                return !isEmptyString(this.iconLeft);
+                return _.isString(this.iconLeft) && this.iconLeft !== '';
             },
             hasRightIcon() {
-                return !isEmptyString(this.iconRight);
+                return _.isString(this.iconRight) && this.iconRight !== '';
             },
             className() {
                 let baseClass = 'c-btn';
-                let hasColor = !isEmptyString(this.color);
+                let hasColor = _.isString(this.color) && this.color !== '';
                 let color = hasColor ? this.color : '';
 
                 let modElevated = `${baseClass}--elevated`,

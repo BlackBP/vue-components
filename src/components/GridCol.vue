@@ -1,6 +1,4 @@
 <script>
-    import {isEmptyString} from '../utils'
-
     const SIZE = {
         xl: 'xl',
         lg: 'lg',
@@ -52,10 +50,12 @@
 
             sizes = _.reduce(sizes, (total, value, key) => {
 
-                if (isEmptyString(value)) {
-                    total.push(`--${key}`)
-                } else if(_.isBoolean(value) && value) {
+                if (_.isString(value) && value !== '') {
                     total.push(`--${key}-${value}`);
+                }
+
+                if(_.isBoolean(value) && value) {
+                    total.push(`--${key}`)
                 }
 
                 return total

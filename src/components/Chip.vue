@@ -1,5 +1,4 @@
 <script>
-    import {isEmptyString} from '../utils'
     import CIcon from "./Icon.vue"
 
     /**
@@ -43,10 +42,10 @@
             let baseClass = 'c-chip',
                 leadingIconClassName = `${baseClass}__leading`,
                 trailingIconClassName = `${baseClass}__trailing`,
-                hasColor = !isEmptyString(props.color),
-                hasLeading = !isEmptyString(props.leading),
-                hasTrailing = !isEmptyString(props.trailing),
-                tagName = isEmptyString(props.tag) ? 'div' : props.tag,
+                hasColor = props.color !== '',
+                hasLeading = props.leading !== '',
+                hasTrailing = props.trailing !== '',
+                tagName = props.tag !== '' ? props.tag : 'div',
                 className = [
                     baseClass,
                     {
