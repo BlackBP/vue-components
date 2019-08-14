@@ -153,16 +153,18 @@
             }
         },
         mounted() {
-            if (this.hasMask) {
+            if (this.hasMask && Inputmask) {
                 new Inputmask(this.mask).mask(this.$refs.field);
             }
         },
         beforeDestroy() {
-            if (this.hasMask) {
+            if (this.hasMask && Inputmask) {
                 let field = this.$refs.field;
 
                 if (field.inputmask) {
-                    field.inputmask.remove()
+                    if(_.isFunction(field.inputmask.remove)) {
+                        field.inputmask.remove()
+                    }
                 }
             }
         }
