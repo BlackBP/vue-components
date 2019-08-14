@@ -14,6 +14,7 @@
 
 <script>
     import CIcon from "./Icon.vue";
+    import {isEmptyString} from "../utils";
 
     export default {
         name: "c-icon-btn",
@@ -52,7 +53,7 @@
         computed: {
             className() {
                 let base = 'c-icon-btn';
-                let hasColor = typeof this.color === "string" && this.color !== '';
+                let hasColor = !isEmptyString(this.color);
                 let modColor = hasColor ? `${base}--${this.color}` : '',
                     modTransparent = `${base}--transparent`,
                     modElevated = `${base}--elevated`,

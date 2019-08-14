@@ -9,6 +9,10 @@
             event: 'change'
         },
         props: {
+            errors: {
+                type: Object,
+                default: () => ({})
+            },
             data: {
                 type: Object,
                 default: () => ({}),
@@ -30,7 +34,9 @@
                         errors[key] = this.test(value, key)
                     });
 
-                    this.$emit('change', errors)
+                    // this.$nextTick(() => {
+                        this.$emit('change', errors)
+                    // })
                 }
             }
         },
@@ -52,7 +58,7 @@
                 return _.filter(errors, item => item !== '')
             },
             testIsRequired(value = '') {
-                if(typeof value === 'number') {
+                if(_.isNumber(value)) {
                     value = _.isNaN(value) ? '' : value;
                     value = _.toString(value)
                 }

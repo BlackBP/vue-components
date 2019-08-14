@@ -1,4 +1,6 @@
 <script>
+    import {getConfig, isEmptyString} from '../utils'
+
     export default {
         name: "c-icon",
         functional: true,
@@ -21,10 +23,12 @@
                 default: 'mdi mdi-'
             }
         },
-        render(createElement, {data, props}) {
-            let baseClass = 'c-icon';
+        render(createElement, {data, props, parent}) {
+            const baseClass = 'c-icon';
+            const config = getConfig(parent, 'icon');
+            const vendorPrefix = isEmptyString(props.vendorPrefix) ? config.vendorPrefix : props.vendorPrefix;
 
-            data.class = [data.class, baseClass, `${props.vendorPrefix}${props.name}`];
+            data.class = [data.class, baseClass, `${vendorPrefix}${props.name}`];
 
             if(props.size) {
                 data.style = [data.style, {

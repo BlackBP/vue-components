@@ -5,7 +5,7 @@
             :disabled="disabled"
             @click="handleClick">
 
-        <c-icon v-if="hasLeftIcon && iconLeft"
+        <c-icon v-if="hasLeftIcon"
                 class="c-btn__icon"
                 :name="iconLeft"/>
 
@@ -13,7 +13,7 @@
             <slot></slot>
         </span>
 
-        <c-icon v-if="hasRightIcon && iconRight"
+        <c-icon v-if="hasRightIcon"
                 class="c-btn__icon"
                 :name="iconRight"/>
 
@@ -22,14 +22,8 @@
 </template>
 
 <script>
+    import {isEmptyString} from '../utils';
     import CIcon from "./Icon.vue";
-
-    function isValidString(value) {
-        if (typeof value === 'string') {
-            return value !== ''
-        }
-        return false
-    }
 
     export default {
         name: "c-btn",
@@ -74,14 +68,14 @@
         },
         computed: {
             hasLeftIcon() {
-                return isValidString(this.iconLeft);
+                return !isEmptyString(this.iconLeft);
             },
             hasRightIcon() {
-                return isValidString(this.iconRight);
+                return !isEmptyString(this.iconRight);
             },
             className() {
                 let baseClass = 'c-btn';
-                let hasColor = isValidString(this.color);
+                let hasColor = !isEmptyString(this.color);
                 let color = hasColor ? this.color : '';
 
                 let modElevated = `${baseClass}--elevated`,

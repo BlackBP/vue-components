@@ -75,14 +75,14 @@
         },
         computed: {
             hasData() {
-                if (!Array.isArray(this.data)) return false;
-                return this.data.length > 0
+                if (!_.isArray(this.data)) return false;
+                return _.size(this.data) > 0
             },
             columnsCount() {
-                if (typeof this.headers !== 'object') return 0;
-                if (Array.isArray(this.headers)) return 0;
+                if (!_.isObjectLike(this.headers)) return 0;
+                if (_.isArray(this.headers)) return 0;
 
-                return Object.keys(this.headers).length;
+                return _.size(Object.keys(this.headers));
             }
         }
 

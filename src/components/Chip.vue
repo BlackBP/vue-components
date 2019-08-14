@@ -47,9 +47,12 @@
                 hasLeading = !isEmptyString(props.leading),
                 hasTrailing = !isEmptyString(props.trailing),
                 tagName = isEmptyString(props.tag) ? 'div' : props.tag,
-                className = [baseClass, {
-                    [`${baseClass}--${props.color}`]: hasColor
-                }];
+                className = [
+                    baseClass,
+                    {
+                        [`${baseClass}--${props.color}`]: hasColor
+                    }
+                ];
 
             let elText = createElement('div', {
                 class: `${baseClass}__text`
@@ -74,7 +77,7 @@
                     ];
                 }
 
-                if(hasLeading && hasTrailing) {
+                if (hasLeading && hasTrailing) {
                     content = [
                         createIcon(createElement, props.leading, leadingIconClassName),
                         elText,

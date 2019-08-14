@@ -1,6 +1,7 @@
 <script>
     import Vue from 'vue'
     import LoaderDefault from "./loaders/LoaderDefault.vue";
+    import {getConfig} from '../utils'
 
     /**
      *
@@ -33,7 +34,7 @@
             }
         },
         render(createElement, {props, data, parent}) {
-            const config = _.get(parent, '$bbpComponentsConfig.loading', {});
+            const config = getConfig(parent, 'loading');
             const CustomSpinner = config.spinner;
 
             let baseClass = 'c-loading';

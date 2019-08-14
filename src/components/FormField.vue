@@ -33,6 +33,8 @@
 </template>
 
 <script>
+    import {isEmptyString} from "../utils";
+
     export default {
         name: "c-form-field",
         props: {
@@ -87,7 +89,7 @@
                 };
             },
             hasHelper() {
-                return typeof this.helperText === 'string' && this.helperText !== '';
+                return !isEmptyString(this.helperText);
             }
         },
         methods: {

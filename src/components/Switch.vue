@@ -55,9 +55,9 @@
                 }
 
                 // For checkbox
-                if (this.model instanceof Array) {
+                if (_.isArray(this.model)) {
                     return this.model.includes(this.value);
-                } else if (typeof this.model === 'boolean') {
+                } else if (_.isBoolean(this.model)) {
                     return this.model;
                 } else {
                     return this.model == this.value;
@@ -76,7 +76,7 @@
                 let value = this.value;
                 let newValue = value;
 
-                if (this.model instanceof Array) {
+                if (_.isArray(this.model)) {
                     newValue = [...this.model];
 
                     if (isChecked) {
@@ -86,7 +86,7 @@
                     }
 
                     this.$emit('change', newValue);
-                } else if (typeof this.model === 'boolean') {
+                } else if (_.isBoolean(this.model)) {
                     this.$emit('change', isChecked);
                 } else {
                     this.$emit('change', value);
