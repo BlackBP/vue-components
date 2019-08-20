@@ -1,11 +1,11 @@
 <script>
     import Vue from 'vue'
     import LoaderDefault from "./loaders/LoaderDefault.vue";
-    import {getConfig} from '../utils'
+    import {getConfig} from '../utils.js'
 
     /**
      *
-     * @param {Function} createElement
+     * @param {*} createElement
      * @param {Object} data
      * @param {Vue} spinner
      * @return {*}
@@ -33,32 +33,34 @@
                 default: false,
             }
         },
-        render(createElement, {props, data, parent}) {
+        render(h, {props, data, parent}) {
             const config = getConfig(parent, 'loading');
             const CustomSpinner = config.spinner;
 
-            let baseClass = 'c-loading';
-            let content = [];
-            let spinnerWrapData = {
-                class: `${baseClass}__spinner`
+            const baseClassName = 'c-loading';
+            const ClassName = {
+                spinner: `${baseClassName}__spinner`,
+                text: `${baseClassName}__text`
             };
-            let textWrapData = {
-                class: `${baseClass}__text`
-            };
+            const content = [];
+            const {
+                text: propText = '',
+                elevated: propElevated,
+                dense: propDense,
+            } = props;
 
-            content.push(createSpinner(createElement, spinnerWrapData, CustomSpinner));
+            content.push(createSpinner(h, {class: ClassName.spinner}, CustomSpinner));
 
-            if (props.text) {
-                content.push(createElement('div', textWrapData, props.text))
+            if (propText !== '') {
+                content.push(h('div', {class: ClassName.text}, propText))
             }
 
-            data.class = [data.class, {
-                [`${baseClass}`]: true,
-                [`--elevated`]: !!props.elevated,
-                [`--dense`]: !!props.dense
+            data.class = [data.class, baseClassName, {
+                [`--elevated`]: !!propElevated,
+                [`--dense`]: !!propDense
             }];
 
-            return createElement('div', data, content);
+            return h('div', data, content);
         }
     }
 </script>

@@ -29,7 +29,7 @@
     "*.js"
   ],
   "dependencies": {
-    "@mdi/font": "^3.8.95",
+    "@mdi/font": "^4.0.96",
     "inputmask": "^4.0.8",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",

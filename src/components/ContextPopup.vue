@@ -1,7 +1,7 @@
 <template>
     <transition :name="transition">
         <c-card v-show="visible"
-                class="c-context-menu"
+                class="c-context-popup c-elevate-6"
                 :style="styles">
             <slot v-bind="contextData"/>
         </c-card>
@@ -12,7 +12,7 @@
     import CCard from './Card.vue'
 
     export default {
-        name: "c-context-popup",
+        name: "c-popup",
         components: {
             CCard
         },
@@ -116,25 +116,11 @@
             };
 
             window.addEventListener('click', $rootEl.$_contextMenuHandlers.onClick);
-            window.addEventListener('scroll', $rootEl.$_contextMenuHandlers.onScroll);
+            window.addEventListener('scroll', $rootEl.$_contextMenuHandlers.onScroll, true);
         },
         beforeDestroy() {
             window.removeEventListener('click', this.$el.$_contextMenuHandlers.onClick);
-            window.removeEventListener('scroll', this.$el.$_contextMenuHandlers.onScroll);
+            window.removeEventListener('scroll', this.$el.$_contextMenuHandlers.onScroll, true);
         }
     }
 </script>
-
-<style lang="scss"
-       scoped>
-    .c-context-menu {
-        position: fixed;
-        z-index: 2000;
-        top: 0;
-        left: 0;
-        display: block;
-        width: auto;
-        height: auto;
-        transform: translate(0, 0);
-    }
-</style>

@@ -24,19 +24,25 @@
             }
         },
         render(createElement, {data, props, parent}) {
-            const baseClass = 'c-icon';
+            const baseClassName = 'c-icon';
             const config = getConfig(parent, 'icon');
-            const vendorPrefix = _.isString(props.vendorPrefix) && props.vendorPrefix !== '' ? config.vendorPrefix : props.vendorPrefix;
+            const {
+                tag: propTag,
+                name: propName,
+                size: propSize,
+                vendorPrefix: propVendorPrefix,
+            } = props;
+            const vendorPrefix = config.vendorPrefix ? config.vendorPrefix : propVendorPrefix;
 
-            data.class = [data.class, baseClass, `${vendorPrefix}${props.name}`];
+            data.class = [data.class, baseClassName, `${vendorPrefix}${propName}`];
 
-            if(props.size) {
+            if(propSize) {
                 data.style = [data.style, {
-                    fontSize: props.size
+                    fontSize: propSize
                 }];
             }
 
-            return createElement(props.tag, data);
+            return createElement(propTag, data);
         }
     }
 </script>

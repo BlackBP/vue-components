@@ -2,10 +2,10 @@
     export default {
         name: "c-list",
         functional: true,
-        render(createElement, {data, props, children}) {
-            let baseClass = 'c-list';
+        render(createElement, {data, children}) {
+            let baseClassName = 'c-list';
 
-            data.class = [baseClass, data.class];
+            data.class = [baseClassName, data.class];
 
             return createElement('div', data, children)
         }

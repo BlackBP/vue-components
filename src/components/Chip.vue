@@ -3,13 +3,13 @@
 
     /**
      *
-     * @param createElement
+     * @param h
      * @param iconName
      * @param className
      * @return {*}
      */
-    function createIcon(createElement, iconName, className) {
-        return createElement(CIcon, {
+    function createIcon(h, iconName, className) {
+        return h(CIcon, {
             class: className,
             props: {
                 name: iconName
@@ -38,33 +38,40 @@
                 default: '',
             }
         },
-        render(createElement, {data, children, props}) {
-            let baseClass = 'c-chip',
-                leadingIconClassName = `${baseClass}__leading`,
-                trailingIconClassName = `${baseClass}__trailing`,
-                hasColor = props.color !== '',
-                hasLeading = props.leading !== '',
-                hasTrailing = props.trailing !== '',
-                tagName = props.tag !== '' ? props.tag : 'div',
-                className = [
-                    baseClass,
-                    {
-                        [`${baseClass}--${props.color}`]: hasColor
-                    }
-                ];
+        render(h, {data, children, props}) {
+            const baseClassName = 'c-chip';
+            const ClassName = {
+                leading: `${baseClassName}__leading`,
+                trailing: `${baseClassName}__trailing`,
+                text: `${baseClassName}__text`
+            };
+            
+            const {
+                color: propColor = '',
+                leading: propLeading = '',
+                trailing: propTrailing = '',
+                tag: propTag = 'div',
+            } = props;
 
-            let elText = createElement('div', {
-                class: `${baseClass}__text`
+            const hasColor = propColor !== '';
+            const hasLeading = propLeading !== '';
+            const hasTrailing = propTrailing !== '';
+            const tagName = propTag !== '' ? propTag : 'div';
+
+            let elText = h('div', {
+                class: ClassName.text
             }, children);
 
             let content = [elText];
 
-            data.class = [data.class, className];
+            data.class = [data.class, baseClassName, {
+                [`${baseClassName}--${propColor}`]: hasColor
+            }];
 
             if (hasLeading || hasTrailing) {
                 if (hasLeading) {
                     content = [
-                        createIcon(createElement, props.leading, leadingIconClassName),
+                        createIcon(h, propLeading, ClassName.leading),
                         elText
                     ];
                 }
@@ -72,20 +79,20 @@
                 if (hasTrailing) {
                     content = [
                         elText,
-                        createIcon(createElement, props.trailing, trailingIconClassName),
+                        createIcon(h, propTrailing, ClassName.trailing),
                     ];
                 }
 
                 if (hasLeading && hasTrailing) {
                     content = [
-                        createIcon(createElement, props.leading, leadingIconClassName),
+                        createIcon(h, propLeading, ClassName.leading),
                         elText,
-                        createIcon(createElement, props.trailing, trailingIconClassName),
+                        createIcon(h, propTrailing, ClassName.trailing),
                     ];
                 }
             }
 
-            return createElement(tagName, data, content);
+            return h(tagName, data, content);
         }
     }
 </script>

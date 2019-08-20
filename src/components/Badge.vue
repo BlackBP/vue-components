@@ -1,28 +1,9 @@
-<template>
-    <div class="c-badge">
-        <div class="c-badge__slot">
-            <slot></slot>
-        </div>
-
-        <div v-if="$slots.badge || icon !== ''"
-             class="c-badge__badge">
-
-            <template v-if="icon !== ''">
-                <c-icon :name="icon" />
-            </template>
-
-            <template v-else>
-                <slot name="badge"></slot>
-            </template>
-        </div>
-    </div>
-</template>
-
 <script>
     import CIcon from "./Icon.vue";
+
     export default {
         name: "c-badge",
-        components: {CIcon},
+        functional: true,
         props: {
             icon: {
                 type: String,
@@ -31,7 +12,55 @@
             color: {
                 type: String,
                 default: ''
+            },
+            value: {
+                type: [Number, String],
+                default: ''
             }
+        },
+        render(h, {data, props, slots}) {
+            const baseClassName = 'c-badge';
+            const ClassName = {
+                slot: `${baseClassName}__slot`,
+                badge: `${baseClassName}__badge`
+            };
+            const {
+                icon: propIcon = '',
+                color: propColor = '',
+                value: propValue = '',
+            } = props;
+            const $slots = slots();
+            const value = !_.isNumber(propValue) && !_.isString(propValue) ? '' : _.toString(propValue);
+
+            const hasIcon = propIcon !== '';
+            const hasColor = propColor !== '';
+            const hasValue = value !== '';
+            const children = [
+                h('div', {class: ClassName.slot}, [
+                    $slots.default
+                ]),
+            ];
+
+            // Добавляем основной класс
+            data.class = [data.class, baseClassName, {
+                [`${baseClassName}--${propColor}`]: hasColor
+            }];
+
+            if(hasValue || hasIcon) {
+                let iconData = {
+                    props: {
+                        name: propIcon
+                    }
+                };
+
+                children.push(
+                    h('div', {class: ClassName.badge}, [
+                        hasIcon ? h(CIcon, iconData) : value
+                    ])
+                )
+            }
+
+            return h('div', data, children)
         }
     }
 </script>

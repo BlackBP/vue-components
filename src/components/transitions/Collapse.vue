@@ -105,7 +105,7 @@
                         setTimeout(() => {
                             element.style.height = height;
                             setAnimatedStyles(element, true);
-                        });
+                        }, 0);
                     },
                     afterEnter(element) {
                         clearStyles(element)
@@ -127,7 +127,7 @@
                         setTimeout(() => {
                             element.style.height = 0;
                             setAnimatedStyles(element, false);
-                        });
+                        }, 0);
                     },
                     afterLeave(element) {
                         clearStyles(element);

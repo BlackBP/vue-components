@@ -103,6 +103,9 @@ export default {
      * @param {Object} [options]
      * @param {Object} [options.loading]
      * @param {Object} [options.loading.spinner]
+     * @param {Object} [options.textInput]
+     * @param {Function} [options.textInput.onMount]
+     * @param {Function} [options.textInput.onBeforeDestroy]
      */
     install(Vue, options = {}) {
 
