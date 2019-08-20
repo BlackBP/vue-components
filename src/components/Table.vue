@@ -20,7 +20,7 @@
             <tr v-for="(row, rowIndex) in data"
                 :key="`table-row-${rowIndex}`"
                 :class="rowClass"
-                @click="$emit('rowclick', row)">
+                @click="$emit('row-click', row)">
 
                 <template v-for="(header, headerKey) in headers">
                     <td v-if="headerKey in row"

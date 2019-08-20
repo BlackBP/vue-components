@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    import Inputmask from "inputmask";
+    import {getConfig} from '../utils.js'
     import FormField from "./FormField.vue";
     import CIcon from "./Icon.vue";
 
@@ -135,7 +135,7 @@
                 return text;
             },
             hasMask() {
-                return _.isObjectLike(this.mask)
+                return _.isObjectLike(this.mask) || _.isString(this.mask)
             },
             fieldRef() {
                 return this.$refs.field;
@@ -153,20 +153,16 @@
             }
         },
         mounted() {
-            if (this.hasMask && Inputmask) {
-                new Inputmask(this.mask).mask(this.$refs.field);
-            }
+            const config = getConfig(this, 'textInput');
+            const onMount = _.isFunction(config.mounted) ? config.mounted : () => {};
+
+            onMount(this, this.mask, this.hasMask, this.$refs.field);
         },
         beforeDestroy() {
-            if (this.hasMask && Inputmask) {
-                let field = this.$refs.field;
+            const config = getConfig(this, 'textInput');
+            const onBeforeDestroy = _.isFunction(config.beforeDestroy) ? config.beforeDestroy : () => {};
 
-                if (field.inputmask) {
-                    if(_.isFunction(field.inputmask.remove)) {
-                        field.inputmask.remove()
-                    }
-                }
-            }
+            onBeforeDestroy(this, this.mask, this.hasMask, this.$refs.field);
         }
     }
 </script>
