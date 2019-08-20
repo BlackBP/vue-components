@@ -14,10 +14,14 @@
     "vue",
     "ui"
   ],
-  "version": "0.9.95",
+  "version": "0.9.96",
   "scripts": {
     "serve": "vue-cli-service serve src/dashboard/app.js",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "publish-build": "yarn publish",
+    "version-patch": "yarn version --patch",
+    "version-minor": "yarn version --minor",
+    "version-major": "yarn version --major"
   },
   "main": "./dist/lib.common.js",
   "module": "./dist/lib.esm.js",
