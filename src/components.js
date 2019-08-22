@@ -24,7 +24,7 @@ import CLoadingOverlay from './components/LoadingOverlay.vue';
 import CModal from './components/Modal.vue';
 import CPagination from './components/Pagination.vue';
 import CRadio from './components/Radio.vue';
-import ScrollView from './components/ScrollView.vue';
+import CScrollView from './components/ScrollView.vue';
 import CSelect from './components/Select.vue';
 import CServiceFormValidate from './components/ServiceFormValidate.vue';
 import CStackGroup from './components/StackGroup.vue';
@@ -56,6 +56,7 @@ const Components = {
     CModal,
     CPagination,
     CRadio,
+    CScrollView,
     CSelect,
     CServiceFormValidate,
     CStackGroup,
@@ -88,6 +89,7 @@ export {
     CModal,
     CPagination,
     CRadio,
+    CScrollView,
     CSelect,
     CServiceFormValidate,
     CStackGroup,
