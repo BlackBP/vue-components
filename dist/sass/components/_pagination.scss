@@ -4,6 +4,8 @@
   $btn: #{$self}__btn;
   $item: #{$self}__item;
 
+  $item-size: 2em;
+
   $hover-background: rgba(#000, 0.15);
   $active-background: rgba(#000, 0.25);
 
@@ -28,12 +30,10 @@
     #{$btn},
     #{$item} {
       display: inline-block;
-      width: 2em;
-      height: 2em;
-      border-radius: calc(2em / 2);
-      line-height: 2em;
+      width: $item-size;
+      height: $item-size;
+      border-radius: calc(#{$item-size} / 2);
       cursor: pointer;
-      //transition: background-color $g-transition, color $g-transition;
 
       &:hover,
       &:focus {
@@ -48,12 +48,11 @@
 
     #{$btn} {
       display: inline-block;
-      width: 2em;
-      height: 2em;
       padding: 0;
       background: transparent;
       border: none;
       appearance: none;
+      line-height: 1;
 
       &[disabled],
       &[disabled="disabled"] {
@@ -71,6 +70,7 @@
       margin-left: 3px;
       margin-right: 3px;
       text-decoration: none;
+      line-height: $item-size;
 
       &.is-active {
         background-color: $color-primary;
