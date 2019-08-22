@@ -12,7 +12,7 @@
     import CCard from './Card.vue'
 
     export default {
-        name: "c-popup",
+        name: "c-context-popup",
         components: {
             CCard
         },
