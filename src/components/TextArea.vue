@@ -36,23 +36,7 @@
                 type: null,
                 default: '',
             },
-            icon: {
-                type: String,
-                default: '',
-            },
-            iconTitle: {
-                type: String,
-                default: '',
-            },
-            label: {
-                type: String,
-                default: '',
-            },
             helper: {
-                type: String,
-                default: '',
-            },
-            title: {
                 type: String,
                 default: '',
             },

@@ -20,12 +20,13 @@
             <tr v-for="(row, rowIndex) in data"
                 :key="`table-row-${rowIndex}`"
                 :class="rowClass"
-                @click="$emit('row-click', row)">
+                @click="$emit('row-click', row, rowIndex)"
+                @contextmenu="$emit('row-contextmenu', $event, row, rowIndex)">
 
                 <template v-for="(header, headerKey) in headers">
                     <td v-if="headerKey in row"
                         :key="`table-col-${rowIndex}-${headerKey}`">
-                        <slot v-bind="{data: row, value: row[headerKey]}"
+                        <slot v-bind="{rowData: row, rowIndex: rowIndex, value: row[headerKey]}"
                               :name="`col-${headerKey}`">
                             {{ row[headerKey] }}
                         </slot>
