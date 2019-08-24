@@ -1,10 +1,10 @@
 <template>
     <transition :name="transition">
-        <c-card v-show="visible"
-                class="c-context-popup c-elevate-6"
-                :style="styles">
+        <div v-show="visible"
+             class="c-context-popup c-elevate-6"
+             :style="styles">
             <slot v-bind="contextData"/>
-        </c-card>
+        </div>
     </transition>
 </template>
 
