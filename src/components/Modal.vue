@@ -31,7 +31,7 @@
                                  :style="modalStyle"
                                  @click.stop>
 
-                                <header v-if="hasTitle || hasIcon"
+                                <header v-if="hasTitle || hasIcon || allowDismiss"
                                         class="c-modal__header">
 
                                     <c-icon v-if="hasIcon"
@@ -43,9 +43,9 @@
                                         {{ title }}
                                     </div>
 
-                                    <div class="c-modal__close-icon">
-                                        <c-icon-btn v-show="allowDismiss"
-                                                    icon="close"
+                                    <div v-if="allowDismiss"
+                                         class="c-modal__close-icon">
+                                        <c-icon-btn icon="close"
                                                     :dense="true"
                                                     :transparent="true"
                                                     @click="close"/>
@@ -117,7 +117,7 @@
 
     function getModalCount() {
         let modalCount = parseInt($html.dataset[dataKeys.modalOpenCount]);
-        return  _.isNaN(modalCount) ? 0 : modalCount;
+        return _.isNaN(modalCount) ? 0 : modalCount;
     }
 
     function setModalCount(value) {
@@ -214,7 +214,7 @@
             open() {
                 let modalCount = getModalCount();
 
-                if(modalCount <= 0) {
+                if (modalCount <= 0) {
                     setModalCount(1);
                 } else {
                     setModalCount(modalCount + 1)
@@ -228,7 +228,7 @@
             close() {
                 let modalCount = getModalCount();
 
-                if(modalCount > 1) {
+                if (modalCount > 1) {
                     setModalCount(modalCount - 1)
                 } else {
                     setModalCount(0);
@@ -239,14 +239,22 @@
                 this.$emit(Events.close.name);
             },
             backdropClick(event) {
-                event.preventDefault();
-                event.stopPropagation();
-
-                if (!this.allowDismiss) return;
-                if (!this.outsideDismiss) return;
-
-                this.close();
+                if (this.outsideDismiss) {
+                    this.close()
+                }
             }
+        },
+        mounted() {
+            this.$el.__vueModalListener__ = (event) => {
+                if(event.code === 'Escape') {
+                    this.close()
+                }
+            };
+
+            window.addEventListener('keyup', this.$el.__vueModalListener__);
+        },
+        beforeDestroy() {
+            window.removeEventListener('keyup', this.$el.__vueModalListener__);
         }
     }
 </script>
