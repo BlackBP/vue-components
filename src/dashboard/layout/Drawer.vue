@@ -5,7 +5,6 @@
            @mouseleave="closeDrawer">
 
         <div class="app-drawer__header">
-
         </div>
 
         <div class="app-drawer__body">
@@ -31,7 +30,6 @@
         </div>
 
         <div class="app-drawer__footer">
-
         </div>
 
     </aside>
@@ -67,7 +65,9 @@
                     home: createMenuItem(this.$appRoute.home,  {
                         exact: true
                     }),
-                    components: createMenuItem(this.$appRoute.components),
+                    components: createMenuItem(this.$appRoute.buttons),
+                    notifications: createMenuItem(this.$appRoute.notifications),
+                    contextPopup: createMenuItem(this.$appRoute.contextPopup),
                 }
             }
         },
