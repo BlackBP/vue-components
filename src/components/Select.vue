@@ -33,7 +33,10 @@
                 </template>
 
                 <template v-else>
-                    {{ selected[optionLabel] }}
+                    <slot v-bind="{value: selected}"
+                          name="selected-single">
+                        {{ selected[optionLabel] }}
+                    </slot>
                 </template>
 
             </div>
@@ -67,10 +70,15 @@
 
                 <div v-show="!hasOptions || hasMaxItems"
                      class="c-select__list-info">
-                    <template v-if="!hasOptions">{{ emptyPlaceholder }}</template>
+
+                    <template v-if="!hasOptions">
+                        {{ emptyPlaceholder }}
+                    </template>
+
                     <template v-if="hasMaxItems">
                         {{ maxItemsMessage }} ({{ itemsCount }}/{{ maxItems }})
                     </template>
+
                 </div>
 
                 <div v-show="!hasMaxItems && hasOptions"
@@ -202,7 +210,7 @@
             },
             value: {
                 type: null,
-                default: ''
+                default: () => ({})
             }
         },
         data() {
@@ -497,7 +505,6 @@
 
                 this.focused = false;
                 this.clearQuery();
-                this.resetList();
 
                 if (this.searchable) {
                     this.blurSearch();
@@ -512,15 +519,20 @@
             showList() {
                 if (this.focused || this.disabled) return;
 
-                this.focused = true;
+                this.clearQuery();
+                this.resetList();
 
-                if (this.searchable) {
-                    this.$nextTick(() => {
-                        this.focusSearch();
-                    });
-                } else {
-                    this.focus();
-                }
+                this.$nextTick(() => {
+                    this.focused = true;
+
+                    if (this.searchable) {
+                        this.$nextTick(() => {
+                            this.focusSearch();
+                        });
+                    } else {
+                        this.focus();
+                    }
+                })
             },
 
             // Label interactions
