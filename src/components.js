@@ -10,6 +10,7 @@ import CCheckbox from './components/Checkbox.vue';
 import CChip from './components/Chip.vue';
 import CCollapse from './components/Collapse.vue';
 import CContextPopup from './components/ContextPopup.vue';
+import ContextPopupItem from './components/ContextPopupItem.vue';
 import CDivider from './components/Divider.vue';
 import CFormRow from './components/FormRow.vue';
 import CGridCol from './components/GridCol.vue';
@@ -42,6 +43,7 @@ const Components = {
     CChip,
     CCollapse,
     CContextPopup,
+    ContextPopupItem,
     CDivider,
     CFormRow,
     CGridCol,
@@ -75,6 +77,7 @@ export {
     CChip,
     CCollapse,
     CContextPopup,
+    ContextPopupItem,
     CDivider,
     CFormRow,
     CGridCol,

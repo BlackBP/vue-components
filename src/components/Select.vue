@@ -86,7 +86,10 @@
                          :key="`option-item-${option[trackBy]}`"
                          @keypress.stop.enter.space="optionClick(option)"
                          @click.stop="optionClick(option)">
-                        {{ option[optionLabel] }}
+                        <slot v-bind="option"
+                              name="option">
+                            {{ option[optionLabel] }}
+                        </slot>
                     </div>
 
                 </div>

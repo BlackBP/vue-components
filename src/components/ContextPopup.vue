@@ -25,6 +25,10 @@
                 type: Boolean,
                 default: true
             },
+            offset: {
+                type: Number,
+                default: 3
+            }
         },
         data() {
             return {
@@ -37,49 +41,53 @@
         computed: {
             styles() {
                 return {
-                    top: this.clientY + 'px',
-                    left: this.clientX + 'px'
+                    top: this.clientY + this.offset + 'px',
+                    left: this.clientX + this.offset + 'px'
                 }
             }
         },
         methods: {
             show(event = {}, data = {}) {
-                const element = this.$el;
-
-                const {
-                    clientY,
-                    clientX
-                } = event;
-
-                this.visible = true;
-                this.contextData = data;
-                this.clientY = clientY;
-                this.clientX = clientX;
-
-                this.$nextTick(() => {
-                    const {
-                        clientHeight: viewportHeight,
-                        clientWidth: viewportWidth
-                    } = document.documentElement;
+                if(event instanceof MouseEvent) {
+                    const element = this.$el;
 
                     const {
-                        offsetHeight: elHeight,
-                        offsetWidth: elWidth,
-                    } = element;
+                        clientY,
+                        clientX
+                    } = event;
 
-                    const totalHeight = clientY + elHeight;
-                    const totalWidth = clientX + elWidth;
+                    this.visible = true;
+                    this.contextData = data;
+                    this.clientY = clientY;
+                    this.clientX = clientX;
 
-                    const elOffsetY = totalHeight - viewportHeight;
-                    const elOffsetX = totalWidth - viewportWidth;
+                    this.$nextTick(() => {
+                        const {
+                            clientHeight: viewportHeight,
+                            clientWidth: viewportWidth
+                        } = document.documentElement;
 
-                    let translateY = elOffsetY > 0 ? elOffsetY : 0;
-                    let translateX = elOffsetX > 0 ? elOffsetX : 0;
+                        const {
+                            offsetHeight: elHeight,
+                            offsetWidth: elWidth,
+                        } = element;
 
-                    element.style.transform = `translate(-${translateX}px, -${translateY}px)`;
+                        const totalHeight = clientY + elHeight;
+                        const totalWidth = clientX + elWidth;
 
-                    this.$emit('show');
-                });
+                        const elOffsetY = totalHeight - viewportHeight;
+                        const elOffsetX = totalWidth - viewportWidth;
+
+                        let translateY = elOffsetY > 0 ? elOffsetY : 0;
+                        let translateX = elOffsetX > 0 ? elOffsetX : 0;
+
+                        element.style.transform = `translate(-${translateX}px, -${translateY}px)`;
+
+                        this.$emit('show');
+                    });
+                } else {
+                    throw TypeError(`event must be instanceof MouseEvent`);
+                }
             },
             hide() {
                 this.visible = false;
