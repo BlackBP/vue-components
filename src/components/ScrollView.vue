@@ -53,6 +53,10 @@
             },
             scrollToTop() {
                 this.scrollTo(0)
+            },
+            resetLoadingState() {
+                this.loading = false;
+                this.complete = false;
             }
         },
         mounted() {

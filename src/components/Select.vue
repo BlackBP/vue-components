@@ -138,13 +138,11 @@
             },
             trackBy: {
                 type: String,
-                default: 'id',
-                required: true
+                default: 'id'
             },
             optionLabel: {
                 type: String,
-                default: 'label',
-                required: true
+                default: 'label'
             },
             groupValues: {
                 type: String,
