@@ -68,7 +68,7 @@
                             this.loading = false;
                             this.complete = false;
                         },
-                        complete: () => {
+                        completed: () => {
                             this.loading = false;
                             this.complete = true;
                         }
