@@ -10,7 +10,7 @@ import CCheckbox from './components/Checkbox.vue';
 import CChip from './components/Chip.vue';
 import CCollapse from './components/Collapse.vue';
 import CContextPopup from './components/ContextPopup.vue';
-import ContextPopupItem from './components/ContextPopupItem.vue';
+import CContextPopupItem from './components/ContextPopupItem.vue';
 import CDivider from './components/Divider.vue';
 import CFormRow from './components/FormRow.vue';
 import CGridCol from './components/GridCol.vue';
@@ -31,6 +31,7 @@ import CServiceFormValidate from './components/ServiceFormValidate.vue';
 import CStackGroup from './components/StackGroup.vue';
 import CStackItem from './components/StackItem.vue';
 import CSwitch from './components/Switch.vue';
+import CTable from './components/Table.vue';
 import CTextArea from './components/TextArea.vue';
 import CTextInput from './components/TextInput.vue';
 
@@ -43,7 +44,7 @@ const Components = {
     CChip,
     CCollapse,
     CContextPopup,
-    ContextPopupItem,
+    CContextPopupItem,
     CDivider,
     CFormRow,
     CGridCol,
@@ -64,6 +65,7 @@ const Components = {
     CStackGroup,
     CStackItem,
     CSwitch,
+    CTable,
     CTextArea,
     CTextInput
 };
@@ -77,7 +79,7 @@ export {
     CChip,
     CCollapse,
     CContextPopup,
-    ContextPopupItem,
+    CContextPopupItem,
     CDivider,
     CFormRow,
     CGridCol,
@@ -98,6 +100,7 @@ export {
     CStackGroup,
     CStackItem,
     CSwitch,
+    CTable,
     CTextArea,
     CTextInput
 }
