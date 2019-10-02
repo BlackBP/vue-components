@@ -5,11 +5,12 @@
                 <slot name="colgroup"/>
             </colgroup>
 
-            <thead>
+            <thead v-if="showHeaders">
             <tr>
                 <th v-for="(header, key) in headers"
                     :key="`table-header-${key}`">
-                    <slot :name="`header-${key}`">
+                    <slot v-bind="{key, value: header}"
+                          :name="`header-${key}`">
                         {{ header }}
                     </slot>
                 </th>
@@ -70,6 +71,10 @@
                 type: Object,
                 default: () => ({}),
                 required: true
+            },
+            showHeaders: {
+                type: Boolean,
+                default: true
             },
             rowClass: {
                 type: String,

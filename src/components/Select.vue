@@ -92,7 +92,7 @@
                             'is-group': option.isGroup
                          }"
                          :key="`option-item-${option[trackBy]}`"
-                         @keypress.stop.enter.space="optionClick(option)"
+                         @keypress.enter.space="optionClick(option)"
                          @click.stop="optionClick(option)">
                         <slot v-bind="option"
                               name="option">
