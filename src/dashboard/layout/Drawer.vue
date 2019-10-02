@@ -68,6 +68,7 @@
                     components: createMenuItem(this.$appRoute.buttons),
                     notifications: createMenuItem(this.$appRoute.notifications),
                     contextPopup: createMenuItem(this.$appRoute.contextPopup),
+                    formFields: createMenuItem(this.$appRoute.formFields),
                 }
             }
         },

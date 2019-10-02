@@ -1,6 +1,6 @@
 <template>
-    <layout-screen-card header="Buttons"
-                        icon="checkbox-multiple-blank">
+    <layout-screen-card :header="$route.meta.title"
+                        :icon="$route.meta.icon">
 
         <c-grid-row justify="center">
 

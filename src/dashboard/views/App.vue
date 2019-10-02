@@ -16,9 +16,9 @@
 </template>
 
 <script>
-    import AppHeader from "./layout/Header";
-    import AppDrawer from "./layout/Drawer";
-    import AppContent from "./layout/Content";
+    import AppHeader from "../layout/Header";
+    import AppDrawer from "../layout/Drawer";
+    import AppContent from "../layout/Content";
 
     export default {
         name: "App",

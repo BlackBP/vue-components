@@ -119,17 +119,18 @@
                                   track-by="id"
                                   option-label="name"
                                   placeholder="Select"
-                                  :options-limit="100"
                                   :options="selectList"
                                   :searchable="true"
                                   :multiple="false">
                             <template slot="selected-single"
                                       slot-scope="selected">
-                                <c-icon :name="selected.value.name"/> {{ selected.value.name }}
+                                <c-icon :name="selected.value.name"/>
+                                {{ selected.value.name }}
                             </template>
                             <template slot="option"
                                       slot-scope="option">
-                                <c-icon :name="option.value.name"/> {{ option.value.name }}
+                                <c-icon :name="option.value.name"/>
+                                {{ option.value.name }}
                             </template>
                         </c-select>
                     </c-grid-col>
@@ -161,12 +162,46 @@
 
         </c-card-section>
 
+        <!-- Form constructor -->
+        <c-card-section>
+            <h3>
+                Constructor
+            </h3>
+
+            <c-form :data="formFieldsData"
+                    :config="formFields"
+                    @submit="onSubmit">
+
+                <template slot="field-active">
+                    Активность 1
+                </template>
+
+                <template slot="field-visible">
+                    Видимость 2
+                </template>
+
+                <template slot="footer">
+                    <c-btn type="submit">
+                        Отправить
+                    </c-btn>
+                </template>
+
+            </c-form>
+
+            <pre>
+                {{ formData }}
+            </pre>
+        </c-card-section>
+
     </layout-screen-card>
 </template>
 
 <script>
     import IconsMeta from '@mdi/svg/meta';
+    import CForm from '../../components/Form';
     import LayoutScreenCard from "../layouts/ScreenCard";
+
+    const createField = CForm.createField;
 
     const FIELDS_MAP = {
         name: {
@@ -191,17 +226,44 @@
         }
     };
 
-    console.log();
+    const FORM_FIELDS_MAP = {
+        active: createField('active', 'switch', true, false, {}),
+        visible: createField('visible', 'switch', true, false, {}),
+        name: createField('name', 'text-input', 'name', true, {
+            type: 'text',
+            leading: 'text',
+            trailing: 'information',
+            placeholder: 'Name'
+        }),
+        phone: createField('phone', 'text-input', '', true, {
+            mask: '+7 (999) 999-99-99',
+            leading: 'phone',
+            trailing: 'information',
+            placeholder: 'Телефон',
+        }),
+        gender: createField('gender', 'select', {code: 'male', name: 'Мужской'}, true, {
+            options: [
+                {code: 'male', name: 'Мужской'},
+                {code: 'female', name: 'Женский'},
+            ],
+            trackBy: 'code',
+            optionLabel: 'name',
+        })
+    };
 
     export default {
         name: "ScreenFormFields",
-        components: {LayoutScreenCard},
+        components: {
+            LayoutScreenCard,
+            CForm
+        },
         data() {
             return {
                 data: _.mapValues(FIELDS_MAP, item => item.default),
                 errors: _.mapValues(FIELDS_MAP, item => []),
                 selected: [],
-                selectList: [...IconsMeta]
+                selectList: [...IconsMeta],
+                formData: {}
             }
         },
         computed: {
@@ -214,6 +276,20 @@
                         required: item.required
                     }
                 })
+            },
+            formFields() {
+                return FORM_FIELDS_MAP
+            },
+            formFieldsData() {
+                return {
+                    name: 'John Doe',
+                    phone: '+79098426994'
+                }
+            }
+        },
+        methods: {
+            onSubmit(data = {}) {
+                this.formData = {...data};
             }
         }
     }

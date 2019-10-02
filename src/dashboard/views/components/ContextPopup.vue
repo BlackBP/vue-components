@@ -1,6 +1,15 @@
 <template>
-    <layout-screen-card header="Context popup"
-                        icon="tooltip-text">
+    <layout-screen-card :header="$route.meta.title"
+                        :icon="$route.meta.icon">
+
+        <div>
+            <c-icon-btn icon="dots-vertical"
+                        :transparent="true"
+                        :dense="true"
+                        @click.stop="showContextMenu($event, {id: 2}, 2)" />
+        </div>
+
+        <c-divider />
 
         <c-table :data="data"
                  :headers="{
@@ -40,7 +49,7 @@
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard";
     import CTable from "../../../components/Table";
-    import CContextPopupItem from "../../components/ContextPopupItem";
+    import CContextPopupItem from "../../../components/ContextPopupItem";
 
     export default {
         name: "ScreenContextPopup",

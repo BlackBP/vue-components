@@ -1,4 +1,3 @@
-
 /**
  *
  * @param metaData
@@ -29,5 +28,22 @@ export function createRoute(metaData, component, rest = {}) {
             ...meta
         },
         ...rest
+    }
+}
+
+/**
+ *
+ * @param {string} path
+ * @param {string|null} name
+ * @param {string} title
+ * @param {string} [icon]
+ * @return {{path: string, name: string, icon: string, title: string}}
+ */
+export function createMeta(path, name, title, icon = '') {
+    return {
+        path,
+        name,
+        title,
+        icon
     }
 }

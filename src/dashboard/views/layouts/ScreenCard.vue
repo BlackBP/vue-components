@@ -1,7 +1,7 @@
 <template functional>
     <c-card class="c-elevate-3">
         <h2 class="h2"
-            style="display: flex; justify-content: center; align-items: center;">
+            style="display: flex; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 2;" >
             <c-icon v-if="props.icon"
                     style="margin-right: 10px;"
                     :name="props.icon"/>

@@ -1,21 +1,9 @@
-/**
- *
- * @param {string} path
- * @param {string|null} name
- * @param {string} title
- * @param {string} [icon]
- * @return {{path: string, name: string, icon: string, title: string}}
- */
-function createMeta(path, name, title, icon = '') {
-    return {
-        path,
-        name,
-        title,
-        icon
-    }
-}
+import {createMeta} from './helpers';
 
 export default {
     home: createMeta('/', 'home', 'Главная', 'home'),
-    components: createMeta('/components', 'components', 'Компоненты', 'view-dashboard'),
+    buttons: createMeta('/buttons', 'buttons', 'Кнопки', 'checkbox-multiple-blank'),
+    notifications: createMeta('/notifications', 'notifications', 'Уведомления', 'bell'),
+    contextPopup: createMeta('/context-popup', 'context-popup', 'Контекстное меню', 'tooltip-text'),
+    formFields: createMeta('/form-fields', 'form-fields', 'Поля форм', 'clipboard-text'),
 };

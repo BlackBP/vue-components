@@ -1,6 +1,6 @@
 <template>
-    <layout-screen-card header="Notifications"
-                        icon="bell">
+    <layout-screen-card :header="$route.meta.title"
+                        :icon="$route.meta.icon">
 
         <c-grid-row justify="center">
             <c-grid-col xl="4">
