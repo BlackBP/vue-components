@@ -12,6 +12,7 @@ import CCollapse from './components/Collapse.vue';
 import CContextPopup from './components/ContextPopup.vue';
 import CContextPopupItem from './components/ContextPopupItem.vue';
 import CDivider from './components/Divider.vue';
+import CForm from './components/Form.vue';
 import CFormRow from './components/FormRow.vue';
 import CGridCol from './components/GridCol.vue';
 import CGridContainer from './components/GridContainer.vue';
@@ -46,6 +47,7 @@ const Components = {
     CContextPopup,
     CContextPopupItem,
     CDivider,
+    CForm,
     CFormRow,
     CGridCol,
     CGridContainer,
@@ -81,6 +83,7 @@ export {
     CContextPopup,
     CContextPopupItem,
     CDivider,
+    CForm,
     CFormRow,
     CGridCol,
     CGridContainer,

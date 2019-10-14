@@ -5,17 +5,17 @@
             :disabled="disabled"
             @click="handleClick">
 
-        <c-icon v-if="hasLeftIcon"
+        <c-icon v-if="hasLeading"
                 class="c-btn__icon"
-                :name="iconLeft"/>
+                :name="leading"/>
 
         <span class="c-btn__text">
             <slot></slot>
         </span>
 
-        <c-icon v-if="hasRightIcon"
+        <c-icon v-if="hasTrailing"
                 class="c-btn__icon"
-                :name="iconRight"/>
+                :name="trailing"/>
 
     </button>
 
@@ -32,11 +32,11 @@
                 type: String,
                 default: 'button',
             },
-            iconLeft: {
+            leading: {
                 type: String,
                 default: ''
             },
-            iconRight: {
+            trailing: {
                 type: String,
                 default: ''
             },
@@ -66,11 +66,11 @@
             }
         },
         computed: {
-            hasLeftIcon() {
-                return _.isString(this.iconLeft) && this.iconLeft !== '';
+            hasLeading() {
+                return _.isString(this.leading) && this.leading !== '';
             },
-            hasRightIcon() {
-                return _.isString(this.iconRight) && this.iconRight !== '';
+            hasTrailing() {
+                return _.isString(this.trailing) && this.trailing !== '';
             },
             className() {
                 let baseClass = 'c-btn';

@@ -11,10 +11,18 @@
                :show-counter="showCounter"
                :show-helper="true">
 
-        <c-icon v-if="leading"
-                class="c-text-input__leading"
-                :title="title"
-                :name="leading"/>
+        <template v-if="$slots.leading">
+            <div class="c-text-input__leading">
+                <slot name="leading"/>
+            </div>
+        </template>
+
+        <template v-else>
+            <c-icon v-if="leading"
+                    class="c-text-input__leading"
+                    :title="title"
+                    :name="leading"/>
+        </template>
 
         <input v-model="model"
                ref="field"
@@ -30,9 +38,17 @@
                @focus="focused = true"
                @blur="focused = false">
 
-        <c-icon v-if="trailing"
-                class="c-text-input__trailing"
-                :name="trailing"/>
+        <template v-if="$slots.trailing">
+            <div class="c-text-input__trailing">
+                <slot name="trailing" />
+            </div>
+        </template>
+
+        <template v-else>
+            <c-icon v-if="trailing"
+                    class="c-text-input__trailing"
+                    :name="trailing"/>
+        </template>
 
     </FormField>
 </template>
