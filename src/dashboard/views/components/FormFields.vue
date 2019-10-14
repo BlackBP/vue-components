@@ -77,6 +77,30 @@
 
                 </c-grid-row>
 
+                <c-grid-row style="margin-top: 15px;">
+
+                    <c-grid-col xl="3">
+                        <c-form-row>
+                            <h4>With custom leading and trailing</h4>
+                        </c-form-row>
+                        <c-form-row v-for="field in fieldsMeta"
+                                    :key="field.key">
+                            <c-text-input v-model="data[field.key]"
+                                          helper="Some useful helper"
+                                          :type="field.type"
+                                          :mask="field.mask"
+                                          :placeholder="field.placeholder">
+                                <c-chip slot="leading"
+                                        color="secondary"
+                                        style="font-size: 1rem;">
+                                    Name:
+                                </c-chip>
+                            </c-text-input>
+                        </c-form-row>
+                    </c-grid-col>
+
+                </c-grid-row>
+
             </c-card-section>
 
         </c-card-section>
@@ -90,14 +114,6 @@
             <c-divider/>
 
             <c-card-section>
-
-                <c-grid-row>
-
-                    <c-grid-col xl="3">
-                    </c-grid-col>
-
-                </c-grid-row>
-
             </c-card-section>
 
         </c-card-section>
@@ -162,46 +178,11 @@
 
         </c-card-section>
 
-        <!-- Form constructor -->
-        <c-card-section>
-            <h3>
-                Constructor
-            </h3>
-
-            <c-form :data="formFieldsData"
-                    :config="formFields"
-                    @submit="onSubmit">
-
-                <template slot="field-active">
-                    Активность 1
-                </template>
-
-                <template slot="field-visible">
-                    Видимость 2
-                </template>
-
-                <template slot="footer">
-                    <c-btn type="submit">
-                        Отправить
-                    </c-btn>
-                </template>
-
-            </c-form>
-
-            <pre>
-                {{ formData }}
-            </pre>
-        </c-card-section>
-
     </layout-screen-card>
 </template>
 
 <script>
-    import IconsMeta from '@mdi/svg/meta';
-    import CForm from '../../components/Form';
     import LayoutScreenCard from "../layouts/ScreenCard";
-
-    const createField = CForm.createField;
 
     const FIELDS_MAP = {
         name: {
@@ -226,43 +207,17 @@
         }
     };
 
-    const FORM_FIELDS_MAP = {
-        active: createField('active', 'switch', true, false, {}),
-        visible: createField('visible', 'switch', true, false, {}),
-        name: createField('name', 'text-input', 'name', true, {
-            type: 'text',
-            leading: 'text',
-            trailing: 'information',
-            placeholder: 'Name'
-        }),
-        phone: createField('phone', 'text-input', '', true, {
-            mask: '+7 (999) 999-99-99',
-            leading: 'phone',
-            trailing: 'information',
-            placeholder: 'Телефон',
-        }),
-        gender: createField('gender', 'select', {code: 'male', name: 'Мужской'}, true, {
-            options: [
-                {code: 'male', name: 'Мужской'},
-                {code: 'female', name: 'Женский'},
-            ],
-            trackBy: 'code',
-            optionLabel: 'name',
-        })
-    };
-
     export default {
         name: "ScreenFormFields",
         components: {
-            LayoutScreenCard,
-            CForm
+            LayoutScreenCard
         },
         data() {
             return {
                 data: _.mapValues(FIELDS_MAP, item => item.default),
                 errors: _.mapValues(FIELDS_MAP, item => []),
                 selected: [],
-                selectList: [...IconsMeta],
+                selectList: [],
                 formData: {}
             }
         },
@@ -276,15 +231,6 @@
                         required: item.required
                     }
                 })
-            },
-            formFields() {
-                return FORM_FIELDS_MAP
-            },
-            formFieldsData() {
-                return {
-                    name: 'John Doe',
-                    phone: '+79098426994'
-                }
             }
         },
         methods: {

@@ -50,7 +50,19 @@
                     <c-card-section class="c-btn-group">
                         <c-btn v-for="color in colors"
                                :key="color"
-                               icon-left="heart"
+                               leading="heart"
+                               :elevated="elevated"
+                               :bordered="bordered"
+                               :transparent="transparent"
+                               :color="color">
+                            Icon
+                        </c-btn>
+                    </c-card-section>
+
+                    <c-card-section class="c-btn-group">
+                        <c-btn v-for="color in colors"
+                               :key="color"
+                               trailing="heart"
                                :elevated="elevated"
                                :bordered="bordered"
                                :transparent="transparent"

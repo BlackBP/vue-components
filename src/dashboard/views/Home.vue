@@ -14,5 +14,7 @@
             return {
             }
         },
+        methods: {
+        }
     }
 </script>

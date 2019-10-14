@@ -4,10 +4,6 @@ export const MUTATION =  {
     closeDrawer: 'closeDrawer',
 };
 
-export const STATE = {
-    drawer: 'drawer',
-};
-
 export const GETTER = {
     drawerIsOpen: 'drawerIsOpen'
 };

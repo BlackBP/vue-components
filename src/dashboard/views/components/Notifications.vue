@@ -35,7 +35,7 @@
 
                     <c-form-row>
                         <c-btn color="primary"
-                               icon-left="bell"
+                               leading="bell"
                                type="submit">
                             Show notification
                         </c-btn>

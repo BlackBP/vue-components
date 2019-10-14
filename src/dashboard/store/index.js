@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {MUTATION, STATE, GETTER} from './store-maps'
+import {MUTATION, GETTER} from './store-maps'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        [STATE.drawer]: {
+        drawer: {
             isOpen: false
         }
     },
     getters: {
         [GETTER.drawerIsOpen](state) {
-            return state[STATE.drawer].isOpen
+            return state.drawer.isOpen
         }
     },
     mutations: {
