@@ -181,7 +181,10 @@ $field-readonly-color: #555;
 
     #{$leading},
     #{$trailing} {
-      display: inline-block;
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
       margin: auto;
       font-size: $field-icon-size;
       line-height: 1;
