@@ -25,9 +25,13 @@
                 type: Boolean,
                 default: true
             },
-            offset: {
+            pointerOffset: {
                 type: Number,
                 default: 3
+            },
+            sideOffset: {
+                type: Number,
+                default: 10
             }
         },
         data() {
@@ -41,8 +45,8 @@
         computed: {
             styles() {
                 return {
-                    top: this.clientY + this.offset + 'px',
-                    left: this.clientX + this.offset + 'px'
+                    top: this.clientY + this.pointerOffset + 'px',
+                    left: this.clientX + this.pointerOffset + 'px'
                 }
             }
         },
@@ -78,8 +82,8 @@
                         const elOffsetY = totalHeight - viewportHeight;
                         const elOffsetX = totalWidth - viewportWidth;
 
-                        let translateY = elOffsetY > 0 ? elOffsetY : 0;
-                        let translateX = elOffsetX > 0 ? elOffsetX : 0;
+                        let translateY = elOffsetY > 0 ? elOffsetY + this.sideOffset : 0;
+                        let translateX = elOffsetX > 0 ? elOffsetX + this.sideOffset : 0;
 
                         element.style.transform = `translate(-${translateX}px, -${translateY}px)`;
 
