@@ -14,7 +14,7 @@
     "vue",
     "ui"
   ],
-  "version": "0.9.110",
+  "version": "0.9.111",
   "scripts": {
     "serve": "vue-cli-service serve src/dashboard/app.js",
     "build": "rollup -c",
