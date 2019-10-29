@@ -51,9 +51,6 @@ $g-gutter: 15px !default;
 $disabled-background: #DDD !default;
 $disabled-font-color: $g-font-color !default;
 
-/**
-** Components
-*/
 // Elevation
 $elevation-start-index: 0 !default;
 $elevation-end-index: 24 !default;
@@ -144,5 +141,9 @@ $elevation-ambient-map: (
         24: "0px 9px 46px 8px"
 ) !default;
 
+
+/**
+** Components
+*/
 // Buttons
 $btn-base-color: #EEE !default;

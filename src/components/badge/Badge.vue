@@ -1,0 +1,66 @@
+<script>
+    import {CIcon} from '../icon';
+
+    export default {
+        name: "c-badge",
+        functional: true,
+        props: {
+            icon: {
+                type: String,
+                default: ''
+            },
+            color: {
+                type: String,
+                default: ''
+            },
+            value: {
+                type: [Number, String],
+                default: ''
+            }
+        },
+        render(h, {data, props, slots}) {
+            const baseClassName = 'c-badge';
+            const ClassName = {
+                slot: `${baseClassName}__slot`,
+                badge: `${baseClassName}__badge`
+            };
+            const {
+                icon: propIcon = '',
+                color: propColor = '',
+                value: propValue = '',
+            } = props;
+            const $slots = slots();
+            const value = !_.isNumber(propValue) && !_.isString(propValue) ? '' : _.toString(propValue);
+
+            const hasIcon = propIcon !== '';
+            const hasColor = propColor !== '';
+            const hasValue = value !== '';
+            const children = [
+                h('div', {class: ClassName.slot}, [
+                    $slots.default
+                ]),
+            ];
+
+            // Добавляем основной класс
+            data.class = [data.class, baseClassName, {
+                [`${baseClassName}--${propColor}`]: hasColor
+            }];
+
+            if(hasValue || hasIcon) {
+                let iconData = {
+                    props: {
+                        name: propIcon
+                    }
+                };
+
+                children.push(
+                    h('div', {class: ClassName.badge}, [
+                        hasIcon ? h(CIcon, iconData) : value
+                    ])
+                )
+            }
+
+            return h('div', data, children)
+        }
+    }
+</script>

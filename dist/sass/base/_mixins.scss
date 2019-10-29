@@ -1,27 +1,3 @@
-// Elevation
-@mixin box-elevation($level: 3, $color: #000, $opacity-boost: 0) {
-
-  @if $level < 0 {
-    $level: 0;
-  }
-  @if $level > 24 {
-    $level: 24;
-  }
-
-  $umbra-color-level: map_get($elevation-umbra-map, $level);
-  $penumbra-color-level: map_get($elevation-penumbra-map, $level);
-  $ambient-color-level: map_get($elevation-ambient-map, $level);
-
-  $umbra-color: rgba($color, $elevation-umbra-opacity + $opacity-boost);
-  $penumbra-color: rgba($color, $elevation-penumbra-opacity + $opacity-boost);
-  $ambient-color: rgba($color, $elevation-ambient-opacity + $opacity-boost);
-
-  box-shadow: #{$umbra-color-level} #{$umbra-color},
-  #{$penumbra-color-level} #{$penumbra-color},
-  #{$ambient-color-level} #{$ambient-color};
-
-}
-
 // Input, TextArea placeholder
 @mixin input-placeholder {
   &::-webkit-input-placeholder {

@@ -1,0 +1,19 @@
+// Disable outline
+* {
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+*,
+*::before,
+*::after {
+  // Box sizing
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  // Disable tap highlight
+  -webkit-tap-highlight-color: transparent;
+}

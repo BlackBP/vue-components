@@ -1,0 +1,13 @@
+.c-card-section {
+  $self: #{&};
+
+  @at-root {
+    #{$self} {
+      & + & {
+        margin-top: $card-padding;
+      }
+    }
+
+  }
+
+}

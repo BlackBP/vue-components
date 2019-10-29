@@ -6,7 +6,7 @@ import PluginCopy from 'rollup-plugin-copy'
 import {terser as PluginTerser} from "rollup-plugin-terser"
 
 const CONFIG = {
-    input: './src/components.js',
+    input: './src/index.js',
     output: {
         fileName: 'lib',
         dir: '/dist',
@@ -43,6 +43,8 @@ const CONFIG = {
 };
 
 export default [
+
+    // ESM
     {
         input: CONFIG.input,
         output: {
@@ -54,11 +56,14 @@ export default [
             PluginCopy(CONFIG.pluginOpts.copy)
         ]
     },
+
+    // CommonJS
     {
         input: CONFIG.input,
         output: {
             file: CONFIG.getFileName('common'),
-            format: 'cjs'
+            format: 'cjs',
+            exports: 'named'
         },
         plugins: CONFIG.plugins
     },
