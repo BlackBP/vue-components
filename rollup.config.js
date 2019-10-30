@@ -1,9 +1,8 @@
-import PluginVue from 'rollup-plugin-vue'
-import PluginResolve from 'rollup-plugin-node-resolve'
-import PluginLocalResolve from 'rollup-plugin-local-resolve'
-import PluginCommonjs from 'rollup-plugin-commonjs'
-import PluginCopy from 'rollup-plugin-copy'
-import {terser as PluginTerser} from "rollup-plugin-terser"
+import PluginVue from 'rollup-plugin-vue';
+import PluginResolve from 'rollup-plugin-node-resolve';
+import PluginLocalResolve from 'rollup-plugin-local-resolve';
+import PluginCommonjs from 'rollup-plugin-commonjs';
+import {terser as PluginTerser} from 'rollup-plugin-terser';
 
 const CONFIG = {
     input: './src/index.js',
@@ -18,17 +17,6 @@ const CONFIG = {
         PluginVue(),
         PluginTerser()
     ],
-    pluginOpts: {
-        copy: {
-            targets: [
-                {
-                    src: './src/styles',
-                    dest: './dist',
-                    rename: 'sass'
-                }
-            ]
-        }
-    },
 
     /**
      *
@@ -52,8 +40,7 @@ export default [
             format: 'esm'
         },
         plugins: [
-            ...CONFIG.plugins,
-            PluginCopy(CONFIG.pluginOpts.copy)
+            ...CONFIG.plugins
         ]
     },
 

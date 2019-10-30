@@ -1,5 +1,5 @@
 <script>
-    import CIcon from "./Icon.vue"
+    import {CIcon} from '../icon/';
 
     /**
      *

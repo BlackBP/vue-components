@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import CIcon from "./Icon.vue";
+    import {CIcon} from '../icon';
 
     export default {
         name: "c-checkbox",

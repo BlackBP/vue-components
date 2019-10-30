@@ -27,10 +27,6 @@
         #{$icon} {
           box-shadow: 0 0 0 0 rgba($color-enabled, 0.1);
           background: rgba($color-enabled, 0.1);
-
-          @if $type == 'checkbox' {
-            border-radius: 3px;
-          }
         }
       }
 

@@ -14,7 +14,7 @@
                    @change="handleChange">
 
             <c-icon class="c-radio__icon"
-                    :name="checked ? 'radiobox-marked' : 'radiobox-blank'" />
+                    :name="checked ? 'radiobox-marked' : 'radiobox-blank'"/>
 
             <span class="c-radio__content">
                 <slot></slot>
@@ -27,7 +27,8 @@
 </template>
 
 <script>
-    import CIcon from "./Icon.vue";
+    import {CIcon} from '../icon';
+
     export default {
         name: "c-radio",
         components: {CIcon},
@@ -60,7 +61,7 @@
         },
         methods: {
             handleChange(event) {
-                    this.$emit('change', this.value)
+                this.$emit('change', this.value)
             },
             focus() {
                 this.$refs.label.focus();

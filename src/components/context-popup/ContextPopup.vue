@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import CCard from './Card.vue'
+    import {CCard} from '../card'
 
     export default {
         name: "c-context-popup",

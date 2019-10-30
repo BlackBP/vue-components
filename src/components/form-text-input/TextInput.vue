@@ -1,15 +1,15 @@
 <template>
-    <FormField class="c-text-input"
-               content-class="c-text-input__wrap"
-               :focused="focused"
-               :has-error="hasErrors"
-               :helper-text="helperText"
-               :disabled="disabled"
-               :readonly="readonly"
-               :count="valueLength"
-               :count-max="maxLength"
-               :show-counter="showCounter"
-               :show-helper="true">
+    <c-form-field class="c-text-input"
+                  content-class="c-text-input__wrap"
+                  :focused="focused"
+                  :has-error="hasErrors"
+                  :helper-text="helperText"
+                  :disabled="disabled"
+                  :readonly="readonly"
+                  :count="valueLength"
+                  :count-max="maxLength"
+                  :show-counter="showCounter"
+                  :show-helper="true">
 
         <template v-if="$slots.leading">
             <div class="c-text-input__leading">
@@ -40,7 +40,7 @@
 
         <template v-if="$slots.trailing">
             <div class="c-text-input__trailing">
-                <slot name="trailing" />
+                <slot name="trailing"/>
             </div>
         </template>
 
@@ -50,19 +50,19 @@
                     :name="trailing"/>
         </template>
 
-    </FormField>
+    </c-form-field>
 </template>
 
 <script>
-    import {getConfig} from '../utils.js'
-    import FormField from "./FormField.vue";
-    import CIcon from "./Icon.vue";
+    import {getConfig} from '../../utils.js'
+    import {CFormField} from '../form-field';
+    import {CIcon} from '../icon';
 
     export default {
         name: "c-text-input",
         components: {
             CIcon,
-            FormField
+            CFormField
         },
         props: {
             type: {
@@ -170,13 +170,15 @@
         },
         mounted() {
             const config = getConfig(this, 'textInput');
-            const onMount = _.isFunction(config.mounted) ? config.mounted : () => {};
+            const onMount = _.isFunction(config.mounted) ? config.mounted : () => {
+            };
 
             onMount(this, this.mask, this.hasMask, this.$refs.field);
         },
         beforeDestroy() {
             const config = getConfig(this, 'textInput');
-            const onBeforeDestroy = _.isFunction(config.beforeDestroy) ? config.beforeDestroy : () => {};
+            const onBeforeDestroy = _.isFunction(config.beforeDestroy) ? config.beforeDestroy : () => {
+            };
 
             onBeforeDestroy(this, this.mask, this.hasMask, this.$refs.field);
         }

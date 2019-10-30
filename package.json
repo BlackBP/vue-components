@@ -18,6 +18,7 @@
   "scripts": {
     "serve-sandbox": "vue-cli-service serve sandbox/app.js",
     "build": "rollup -c",
+    "build-css": "node-sass --output-style=compressed --importer=node_modules/node-sass-package-importer/dist/cli.js src/styles/index.scss dist/styles.css",
     "publish-build": "yarn publish",
     "version-patch": "yarn version --patch",
     "version-minor": "yarn version --minor",
@@ -28,7 +29,9 @@
   "source": "./src/index.js",
   "files": [
     "dist",
-    "src"
+    "src",
+    "*.json",
+    "*.js"
   ],
   "dependencies": {
     "@mdi/font": "^4.2.95",
@@ -46,11 +49,13 @@
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "node-sass": "^4.9.0",
+    "node-sass-package-importer": "^5.3.2",
     "rollup": "^1.16.6",
     "rollup-plugin-commonjs": "^10.0.1",
     "rollup-plugin-copy": "^3.0.0",
     "rollup-plugin-local-resolve": "^1.0.7",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-scss": "^1.0.2",
     "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-uglify": "^6.0.2",
     "rollup-plugin-vue": "^5.0.0",

@@ -1,15 +1,15 @@
 <template>
-    <FormField class="c-text-area"
-               content-class="c-text-area__wrap"
-               :focused="focused"
-               :has-error="hasErrors"
-               :helper-text="helperText"
-               :disabled="disabled"
-               :readonly="readonly"
-               :count="valueLength"
-               :count-max="maxLength"
-               :show-counter="showCounter"
-               :show-helper="true">
+    <c-form-field class="c-text-area"
+                  content-class="c-text-area__wrap"
+                  :focused="focused"
+                  :has-error="hasErrors"
+                  :helper-text="helperText"
+                  :disabled="disabled"
+                  :readonly="readonly"
+                  :count="valueLength"
+                  :count-max="maxLength"
+                  :show-counter="showCounter"
+                  :show-helper="true">
 
         <textarea v-model="model"
                   ref="field"
@@ -22,15 +22,15 @@
                   @focus="focused = true"
                   @blur="focused = false"></textarea>
 
-    </FormField>
+    </c-form-field>
 </template>
 
 <script>
-    import FormField from "./FormField.vue";
+    import {CFormField} from '../form-field';
 
     export default {
         name: "c-text-area",
-        components: {FormField},
+        components: {CFormField},
         props: {
             value: {
                 type: null,

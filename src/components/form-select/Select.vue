@@ -110,9 +110,9 @@
 </template>
 
 <script>
-    import CFormField from "./FormField.vue";
-    import CIcon from "./Icon.vue";
-    import CChip from "./Chip.vue";
+    import {CFormField} from '../form-field';
+    import {CIcon} from '../icon';
+    import {CChip} from '../chip';
 
     const OPTION_KEY = {
         isGroup: 'isGroup',
