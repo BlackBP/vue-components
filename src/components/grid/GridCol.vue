@@ -1,4 +1,6 @@
 <script>
+    import _ from '../../utils';
+
     const SIZE = {
         xl: 'xl',
         lg: 'lg',

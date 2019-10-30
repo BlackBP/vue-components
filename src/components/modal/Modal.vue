@@ -78,6 +78,7 @@
 </template>
 
 <script>
+    import _ from '../../utils';
     import {CIcon} from '../icon';
     import {CIconBtn} from '../icon-button';
     import {CLoading} from '../loading';

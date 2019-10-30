@@ -59,6 +59,8 @@
 </template>
 
 <script>
+    import _ from '../../utils';
+
     export default {
         name: "c-table",
         props: {

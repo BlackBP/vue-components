@@ -1,0 +1,69 @@
+// Colored
+@mixin btn-colored($background, $font-color: #fff) {
+  background: $background;
+  color: $font-color;
+
+  &:hover,
+  &:focus {
+    background: lighten($background, 5%);
+    color: $font-color;
+  }
+
+  &:active {
+    background: darken($background, 5%);
+    color: $font-color;
+  }
+}
+
+@mixin btn-modifier-colored($mod-name, $background, $font-color: #fff) {
+  @include make-modifier($mod-name) {
+    @include btn-colored($background, $font-color);
+  }
+}
+
+// Transparent
+@mixin btn-transparent($color) {
+  background: transparent;
+  color: $color;
+
+  &:hover,
+  &:focus {
+    background: rgba($color, 0.2);
+  }
+
+  &:active {
+    background: rgba(darken($color, 5%), 0.3);
+  }
+}
+
+@mixin btn-modifier-transparent($mod-name, $color) {
+  @include make-modifier($mod-name) {
+    @include btn-transparent($color)
+  }
+}
+
+// Bordered
+@mixin btn-bordered($color, $hover-font-color: #fff) {
+  $active-background-color: darken($color, 5%);
+
+  background: transparent;
+  border-color: $color;
+  color: $color;
+
+  &:hover,
+  &:focus {
+    background: $color;
+    color: $hover-font-color;
+  }
+
+  &:active {
+    background: $active-background-color;
+    color: $hover-font-color;
+  }
+}
+
+@mixin btn-modifier-bordered($mod-name, $color, $hover-font-color: #fff) {
+  @include make-modifier($mod-name) {
+    @include btn-bordered($color, $hover-font-color)
+  }
+}

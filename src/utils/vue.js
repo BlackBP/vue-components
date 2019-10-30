@@ -1,4 +1,4 @@
-import _ from 'lodash';// TODO: remove LODASH
+import _ from './index';
 
 /**
  *

@@ -1,4 +1,5 @@
 <script>
+    import _ from '../../utils';
 
     const ANIMATED_STYLES = {
         opacity: [0, 1],

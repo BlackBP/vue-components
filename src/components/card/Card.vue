@@ -9,8 +9,10 @@
             },
         },
         render(createElement, {data, children, props}) {
-            let baseClass = 'c-card';
-            data.class = [data.class, baseClass];
+            const className = 'c-card';
+
+            data.class = [data.class, className];
+
             return createElement(props.tag, data, children)
         }
     }

@@ -21,9 +21,7 @@ $field-placeholder-color: #757575;
 $field-readonly-background: #F5F5F5;
 $field-readonly-color: #555;
 
-/*
-** Form field
-*/
+// === FORM FIELD
 .c-form-field {
   $self: #{&};
   $content: #{$self}__content;
@@ -123,9 +121,7 @@ $field-readonly-color: #555;
   }
 }
 
-/*
-** Text Input
-*/
+// === TEXT INPUT
 .c-text-input {
   $self: #{&};
   $wrap: #{$self}__wrap;
@@ -203,9 +199,7 @@ $field-readonly-color: #555;
 
 }
 
-/*
-** Text area
-*/
+// === TEXT AREA
 .c-text-area {
   $self: #{&};
   $wrap: #{$self}__wrap;
@@ -255,9 +249,7 @@ $field-readonly-color: #555;
 
 }
 
-/*
-** Select
-*/
+// === SELECT
 .c-select {
   $self: #{&};
   $wrap: #{$self}__wrap;
@@ -393,9 +385,7 @@ $field-readonly-color: #555;
 
 }
 
-/*
-** Form field row
-*/
+// === FORM ROW
 .c-form-row {
   $self: #{&};
 
@@ -415,9 +405,7 @@ $field-readonly-color: #555;
   }
 }
 
-/*
-** Google Chrome autofill input background fix
-*/
+// === Google Chrome autofill input background fix
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

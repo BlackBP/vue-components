@@ -1,0 +1,134 @@
+$grid-breakpoints: xs sm md lg xl;
+$grid-container-sizes: (xs: 100%, sm: 570px, md: 750px, lg: 990px, xl: 1170px);
+
+$grid-gutter: 15px !default;
+$grid-columns-count: 12;
+
+$grid-container: #{'.c-grid-container'};
+$grid-row: #{'.c-grid-row'};
+$grid-column: #{'.c-grid-col'};
+
+// === MIXINS
+@mixin make-columns() {
+  @for $index from 1 through $grid-columns-count {
+    $width: (100% / $grid-columns-count) * $index;
+
+    &-#{$index} {
+      flex: 0 0 $width;
+      max-width: $width;
+      @content;
+    }
+  }
+}
+
+@mixin make-auto-column() {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+  @content;
+}
+
+// === STYLES
+#{$grid-container} {
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+
+  &.--fluid {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: $grid-gutter;
+    padding-left: $grid-gutter;
+  }
+}
+
+// Row
+#{$grid-row} {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: -$grid-gutter;
+  margin-left: -$grid-gutter;
+
+  &.--items {
+    &-start {
+      align-items: start;
+    }
+
+    &-end {
+      align-items: flex-end;
+    }
+
+    &-center {
+      align-items: center;
+    }
+
+    &-stretch {
+      align-items: stretch;
+    }
+
+    &-baseline {
+      align-items: baseline;
+    }
+  }
+
+  &.--justify {
+    &-start {
+      justify-content: flex-start;
+    }
+
+    &-end {
+      justify-content: flex-end;
+    }
+
+    &-center {
+      justify-content: center;
+    }
+
+    &-between {
+      justify-content: space-between;
+    }
+
+    &-around {
+      justify-content: space-around;
+    }
+  }
+}
+
+// Columns
+#{$grid-column} {
+  flex: 1 1 0;
+  width: 100%;
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+
+  &.--auto {
+    @include make-auto-column;
+  }
+}
+
+// Media
+@each $breakpoint, $container-size in $grid-container-sizes {
+
+  @include media($breakpoint) {
+
+    #{$grid-container} {
+      width: $container-size;
+    }
+
+    #{$grid-column}.--#{$breakpoint} {
+      @include make-columns;
+
+      &-auto {
+        @include make-auto-column;
+      }
+
+    }
+
+  }
+
+}

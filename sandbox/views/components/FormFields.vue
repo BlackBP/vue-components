@@ -2,10 +2,6 @@
     <layout-screen-card :header="$route.meta.title"
                         :icon="$route.meta.icon">
 
-        <c-service-form-validate v-model="errors"
-                                 :data="data"
-                                 :rules="validateRules"/>
-
         <!-- Text input -->
         <c-card-section>
             <h3>
@@ -22,12 +18,12 @@
                         <c-form-row>
                             <h4>Regular</h4>
                         </c-form-row>
-                        <c-form-row v-for="field in fieldsMeta"
-                                    :key="field.key">
-                            <c-text-input v-model="data[field.key]"
-                                          :type="field.type"
-                                          :mask="field.mask"
-                                          :placeholder="field.placeholder"/>
+                        <c-form-row>
+                            <c-text-input v-model="data[fieldsConfig.textInput.key]"
+                                          :helper="fieldsConfig.textInput.helper"
+                                          :type="fieldsConfig.textInput.type"
+                                          :mask="fieldsConfig.textInput.mask"
+                                          :placeholder="fieldsConfig.textInput.placeholder"/>
                         </c-form-row>
                     </c-grid-col>
 
@@ -35,13 +31,13 @@
                         <c-form-row>
                             <h4>With leading icon</h4>
                         </c-form-row>
-                        <c-form-row v-for="field in fieldsMeta"
-                                    :key="field.key">
-                            <c-text-input v-model="data[field.key]"
-                                          :type="field.type"
-                                          :mask="field.mask"
-                                          :leading="field.leading"
-                                          :placeholder="field.placeholder"/>
+                        <c-form-row>
+                            <c-text-input v-model="data[fieldsConfig.textInput.key]"
+                                          :helper="fieldsConfig.textInput.helper"
+                                          :type="fieldsConfig.textInput.type"
+                                          :mask="fieldsConfig.textInput.mask"
+                                          :leading="fieldsConfig.textInput.leading"
+                                          :placeholder="fieldsConfig.textInput.placeholder"/>
                         </c-form-row>
                     </c-grid-col>
 
@@ -49,13 +45,13 @@
                         <c-form-row>
                             <h4>With trailing icon</h4>
                         </c-form-row>
-                        <c-form-row v-for="field in fieldsMeta"
-                                    :key="field.key">
-                            <c-text-input v-model="data[field.key]"
-                                          :type="field.type"
-                                          :mask="field.mask"
-                                          :trailing="field.trailing"
-                                          :placeholder="field.placeholder"/>
+                        <c-form-row>
+                            <c-text-input v-model="data[fieldsConfig.textInput.key]"
+                                          :helper="fieldsConfig.textInput.helper"
+                                          :type="fieldsConfig.textInput.type"
+                                          :mask="fieldsConfig.textInput.mask"
+                                          :trailing="fieldsConfig.textInput.trailing"
+                                          :placeholder="fieldsConfig.textInput.placeholder"/>
                         </c-form-row>
                     </c-grid-col>
 
@@ -63,39 +59,15 @@
                         <c-form-row>
                             <h4>With leading and trailing icons</h4>
                         </c-form-row>
-                        <c-form-row v-for="field in fieldsMeta"
-                                    :key="field.key">
-                            <c-text-input v-model="data[field.key]"
-                                          :type="field.type"
-                                          :mask="field.mask"
-                                          :leading="field.leading"
-                                          :trailing="field.trailing"
-                                          :placeholder="field.placeholder"
-                                          :errors="errors[field.key]"/>
-                        </c-form-row>
-                    </c-grid-col>
-
-                </c-grid-row>
-
-                <c-grid-row style="margin-top: 15px;">
-
-                    <c-grid-col xl="3">
                         <c-form-row>
-                            <h4>With custom leading and trailing</h4>
-                        </c-form-row>
-                        <c-form-row v-for="field in fieldsMeta"
-                                    :key="field.key">
-                            <c-text-input v-model="data[field.key]"
-                                          helper="Some useful helper"
-                                          :type="field.type"
-                                          :mask="field.mask"
-                                          :placeholder="field.placeholder">
-                                <c-chip slot="leading"
-                                        color="secondary"
-                                        style="font-size: 1rem;">
-                                    Name:
-                                </c-chip>
-                            </c-text-input>
+                            <c-text-input v-model="data[fieldsConfig.textInput.key]"
+                                          :helper="fieldsConfig.textInput.helper"
+                                          :type="fieldsConfig.textInput.type"
+                                          :mask="fieldsConfig.textInput.mask"
+                                          :leading="fieldsConfig.textInput.leading"
+                                          :trailing="fieldsConfig.textInput.trailing"
+                                          :placeholder="fieldsConfig.textInput.placeholder"
+                                          :errors="errors[fieldsConfig.textInput.key]"/>
                         </c-form-row>
                     </c-grid-col>
 
@@ -114,6 +86,9 @@
             <c-divider/>
 
             <c-card-section>
+                <c-text-area v-model="data[fieldsConfig.textArea.key]"
+                             :placeholder="fieldsConfig.textArea.placeholder"
+                             :helper="fieldsConfig.textArea.helper"/>
             </c-card-section>
 
         </c-card-section>
@@ -160,7 +135,7 @@
         <!-- Switches -->
         <c-card-section>
             <h3>
-                Switches
+                Switch & Checkbox & Radio
             </h3>
 
             <c-divider/>
@@ -170,7 +145,56 @@
                 <c-grid-row>
 
                     <c-grid-col xl="3">
+                        <c-form-row>
+                            <h4>Switch</h4>
+                        </c-form-row>
+                        <c-form-row>
+                            <c-switch v-model="data[fieldsConfig.switch.key]"
+                                      value="1">
+                                Switch
+                            </c-switch>
+                            <br>
+                            <c-switch v-model="data[fieldsConfig.switch.key]"
+                                      value="2">
+                                Switch
+                            </c-switch>
+                        </c-form-row>
                     </c-grid-col>
+
+                    <c-grid-col xl="3">
+                        <c-form-row>
+                            <h4>Checkbox</h4>
+                        </c-form-row>
+                        <c-form-row>
+                            <c-checkbox v-model="data[fieldsConfig.checkbox.key]"
+                                        value="1">
+                                Checkbox
+                            </c-checkbox>
+                            <br>
+                            <c-checkbox v-model="data[fieldsConfig.checkbox.key]"
+                                        value="2">
+                                Checkbox
+                            </c-checkbox>
+                        </c-form-row>
+                    </c-grid-col>
+
+                    <c-grid-col xl="3">
+                        <c-form-row>
+                            <h4>Radio</h4>
+                        </c-form-row>
+                        <c-form-row>
+                            <c-radio v-model="data[fieldsConfig.radio.key]"
+                                     value="1">
+                                Radio 1
+                            </c-radio>
+                            <br>
+                            <c-radio v-model="data[fieldsConfig.radio.key]"
+                                     value="2">
+                                Radio 2
+                            </c-radio>
+                        </c-form-row>
+                    </c-grid-col>
+
 
                 </c-grid-row>
 
@@ -183,33 +207,55 @@
 
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard";
+    import CTextArea from "../../../src/components/form-text-area/TextArea";
+    import CFormRow from "../../../src/components/form-row/FormRow";
+    import CSwitch from "../../../src/components/form-switch/Switch";
+    import CGridCol from "../../../src/components/grid/GridCol";
+    import CCheckbox from "../../../src/components/form-checkbox/Checkbox";
+    import CRadio from "../../../src/components/form-radio/Radio";
 
     const FIELDS_MAP = {
-        name: {
-            key: 'name',
+        textInput: {
+            key: 'textInput',
             type: 'text',
             default: '',
             required: true,
             mask: false,
             leading: 'text',
             trailing: 'information',
-            placeholder: 'Default',
+            placeholder: 'Введите что-нибудь...',
+            helper: 'Вспомогательный текст'
         },
-        phone: {
-            key: 'phone',
-            type: 'tel',
+        textArea: {
+            key: 'textArea',
             default: '',
-            required: true,
-            mask: '+7 (999) 999-99-99',
-            leading: 'phone',
-            trailing: 'information',
-            placeholder: 'With input mask',
+            placeholder: 'Введите что-нибудь...',
+            helper: 'Вспомогательный текст',
+            rows: 8
+        },
+        switch: {
+            key: 'switch',
+            default: []
+        },
+        checkbox: {
+            key: 'checkbox',
+            default: []
+        },
+        radio: {
+            key: 'radio',
+            default: []
         }
     };
 
     export default {
         name: "ScreenFormFields",
         components: {
+            CRadio,
+            CCheckbox,
+            CGridCol,
+            CSwitch,
+            CFormRow,
+            CTextArea,
             LayoutScreenCard
         },
         data() {
@@ -222,7 +268,7 @@
             }
         },
         computed: {
-            fieldsMeta() {
+            fieldsConfig() {
                 return FIELDS_MAP
             },
             validateRules() {
@@ -233,10 +279,5 @@
                 })
             }
         },
-        methods: {
-            onSubmit(data = {}) {
-                this.formData = {...data};
-            }
-        }
     }
 </script>

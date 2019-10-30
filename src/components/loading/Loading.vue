@@ -1,6 +1,6 @@
 <script>
     import LoaderDefault from './LoaderDefault.vue';
-    import {getConfig} from '../../utils.js'
+    import {getConfig} from '../../utils'
 
     /**
      *

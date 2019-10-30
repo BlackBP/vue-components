@@ -1,3 +1,3 @@
-import CBtn from './Button.vue';
+import CBtn from './Btn.vue';
 
 export {CBtn}

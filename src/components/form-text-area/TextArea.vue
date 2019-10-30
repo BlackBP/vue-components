@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    import _ from '../../utils';
     import {CFormField} from '../form-field';
 
     export default {

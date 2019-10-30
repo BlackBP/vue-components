@@ -1,0 +1,63 @@
+import _ from 'lodash';
+const {
+    isEmpty,
+    isNumber,
+    isNaN,
+    isArray,
+    isObjectLike,
+    isString,
+    isBoolean,
+    isFunction,
+    uniqBy,
+    debounce,
+    some,
+    toLower,
+    reduce,
+    filter,
+    last,
+    concat,
+    map,
+    mapKeys,
+    mapValues,
+    find,
+    values,
+    each,
+    toString,
+    size,
+    get
+} = _;
+
+export {
+    installFactory,
+    registerComponents,
+    getConfig,
+    registerComponent
+} from './vue'
+
+export default {
+    isEmpty,
+    isNumber,
+    isNaN,
+    isArray,
+    isObjectLike,
+    isString,
+    isBoolean,
+    isFunction,
+    uniqBy,
+    debounce,
+    some,
+    toLower,
+    reduce,
+    filter,
+    last,
+    concat,
+    map,
+    mapKeys,
+    mapValues,
+    find,
+    values,
+    each,
+    toString,
+    size,
+    get,
+}

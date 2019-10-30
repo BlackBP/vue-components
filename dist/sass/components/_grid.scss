@@ -1,20 +1,3 @@
-@-ms-viewport {
-  width: device-width;
-}
-
-html {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -ms-overflow-style: scrollbar;
-}
-
-*,
-*::after,
-*::before {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
 $grid-breakpoints: xs sm md lg xl;
 $grid-container-sizes: (xs: 100%, sm: 570px, md: 750px, lg: 990px, xl: 1170px);
 
@@ -25,9 +8,7 @@ $grid-container: #{'.c-grid-container'};
 $grid-row: #{'.c-grid-row'};
 $grid-column: #{'.c-grid-col'};
 
-/*
-** Mixins
- */
+// === MIXINS
 @mixin make-columns() {
   @for $index from 1 through $grid-columns-count {
     $width: (100% / $grid-columns-count) * $index;
@@ -47,9 +28,7 @@ $grid-column: #{'.c-grid-col'};
   @content;
 }
 
-/*
-** Styles
- */
+// === STYLES
 #{$grid-container} {
   width: 100%;
   max-width: 100%;

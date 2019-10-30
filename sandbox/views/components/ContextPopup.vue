@@ -50,11 +50,10 @@
 
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard";
-    import CTable from "../../../src/components/Table";
 
     export default {
         name: "ScreenContextPopup",
-        components: {CTable, LayoutScreenCard},
+        components: {LayoutScreenCard},
         data() {
             return {
                 data: _.map(Array(50), (item, index) => {

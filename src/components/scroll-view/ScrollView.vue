@@ -5,6 +5,7 @@
 </template>
 
 <script>
+    import _ from '../../utils';
     import ScrollTo from 'animated-scroll-to';
 
     export default {

@@ -19,9 +19,7 @@
 
 $modal-transition: 0.3s ease;
 
-/**
-** Animations
- */
+// === ANIMATIONS
 // Scale
 .modal-scale {
   &-enter-active,
@@ -187,9 +185,7 @@ $modal-transition: 0.3s ease;
   }
 }
 
-/**
-** Layout modifiers
- */
+// === LAYOUT MODIFIERS
 // Html modifier
 html.modal-open {
   height: 100%;
@@ -197,9 +193,7 @@ html.modal-open {
   overflow: hidden;
 }
 
-/**
-** Modal styles
- */
+// === MODAL STYLES
 // Modal container
 .c-modal-container {
   $self: #{&};

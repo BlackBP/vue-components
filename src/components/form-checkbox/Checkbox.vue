@@ -28,6 +28,7 @@
 </template>
 
 <script>
+    import _ from '../../utils';
     import {CIcon} from '../icon';
 
     export default {

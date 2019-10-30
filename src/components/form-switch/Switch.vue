@@ -26,6 +26,8 @@
 </template>
 
 <script>
+    import _ from '../../utils';
+
     export default {
         name: "c-switch",
         model: {

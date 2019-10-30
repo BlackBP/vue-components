@@ -25,6 +25,7 @@ export {CLoading, CLoadingOverlay} from './components/loading';
 export {CModal} from './components/modal';
 export {CPagination} from './components/pagination';
 export {CScrollView} from './components/scroll-view';
+export {CServiceFormValidate} from './components/service';
 export {CStackItem, CStackGroup} from './components/stack';
 export {CTable} from './components/table';
 

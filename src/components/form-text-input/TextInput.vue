@@ -54,7 +54,7 @@
 </template>
 
 <script>
-    import {getConfig} from '../../utils.js'
+    import _, {getConfig} from '../../utils'
     import {CFormField} from '../form-field';
     import {CIcon} from '../icon';
 

@@ -22,6 +22,7 @@ import {CLoading, CLoadingOverlay} from './loading';
 import {CModal} from './modal';
 import {CPagination} from './pagination';
 import {CScrollView} from './scroll-view';
+import {CServiceFormValidate} from './service';
 import {CStackItem, CStackGroup} from './stack';
 import {CTable} from './table';
 
@@ -55,6 +56,7 @@ export default {
     CModal,
     CPagination,
     CScrollView,
+    CServiceFormValidate,
     CStackGroup,
     CStackItem,
     CTable

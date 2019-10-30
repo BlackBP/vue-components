@@ -1,0 +1,195 @@
+// == Clearfix
+.clear-fix {
+  &:after,
+  &:before {
+    display: table;
+    content: "";
+    clear: both;
+  }
+}
+
+// == Lists
+.list {
+  &-unstyled {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+}
+
+// == Images
+.img {
+  &-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+  }
+
+  &-rounded {
+    display: block;
+    border-radius: 50%;
+    border: 0;
+  }
+}
+
+// == Text
+.text {
+
+  // Colors
+  &-primary {
+    color: $color-primary;
+  }
+
+  &-secondary {
+    color: $color-secondary;
+  }
+
+  &-success {
+    color: $color-success;
+  }
+
+  &-info {
+    color: $color-info;
+  }
+
+  &-error {
+    color: $color-error;
+  }
+
+  &-warn {
+    color: $color-warn;
+  }
+
+  &-white {
+    color: $color-light;
+  }
+
+  &-dark {
+    color: $color-dark;
+  }
+
+  // Alignment
+  &-center {
+    text-align: center;
+  }
+
+  &-left {
+    text-align: left;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-justify {
+    text-align: justify;
+  }
+
+  // Transforms
+  &-upper {
+    text-transform: uppercase;
+  }
+
+  &-lower {
+    text-transform: lowercase;
+  }
+
+  &-capitalize {
+    text-transform: capitalize;
+  }
+
+  // Decorations
+  &-underline {
+    text-decoration: underline;
+  }
+
+  // Weights
+  &-hairline {
+    font-weight: 100;
+  }
+
+  &-thin {
+    font-weight: 200;
+  }
+
+  &-light {
+    font-weight: 300;
+  }
+
+  &-regular {
+    font-weight: 400;
+  }
+
+  &-medium {
+    font-weight: 500;
+  }
+
+  &-semibold {
+    font-weight: 600;
+  }
+
+  &-bold {
+    font-weight: 700;
+  }
+
+  &-black {
+    font-weight: 800;
+  }
+
+  &-heavy {
+    font-weight: 900;
+  }
+
+  // Wrap
+  &-nowrap {
+    white-space: nowrap;
+  }
+
+  &-wrap {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    white-space: normal;
+  }
+
+  &-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+// == Selection
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// == elevation
+.elevate {
+  $self: #{&};
+
+  @at-root {
+
+    #{$self} {
+      @include box-elevation(3);
+
+      @for $level from $elevation-start-index through $elevation-end-index {
+        &-#{$level} {
+          @include box-elevation($level);
+        }
+      }
+
+    }
+
+  }
+
+}

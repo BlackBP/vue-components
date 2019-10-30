@@ -1,0 +1,414 @@
+// Config
+$state-focused: '.is-focused';
+$state-error: '.has-error';
+$state-success: '.has-success';
+
+$field-font-color: $g-font-color;
+
+$field-border: $g-border;
+$field-border-color: nth($g-border, 3);
+$field-border-active: nth($g-border, 1) nth($g-border, 2) $color-primary;
+$field-border-radius: $g-border-radius;
+
+$field-icon-size: 24px;
+$field-icon-color: lighten($field-font-color, 20%);
+
+$field-height: 38px;
+$field-padding: 6px 12px;
+
+$field-placeholder-color: #757575;
+
+$field-readonly-background: #F5F5F5;
+$field-readonly-color: #555;
+
+// === FORM FIELD
+.c-form-field {
+  $self: #{&};
+  $content: #{$self}__content;
+  $footer: #{$self}__footer;
+  $helper: #{$self}__helper;
+  $counter: #{$self}__counter;
+
+  @at-root {
+    #{$self} {
+      display: block;
+      color: $field-font-color;
+      line-height: 1;
+
+      &.has-error {
+        #{$content} {
+          border-color: $color-error !important;
+          background-color: rgba($color-error, 0.1) !important;
+        }
+
+        #{$helper} {
+          color: $color-error;
+        }
+
+        #{$counter} {
+          display: none;
+        }
+      }
+
+      &.is-focused {
+        #{$content} {
+          border: $field-border-active;
+        }
+      }
+
+      &.is-readonly {
+        #{$content} {
+          background: $field-readonly-background !important;
+          border: $field-border !important;
+        }
+      }
+
+      &.is-disabled {
+        #{$content} {
+          background: $field-border-color !important;
+          border: $field-border !important;
+        }
+      }
+
+      input,
+      textarea {
+        @include input-placeholder() {
+          color: $field-placeholder-color;
+          line-height: inherit;
+          font-size: inherit;
+        }
+      }
+
+    }
+
+    #{$content} {
+      position: relative;
+      display: block;
+      background: #FFF;
+      border: $field-border;
+      border-radius: $field-border-radius;
+      //box-shadow: 0 0 8px 0 rgba(#000, 0.1);
+      transition: border $g-transition, color $g-transition, background-color $g-transition;
+    }
+
+    #{$footer} {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-left: 12px;
+      margin-top: 3px;
+      font-size: 12px;
+      line-height: 1.1;
+      color: rgba($field-font-color, 0.7)
+    }
+
+    #{$helper} {
+      flex: 1 1 auto;
+      display: block;
+      width: auto;
+      height: auto;
+      margin: auto auto auto 0;
+    }
+
+    #{$counter} {
+      flex: 0 0 auto;
+      display: block;
+      width: auto;
+      height: auto;
+      margin: auto 0 auto 10px;
+    }
+  }
+}
+
+// === TEXT INPUT
+.c-text-input {
+  $self: #{&};
+  $wrap: #{$self}__wrap;
+  $field: #{$self}__field;
+  $leading: #{$self}__leading;
+  $trailing: #{$self}__trailing;
+
+  $icon-gutter: 10px;
+
+  @at-root {
+
+    #{$self} {
+
+      &.is-focused {
+
+      }
+
+      &.is-disabled {
+      }
+
+    }
+
+    #{$wrap} {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #{$field} {
+      flex: 1 1 auto;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: $field-height;
+      padding: $field-padding;
+      margin: 0;
+      background: none;
+      border: none;
+      line-height: 1;
+      color: inherit;
+
+      &[readonly="readonly"],
+      &[readonly] {
+        cursor: default !important;
+      }
+
+      &[disabled="disabled"],
+      &[disabled] {
+        cursor: not-allowed !important;
+      }
+    }
+
+    #{$leading},
+    #{$trailing} {
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      font-size: $field-icon-size;
+      line-height: 1;
+      color: $field-icon-color;
+    }
+
+    #{$leading} {
+      margin: auto 0 auto $icon-gutter;
+    }
+
+    #{$trailing} {
+      margin: auto $icon-gutter auto 0;
+    }
+
+  }
+
+}
+
+// === TEXT AREA
+.c-text-area {
+  $self: #{&};
+  $wrap: #{$self}__wrap;
+  $field: #{$self}__field;
+
+  @at-root {
+
+    #{$self} {
+
+      &.is-focused {
+      }
+
+      &.is-disabled {
+      }
+
+    }
+
+    #{$field} {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      min-height: 100px;
+      max-height: 150px;
+      padding: nth($field-padding, 2);
+      margin: 0;
+      background: none;
+      border: none;
+      line-height: $g-line-height;
+      color: inherit;
+      resize: none;
+
+      &[readonly="readonly"],
+      &[readonly] {
+        cursor: default !important;
+        color: $field-readonly-color !important;
+      }
+
+      &[disabled="disabled"],
+      &[disabled] {
+        cursor: not-allowed !important;
+        color: $field-readonly-color !important;
+      }
+    }
+
+  }
+
+}
+
+// === SELECT
+.c-select {
+  $self: #{&};
+  $wrap: #{$self}__wrap;
+  $chip: #{$self}__chip;
+
+  $field: #{$self}__field;
+  $field-input: #{$field}-input;
+  $field-icon: #{$field}-icon;
+  $field-label: #{$field}-label;
+
+  $list: #{$self}__list;
+  $list-info: #{$self}__list-info;
+  $list-options: #{$self}__list-options;
+
+  $option: #{$self}__option;
+
+  @at-root {
+
+    #{$self} {
+      cursor: pointer;
+
+      // Transition
+      &-trans-enter-active,
+      &-trans-leave-active {
+        transition: opacity 0.2s ease;
+      }
+
+      &-trans-enter,
+      &-trans-leave-active {
+        opacity: 0;
+      }
+    }
+
+    #{$wrap} {
+      position: relative;
+    }
+
+    #{$chip} {
+      margin: 0 5px 5px 0;
+      font-size: 0.9em;
+    }
+
+    #{$field} {
+      flex: 1 1 auto;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      min-height: $field-height;
+      padding: $field-padding;
+      margin: 0;
+      background: none;
+      border: none;
+      line-height: 1;
+      color: $field-font-color;
+    }
+
+    #{$field-label} {
+      display: block;
+      width: 100%;
+      @include word-ellipsis();
+    }
+
+    #{$field-input} {
+      flex: 1 1 auto;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+      cursor: pointer;
+      background: none;
+
+      @include input-placeholder() {
+        color: $field-placeholder-color;
+        line-height: inherit;
+        font-size: inherit;
+      }
+    }
+
+    #{$field-icon} {
+      flex: 0 0 auto;
+      display: inline-block;
+      margin: auto 0 auto auto;
+      font-size: 22px;
+    }
+
+    #{$list} {
+      position: absolute;
+      z-index: 3;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: block;
+      height: auto;
+      max-height: 300px;
+      background: #fff;
+      box-shadow: 0 5px 10px 0 rgba(#000, 0.3);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    #{$list-info} {
+      padding: nth($field-padding, 2);
+      color: $field-placeholder-color;
+    }
+
+    #{$option} {
+      display: block;
+      width: 100%;
+      padding: nth($field-padding, 2);
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background: rgba(#000, 0.05);
+      }
+
+      &.is-selected {
+        background: $color-primary;
+        color: #fff;
+      }
+
+      &.is-group {
+        background: #ddd;
+        color: $field-font-color;
+      }
+    }
+
+  }
+
+}
+
+// === FORM ROW
+.c-form-row {
+  $self: #{&};
+
+  @at-root {
+
+    #{$self} {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 15px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+  }
+}
+
+// === Google Chrome autofill input background fix
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  box-shadow: inset 0 0 0 50px white !important;
+}

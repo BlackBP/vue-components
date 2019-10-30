@@ -110,6 +110,7 @@
 </template>
 
 <script>
+    import _ from '../../utils';
     import {CFormField} from '../form-field';
     import {CIcon} from '../icon';
     import {CChip} from '../chip';
