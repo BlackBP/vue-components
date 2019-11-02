@@ -1,0 +1,18 @@
+@mixin make-columns($grid-columns-count) {
+  @for $index from 1 through $grid-columns-count {
+    $width: (100% / $grid-columns-count) * $index;
+
+    &-#{$index} {
+      flex: 0 0 $width;
+      max-width: $width;
+      @content;
+    }
+  }
+}
+
+@mixin make-auto-column() {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+  @content;
+}

@@ -4,9 +4,17 @@
   $leading: #{$self}__leading;
   $trailing: #{$self}__trailing;
 
+  // Modifiers
+  $mod-primary: #{$self}--primary;
+  $mod-secondary: #{$self}--secondary;
+  $mod-success: #{$self}--success;
+  $mod-error: #{$self}--error;
+  $mod-warn: #{$self}--warn;
+  $mod-info: #{$self}--info;
+
+  // Configuration
   $icon-gap: 5px;
   $padding: 3px 6px;
-
   $background: $color-grey;
   $font-color: $g-font-color;
   $border-radius: $g-border-radius;
@@ -52,15 +60,12 @@
       height: auto;
       margin: auto 0 auto $icon-gap;
     }
-
-    #{$self} {
-      @include make-colored('primary', $color-primary);
-      @include make-colored('secondary', $color-secondary);
-      @include make-colored('success', $color-success);
-      @include make-colored('error', $color-error);
-      @include make-colored('warn', $color-warn);
-      @include make-colored('info', $color-info);
-    }
-
   }
+
+  @include make-colored($mod-primary, $color-primary);
+  @include make-colored($mod-secondary, $color-secondary);
+  @include make-colored($mod-success, $color-success);
+  @include make-colored($mod-error, $color-error);
+  @include make-colored($mod-warn, $color-warn);
+  @include make-colored($mod-info, $color-info);
 }

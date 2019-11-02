@@ -1,3 +1,5 @@
+@import "../mixins/grid";
+
 $grid-breakpoints: xs sm md lg xl;
 $grid-container-sizes: (xs: 100%, sm: 570px, md: 750px, lg: 990px, xl: 1170px);
 
@@ -7,26 +9,6 @@ $grid-columns-count: 12;
 $grid-container: #{'.c-grid-container'};
 $grid-row: #{'.c-grid-row'};
 $grid-column: #{'.c-grid-col'};
-
-// === MIXINS
-@mixin make-columns() {
-  @for $index from 1 through $grid-columns-count {
-    $width: (100% / $grid-columns-count) * $index;
-
-    &-#{$index} {
-      flex: 0 0 $width;
-      max-width: $width;
-      @content;
-    }
-  }
-}
-
-@mixin make-auto-column() {
-  flex: 0 0 auto;
-  width: auto;
-  max-width: 100%;
-  @content;
-}
 
 // === STYLES
 #{$grid-container} {
@@ -121,7 +103,7 @@ $grid-column: #{'.c-grid-col'};
     }
 
     #{$grid-column}.--#{$breakpoint} {
-      @include make-columns;
+      @include make-columns($grid-columns-count);
 
       &-auto {
         @include make-auto-column;

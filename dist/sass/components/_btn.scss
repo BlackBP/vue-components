@@ -7,21 +7,19 @@
   $text: #{$self}__text;
 
   // Modifiers vars
-  $mod-color-primary: 'primary';
-  $mod-color-secondary: 'secondary';
-  $mod-color-success: 'success';
-  $mod-color-error: 'error';
-  $mod-color-warn: 'warn';
-  $mod-color-info: 'info';
-  $mod-color-light: 'light';
-  $mod-color-dark: 'dark';
+  $mod-color-primary: #{$self}--primary;
+  $mod-color-secondary: #{$self}--secondary;
+  $mod-color-success: #{$self}--success;
+  $mod-color-error: #{$self}--error;
+  $mod-color-warn: #{$self}--warn;
+  $mod-color-info: #{$self}--info;
+  $mod-color-light: #{$self}--light;
+  $mod-color-dark: #{$self}--dark;
 
-  $mod-bordered: 'bordered';
-  $mod-elevated: 'elevated';
-  $mod-transparent: 'transparent';
-  $mod-block: 'block';
-  $mod-icon-left: 'icon-left';
-  $mod-icon-right: 'icon-right';
+  $mod-bordered: #{$self}--bordered;
+  $mod-elevated: #{$self}--elevated;
+  $mod-transparent: #{$self}--transparent;
+  $mod-block: #{$self}--block;
 
   // Configuration
   $btn-padding: 8px 16px;
@@ -112,8 +110,6 @@
 
   // Transparent
   @include make-modifier($mod-transparent) {
-    background: transparent;
-
     @include btn-transparent($btn-font-color);
     @include btn-modifier-transparent($mod-color-primary, $color-primary);
     @include btn-modifier-transparent($mod-color-secondary, $color-secondary);

@@ -1,4 +1,6 @@
 <script>
+    let ClassName = 'c-stack-item';
+
     export default {
         name: "c-stack-item",
         functional: true,
@@ -13,10 +15,8 @@
             }
         },
         render(createElement, {data, props, children}) {
-            let baseClass = 'c-stack-item';
-
-            data.class = [baseClass, data.class, {
-                [`${baseClass}--flex`]: props.flex
+            data.class = [data.class, ClassName, {
+                [`${ClassName}--flex`]: props.flex
             }];
 
             return createElement(props.tag, data, children)

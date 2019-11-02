@@ -3,9 +3,13 @@
   $spinner: #{$self}__spinner;
   $text: #{$self}__text;
 
+  // Modifiers
+  $mod-elevated: #{$self}--elevated;
+  $mod-dense: #{$self}--dense;
+
+  // Configuration
   $border: none;
   $border-radius: $g-border-radius-lg;
-
   $text-color: $g-font-color;
   $text-size: 1.2rem;
 
@@ -35,11 +39,11 @@
   }
 
   // Modifiers
-  @include make-modifier('elevated') {
+  @include make-modifier($mod-elevated) {
     @include box-elevation();
   }
 
-  @include make-modifier('dense') {
+  @include make-modifier($mod-dense) {
     padding: 5px;
     font-size: 1rem;
   }

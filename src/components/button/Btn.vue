@@ -37,11 +37,11 @@
             elevated: propElevated,
         } = props;
 
-        const modElevated = '--elevated',
-            modTransparent = '--transparent',
-            modBordered = '--bordered',
-            modBlock = '--block',
-            modColor = `--${propColor}`;
+        const modElevated = `${className}--elevated`,
+            modTransparent = `${className}--transparent`,
+            modBordered = `${className}--bordered`,
+            modBlock = `${className}--block`,
+            modColor = `${className}--${propColor}`;
 
         const classNames = [
             className,

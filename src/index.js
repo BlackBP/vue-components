@@ -26,7 +26,7 @@ export {CModal} from './components/modal';
 export {CPagination} from './components/pagination';
 export {CScrollView} from './components/scroll-view';
 export {CServiceFormValidate} from './components/service';
-export {CStackItem, CStackGroup} from './components/stack';
+export {CStackItem, CStackGroup} from './components/stack-group';
 export {CTable} from './components/table';
 
 export default installFactory({

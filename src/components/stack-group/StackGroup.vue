@@ -1,4 +1,6 @@
 <script>
+    const ClassName = 'c-stack-group';
+
     export default {
         name: "c-stack-group",
         functional: true,
@@ -29,14 +31,12 @@
             }
         },
         render(createElement, {data, props, children}) {
-            let baseClass = 'c-stack';
-
-            data.class = [data.class, baseClass, {
-                [`${baseClass}--inline`]: props.inline,
-                [`${baseClass}--column`]: props.column,
-                [`${baseClass}--items-${props.alignItems}`]: true,
-                [`${baseClass}--justify-${props.justify}`]: true,
-                [`${baseClass}--wrap`]: props.wrap,
+            data.class = [data.class, ClassName, {
+                [`${ClassName}--inline`]: props.inline,
+                [`${ClassName}--column`]: props.column,
+                [`${ClassName}--items-${props.alignItems}`]: true,
+                [`${ClassName}--justify-${props.justify}`]: true,
+                [`${ClassName}--wrap`]: props.wrap,
             }];
 
             return createElement(props.tag, data, children);

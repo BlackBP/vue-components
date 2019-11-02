@@ -23,7 +23,7 @@ import {CModal} from './modal';
 import {CPagination} from './pagination';
 import {CScrollView} from './scroll-view';
 import {CServiceFormValidate} from './service';
-import {CStackItem, CStackGroup} from './stack';
+import {CStackItem, CStackGroup} from './stack-group';
 import {CTable} from './table';
 
 export default {

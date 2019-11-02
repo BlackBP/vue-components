@@ -73,7 +73,7 @@
 
   }
 
-  @include make-modifier('width-auto') {
+  @include make-modifier(#{$self}--width-auto) {
     width: auto;
     max-width: 100%;
   }

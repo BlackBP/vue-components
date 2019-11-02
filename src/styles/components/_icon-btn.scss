@@ -1,69 +1,31 @@
+@import "../mixins/icon-btn";
+
 .c-icon-btn {
   // Element & modifiers vars
   $self: #{&};
   $icon: #{$self}__icon;
 
-  $mod-color-primary: 'primary';
-  $mod-color-secondary: 'secondary';
-  $mod-color-success: 'success';
-  $mod-color-error: 'error';
-  $mod-color-warn: 'warn';
-  $mod-color-info: 'info';
-  $mod-color-light: 'light';
-  $mod-color-dark: 'dark';
+  // Modifiers
+  $mod-color-primary: #{$self}--primary;
+  $mod-color-secondary: #{$self}--secondary;
+  $mod-color-success: #{$self}--success;
+  $mod-color-error: #{$self}--error;
+  $mod-color-warn: #{$self}--warn;
+  $mod-color-info: #{$self}--info;
+  $mod-color-light: #{$self}--light;
+  $mod-color-dark: #{$self}--dark;
+  $mod-elevated: #{$self}--elevated;
+  $mod-dense: #{$self}--dense;
+  $mod-transparent: #{$self}--transparent;
 
-  $mod-elevated: 'elevated';
-  $mod-dense: 'dense';
-  $mod-transparent: 'transparent';
-
-  // Config vars
+  // Configuration
   $font-size: 24px;
   $default-size: 1.75em;
   $dense-size: 1.4em;
-
   $font-color: $g-font-color;
   $background-color: $btn-base-color;
-
   $disabled-font-color: $disabled-font-color;
   $disabled-background: $disabled-background;
-
-  // Mixins
-
-  @mixin make-colored($name, $background, $text: #fff) {
-    @include make-modifier($name) {
-      background: $background;
-      color: $text;
-
-      &:hover,
-      &:focus {
-        background: lighten($background, 5%);
-        color: $text;
-      }
-
-      &:active {
-        background: darken($background, 5%);
-        color: $text;
-      }
-
-      @content
-    }
-  }
-
-  @mixin make-transparent($mod-name, $color) {
-    @include make-modifier($mod-name) {
-      background: transparent;
-      color: $color;
-
-      &:hover,
-      &:focus {
-        background: rgba($color, 0.2);
-      }
-
-      &:active {
-        background: rgba(darken($color, 5%), 0.3);
-      }
-    }
-  }
 
   // Styles
   @at-root {
@@ -113,60 +75,58 @@
       display: inline-block;
       margin: auto;
     }
+  }
 
-    // === MODIFIERS
-    // Colors
-    @include make-colored($mod-color-primary, $color-primary);
-    @include make-colored($mod-color-secondary, $color-secondary);
-    @include make-colored($mod-color-success, $color-success);
-    @include make-colored($mod-color-error, $color-error);
-    @include make-colored($mod-color-warn, $color-warn);
-    @include make-colored($mod-color-info, $color-info);
-    @include make-colored($mod-color-light, $color-light, $font-color);
-    @include make-colored($mod-color-dark, $color-dark);
+  // Colors
+  @include make-colored($mod-color-primary, $color-primary);
+  @include make-colored($mod-color-secondary, $color-secondary);
+  @include make-colored($mod-color-success, $color-success);
+  @include make-colored($mod-color-error, $color-error);
+  @include make-colored($mod-color-warn, $color-warn);
+  @include make-colored($mod-color-info, $color-info);
+  @include make-colored($mod-color-light, $color-light, $font-color);
+  @include make-colored($mod-color-dark, $color-dark);
 
-    // Elevated
-    @include make-modifier($mod-elevated) {
-      @include box-elevation(3);
+  // Transparent
+  @include make-modifier($mod-transparent) {
+    background: transparent;
 
-      &:hover,
-      &:focus {
-        @include box-elevation(6)
-      }
-
-      &:active {
-        @include box-elevation(1);
-      }
+    &:hover,
+    &:focus {
+      background: rgba(#000, 0.1);
     }
 
-    // Dense
-    @include make-modifier($mod-dense) {
-      width: $dense-size;
-      height: $dense-size;
+    &:active {
+      background: rgba(#000, 0.2);
     }
 
-    // Transparent
-    @include make-modifier($mod-transparent) {
-      background: transparent;
+    @include make-transparent($mod-color-primary, $color-primary);
+    @include make-transparent($mod-color-secondary, $color-secondary);
+    @include make-transparent($mod-color-success, $color-success);
+    @include make-transparent($mod-color-error, $color-error);
+    @include make-transparent($mod-color-warn, $color-warn);
+    @include make-transparent($mod-color-info, $color-info);
+    @include make-transparent($mod-color-light, $color-light);
+    @include make-transparent($mod-color-dark, $color-dark);
+  }
 
-      &:hover,
-      &:focus {
-        background: rgba(#000, 0.1);
-      }
+  // Elevated
+  @include make-modifier($mod-elevated) {
+    @include box-elevation(3);
 
-      &:active {
-        background: rgba(#000, 0.2);
-      }
+    &:hover,
+    &:focus {
+      @include box-elevation(6)
+    }
 
-      @include make-transparent($mod-color-primary, $color-primary);
-      @include make-transparent($mod-color-secondary, $color-secondary);
-      @include make-transparent($mod-color-success, $color-success);
-      @include make-transparent($mod-color-error, $color-error);
-      @include make-transparent($mod-color-warn, $color-warn);
-      @include make-transparent($mod-color-info, $color-info);
-      @include make-transparent($mod-color-light, $color-light);
-      @include make-transparent($mod-color-dark, $color-dark);
+    &:active {
+      @include box-elevation(1);
     }
   }
 
+  // Dense
+  @include make-modifier($mod-dense) {
+    width: $dense-size;
+    height: $dense-size;
+  }
 }

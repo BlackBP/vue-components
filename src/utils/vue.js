@@ -1,4 +1,4 @@
-import _ from './index';
+import _ from 'lodash';
 
 /**
  *

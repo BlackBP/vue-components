@@ -3,8 +3,9 @@
   $slot: #{$self}__slot;
   $badge: #{$self}__badge;
 
-  $min-size: 1.71428em;
-  $offset: -0.57142em;
+  // Configuration
+  $badge-min-size: 1.71428em;
+  $badge-offset: -0.57142em;
 
   @at-root {
     #{$self} {
@@ -15,16 +16,16 @@
 
     #{$badge} {
       position: absolute;
-      top: $offset;
-      right: $offset;
+      top: $badge-offset;
+      right: $badge-offset;
       z-index: 2;
       display: inline-flex;
       flex-flow: row wrap;
       justify-content: center;
       align-items: center;
       line-height: normal;
-      height: $min-size;
-      min-width: $min-size;
+      height: $badge-min-size;
+      min-width: $badge-min-size;
       font-size: 14px;
       padding: 0 3px;
       background: #333;

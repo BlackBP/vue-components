@@ -1,5 +1,5 @@
 <script>
-    import {CIcon} from '../icon/';
+    import {CIcon} from '../icon';
 
     /**
      *

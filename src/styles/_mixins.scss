@@ -126,7 +126,7 @@
 
 //
 @mixin make-modifier($name) {
-  &.--#{$name} {
+  &#{$name} {
     @content;
   }
 }
