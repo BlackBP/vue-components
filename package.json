@@ -19,7 +19,7 @@
     "serve-sandbox": "vue-cli-service serve --host=192.168.1.103 sandbox/app.js",
     "build": "rollup -c",
     "build-css": "node-sass --importer=node_modules/node-sass-package-importer/dist/cli.js src/styles/index.scss dist/css/styles.css",
-    "build-css-min": "node-sass --output-style=compressed --importer=node_modules/node-sass-package-importer/dist/cli.js src/styles/index.scss dist/css/styles.css",
+    "build-css-min": "node-sass --output-style=compressed --importer=node_modules/node-sass-package-importer/dist/cli.js src/styles/index.scss dist/css/styles.min.css",
     "publish-build": "yarn publish",
     "version-patch": "yarn version --patch",
     "version-minor": "yarn version --minor",
