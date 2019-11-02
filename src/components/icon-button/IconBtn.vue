@@ -2,8 +2,8 @@
     import {CIcon} from '../icon';
     import btnMixin from '../../mixins/button';
 
-    const ClassName = 'c-icon-btn';
-    const IconClassName = `${ClassName}__icon`;
+    const BaseClassName = 'c-icon-btn';
+    const IconClassName = `${BaseClassName}__icon`;
 
     /**
      *
@@ -35,14 +35,14 @@
             elevated: propElevated
         } = props;
 
-        const modColor = propColor ? `--${propColor}` : '',
-            modTransparent = '--transparent',
-            modElevated = '--elevated',
-            modDense = '--dense';
+        const modColor = propColor ? `${BaseClassName}--${propColor}` : '',
+            modTransparent = `${BaseClassName}--transparent`,
+            modElevated = `${BaseClassName}--elevated`,
+            modDense = `${BaseClassName}--dense`;
 
         classNames = [
             classNames,
-            ClassName,
+            BaseClassName,
             modColor,
             {
                 [modDense]: propDense
