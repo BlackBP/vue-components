@@ -38,6 +38,14 @@
     export default {
         name: "c-form-field",
         props: {
+            disabled: {
+                type: Boolean,
+                default: false,
+            },
+            readonly: {
+                type: Boolean,
+                default: false,
+            },
             contentClass: {
                 type: String,
                 default: '',
@@ -63,14 +71,6 @@
                 default: false
             },
             hasError: {
-                type: Boolean,
-                default: false,
-            },
-            disabled: {
-                type: Boolean,
-                default: false,
-            },
-            readonly: {
                 type: Boolean,
                 default: false,
             },

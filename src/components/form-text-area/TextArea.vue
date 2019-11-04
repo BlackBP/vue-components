@@ -26,82 +26,19 @@
 </template>
 
 <script>
-    import _ from '../../utils';
+    import mixinFormInput from '../../mixins/form-input';
     import {CFormField} from '../form-field';
 
     export default {
         name: "c-text-area",
-        components: {CFormField},
+        mixins: [mixinFormInput],
+        components: {
+            CFormField
+        },
         props: {
-            value: {
-                type: null,
-                default: '',
-            },
-            helper: {
-                type: String,
-                default: '',
-            },
-            placeholder: {
-                type: String,
-                default: '',
-            },
-            readonly: {
-                type: Boolean,
-                default: false,
-            },
-            disabled: {
-                type: Boolean,
-                default: false,
-            },
-            showCounter: {
-                type: Boolean,
-                default: false,
-            },
-            errors: {
-                type: Array,
-                default: () => [],
-            },
-            maxLength: {
-                type: Number,
-                default: 100,
-            },
             rows: {
                 type: Number,
                 default: 10,
-            }
-        },
-        data() {
-            return {
-                focused: false,
-                valueLength: 0
-            }
-        },
-        computed: {
-            model: {
-                get() {
-                    return this.value;
-                },
-                set(value) {
-                    this.valueLength = _.toString(value).length;
-                    this.$emit('input', value);
-                }
-            },
-            hasErrors() {
-                return !_.isEmpty(this.errors)
-            },
-            helperText() {
-                let text = this.helper;
-
-                if (this.hasErrors) {
-                    text = this.errors.join(', ');
-                }
-
-                return text;
-            }
-        },
-        methods: {
-            focus() {
-                this.$refs.field.focus();
             }
         }
     }

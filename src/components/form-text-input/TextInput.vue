@@ -20,7 +20,6 @@
         <template v-else>
             <c-icon v-if="leading"
                     class="c-text-input__leading"
-                    :title="title"
                     :name="leading"/>
         </template>
 
@@ -54,12 +53,14 @@
 </template>
 
 <script>
-    import _, {getConfig} from '../../utils'
+    import mixinFormInput from '../../mixins/form-input';
+    import _, {getConfig} from '../../utils';
     import {CFormField} from '../form-field';
     import {CIcon} from '../icon';
 
     export default {
         name: "c-text-input",
+        mixins: [mixinFormInput],
         components: {
             CIcon,
             CFormField
@@ -69,45 +70,9 @@
                 type: String,
                 default: 'text',
             },
-            placeholder: {
-                type: String,
-                default: '',
-            },
-            helper: {
-                type: String,
-                default: '',
-            },
-            value: {
-                type: null,
-                default: ''
-            },
             mask: {
                 type: [String, Boolean, Object],
                 default: false,
-            },
-            title: {
-                type: String,
-                default: '',
-            },
-            readonly: {
-                type: Boolean,
-                default: false,
-            },
-            disabled: {
-                type: Boolean,
-                default: false,
-            },
-            showCounter: {
-                type: Boolean,
-                default: false,
-            },
-            errors: {
-                type: Array,
-                default: () => [],
-            },
-            maxLength: {
-                type: Number,
-                default: 100,
             },
             leading: {
                 type: String,
@@ -118,54 +83,9 @@
                 default: '',
             }
         },
-        data() {
-            return {
-                focused: false,
-                valueLength: 0
-            }
-        },
         computed: {
-            model: {
-                get() {
-                    return this.value;
-                },
-                set(value) {
-                    this.valueLength = _.toString(value).length;
-                    this.$emit('input', value);
-                }
-            },
-            hasErrors() {
-                if (_.isArray(this.errors)) {
-                    return !_.isEmpty(this.errors)
-                }
-
-                return false;
-            },
-            helperText() {
-                let text = this.helper;
-
-                if (this.hasErrors) {
-                    text = this.errors.join(', ');
-                }
-
-                return text;
-            },
             hasMask() {
                 return _.isObjectLike(this.mask) || _.isString(this.mask)
-            },
-            fieldRef() {
-                return this.$refs.field;
-            }
-        },
-        methods: {
-            focus() {
-                this.$refs.field.focus();
-            },
-            handleKeyPress(event) {
-                this.$emit('keypress', event)
-            },
-            handleChange(event) {
-                this.$emit('change', event)
             }
         },
         mounted() {
