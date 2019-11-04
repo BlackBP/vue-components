@@ -2227,57 +2227,57 @@ html.modal-open {
   height: 100%;
   overflow: auto; }
 
-.c-stack {
+.c-stack-group {
   display: flex;
   flex-flow: row nowrap; }
-  .c-stack > .c-stack-item {
+  .c-stack-group > .c-stack-item {
     margin-right: 10px; }
-    .c-stack > .c-stack-item:last-child {
+    .c-stack-group > .c-stack-item:last-child {
       margin-right: 0; }
 
-.c-stack.c-stack--inline {
+.c-stack-group.c-stack-group--inline {
   display: inline-flex; }
 
-.c-stack.c-stack--column {
+.c-stack-group.c-stack-group--column {
   flex-direction: column; }
-  .c-stack.c-stack--column > .c-stack-item {
+  .c-stack-group.c-stack-group--column > .c-stack-item {
     margin-bottom: 10px;
     margin-right: initial; }
-    .c-stack.c-stack--column > .c-stack-item:last-child {
+    .c-stack-group.c-stack-group--column > .c-stack-item:last-child {
       margin-bottom: 0;
       margin-right: initial; }
 
-.c-stack.c-stack--wrap {
+.c-stack-group.c-stack-group--wrap {
   flex-wrap: wrap; }
 
-.c-stack.c-stack--items-start {
+.c-stack-group.c-stack-group--items-start {
   align-items: start; }
 
-.c-stack.c-stack--items-end {
+.c-stack-group.c-stack-group--items-end {
   align-items: flex-end; }
 
-.c-stack.c-stack--items-center {
+.c-stack-group.c-stack-group--items-center {
   align-items: center; }
 
-.c-stack.c-stack--items-stretch {
+.c-stack-group.c-stack-group--items-stretch {
   align-items: stretch; }
 
-.c-stack.c-stack--items-baseline {
+.c-stack-group.c-stack-group--items-baseline {
   align-items: baseline; }
 
-.c-stack.c-stack--justify-start {
+.c-stack-group.c-stack-group--justify-start {
   justify-content: flex-start; }
 
-.c-stack.c-stack--justify-end {
+.c-stack-group.c-stack-group--justify-end {
   justify-content: flex-end; }
 
-.c-stack.c-stack--justify-center {
+.c-stack-group.c-stack-group--justify-center {
   justify-content: center; }
 
-.c-stack.c-stack--justify-between {
+.c-stack-group.c-stack-group--justify-between {
   justify-content: space-between; }
 
-.c-stack.c-stack--justify-around {
+.c-stack-group.c-stack-group--justify-around {
   justify-content: space-around; }
 
 .c-stack-item {

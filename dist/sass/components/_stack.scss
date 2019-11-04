@@ -1,5 +1,5 @@
-$stack-group: #{'.c-stack'};
-$stack-group-item: #{$stack-group}-item;
+$stack-group: #{'.c-stack-group'};
+$stack-group-item: #{'.c-stack-item'};
 
 #{$stack-group} {
   $self: #{&};
