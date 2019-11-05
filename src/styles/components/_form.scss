@@ -7,7 +7,6 @@ $field-font-color: $g-font-color;
 
 $field-border: $g-border;
 $field-border-color: nth($g-border, 3);
-$field-border-active: nth($g-border, 1) nth($g-border, 2) $color-primary;
 $field-border-radius: $g-border-radius;
 
 $field-icon-size: 24px;
@@ -52,7 +51,7 @@ $field-readonly-color: #555;
 
       &.is-focused {
         #{$content} {
-          border: $field-border-active;
+          border-color: $color-primary;
         }
       }
 
