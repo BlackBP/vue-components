@@ -33,7 +33,7 @@
 </template>
 
 <script>
-    import _ from '../../utils';
+    import {isString} from '../../utils/helpers';
 
     export default {
         name: "c-form-field",
@@ -89,7 +89,7 @@
                 };
             },
             hasHelper() {
-                return _.isString(this.helperText) && this.helperText !== ''
+                return isString(this.helperText) && this.helperText !== ''
             }
         },
         methods: {

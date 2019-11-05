@@ -5,7 +5,9 @@
 </template>
 
 <script>
-    import _ from '../../utils';
+    import {
+        debounce
+    } from '../../utils/helpers';
     import ScrollTo from 'animated-scroll-to';
 
     export default {
@@ -62,7 +64,7 @@
         },
         mounted() {
             if (this.enableLoading) {
-                const debouncedCB = _.debounce(() => {
+                const debouncedCB = debounce(() => {
                     this.loading = true;
                     this.$emit('loading', {
                         loaded: () => {

@@ -59,7 +59,11 @@
 </template>
 
 <script>
-    import _ from '../../utils';
+    import {
+        isArray,
+        isObjectLike,
+        size
+    } from '../../utils/helpers';
 
     export default {
         name: "c-table",
@@ -85,14 +89,14 @@
         },
         computed: {
             hasData() {
-                if (!_.isArray(this.data)) return false;
-                return _.size(this.data) > 0
+                if (!isArray(this.data)) return false;
+                return size(this.data) > 0
             },
             columnsCount() {
-                if (!_.isObjectLike(this.headers)) return 0;
-                if (_.isArray(this.headers)) return 0;
+                if (!isObjectLike(this.headers)) return 0;
+                if (isArray(this.headers)) return 0;
 
-                return _.size(Object.keys(this.headers));
+                return size(Object.keys(this.headers));
             }
         }
 

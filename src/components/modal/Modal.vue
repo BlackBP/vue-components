@@ -78,7 +78,11 @@
 </template>
 
 <script>
-    import _ from '../../utils';
+    import {
+        isNaN,
+        isString
+    } from '../../utils/helpers';
+
     import {CIcon} from '../icon';
     import {CIconBtn} from '../icon-button';
     import {CLoading} from '../loading';
@@ -118,7 +122,7 @@
 
     function getModalCount() {
         let modalCount = parseInt($html.dataset[dataKeys.modalOpenCount]);
-        return _.isNaN(modalCount) ? 0 : modalCount;
+        return isNaN(modalCount) ? 0 : modalCount;
     }
 
     function setModalCount(value) {
@@ -188,10 +192,10 @@
         },
         computed: {
             hasTitle() {
-                return _.isString(this.title) && this.title !== '';
+                return isString(this.title) && this.title !== '';
             },
             hasIcon() {
-                return _.isString(this.icon) && this.icon !== '';
+                return isString(this.icon) && this.icon !== '';
             },
             modalClassName() {
                 let base = CssClass.modal.base;
@@ -239,7 +243,7 @@
                 this.visible = false;
                 this.$emit(Events.close.name);
             },
-            backdropClick(event) {
+            backdropClick() {
                 if (this.outsideDismiss) {
                     this.close()
                 }

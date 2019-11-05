@@ -120,7 +120,7 @@
                         $vm.hide()
                     }
                 },
-                onScroll: event => {
+                onScroll: () => {
                     if ($vm.visible) {
                         $vm.hide()
                     }

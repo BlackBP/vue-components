@@ -23,8 +23,7 @@
                     :name="leading"/>
         </template>
 
-        <input v-model="model"
-               ref="field"
+        <input ref="field"
                class="c-text-input__field"
                autocomplete="off"
                :type="type"
@@ -32,7 +31,8 @@
                :disabled="disabled"
                :readonly="readonly"
                :min="type === 'number' ? 0 : false"
-               @change="handleChange"
+               :value="value"
+               @input="handleChange"
                @keypress="handleKeyPress"
                @focus="focused = true"
                @blur="focused = false">
@@ -53,9 +53,13 @@
 </template>
 
 <script>
-    import mixinFormInput from '../../mixins/form-input';
-    import _ from '../../utils';
+    import {
+        isObjectLike,
+        isString,
+        isFunction
+    } from '../../utils/helpers';
     import {getConfig} from '../../utils/config';
+    import mixinFormInput from '../../mixins/form-input';
     import {CFormField} from '../form-field';
     import {CIcon} from '../icon';
 
@@ -86,19 +90,19 @@
         },
         computed: {
             hasMask() {
-                return _.isObjectLike(this.mask) || _.isString(this.mask)
+                return isObjectLike(this.mask) || isString(this.mask)
             }
         },
         mounted() {
             const config = getConfig(this, 'textInput');
-            const onMount = _.isFunction(config.mounted) ? config.mounted : () => {
+            const onMount = isFunction(config.mounted) ? config.mounted : () => {
             };
 
             onMount(this, this.mask, this.hasMask, this.$refs.field);
         },
         beforeDestroy() {
             const config = getConfig(this, 'textInput');
-            const onBeforeDestroy = _.isFunction(config.beforeDestroy) ? config.beforeDestroy : () => {
+            const onBeforeDestroy = isFunction(config.beforeDestroy) ? config.beforeDestroy : () => {
             };
 
             onBeforeDestroy(this, this.mask, this.hasMask, this.$refs.field);

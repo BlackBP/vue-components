@@ -51,6 +51,13 @@
 
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard";
+    import CTextInput from "../../../src/components/form-text-input/TextInput";
+    import CFormRow from "../../../src/components/form-row/FormRow";
+    import CGridRow from "../../../src/components/grid/GridRow";
+    import CGridCol from "../../../src/components/grid/GridCol";
+    import CSelect from "../../../src/components/form-select/Select";
+    import CTextArea from "../../../src/components/form-text-area/TextArea";
+    import CBtn from "../../../src/components/button/Btn";
 
     const COLORS = [
         {
@@ -78,6 +85,13 @@
     export default {
         name: "ScreenNotifications",
         components: {
+            CBtn,
+            CTextArea,
+            CSelect,
+            CGridCol,
+            CGridRow,
+            CFormRow,
+            CTextInput,
             LayoutScreenCard
         },
         data() {
@@ -94,13 +108,12 @@
                 this.$notify.add(this.message, {
                     title: this.title,
                     duration: this.duration,
-                    color: this.color
+                    color: this.color.id,
+                    onClose(e, i) {
+                        console.log(e, i)
+                    }
                 })
             },
         }
     }
 </script>
-
-<style scoped>
-
-</style>

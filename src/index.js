@@ -1,6 +1,7 @@
 import Components from './components';
 import {installFactory} from './utils/vue';
 
+// Components
 export {CBadge} from './components/badge';
 export {CBtn} from './components/button';
 export {CCard, CCardSection} from './components/card';
@@ -28,6 +29,10 @@ export {CScrollView} from './components/scroll-view';
 export {CServiceFormValidate} from './components/service';
 export {CStackItem, CStackGroup} from './components/stack-group';
 export {CTable} from './components/table';
+
+// Plugins
+export {AlertPlugin} from './plugins/alert';
+export {NotificationPlugin} from './plugins/notification';
 
 export default installFactory({
     components: Components

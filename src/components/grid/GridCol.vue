@@ -1,5 +1,9 @@
 <script>
-    import _ from '../../utils';
+    import {
+        reduce,
+        isString,
+        isBoolean
+    } from '../../utils/helpers';
 
     const SIZE = {
         xl: 'xl',
@@ -50,13 +54,13 @@
                 [SIZE.auto]: props[SIZE.auto]
             };
 
-            sizes = _.reduce(sizes, (total, value, key) => {
+            sizes = reduce(sizes, (total, value, key) => {
 
-                if (_.isString(value) && value !== '') {
+                if (isString(value) && value !== '') {
                     total.push(`--${key}-${value}`);
                 }
 
-                if(_.isBoolean(value) && value) {
+                if(isBoolean(value) && value) {
                     total.push(`--${key}`)
                 }
 

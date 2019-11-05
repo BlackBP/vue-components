@@ -1,5 +1,7 @@
 <script>
-    import _ from '../../utils';
+    import {
+        each
+    } from '../../utils/helpers';
 
     const ANIMATED_STYLES = {
         opacity: [0, 1],
@@ -38,7 +40,7 @@
      * @param visibleState
      */
     function setAnimatedStyles(element, visibleState = false) {
-        _.each(ANIMATED_STYLES, (value, key) => {
+        each(ANIMATED_STYLES, (value, key) => {
             element.style[key] = visibleState ? value[1] : value[0]
         })
     }
@@ -48,7 +50,7 @@
      * @param element
      */
     function clearStyles(element) {
-        _.each(STYLES_MAP, value => {
+        each(STYLES_MAP, value => {
             element.style[value] = null
         });
     }
@@ -96,7 +98,7 @@
                         element.style.width = null;
                         element.style.position = null;
                         element.style.visibility = null;
-                        element.style.height = 0;
+                        element.style.height = '0';
 
                         // Trigger the animation.
                         // We use `setTimeout` because we need
@@ -126,7 +128,7 @@
                         getComputedStyle(element).height;
 
                         setTimeout(() => {
-                            element.style.height = 0;
+                            element.style.height = '0';
                             setAnimatedStyles(element, false);
                         }, 0);
                     },

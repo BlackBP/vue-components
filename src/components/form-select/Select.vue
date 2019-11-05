@@ -110,7 +110,20 @@
 </template>
 
 <script>
-    import _ from '../../utils';
+    import {
+        isObjectLike,
+        filter,
+        uniqBy,
+        isEmpty,
+        debounce,
+        get,
+        isArray,
+        reduce,
+        concat,
+        some,
+        toLower,
+        map
+    } from '../../utils/helpers';
     import {CFormField} from '../form-field';
     import {CIcon} from '../icon';
     import {CChip} from '../chip';
@@ -231,19 +244,19 @@
         computed: {
             selected() {
                 if(this.multiple) {
-                    return _.isArray(this.value) ? this.value : []
+                    return isArray(this.value) ? this.value : []
                 } else {
-                    return _.isObjectLike(this.value) ? this.value : {}
+                    return isObjectLike(this.value) ? this.value : {}
                 }
             },
             hasSelected() {
-                return !_.isEmpty(this.selected)
+                return !isEmpty(this.selected)
             },
             hasOptions() {
-                return !_.isEmpty(this.list);
+                return !isEmpty(this.list);
             },
             hasErrors() {
-                return !_.isEmpty(this.errors)
+                return !isEmpty(this.errors)
             },
             helperText() {
                 let text = this.helper;
@@ -328,14 +341,14 @@
                     let selected = [...this.selected];
 
                     if (isSelected) {
-                        selected = _.filter(selected, item => {
+                        selected = filter(selected, item => {
                             return item[this.trackBy] !== optionValue[this.trackBy]
                         });
                     } else {
                         selected.push(optionValue)
                     }
 
-                    optionValue = _.uniqBy(selected, this.trackBy);
+                    optionValue = uniqBy(selected, this.trackBy);
 
                     /* if has maximum items prevent option select */
                     if (this.hasMaxItems) {
@@ -351,7 +364,7 @@
                     }
 
                     /* if has maximum items prevent option select */
-                    if (this.hasMaxItems && !_.isEmpty(optionValue)) {
+                    if (this.hasMaxItems && !isEmpty(optionValue)) {
                         return;
                     }
 
@@ -365,7 +378,7 @@
              *
              * @param {String} query
              */
-            filterByQuery: _.debounce(function (query = '') {
+            filterByQuery: debounce(function (query = '') {
                 if (this.customSearch) {
                     this.customSearchCallback(query)
                         .then(() => {
@@ -387,12 +400,12 @@
              * @param {Object} option
              */
             removeItem(option = {}) {
-                if (_.isEmpty(this.selected)) return;
+                if (isEmpty(this.selected)) return;
 
-                let optionId = _.get(option, this.trackBy, false);
+                let optionId = get(option, this.trackBy, false);
 
-                let filteredList = _.filter(this.selected, item => {
-                    return optionId !== _.get(item, this.trackBy, null)
+                let filteredList = filter(this.selected, item => {
+                    return optionId !== get(item, this.trackBy, null)
                 });
 
                 this.handleChange(filteredList)
@@ -402,8 +415,8 @@
              * Removes last item in selected list
              */
             removeLastItem() {
-                if(_.isArray(this.selected)) {
-                    this.removeItem(_.last(this.selected))
+                if(isArray(this.selected)) {
+                    this.removeItem(last(this.selected))
                 }
             },
 
@@ -412,42 +425,42 @@
              */
             parseOptions() {
                 let selectedOptions = this.selected;
-                let options = _.isArray(this.options) ? [...this.options] : [];
+                let options = isArray(this.options) ? [...this.options] : [];
                 let trackBy = this.trackBy;
                 let optionLabel = this.optionLabel;
                 let groupValues = this.groupValues;
                 let groupLabel = this.groupLabel;
                 let queryString = this.query;
 
-                if(_.isEmpty(options)) {
+                if(isEmpty(options)) {
                     this.setList([]);
                     return;
                 }
 
                 if (groupValues !== '') {
-                    options = _.reduce(options, (total, option) => {
-                        let values = _.get(option, groupValues, []);
+                    options = reduce(options, (total, option) => {
+                        let values = get(option, groupValues, []);
 
                         total.push({
-                            [trackBy]: _.get(option, trackBy, ''),
-                            [optionLabel]: _.get(option, groupLabel, ''),
+                            [trackBy]: get(option, trackBy, ''),
+                            [optionLabel]: get(option, groupLabel, ''),
                             [OPTION_KEY.value]: values,
                             [OPTION_KEY.isGroup]: values.length > 0
                         });
 
-                        return _.concat(total, values);
+                        return concat(total, values);
                     }, []);
                 }
 
-                let list = _.map(options, option => {
-                    let isGroup = _.get(option, OPTION_KEY.isGroup, false);
-                    let itemId = _.get(option, trackBy, '');
+                let list = map(options, option => {
+                    let isGroup = get(option, OPTION_KEY.isGroup, false);
+                    let itemId = get(option, trackBy, '');
                     let isSelected = false;
 
                     if (this.multiple) {
-                        isSelected = _.some(selectedOptions, {[trackBy]: itemId})
+                        isSelected = some(selectedOptions, {[trackBy]: itemId})
                     } else {
-                        isSelected = itemId === _.get(selectedOptions, trackBy, null);
+                        isSelected = itemId === get(selectedOptions, trackBy, null);
                     }
 
                     if (isGroup) {
@@ -457,7 +470,7 @@
 
                     return {
                         [trackBy]: itemId,
-                        [optionLabel]: _.get(option, optionLabel, ''),
+                        [optionLabel]: get(option, optionLabel, ''),
                         [OPTION_KEY.value]: option,
                         [OPTION_KEY.isGroup]: isGroup,
                         [OPTION_KEY.isSelected]: isSelected
@@ -465,11 +478,11 @@
                 });
 
                 if(this.searchable && queryString !== '') {
-                    list = _.filter(list, item => {
-                        let label = _.toLower(_.get(item, optionLabel, ''));
+                    list = filter(list, item => {
+                        let label = toLower(get(item, optionLabel, ''));
 
                         if (label !== '') {
-                            return label.match(_.toLower(queryString))
+                            return label.match(toLower(queryString))
                         }
 
                         return true;
@@ -485,7 +498,7 @@
              * @param newList
              */
             setList(newList = []) {
-                newList = _.isArray(newList) ? newList : [];
+                newList = isArray(newList) ? newList : [];
                 this.list = newList;
             },
 
@@ -568,11 +581,11 @@
                 this.$emit('change', value);
             },
 
-            handleShow(event) {
+            handleShow() {
                 this.showList();
             },
 
-            handleHide(event) {
+            handleHide() {
                 this.hideList();
             },
 

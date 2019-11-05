@@ -1,5 +1,9 @@
 <script>
-    import _ from '../../utils';
+    import {
+        isNumber,
+        isString,
+        toString
+    } from '../../utils/helpers';
     import {CIcon} from '../icon';
 
     export default {
@@ -31,7 +35,7 @@
                 value: propValue = '',
             } = props;
             const $slots = slots();
-            const value = !_.isNumber(propValue) && !_.isString(propValue) ? '' : _.toString(propValue);
+            const value = !isNumber(propValue) && !isString(propValue) ? '' : toString(propValue);
 
             const hasIcon = propIcon !== '';
             const hasColor = propColor !== '';

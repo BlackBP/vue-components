@@ -1,5 +1,13 @@
 <script>
-    import _ from '../../utils';
+    import {
+        each,
+        get,
+        filter,
+        isNumber,
+        isNaN,
+        toString,
+        isEmpty
+    } from '../../utils/helpers';
 
     export default {
         name: "c-service-form-validate",
@@ -26,10 +34,10 @@
         watch: {
             data: {
                 deep: true,
-                handler(data, oldValue) {
+                handler(data) {
                     let errors = {};
 
-                    _.each(data, (value, key) => {
+                    each(data, (value, key) => {
                         errors[key] = this.test(value, key)
                     });
 
@@ -42,9 +50,9 @@
         methods: {
             test(value = '', key = '') {
                 let errors = [];
-                let rules = _.get(this.rules, key, {});
+                let rules = get(this.rules, key, {});
 
-                _.each(rules, (condition, ruleName) => {
+                each(rules, (condition, ruleName) => {
                     switch (ruleName) {
                         case 'required':
                             if (condition) {
@@ -54,15 +62,15 @@
                     }
                 });
 
-                return _.filter(errors, item => item !== '')
+                return filter(errors, item => item !== '')
             },
             testIsRequired(value = '') {
-                if (_.isNumber(value)) {
-                    value = _.isNaN(value) ? '' : value;
-                    value = _.toString(value)
+                if (isNumber(value)) {
+                    value = isNaN(value) ? '' : value;
+                    value = toString(value)
                 }
 
-                if (_.isEmpty(value)) {
+                if (isEmpty(value)) {
                     return 'Обязательно для заполнения.'
                 }
 

@@ -1,13 +1,20 @@
-import _ from '../utils';
+import {
+    toString,
+    isArray
+} from '../utils/helpers';
 
 const MODEL = {
     prop: 'value',
-    event: 'change',
+    event: 'input',
 };
 
 export default {
     model: MODEL,
     props: {
+        value: {
+            type: null,
+            default: ''
+        },
         disabled: {
             type: Boolean,
             default: false,
@@ -24,10 +31,6 @@ export default {
             type: String,
             default: '',
         },
-        value: {
-            type: null,
-            default: ''
-        },
         errors: {
             type: Array,
             default: () => [],
@@ -43,23 +46,16 @@ export default {
     },
     data() {
         return {
-            focused: false,
-            valueLength: 0
+            focused: false
         }
     },
     computed: {
-        model: {
-            get() {
-                return this.value;
-            },
-            set(value) {
-                this.valueLength = _.toString(value).length;
-                this.$emit(MODEL.event, value);
-            }
+        valueLength() {
+            return toString(this.value).length
         },
         hasErrors() {
-            if (_.isArray(this.errors)) {
-                return !_.isEmpty(this.errors)
+            if (isArray(this.errors)) {
+                return this.errors.length > 0
             }
 
             return false;
@@ -82,7 +78,7 @@ export default {
             this.$refs.field.focus();
         },
         handleChange(event) {
-            this.$emit(MODEL.event, event)
+            this.$emit(MODEL.event, event.target.value)
         },
         handleKeyPress(event) {
             this.$emit('keypress', event)

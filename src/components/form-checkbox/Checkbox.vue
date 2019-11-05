@@ -28,7 +28,10 @@
 </template>
 
 <script>
-    import _ from '../../utils';
+    import {
+        isArray,
+        isBoolean
+    } from '../../utils/helpers';
     import {CIcon} from '../icon';
 
     export default {
@@ -49,9 +52,9 @@
         },
         computed: {
             checked() {
-                if (_.isArray(this.model)) {
+                if (isArray(this.model)) {
                     return this.model.includes(this.value);
-                } else if (_.isBoolean(this.model)) {
+                } else if (isBoolean(this.model)) {
                     return this.model;
                 } else {
                     return this.model == this.value;
@@ -64,7 +67,7 @@
                 let value = this.value;
                 let newValue = value;
 
-                if (_.isArray(this.model)) {
+                if (isArray(this.model)) {
                     newValue = [...this.model];
 
                     if (isChecked) {
@@ -74,7 +77,7 @@
                     }
 
                     this.$emit('change', newValue);
-                } else if (_.isBoolean(this.model)) {
+                } else if (isBoolean(this.model)) {
                     this.$emit('change', isChecked);
                 } else {
                     this.$emit('change', value);

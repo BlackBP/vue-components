@@ -11,14 +11,15 @@
                   :show-counter="showCounter"
                   :show-helper="true">
 
-        <textarea v-model="model"
-                  ref="field"
+        <textarea ref="field"
                   cols="30"
                   class="c-text-area__field"
                   :rows="rows"
                   :disabled="disabled"
                   :readonly="readonly"
                   :placeholder="placeholder"
+                  :value="value"
+                  @input="handleChange"
                   @focus="focused = true"
                   @blur="focused = false"></textarea>
 
