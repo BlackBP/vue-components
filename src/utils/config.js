@@ -1,14 +1,12 @@
+import _ from "lodash";
+
+const CONFIG_KEY = '$componentsConfig';
+
 /**
  *
  * @typedef {{}} ComponentsConfig
  */
-const Config = {
-
-    /**
-     * Register all components or not
-     */
-    includeAll: true,
-
+const DefaultConfig = {
     /**
      * Icon.vue
      * @memberOf ComponentsConfig
@@ -55,4 +53,25 @@ const Config = {
     }
 };
 
-export default Config;
+/**
+ *
+ * @param Vue
+ * @param config
+ */
+export function setConfig(Vue, config) {
+    Vue.prototype[CONFIG_KEY] = _.defaultsDeep(config, DefaultConfig);
+}
+
+
+/**
+ *
+ * @param {Object} context
+ * @param {String} [path]
+ * @return {*}
+ */
+export function getConfig(context = {}, path = '') {
+    let config = _.get(context, CONFIG_KEY, {});
+    return _.get(config, path, {});
+}
+
+export default DefaultConfig;

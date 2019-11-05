@@ -1,5 +1,5 @@
 import Components from './components';
-import {installFactory} from './utils';
+import {installFactory} from './utils/vue';
 
 export {CBadge} from './components/badge';
 export {CBtn} from './components/button';

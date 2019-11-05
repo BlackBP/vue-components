@@ -27,13 +27,6 @@ const {
     get
 } = _;
 
-export {
-    installFactory,
-    registerComponents,
-    getConfig,
-    registerComponent
-} from './vue'
-
 export default {
     isEmpty,
     isNumber,

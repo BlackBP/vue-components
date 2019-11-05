@@ -54,7 +54,8 @@
 
 <script>
     import mixinFormInput from '../../mixins/form-input';
-    import _, {getConfig} from '../../utils';
+    import _ from '../../utils';
+    import {getConfig} from '../../utils/config';
     import {CFormField} from '../form-field';
     import {CIcon} from '../icon';
 
