@@ -1,6 +1,7 @@
 <script>
     import {CIcon} from '../icon';
     import btnMixin from '../../mixins/button';
+    import {createProp} from "../../utils/component";
 
     const ClassName = 'c-btn';
     const IconClassName = `${ClassName}__icon`;
@@ -113,18 +114,9 @@
         functional: true,
         mixins: [btnMixin],
         props: {
-            leading: {
-                type: String,
-                default: ''
-            },
-            trailing: {
-                type: String,
-                default: ''
-            },
-            block: {
-                type: Boolean,
-                default: false
-            }
+            leading: createProp(String, ''),
+            trailing: createProp(String, ''),
+            block: createProp(Boolean, false)
         },
         render(createElement, {data = {}, props = {}, children = [], listeners = {}}) {
             const {

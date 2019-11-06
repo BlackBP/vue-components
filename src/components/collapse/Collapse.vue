@@ -9,6 +9,7 @@
 
 <script>
     import TransitionCollapse from './Transition.vue';
+    import {createProp} from "../../utils/component";
 
     export default {
         name: "c-collapse",
@@ -16,10 +17,7 @@
             TransitionCollapse
         },
         props: {
-            visible: {
-                type: Boolean,
-                default: false
-            }
+            visible: createProp(Boolean, false)
         }
     }
 </script>

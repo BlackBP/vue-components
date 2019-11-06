@@ -33,6 +33,7 @@
         isBoolean
     } from '../../utils/helpers';
     import {CIcon} from '../icon';
+    import {createProp} from "../../utils/component";
 
     export default {
         name: "c-checkbox",
@@ -42,13 +43,10 @@
             event: 'change'
         },
         props: {
-            model: null,
-            value: null,
-            name: String,
-            disabled: {
-                type: Boolean,
-                default: false
-            }
+            model: createProp(null),
+            value: createProp(null),
+            name: createProp(String),
+            disabled: createProp(Boolean, false)
         },
         computed: {
             checked() {

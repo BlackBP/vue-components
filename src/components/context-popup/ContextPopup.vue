@@ -10,6 +10,7 @@
 
 <script>
     import {CCard} from '../card'
+    import {createProp} from "../../utils/component";
 
     export default {
         name: "c-context-popup",
@@ -17,22 +18,10 @@
             CCard
         },
         props: {
-            transition: {
-                type: String,
-                default: ''
-            },
-            closeOnClick: {
-                type: Boolean,
-                default: true
-            },
-            pointerOffset: {
-                type: Number,
-                default: 3
-            },
-            sideOffset: {
-                type: Number,
-                default: 10
-            }
+            transition: createProp(String, ''),
+            closeOnClick: createProp(Boolean, true),
+            pointerOffset: createProp(Number, 3),
+            sideOffset: createProp(Number, 10),
         },
         data() {
             return {

@@ -2,6 +2,7 @@
     import {
         each
     } from '../../utils/helpers';
+    import {createProp} from "../../utils/component";
 
     const ANIMATED_STYLES = {
         opacity: [0, 1],
@@ -59,14 +60,8 @@
         name: "transition-collapse",
         functional: true,
         props: {
-            duration: {
-                type: [Number, String],
-                default: 300
-            },
-            easing: {
-                type: String,
-                default: 'ease-in-out'
-            }
+            duration: createProp([Number, String], 300),
+            easing: createProp(String, 'ease-in-out')
         },
         render(createElement, {props, children}) {
             return createElement('transition', {

@@ -1,5 +1,6 @@
 <script>
     import {CIcon} from '../icon';
+    import {createProp} from "../../utils/component";
 
     /**
      *
@@ -21,22 +22,10 @@
         name: "c-chip",
         functional: true,
         props: {
-            tag: {
-                type: String,
-                default: 'div'
-            },
-            leading: {
-                type: String,
-                default: '',
-            },
-            trailing: {
-                type: String,
-                default: '',
-            },
-            color: {
-                type: String,
-                default: '',
-            }
+            tag: createProp(String, 'div'),
+            leading: createProp(String, ''),
+            trailing: createProp(String, ''),
+            color: createProp(String, '')
         },
         render(h, {data, children, props}) {
             const baseClassName = 'c-chip';
