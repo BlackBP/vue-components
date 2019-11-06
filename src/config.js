@@ -1,7 +1,7 @@
 import {
     defaultsDeep,
     get
-} from '../utils/helpers';
+} from './utils/helpers';
 
 const CONFIG_KEY = '$componentsConfig';
 
@@ -76,5 +76,3 @@ export function getConfig(context = {}, path = '') {
     let config = get(context, CONFIG_KEY, {});
     return get(config, path, {});
 }
-
-export default DefaultConfig;
