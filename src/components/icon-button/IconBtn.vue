@@ -1,6 +1,7 @@
 <script>
     import {CIcon} from '../icon';
     import btnMixin from '../../mixins/button';
+    import {createProp} from "../../utils/component";
 
     const BaseClassName = 'c-icon-btn';
     const IconClassName = `${BaseClassName}__icon`;
@@ -22,7 +23,7 @@
     }
 
     /**
-     *
+     * // TODO: Упростить. Дублируется в Btn.vue
      * @param classNames
      * @param props
      * @return {*[]}
@@ -32,13 +33,15 @@
             color: propColor,
             dense: propDense,
             transparent: propTransparent,
-            elevated: propElevated
+            elevated: propElevated,
+            bordered: propBordered
         } = props;
 
         const modColor = propColor ? `${BaseClassName}--${propColor}` : '',
             modTransparent = `${BaseClassName}--transparent`,
             modElevated = `${BaseClassName}--elevated`,
-            modDense = `${BaseClassName}--dense`;
+            modDense = `${BaseClassName}--dense`,
+            modBordered = `${BaseClassName}--bordered`;
 
         classNames = [
             classNames,
@@ -50,6 +53,11 @@
         ];
 
         // TODO: Найти более лучший способ добавления ОДНОГО из данных классов
+        if (propBordered) {
+            classNames.push(modBordered);
+            return classNames;
+        }
+
         if (propTransparent) {
             classNames.push(modTransparent);
             return classNames;
@@ -68,11 +76,7 @@
         functional: true,
         mixins: [btnMixin],
         props: {
-            icon: {
-                type: String,
-                default: 'dots-horizontal',
-                required: true
-            }
+            icon: createProp(String, 'dots-horizontal', true)
         },
         render(createElement, {data = {}, props = {}, listeners = {}}) {
             const {

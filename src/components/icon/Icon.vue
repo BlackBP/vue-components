@@ -1,27 +1,15 @@
 <script>
     import {getConfig} from '../../config';
+    import {createProp} from "../../utils/component";
 
     export default {
         name: "c-icon",
         functional: true,
         props: {
-            tag: {
-                type: String,
-                default: 'i'
-            },
-            name: {
-                type: String,
-                default: 'dots-horizontal',
-                required: true
-            },
-            size: {
-                type: String,
-                default: ''
-            },
-            vendorPrefix: {
-                type: String,
-                default: 'mdi mdi-'
-            }
+            tag: createProp(String, 'i'),
+            name: createProp(String, 'dots-horizontal', true),
+            size: createProp(String, ''),
+            vendorPrefix: createProp(String, 'mdi mdi-')
         },
         render(createElement, {data, props, parent}) {
             const baseClassName = 'c-icon';

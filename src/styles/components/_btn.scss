@@ -36,6 +36,8 @@
   $btn-icon-margin: .375rem;
   $btn-icon-font-size: 1.1em;
   $btn-transition: $g-transition;
+  $btn-disabled-background-color: $disabled-background-color;
+  $btn-disabled-font-color: $disabled-font-color;
 
   @at-root {
     #{$self} {
@@ -74,9 +76,9 @@
 
       &[disabled],
       &[disabled="disabled"] {
-        border-color: $disabled-background !important;
-        background-color: $disabled-background !important;
-        color: $disabled-font-color !important;
+        border-color: $btn-disabled-background-color !important;
+        background-color: $btn-disabled-background-color !important;
+        color: $btn-disabled-font-color !important;
         box-shadow: none !important;
         cursor: not-allowed !important;
         pointer-events: unset !important;

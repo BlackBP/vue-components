@@ -1,7 +1,6 @@
-@import "../mixins/icon-btn";
+@import "../mixins/btn";
 
 .c-icon-btn {
-  // Element & modifiers vars
   $self: #{&};
   $icon: #{$self}__icon;
 
@@ -17,15 +16,20 @@
   $mod-elevated: #{$self}--elevated;
   $mod-dense: #{$self}--dense;
   $mod-transparent: #{$self}--transparent;
+  $mod-bordered: #{$self}--bordered;
 
   // Configuration
-  $font-size: 24px;
-  $default-size: 1.75em;
-  $dense-size: 1.4em;
-  $font-color: $g-font-color;
-  $background-color: $btn-base-color;
-  $disabled-font-color: $disabled-font-color;
-  $disabled-background: $disabled-background;
+  $btn-border: $g-border-width $g-border-style;
+  $btn-font-size: 24px;
+  $btn-default-size: 1.75em;
+  $btn-dense-size: 1.4em;
+  $btn-font-color: $g-font-color;
+  $btn-background-color: $btn-base-color;
+  $btn-hover-background-color: darken($btn-background-color, 5%);
+  $btn-active-background-color: darken($btn-background-color, 10%);
+  $btn-disabled-font-color: $disabled-font-color;
+  $btn-disabled-background-color: $disabled-background-color;
+  $btn-transition: $g-transition;
 
   // Styles
   @at-root {
@@ -35,35 +39,39 @@
       flex-flow: row nowrap;
       justify-content: center;
       align-items: center;
-      width: $default-size;
-      height: $default-size;
+      width: $btn-default-size;
+      height: $btn-default-size;
       padding: 0;
       margin: 0;
-      border: none;
-      border-radius: calc(#{$default-size} / 2);
-      background: $background-color;
+      border: $btn-border $btn-background-color;
+      border-radius: calc(#{$btn-default-size} / 2);
+      background-color: $btn-background-color;
+      background-clip: border-box;
       color: inherit;
-      font-size: $font-size;
+      font-size: $btn-font-size;
       line-height: 1;
       text-decoration: none;
       cursor: pointer;
-      transition: box-shadow $g-transition, background-color $g-transition, color $g-transition;
+      transition: box-shadow $btn-transition, background-color $btn-transition, color $btn-transition, border-color $btn-transition;
       @include no-select();
 
       &:hover,
       &:focus {
-        background: darken($background-color, 5%);
+        background-color: $btn-hover-background-color;
+        border-color: $btn-hover-background-color;
         text-decoration: none;
       }
 
       &:active {
-        background: darken($background-color, 10%);
+        background-color: $btn-active-background-color;
+        border-color: $btn-active-background-color;
       }
 
       &[disabled],
       &[disabled="disabled"] {
-        background: $disabled-background !important;
-        color: $disabled-font-color !important;
+        background-color: $btn-disabled-background-color !important;
+        border-color: $btn-disabled-background-color !important;
+        color: $btn-disabled-font-color !important;
         box-shadow: none !important;
         cursor: not-allowed !important;
         pointer-events: unset;
@@ -77,37 +85,44 @@
     }
   }
 
-  // Colors
-  @include make-colored($mod-color-primary, $color-primary);
-  @include make-colored($mod-color-secondary, $color-secondary);
-  @include make-colored($mod-color-success, $color-success);
-  @include make-colored($mod-color-error, $color-error);
-  @include make-colored($mod-color-warn, $color-warn);
-  @include make-colored($mod-color-info, $color-info);
-  @include make-colored($mod-color-light, $color-light, $font-color);
-  @include make-colored($mod-color-dark, $color-dark);
+  // Colored
+  @include btn-modifier-colored($mod-color-primary, $color-primary);
+  @include btn-modifier-colored($mod-color-secondary, $color-secondary);
+  @include btn-modifier-colored($mod-color-success, $color-success);
+  @include btn-modifier-colored($mod-color-error, $color-error);
+  @include btn-modifier-colored($mod-color-warn, $color-warn);
+  @include btn-modifier-colored($mod-color-info, $color-info);
+  @include btn-modifier-colored($mod-color-light, $color-light, $btn-font-color);
+  @include btn-modifier-colored($mod-color-dark, $color-dark);
 
   // Transparent
   @include make-modifier($mod-transparent) {
-    background: transparent;
+    background-clip: padding-box;
 
-    &:hover,
-    &:focus {
-      background: rgba(#000, 0.1);
-    }
+    @include btn-transparent($btn-font-color);
+    @include btn-modifier-transparent($mod-color-primary, $color-primary);
+    @include btn-modifier-transparent($mod-color-secondary, $color-secondary);
+    @include btn-modifier-transparent($mod-color-success, $color-success);
+    @include btn-modifier-transparent($mod-color-error, $color-error);
+    @include btn-modifier-transparent($mod-color-warn, $color-warn);
+    @include btn-modifier-transparent($mod-color-info, $color-info);
+    @include btn-modifier-transparent($mod-color-light, $color-light);
+    @include btn-modifier-transparent($mod-color-dark, $color-dark);
+  }
 
-    &:active {
-      background: rgba(#000, 0.2);
-    }
+  // Bordered
+  @include make-modifier($mod-bordered) {
+    background-color: transparent;
 
-    @include make-transparent($mod-color-primary, $color-primary);
-    @include make-transparent($mod-color-secondary, $color-secondary);
-    @include make-transparent($mod-color-success, $color-success);
-    @include make-transparent($mod-color-error, $color-error);
-    @include make-transparent($mod-color-warn, $color-warn);
-    @include make-transparent($mod-color-info, $color-info);
-    @include make-transparent($mod-color-light, $color-light);
-    @include make-transparent($mod-color-dark, $color-dark);
+    @include btn-bordered($btn-font-color);
+    @include btn-modifier-bordered($mod-color-primary, $color-primary);
+    @include btn-modifier-bordered($mod-color-secondary, $color-secondary);
+    @include btn-modifier-bordered($mod-color-success, $color-success);
+    @include btn-modifier-bordered($mod-color-error, $color-error);
+    @include btn-modifier-bordered($mod-color-warn, $color-warn);
+    @include btn-modifier-bordered($mod-color-info, $color-info);
+    @include btn-modifier-bordered($mod-color-light, $color-light, $btn-font-color);
+    @include btn-modifier-bordered($mod-color-dark, $color-dark);
   }
 
   // Elevated
@@ -126,7 +141,7 @@
 
   // Dense
   @include make-modifier($mod-dense) {
-    width: $dense-size;
-    height: $dense-size;
+    width: $btn-dense-size;
+    height: $btn-dense-size;
   }
 }

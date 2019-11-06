@@ -15,6 +15,7 @@
 
         <c-icon-btn icon="close"
                     class="c-notify-item__close-btn"
+                    color="light"
                     :transparent="true"
                     @click.stop="handleClose"/>
     </c-card>

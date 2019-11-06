@@ -1,0 +1,46 @@
+// TODO: Дописать стили для textarea, select
+// Данный класс должен применяться НЕПОСРЕДСТВЕННО на самом теге input/textarea/select
+//.c-form-control {
+//  $self: #{&};
+//
+//  $field-height: calc(1.5em + .875rem);
+//  $field-padding: .375rem .75rem;
+//  $field-background-color: #fff;
+//  $field-placeholder-color: #757575;
+//  $field-border-radius: .375rem;
+//  $field-border: $g-border;
+//  $field-font-color: $g-font-color;
+//  $field-active-color: $color-primary;
+//
+//  @at-root {
+//    #{$self} {
+//      display: block;
+//      width: 100%;
+//      height: $field-height;
+//      padding: $field-padding;
+//      background-color: $field-background-color;
+//      background-clip: padding-box;
+//      border: $field-border;
+//      border-radius: $field-border-radius;
+//      font-size: 1rem;
+//      font-weight: 400;
+//      line-height: 1.5;
+//      transition: border-color $g-transition, box-shadow $g-transition;
+//
+//      &:focus {
+//        border-color: $field-active-color;
+//        outline: 0;
+//        box-shadow: 0 0 .1rem .2rem rgba($field-active-color,.25);
+//      }
+//    }
+//
+//    textarea#{$self} {
+//      height: auto;
+//      resize: none;
+//    }
+//
+//    select#{$self} {
+//      height: auto;
+//    }
+//  }
+//}
