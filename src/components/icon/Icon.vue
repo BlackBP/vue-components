@@ -1,5 +1,5 @@
 <script>
-    import {getConfig} from '../../utils/config';
+    import {getConfig} from '../../config';
 
     export default {
         name: "c-icon",

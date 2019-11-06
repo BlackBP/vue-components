@@ -58,7 +58,7 @@
         isString,
         isFunction
     } from '../../utils/helpers';
-    import {getConfig} from '../../utils/config';
+    import {getConfig} from '../../config';
     import mixinFormInput from '../../mixins/form-input';
     import {CFormField} from '../form-field';
     import {CIcon} from '../icon';

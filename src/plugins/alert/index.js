@@ -1,4 +1,4 @@
-import {pluginFactory} from '../../utils/vue';
+import {pluginFactory} from '../../install';
 import Alert from './Alert.vue';
 
 export const AlertPlugin = pluginFactory((Vue, options = {}) => {

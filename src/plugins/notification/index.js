@@ -1,4 +1,4 @@
-import {pluginFactory} from '../../utils/vue';
+import {pluginFactory} from '../../install';
 import NotificationList from './NotificationList.vue';
 
 export const NotificationPlugin = pluginFactory((Vue, options = {}) => {
