@@ -31,7 +31,7 @@ export {CStackItem, CStackGroup} from './components/stack-group';
 export {CTable} from './components/table';
 
 // Plugins
-export {AlertPlugin} from './plugins/alert';
+// export {AlertPlugin} from './plugins/alert';
 export {NotificationPlugin} from './plugins/notification';
 
 export default installFactory({
