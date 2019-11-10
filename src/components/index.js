@@ -9,10 +9,8 @@ import {CForm} from './form';
 import {CCheckbox} from './form-checkbox';
 import {CFormField} from './form-field';
 import {CRadio} from './form-radio';
-import {CFormRow} from './form-row';
 import {CSelect} from './form-select';
 import {CSwitch} from './form-switch';
-import {CTextArea} from './form-text-area';
 import {CTextInput} from './form-text-input';
 import {CGridCol, CGridContainer, CGridRow} from './grid';
 import {CIcon} from './icon';
@@ -39,10 +37,8 @@ export default {
     CCheckbox,
     CFormField,
     CRadio,
-    CFormRow,
     CSelect,
     CSwitch,
-    CTextArea,
     CTextInput,
     CGridCol,
     CGridContainer,

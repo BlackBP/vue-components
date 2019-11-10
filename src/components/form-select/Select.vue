@@ -1,7 +1,6 @@
 <template>
 
-    <c-form-field class="c-select"
-                  content-class="c-select__wrap"
+    <c-form-input content-class="c-select"
                   tabindex="0"
                   :focused="focused"
                   :has-error="hasErrors"
@@ -105,7 +104,7 @@
             </div>
         </transition>
 
-    </c-form-field>
+    </c-form-input>
 
 </template>
 
@@ -124,7 +123,7 @@
         toLower,
         map
     } from '../../utils/helpers';
-    import {CFormField} from '../form-field';
+    import {CFormInput} from '../form-input';
     import {CIcon} from '../icon';
     import {CChip} from '../chip';
 
@@ -139,7 +138,7 @@
         components: {
             CChip,
             CIcon,
-            CFormField
+            CFormInput
         },
         model: {
             event: 'change'
@@ -243,7 +242,7 @@
         },
         computed: {
             selected() {
-                if(this.multiple) {
+                if (this.multiple) {
                     return isArray(this.value) ? this.value : []
                 } else {
                     return isObjectLike(this.value) ? this.value : {}
@@ -415,7 +414,7 @@
              * Removes last item in selected list
              */
             removeLastItem() {
-                if(isArray(this.selected)) {
+                if (isArray(this.selected)) {
                     this.removeItem(last(this.selected))
                 }
             },
@@ -432,7 +431,7 @@
                 let groupLabel = this.groupLabel;
                 let queryString = this.query;
 
-                if(isEmpty(options)) {
+                if (isEmpty(options)) {
                     this.setList([]);
                     return;
                 }
@@ -477,7 +476,7 @@
                     }
                 });
 
-                if(this.searchable && queryString !== '') {
+                if (this.searchable && queryString !== '') {
                     list = filter(list, item => {
                         let label = toLower(get(item, optionLabel, ''));
 

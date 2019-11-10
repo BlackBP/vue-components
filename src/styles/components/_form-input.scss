@@ -1,0 +1,80 @@
+@import "../mixins/form-input";
+
+.c-form-input {
+  $self: #{&};
+  $label: #{$self}__label;
+  $field: #{$self}__field;
+  $footer: #{$self}__footer;
+  $helper: #{$self}__helper;
+  $counter: #{$self}__counter;
+
+  @at-root {
+    #{$self} {
+      display: block;
+
+      &.is-focused {
+        #{$field} {
+          @include form-input-style-focused;
+        }
+      }
+
+      &.is-disabled,
+      &.is-readonly {
+        #{$field} {
+          @include form-input-style-disabled;
+        }
+      }
+
+      &.has-error {
+        #{$field} {
+          @include form-input-style-error;
+        }
+
+        #{$footer} {
+          color: $form-input-error-color;
+        }
+      }
+
+      &.has-success {
+        #{$field} {
+          @include form-input-style-success;
+        }
+      }
+    }
+
+    #{$field} {
+      display: block;
+      @include form-input-styles;
+    }
+
+    #{$label} {
+      display: inline-block;
+      margin-bottom: .25rem;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    #{$footer} {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: .25rem;
+    }
+
+    #{$helper},
+    #{$counter} {
+      font-size: .8rem;
+    }
+
+    #{$helper} {
+      margin: 0 auto auto 0;
+    }
+
+    #{$counter} {
+      margin: 0 0 auto auto;
+    }
+
+  }
+
+}

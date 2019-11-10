@@ -1,0 +1,127 @@
+.c-select {
+  $self: #{&};
+  $chip: #{$self}__chip;
+  $search: #{$self}__search;
+
+  $field: #{$self}__field;
+  $field-selected: #{$field}-selected;
+  $field-icon: #{$field}-icon;
+
+  $list: #{$self}__list;
+  $list-search: #{$self}__list-search;
+  $list-info: #{$self}__list-info;
+  $list-options: #{$self}__list-options;
+
+  $option: #{$self}__option;
+
+  @at-root {
+
+    #{$self} {
+      position: relative;
+      height: auto;
+    }
+
+    #{$chip} {
+      margin: 0 5px 5px 0;
+      font-size: 0.9em;
+    }
+
+    #{$search} {
+      padding: 0;
+      margin: 0;
+      border: none;
+      cursor: pointer;
+      background: none;
+    }
+
+    #{$field} {
+      flex: 1 1 auto;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+    }
+
+    #{$field-selected} {
+      display: block;
+      width: 100%;
+      @include word-ellipsis();
+    }
+
+    #{$field-icon} {
+      flex: 0 0 auto;
+      display: inline-block;
+      margin: auto 0 auto auto;
+      font-size: 22px;
+    }
+
+    #{$list} {
+      position: absolute;
+      z-index: 3;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+      box-shadow: 0 5px 10px 0 rgba(#000, 0.3);
+    }
+
+    #{$list-search} {
+      display: block;
+      width: 100%;
+      padding: $form-input-padding;
+    }
+
+    #{$list-options} {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    #{$list-info} {
+    }
+
+    #{$option} {
+      display: block;
+      width: 100%;
+      padding: $form-input-padding;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background: rgba(#000, 0.05);
+      }
+
+      &.is-selected {
+        background: $color-primary;
+        color: #fff;
+      }
+
+      &.is-group {
+        background: #ddd;
+        color: $form-input-font-color;
+      }
+    }
+
+  }
+
+  // Transition
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  &-enter,
+  &-leave-active {
+    opacity: 0;
+  }
+
+}

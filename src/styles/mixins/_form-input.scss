@@ -1,0 +1,86 @@
+@mixin form-input-styles {
+  width: 100%;
+  max-width: 100%;
+  height: $form-input-height;
+  min-height: $form-input-height;
+  padding: $form-input-padding;
+  background-color: $form-input-background-color;
+  background-clip: padding-box;
+  border: $form-input-border;
+  border-radius: $form-input-border-radius;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color $g-transition, box-shadow $g-transition;
+  @content
+}
+
+// States
+@mixin form-input-state-focused {
+  &#{$form-input-state-focused} {
+    @include form-input-style-focused;
+    @content
+  }
+}
+
+@mixin form-input-state-error {
+  &#{$form-input-state-error} {
+    @include form-input-style-error;
+    @content
+  }
+}
+
+@mixin form-input-state-success {
+  &#{$form-input-state-success} {
+    @include form-input-style-success;
+    @content
+  }
+}
+
+@mixin form-input-state-disabled-readonly {
+  &#{$form-input-state-disabled},
+  &#{$form-input-state-readonly} {
+    @include form-input-style-disabled;
+    @content
+  }
+}
+
+@mixin form-input-state-disabled {
+  &#{$form-input-state-disabled} {
+    @content
+  }
+}
+
+@mixin form-input-state-readonly {
+  &#{$form-input-state-readonly} {
+    @content
+  }
+}
+
+//
+@mixin form-input-placeholder {
+  &::placeholder {
+    color: $form-input-placeholder-color;
+    opacity: 1;
+  }
+}
+
+// Styles
+@mixin form-input-style-focused {
+  border-color: $form-input-active-color;
+  outline: 0;
+}
+
+@mixin form-input-style-error {
+  border-color: $form-input-error-color;
+  background-color: rgba($form-input-error-color, 0.15);
+}
+@mixin form-input-style-success {
+  border-color: $form-input-success-color;
+  background-color: rgba($form-input-success-color, 0.15);
+}
+
+@mixin form-input-style-disabled {
+  border: $form-input-border !important;
+  background-color: $form-input-disabled-background-color !important;
+}

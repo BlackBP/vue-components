@@ -1,97 +1,136 @@
 <template>
-    <c-form-field class="c-text-input"
-                  content-class="c-text-input__wrap"
-                  :focused="focused"
-                  :has-error="hasErrors"
-                  :helper-text="helperText"
+    <c-form-input :readonly="readonly"
                   :disabled="disabled"
-                  :readonly="readonly"
-                  :count="valueLength"
-                  :count-max="maxLength"
+                  :focused="focused"
+                  :helper="helper"
+                  :errors="errors"
                   :show-counter="showCounter"
-                  :show-helper="true">
+                  :count-max="maxLength"
+                  :count="count"
+                  :content-class="className">
 
-        <template v-if="$slots.leading">
-            <div class="c-text-input__leading">
-                <slot name="leading"/>
-            </div>
+        <template v-if="multiline">
+            <textarea ref="field"
+                      class="c-text-input__field"
+                      :id="inputId"
+                      :rows="rows"
+                      :maxlength="maxLength"
+                      :disabled="disabled"
+                      :readonly="readonly"
+                      :placeholder="placeholder"
+                      :value="value"
+                      @input="onInput"
+                      @focus="onFocus"
+                      @blur="onBlur"></textarea>
         </template>
 
         <template v-else>
-            <c-icon v-if="leading"
-                    class="c-text-input__leading"
-                    :name="leading"/>
-        </template>
+            <div v-if="$slots.leading || leading"
+                 class="c-text-input__leading">
+                <template v-if="$slots.leading">
+                    <slot name="leading"/>
+                </template>
+                <template v-else>
+                    <c-icon v-if="leading"
+                            class="c-text-input__icon"
+                            :name="leading"/>
+                </template>
+            </div>
 
-        <input ref="field"
-               class="c-text-input__field"
-               autocomplete="off"
-               :type="type"
-               :placeholder="placeholder"
-               :disabled="disabled"
-               :readonly="readonly"
-               :min="type === 'number' ? 0 : false"
-               :value="value"
-               @input="handleChange"
-               @keypress="handleKeyPress"
-               @focus="focused = true"
-               @blur="focused = false">
+            <input ref="field"
+                   class="c-text-input__field"
+                   :id="inputId"
+                   :type="type"
+                   :placeholder="placeholder"
+                   :disabled="disabled"
+                   :readonly="readonly"
+                   :value="value"
+                   :maxlength="maxLength"
+                   @input="onInput"
+                   @focus="onFocus"
+                   @blur="onBlur">
 
-        <template v-if="$slots.trailing">
-            <div class="c-text-input__trailing">
-                <slot name="trailing"/>
+            <div v-if="$slots.trailing || trailing"
+                 class="c-text-input__trailing">
+                <template v-if="$slots.trailing">
+                    <slot name="trailing"/>
+                </template>
+                <template v-else>
+                    <c-icon v-if="trailing"
+                            class="c-text-input__icon"
+                            :name="trailing"/>
+                </template>
             </div>
         </template>
-
-        <template v-else>
-            <c-icon v-if="trailing"
-                    class="c-text-input__trailing"
-                    :name="trailing"/>
-        </template>
-
-    </c-form-field>
+    </c-form-input>
 </template>
 
 <script>
     import {
         isObjectLike,
         isString,
-        isFunction
+        isFunction, size
     } from '../../utils/helpers';
+    import {createProp} from '../../utils/component';
     import {getConfig} from '../../config';
-    import mixinFormInput from '../../mixins/form-input';
-    import {CFormField} from '../form-field';
     import {CIcon} from '../icon';
+    import {CFormInput} from '../form-input';
+    import mixinFormInput from '../../mixins/form-input';
+    import mixinFormField from '../../mixins/form-field';
+
+    const MODEL = {
+        prop: 'value',
+        event: 'input'
+    };
 
     export default {
         name: "c-text-input",
-        mixins: [mixinFormInput],
+        model: MODEL,
+        mixins: [mixinFormInput, mixinFormField],
         components: {
-            CIcon,
-            CFormField
+            CFormInput,
+            CIcon
         },
         props: {
-            type: {
-                type: String,
-                default: 'text',
-            },
-            mask: {
-                type: [String, Boolean, Object],
-                default: false,
-            },
-            leading: {
-                type: String,
-                default: '',
-            },
-            trailing: {
-                type: String,
-                default: '',
-            }
+            type: createProp(String, 'text'),
+            multiline: createProp(Boolean, false),
+            mask: createProp([String, Boolean, Object], false),
+            leading: createProp(String, ''),
+            trailing: createProp(String, ''),
+            maxLength: createProp([Number, String], 500),
+            rows: createProp([Number, String], 5)
         },
         computed: {
+            count() {
+                return size(this.value)
+            },
             hasMask() {
                 return isObjectLike(this.mask) || isString(this.mask)
+            },
+            className() {
+                return [
+                    'c-text-input',
+                    {
+                        'is-multiline': this.multiline
+                    }
+                ]
             }
+        },
+        methods: {
+            focus() {
+                this.$refs.field.focus();
+            },
+            onInput(event) {
+                this.$emit(MODEL.event, event.target.value)
+            },
+            onFocus(event) {
+                this.focused = true;
+                this.$emit('focus', event)
+            },
+            onBlur(event) {
+                this.focused = false;
+                this.$emit('blur', event)
+            },
         },
         mounted() {
             const config = getConfig(this, 'textInput');
