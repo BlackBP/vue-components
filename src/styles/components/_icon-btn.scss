@@ -18,19 +18,6 @@
   $mod-transparent: #{$self}--transparent;
   $mod-bordered: #{$self}--bordered;
 
-  // Configuration
-  $btn-border: $g-border-width $g-border-style;
-  $btn-font-size: 24px;
-  $btn-default-size: 1.75em;
-  $btn-dense-size: 1.4em;
-  $btn-font-color: $g-font-color;
-  $btn-background-color: $btn-base-color;
-  $btn-hover-background-color: darken($btn-background-color, 5%);
-  $btn-active-background-color: darken($btn-background-color, 10%);
-  $btn-disabled-font-color: $disabled-font-color;
-  $btn-disabled-background-color: $disabled-background-color;
-  $btn-transition: $g-transition;
-
   // Styles
   @at-root {
 
@@ -39,20 +26,20 @@
       flex-flow: row nowrap;
       justify-content: center;
       align-items: center;
-      width: $btn-default-size;
-      height: $btn-default-size;
+      width: $icon-btn-default-size;
+      height: $icon-btn-default-size;
       padding: 0;
       margin: 0;
       border: $btn-border $btn-background-color;
-      border-radius: calc(#{$btn-default-size} / 2);
+      border-radius: calc(#{$icon-btn-default-size} / 2);
       background-color: $btn-background-color;
       background-clip: border-box;
       color: inherit;
-      font-size: $btn-font-size;
+      font-size: $icon-btn-font-size;
       line-height: 1;
       text-decoration: none;
       cursor: pointer;
-      transition: box-shadow $btn-transition, background-color $btn-transition, color $btn-transition, border-color $btn-transition;
+      transition: box-shadow $g-transition, background-color $g-transition, color $g-transition, border-color $g-transition;
       @include no-select();
 
       &:hover,
@@ -141,7 +128,8 @@
 
   // Dense
   @include make-modifier($mod-dense) {
-    width: $btn-dense-size;
-    height: $btn-dense-size;
+    width: $icon-btn-dense-size;
+    height: $icon-btn-dense-size;
+    font-size: $icon-btn-dense-font-size;
   }
 }

@@ -3,8 +3,8 @@
     import btnMixin from '../../mixins/button';
     import {createProp} from "../../utils/component";
 
-    const BaseClassName = 'c-icon-btn';
-    const IconClassName = `${BaseClassName}__icon`;
+    const ClassName = 'c-icon-btn';
+    const IconClassName = `${ClassName}__icon`;
 
     /**
      *
@@ -13,7 +13,7 @@
      * @param className
      * @return {{}|null}
      */
-    function createIcon(createElement, name = '', className = '') {
+    function createIcon(createElement, name = '', className) {
         return name ? createElement(CIcon, {
             class: className,
             props: {
@@ -24,29 +24,31 @@
 
     /**
      * // TODO: Упростить. Дублируется в Btn.vue
-     * @param classNames
+     * @param className
      * @param props
      * @return {*[]}
      */
-    function getClassNames(classNames, props = {}) {
+    function getClassNames(className, props = {}) {
         const {
             color: propColor,
+            size: propSize,
             dense: propDense,
             transparent: propTransparent,
             elevated: propElevated,
             bordered: propBordered
         } = props;
 
-        const modColor = propColor ? `${BaseClassName}--${propColor}` : '',
-            modTransparent = `${BaseClassName}--transparent`,
-            modElevated = `${BaseClassName}--elevated`,
-            modDense = `${BaseClassName}--dense`,
-            modBordered = `${BaseClassName}--bordered`;
+        const modColor = propColor ? `${className}--${propColor}` : '',
+            modSize = propSize ? `${className}--${propSize}` : '',
+            modTransparent = `${className}--transparent`,
+            modElevated = `${className}--elevated`,
+            modDense = `${className}--dense`,
+            modBordered = `${className}--bordered`;
 
-        classNames = [
-            classNames,
-            BaseClassName,
+        const classNames = [
+            className,
             modColor,
+            modSize,
             {
                 [modDense]: propDense
             }
@@ -87,25 +89,27 @@
             } = props;
 
             const {
-                attrs: dataAttrs = {},
+                attrs = {},
             } = data;
 
             const {
                 click: listenerClick = () => {
-                }
+                },
+                ...restListeners
             } = listeners;
 
             // Data bindings
             data.attrs = {
-                ...dataAttrs,
+                ...attrs,
                 disabled: propDisabled,
                 type: propType
             };
 
-            data.class = getClassNames(data.class, props);
+            data.class = [data.class, getClassNames(ClassName, props)];
 
             data.on = {
-                click(event) {
+                ...restListeners,
+                click: (event) => {
                     if (propDisabled) return;
                     listenerClick(event);
                 }

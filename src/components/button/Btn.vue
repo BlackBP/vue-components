@@ -32,6 +32,7 @@
     function getClassNames(className, props = {}) {
         const {
             color: propColor,
+            size: propSize,
             block: propBlock,
             bordered: propBordered,
             transparent: propTransparent,
@@ -39,6 +40,7 @@
         } = props;
 
         const modElevated = `${className}--elevated`,
+            modSize = propSize ? `${className}--${propSize}` : '',
             modTransparent = `${className}--transparent`,
             modBordered = `${className}--bordered`,
             modBlock = `${className}--block`,
@@ -85,22 +87,24 @@
         } = props;
 
         const {
-            attrs: dataAttrs,
+            attrs = {},
         } = data;
 
         const {
             click: listenerClick = () => {
-            }
+            },
+            ...restListeners
         } = listeners;
 
         data.attrs = {
-            ...dataAttrs,
+            ...attrs,
             disabled: propDisabled,
             type: propType
         };
 
         data.on = {
-            click(event) {
+            ...restListeners,
+            click: (event) => {
                 if (propDisabled) return;
                 listenerClick(event);
             }

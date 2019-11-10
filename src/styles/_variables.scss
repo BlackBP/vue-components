@@ -1,4 +1,4 @@
-// === Colors
+// Colors
 $color-primary: #61BD4F !default;
 $color-secondary: #FFA726 !default;
 
@@ -14,15 +14,14 @@ $color-grey: #DDDDDD !default;
 $color-grey-dark: darken($color-grey, 15%) !default;
 $color-grey-light: lighten($color-grey, 10%) !default;
 
-$color-disabled: #CCC !default;
+$color-disabled: #EDEDED !default;
 $color-enabled: $color-primary !default;
 
-// === Global
 // Typography
 $g-font-family: 'Roboto', sans-serif !default;
 $g-font-size: 16px !default;
 $g-font-weight: 400 !default;
-$g-font-color: #3c4858 !default;
+$g-font-color: #3C4858 !default;
 $g-line-height: 1.25 !default;
 
 // Selected text
@@ -30,7 +29,7 @@ $g-selected-font-color: #FFF !default;
 $g-selected-background: $color-primary !default;
 
 // Border
-$g-border: 2px solid #DDD;
+$g-border: 1px solid #DDD;
 $g-border-width: nth($g-border, 1) !default;
 $g-border-style: nth($g-border, 2) !default;
 $g-border-color: nth($g-border, 3) !default;
@@ -42,10 +41,6 @@ $g-transition: .15s ease-in-out !default;
 
 // Gutter
 $g-gutter: 15px !default;
-
-// Disabled state
-$disabled-background-color: #DDD !default;
-$disabled-font-color: $g-font-color !default;
 
 // Elevation
 $elevation-start-index: 0 !default;
@@ -137,9 +132,56 @@ $elevation-ambient-map: (
         24: "0px 9px 46px 8px"
 ) !default;
 
-// === Components
+// === Components ===
 // Card
 $card-padding: $g-gutter;
 
-// Buttons
+// Button
 $btn-base-color: #EEE !default;
+$btn-height: calc(1.5em + .875rem) !default;
+$btn-padding: .375rem 1rem !default;
+$btn-border: $g-border-width $g-border-style !default;
+$btn-border-radius: $g-border-radius !default;
+$btn-background-color: $btn-base-color !default;
+$btn-hover-background-color: darken($btn-background-color, 5%) !default;
+$btn-active-background-color: darken($btn-background-color, 10%) !default;
+$btn-font-color: $g-font-color !default;
+$btn-font-size: 1em !default;
+$btn-font-weight: 600 !default;
+$btn-line-height: 1.5 !default;
+$btn-icon-margin: .375rem !default;
+$btn-icon-font-size: 1.1em !default;
+$btn-disabled-background-color: $color-disabled !default;
+$btn-disabled-font-color: darken($color-disabled, 10%) !default;
+
+// Icon button
+$icon-btn-font-size: 1.5rem;
+$icon-btn-default-size: 1.75em;
+$icon-btn-dense-size: 1.25em;
+$icon-btn-dense-font-size: 1.25rem;
+
+// Form input
+$form-input-state-focused: #{'.is-focused'};
+$form-input-state-error: #{'.has-error'};
+$form-input-state-success: #{'.has-success'};
+$form-input-state-readonly: #{'.is-readonly'};
+$form-input-state-disabled: #{'.is-disabled'};
+
+$form-input-height: calc(1.5em + .875rem) !default;
+$form-input-padding: .375rem .75rem !default;
+$form-input-background-color: #FFFFFF !default;
+$form-input-placeholder-color: #757575 !default;
+$form-input-border-radius: .375rem !default;
+$form-input-border: $g-border !default;
+$form-input-font-color: $g-font-color !default;
+$form-input-active-color: $color-primary !default;
+$form-input-disabled-background-color: #E7E7E7 !default;
+$form-input-error-color: $color-error;
+$form-input-success-color: $color-success;
+
+// Text input
+$text-input-icon-color: $g-font-color !default;
+$text-input-icon-size: 1.5rem !default;
+$text-input-icon-gutter: .625rem !default;
+$text-input-icon-opacity: .7 !default;
+$text-input-icon-active-opacity: 1 !default;

@@ -21,24 +21,6 @@
   $mod-transparent: #{$self}--transparent;
   $mod-block: #{$self}--block;
 
-  // Configuration
-  $btn-height: calc(1.5em + .875rem);
-  $btn-padding: .375rem 1rem;
-  $btn-border: $g-border-width $g-border-style;
-  $btn-border-radius: $g-border-radius;
-  $btn-background-color: $btn-base-color;
-  $btn-hover-background-color: darken($btn-background-color, 5%);
-  $btn-active-background-color: darken($btn-background-color, 10%);
-  $btn-font-color: $g-font-color;
-  $btn-font-size: 1em;
-  $btn-font-weight: 600;
-  $btn-line-height: 1.5;
-  $btn-icon-margin: .375rem;
-  $btn-icon-font-size: 1.1em;
-  $btn-transition: $g-transition;
-  $btn-disabled-background-color: $disabled-background-color;
-  $btn-disabled-font-color: $disabled-font-color;
-
   @at-root {
     #{$self} {
       display: inline-flex;
@@ -59,7 +41,7 @@
       line-height: $btn-line-height;
       text-decoration: none;
       cursor: pointer;
-      transition: box-shadow $btn-transition, background-color $btn-transition, color $btn-transition, border-color $btn-transition;
+      transition: box-shadow $g-transition, background-color $g-transition, color $g-transition, border-color $g-transition;
       @include no-select();
 
       &:hover,
@@ -74,8 +56,7 @@
         border-color: $btn-active-background-color;
       }
 
-      &[disabled],
-      &[disabled="disabled"] {
+      &:disabled {
         border-color: $btn-disabled-background-color !important;
         background-color: $btn-disabled-background-color !important;
         color: $btn-disabled-font-color !important;
