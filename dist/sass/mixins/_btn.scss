@@ -1,16 +1,22 @@
 // Colored
-@mixin btn-colored($background, $font-color: #fff) {
-  background: $background;
+@mixin btn-colored($background-color, $font-color: #fff) {
+  $hover-background-color: lighten($background-color, 5%);
+  $active-background-color: darken($background-color, 5%);
+
+  background-color: $background-color;
+  border-color: $background-color;
   color: $font-color;
 
   &:hover,
   &:focus {
-    background: lighten($background, 5%);
+    background-color: $hover-background-color;
+    border-color: $hover-background-color;
     color: $font-color;
   }
 
   &:active {
-    background: darken($background, 5%);
+    background-color: $active-background-color;
+    border-color: $active-background-color;
     color: $font-color;
   }
 }
@@ -23,16 +29,22 @@
 
 // Transparent
 @mixin btn-transparent($color) {
-  background: transparent;
+  $hover-color: rgba($color, 0.2);
+  $active-color: rgba(darken($color, 5%), 0.3);
+
+  background-color: transparent;
+  border-color: transparent;
   color: $color;
 
   &:hover,
   &:focus {
-    background: rgba($color, 0.2);
+    background-color: $hover-color;
+    border-color: $hover-color;
   }
 
   &:active {
-    background: rgba(darken($color, 5%), 0.3);
+    background-color: $active-color;
+    border-color: $active-color;
   }
 }
 
@@ -46,18 +58,20 @@
 @mixin btn-bordered($color, $hover-font-color: #fff) {
   $active-background-color: darken($color, 5%);
 
-  background: transparent;
+  background-color: transparent;
   border-color: $color;
   color: $color;
 
   &:hover,
   &:focus {
-    background: $color;
+    background-color: $color;
+    border-color: $color;
     color: $hover-font-color;
   }
 
   &:active {
-    background: $active-background-color;
+    background-color: $active-background-color;
+    border-color: $active-background-color;
     color: $hover-font-color;
   }
 }

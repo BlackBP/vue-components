@@ -91,8 +91,7 @@
 
       &:after {
         z-index: 1;
-        border: $spinner-border;
-        border-color: $spinner-track-color;
+        border: $spinner-border $spinner-track-color;
       }
 
     }

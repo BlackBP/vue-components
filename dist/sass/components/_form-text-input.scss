@@ -1,0 +1,49 @@
+.c-text-input {
+  $self: #{&};
+  $field: #{$self}__field;
+  $leading: #{$self}__leading;
+  $trailing: #{$self}__trailing;
+  $icon: #{$self}__icon;
+
+  @at-root {
+
+    #{$self} {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: auto;
+    }
+
+    #{$field} {
+      flex: 1 1 auto;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #{$leading},
+    #{$trailing} {
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #{$leading} {
+      margin: auto 0 auto $text-input-icon-gutter;
+    }
+
+    #{$trailing} {
+      margin: auto $text-input-icon-gutter auto 0;
+    }
+
+    #{$icon} {
+      font-size: $text-input-icon-size;
+      line-height: 1;
+      color: $text-input-icon-size;
+    }
+
+  }
+
+}

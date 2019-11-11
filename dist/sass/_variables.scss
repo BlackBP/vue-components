@@ -1,4 +1,4 @@
-// === Colors
+// Colors
 $color-primary: #61BD4F !default;
 $color-secondary: #FFA726 !default;
 
@@ -14,10 +14,9 @@ $color-grey: #DDDDDD !default;
 $color-grey-dark: darken($color-grey, 15%) !default;
 $color-grey-light: lighten($color-grey, 10%) !default;
 
-$color-disabled: #CCC !default;
+$color-disabled: #EDEDED !default;
 $color-enabled: $color-primary !default;
 
-// === Global
 // Typography
 $g-font-family: 'Roboto', sans-serif !default;
 $g-font-size: 16px !default;
@@ -34,18 +33,14 @@ $g-border: 1px solid #DDD;
 $g-border-width: nth($g-border, 1) !default;
 $g-border-style: nth($g-border, 2) !default;
 $g-border-color: nth($g-border, 3) !default;
-$g-border-radius: 6px !default;
-$g-border-radius-lg: 12px !default;
+$g-border-radius: .375rem !default;
+$g-border-radius-lg: .75rem !default;
 
 // Transition
-$g-transition: 0.2s ease !default;
+$g-transition: .15s ease-in-out !default;
 
 // Gutter
 $g-gutter: 15px !default;
-
-// Disabled state
-$disabled-background: #DDD !default;
-$disabled-font-color: $g-font-color !default;
 
 // Elevation
 $elevation-start-index: 0 !default;
@@ -137,10 +132,44 @@ $elevation-ambient-map: (
         24: "0px 9px 46px 8px"
 ) !default;
 
-// === Components
-
+// === Components ===
 // Card
 $card-padding: $g-gutter;
 
-// Buttons
+// Button
 $btn-base-color: #EEE !default;
+$btn-height: calc(1.5em + .875rem) !default;
+$btn-padding: .375rem 1rem !default;
+$btn-border: $g-border-width $g-border-style !default;
+$btn-border-radius: $g-border-radius !default;
+$btn-background-color: $btn-base-color !default;
+$btn-hover-background-color: darken($btn-background-color, 5%) !default;
+$btn-active-background-color: darken($btn-background-color, 10%) !default;
+$btn-font-color: $g-font-color !default;
+$btn-font-size: 1em !default;
+$btn-font-weight: 600 !default;
+$btn-line-height: 1.5 !default;
+$btn-icon-margin: .375rem !default;
+$btn-icon-font-size: 1.1em !default;
+$btn-transition: $g-transition !default;
+$btn-disabled-background-color: $color-disabled !default;
+$btn-disabled-font-color: darken($color-disabled, 10%) !default;
+
+// Icon button
+$icon-btn-font-size: 1.5rem;
+$icon-btn-default-size: 1.75em;
+$icon-btn-dense-size: 1.4em;
+
+// Form input
+$form-input-height: calc(1.5em + .875rem) !default;
+$form-input-padding: .375rem .75rem !default;
+$form-input-background-color: #fff !default;
+$form-input-placeholder-color: #757575 !default;
+$form-input-border-radius: .375rem !default;
+$form-input-border: $g-border !default;
+$form-input-font-color: $g-font-color !default;
+$form-input-active-color: $color-primary !default;
+
+// Text input
+$text-input-icon-size: 1.5rem !default;
+$text-input-icon-gutter: .625rem !default;

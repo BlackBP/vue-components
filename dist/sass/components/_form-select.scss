@@ -1,0 +1,134 @@
+//.c-select {
+//  $self: #{&};
+//  $wrap: #{$self}__wrap;
+//  $chip: #{$self}__chip;
+//
+//  $field: #{$self}__field;
+//  $field-input: #{$field}-input;
+//  $field-icon: #{$field}-icon;
+//  $field-label: #{$field}-label;
+//
+//  $list: #{$self}__list;
+//  $list-info: #{$self}__list-info;
+//  $list-options: #{$self}__list-options;
+//
+//  $option: #{$self}__option;
+//
+//  @at-root {
+//
+//    #{$self} {
+//      cursor: pointer;
+//
+//      // Transition
+//      &-trans-enter-active,
+//      &-trans-leave-active {
+//        transition: opacity 0.2s ease;
+//      }
+//
+//      &-trans-enter,
+//      &-trans-leave-active {
+//        opacity: 0;
+//      }
+//    }
+//
+//    #{$wrap} {
+//      position: relative;
+//    }
+//
+//    #{$chip} {
+//      margin: 0 5px 5px 0;
+//      font-size: 0.9em;
+//    }
+//
+//    #{$field} {
+//      flex: 1 1 auto;
+//      display: flex;
+//      flex-flow: row nowrap;
+//      justify-content: space-between;
+//      align-items: center;
+//      width: 100%;
+//      max-width: 100%;
+//      height: auto;
+//      min-height: $field-height;
+//      padding: $field-padding;
+//      margin: 0;
+//      background: none;
+//      border: none;
+//      line-height: 1;
+//      color: $field-font-color;
+//    }
+//
+//    #{$field-label} {
+//      display: block;
+//      width: 100%;
+//      @include word-ellipsis();
+//    }
+//
+//    #{$field-input} {
+//      flex: 1 1 auto;
+//      display: block;
+//      width: 100%;
+//      height: 100%;
+//      border: none;
+//      cursor: pointer;
+//      background: none;
+//
+//      @include input-placeholder() {
+//        color: $field-placeholder-color;
+//        line-height: inherit;
+//        font-size: inherit;
+//      }
+//    }
+//
+//    #{$field-icon} {
+//      flex: 0 0 auto;
+//      display: inline-block;
+//      margin: auto 0 auto auto;
+//      font-size: 22px;
+//    }
+//
+//    #{$list} {
+//      position: absolute;
+//      z-index: 3;
+//      top: 100%;
+//      left: 0;
+//      right: 0;
+//      display: block;
+//      height: auto;
+//      max-height: 300px;
+//      background: #fff;
+//      box-shadow: 0 5px 10px 0 rgba(#000, 0.3);
+//      overflow-x: hidden;
+//      overflow-y: auto;
+//    }
+//
+//    #{$list-info} {
+//      padding: nth($field-padding, 2);
+//      color: $field-placeholder-color;
+//    }
+//
+//    #{$option} {
+//      display: block;
+//      width: 100%;
+//      padding: nth($field-padding, 2);
+//      cursor: pointer;
+//
+//      &:hover,
+//      &:focus {
+//        background: rgba(#000, 0.05);
+//      }
+//
+//      &.is-selected {
+//        background: $color-primary;
+//        color: #fff;
+//      }
+//
+//      &.is-group {
+//        background: #ddd;
+//        color: $field-font-color;
+//      }
+//    }
+//
+//  }
+//
+//}

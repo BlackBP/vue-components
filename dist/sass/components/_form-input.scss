@@ -1,0 +1,57 @@
+.c-form-input {
+  display: block;
+  width: 100%;
+  height: $form-input-height;
+  padding: $form-input-padding;
+  background-color: $form-input-background-color;
+  background-clip: padding-box;
+  border: $form-input-border;
+  border-radius: $form-input-border-radius;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color $g-transition, box-shadow $g-transition;
+
+  &:focus {
+    border-color: $form-input-active-color;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba($form-input-active-color,.25);
+  }
+
+  &::placeholder {
+    color: $form-input-placeholder-color;
+    opacity: 1;
+  }
+
+  // Disabled & Readonly states
+  &:disabled,
+  &[readonly] {
+    background-color: #e7e7e7;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &[readonly] {
+    cursor: default;
+  }
+
+  // States
+  &.has-error {
+    border-color: $color-error;
+  }
+
+  &.has-success {
+    border-color: $color-success;
+  }
+
+  // Google Chrome autofill input background fix
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    box-shadow: inset 0 0 0 50px $form-input-background-color !important;
+  }
+
+}

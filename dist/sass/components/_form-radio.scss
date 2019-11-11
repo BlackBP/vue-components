@@ -4,8 +4,8 @@
   $label: #{$self}__label;
   $content: #{$self}__content;
 
-  $icon-size: 24px;
-  $padding: 3px 0;
+  $icon-size: 1.5rem;
+  $padding: .125em 0;
 
   @at-root {
 
@@ -69,8 +69,8 @@
 
     #{$content} {
       display: block;
-      margin-left: 10px;
-      margin-top: 4px;
+      margin-left: .625rem;
+      margin-top: .25rem;
     }
 
   }
