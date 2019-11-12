@@ -1,3 +1,40 @@
+@mixin btn-style-base {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border: $btn-border $btn-background-color;
+  background-color: $btn-background-color;
+  background-clip: border-box;
+  color: $btn-font-color;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow $g-transition, background-color $g-transition, color $g-transition, border-color $g-transition;
+
+  &:hover,
+  &:focus {
+    background-color: $btn-hover-background-color;
+    border-color: $btn-hover-background-color;
+    text-decoration: none;
+  }
+
+  &:active {
+    background-color: $btn-active-background-color;
+    border-color: $btn-active-background-color;
+  }
+
+  &:disabled {
+    border-color: $btn-disabled-background-color !important;
+    background-color: $btn-disabled-background-color !important;
+    color: $btn-disabled-font-color !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    pointer-events: unset !important;
+  }
+
+  @content;
+}
+
 // Colored
 @mixin btn-colored($background-color, $font-color: #fff) {
   $hover-background-color: lighten($background-color, 5%);
@@ -79,5 +116,19 @@
 @mixin btn-modifier-bordered($mod-name, $color, $hover-font-color: #fff) {
   @include make-modifier($mod-name) {
     @include btn-bordered($color, $hover-font-color)
+  }
+}
+
+// Elevated
+@mixin btn-elevated() {
+  @include box-elevation(3);
+
+  &:hover,
+  &:focus {
+    @include box-elevation(6)
+  }
+
+  &:active {
+    @include box-elevation(1);
   }
 }

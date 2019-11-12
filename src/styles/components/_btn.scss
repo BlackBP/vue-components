@@ -7,63 +7,28 @@
   $text: #{$self}__text;
 
   // Modifiers vars
-  $mod-color-primary: #{$self}--primary;
-  $mod-color-secondary: #{$self}--secondary;
-  $mod-color-success: #{$self}--success;
-  $mod-color-error: #{$self}--error;
-  $mod-color-warn: #{$self}--warn;
-  $mod-color-info: #{$self}--info;
-  $mod-color-light: #{$self}--light;
-  $mod-color-dark: #{$self}--dark;
-
-  $mod-bordered: #{$self}--bordered;
-  $mod-elevated: #{$self}--elevated;
-  $mod-transparent: #{$self}--transparent;
-  $mod-block: #{$self}--block;
+  $mod-color-primary: #{$self}-primary;
+  $mod-color-secondary: #{$self}-secondary;
+  $mod-color-success: #{$self}-success;
+  $mod-color-error: #{$self}-error;
+  $mod-color-warn: #{$self}-warn;
+  $mod-color-info: #{$self}-info;
+  $mod-color-light: #{$self}-light;
+  $mod-color-dark: #{$self}-dark;
 
   @at-root {
     #{$self} {
-      display: inline-flex;
-      flex-flow: row nowrap;
-      justify-content: center;
-      align-items: center;
+      @include btn-style-base;
+      @include no-select;
+
       width: auto;
-      max-width: 100%;
       height: $btn-height;
       padding: $btn-padding;
-      border: $btn-border $btn-background-color;
       border-radius: $btn-border-radius;
-      background-color: $btn-background-color;
-      background-clip: border-box;
-      color: $btn-font-color;
       font-size: $btn-font-size;
       font-weight: $btn-font-weight;
       line-height: $btn-line-height;
-      text-decoration: none;
-      cursor: pointer;
-      transition: box-shadow $g-transition, background-color $g-transition, color $g-transition, border-color $g-transition;
-      @include no-select();
-
-      &:hover,
-      &:focus {
-        background-color: $btn-hover-background-color;
-        border-color: $btn-hover-background-color;
-        text-decoration: none;
-      }
-
-      &:active {
-        background-color: $btn-active-background-color;
-        border-color: $btn-active-background-color;
-      }
-
-      &:disabled {
-        border-color: $btn-disabled-background-color !important;
-        background-color: $btn-disabled-background-color !important;
-        color: $btn-disabled-font-color !important;
-        box-shadow: none !important;
-        cursor: not-allowed !important;
-        pointer-events: unset !important;
-      }
+      white-space: nowrap;
     }
 
     #{$text} {
@@ -71,6 +36,7 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+      line-height: 1.2;
 
       & + #{$icon} {
         margin-left: $btn-icon-margin;
@@ -79,7 +45,6 @@
 
     #{$icon} {
       flex: 0 0 auto;
-      display: inline-block;
       font-size: $btn-icon-font-size;
 
       & + #{$text} {
@@ -100,7 +65,7 @@
   @include btn-modifier-colored($mod-color-dark, $color-dark);
 
   // Transparent
-  @include make-modifier($mod-transparent) {
+  @include make-modifier($btn-modifier-transparent) {
     background-clip: padding-box;
 
     @include btn-transparent($btn-font-color);
@@ -115,7 +80,7 @@
   }
 
   // Bordered
-  @include make-modifier($mod-bordered) {
+  @include make-modifier($btn-modifier-bordered) {
     background-color: transparent;
 
     @include btn-bordered($btn-font-color);
@@ -130,21 +95,23 @@
   }
 
   // Elevated
-  @include make-modifier($mod-elevated) {
-    @include box-elevation(3);
-
-    &:hover,
-    &:focus {
-      @include box-elevation(6)
-    }
-
-    &:active {
-      @include box-elevation(1);
-    }
+  @include make-modifier($btn-modifier-elevated) {
+    @include btn-elevated;
   }
 
   // Block
-  @include make-modifier($mod-block) {
+  @include make-modifier($btn-modifier-block) {
     width: 100%;
+  }
+
+  // Size
+  @include make-modifier($btn-modifier-small) {
+    font-size: .75rem;
+  }
+  @include make-modifier($btn-modifier-medium) {
+    font-size: 1.25rem;
+  }
+  @include make-modifier($btn-modifier-large) {
+    font-size: 1.5rem;
   }
 }

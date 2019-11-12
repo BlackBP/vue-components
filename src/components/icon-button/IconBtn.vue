@@ -1,6 +1,10 @@
 <script>
     import {CIcon} from '../icon';
-    import btnMixin from '../../mixins/button';
+    import btnMixin, {
+        getColorClassName,
+        getSizeClassName,
+        MODIFIERS_MAP
+    } from '../../mixins/button';
     import {createProp} from "../../utils/component";
 
     const ClassName = 'c-icon-btn';
@@ -13,14 +17,14 @@
      * @param className
      * @return {{}|null}
      */
-    function createIcon(createElement, name = '', className) {
+    const createIcon = (createElement, name = '', className) => {
         return name ? createElement(CIcon, {
             class: className,
             props: {
                 name
             }
         }) : null
-    }
+    };
 
     /**
      * // TODO: Упростить. Дублируется в Btn.vue
@@ -32,42 +36,25 @@
         const {
             color: propColor,
             size: propSize,
-            dense: propDense,
             transparent: propTransparent,
             elevated: propElevated,
             bordered: propBordered
         } = props;
 
-        const modColor = propColor ? `${className}--${propColor}` : '',
-            modSize = propSize ? `${className}--${propSize}` : '',
-            modTransparent = `${className}--transparent`,
-            modElevated = `${className}--elevated`,
-            modDense = `${className}--dense`,
-            modBordered = `${className}--bordered`;
 
         const classNames = [
             className,
-            modColor,
-            modSize,
-            {
-                [modDense]: propDense
-            }
+            getColorClassName(className, propColor),
+            getSizeClassName(propSize)
         ];
 
         // TODO: Найти более лучший способ добавления ОДНОГО из данных классов
         if (propBordered) {
-            classNames.push(modBordered);
-            return classNames;
-        }
-
-        if (propTransparent) {
-            classNames.push(modTransparent);
-            return classNames;
-        }
-
-        if (propElevated) {
-            classNames.push(modElevated);
-            return classNames;
+            classNames.push(MODIFIERS_MAP.bordered);
+        } else if (propTransparent) {
+            classNames.push(MODIFIERS_MAP.transparent);
+        } else if (propElevated) {
+            classNames.push(MODIFIERS_MAP.elevated);
         }
 
         return classNames;
@@ -98,7 +85,6 @@
                 ...restListeners
             } = listeners;
 
-            // Data bindings
             data.attrs = {
                 ...attrs,
                 disabled: propDisabled,

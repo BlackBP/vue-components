@@ -1,7 +1,11 @@
 <script>
-    import {CIcon} from '../icon';
-    import btnMixin from '../../mixins/button';
     import {createProp} from "../../utils/component";
+    import btnMixin, {
+        MODIFIERS_MAP,
+        getColorClassName,
+        getSizeClassName
+    } from '../../mixins/button';
+    import {CIcon} from '../icon';
 
     const ClassName = 'c-btn';
     const IconClassName = `${ClassName}__icon`;
@@ -14,14 +18,14 @@
      * @param className
      * @return {{}|null}
      */
-    function createIcon(createElement, name = '', className = '') {
+    const createIcon = (createElement, name = '', className = '') => {
         return name ? createElement(CIcon, {
             class: className,
             props: {
                 name
             }
         }) : null
-    }
+    };
 
     /**
      *
@@ -39,78 +43,25 @@
             elevated: propElevated,
         } = props;
 
-        const modElevated = `${className}--elevated`,
-            modSize = propSize ? `${className}--${propSize}` : '',
-            modTransparent = `${className}--transparent`,
-            modBordered = `${className}--bordered`,
-            modBlock = `${className}--block`,
-            modColor = `${className}--${propColor}`;
-
         const classNames = [
             className,
+            getSizeClassName(propSize),
+            getColorClassName(className, propColor),
             {
-                [modColor]: !!propColor,
-                [modBlock]: propBlock
+                [MODIFIERS_MAP.block]: propBlock
             }
         ];
 
         // TODO: Найти более лучший способ добавления ОДНОГО из данных классов
         if (propBordered) {
-            classNames.push(modBordered);
-            return classNames;
-        }
-
-        if (propTransparent) {
-            classNames.push(modTransparent);
-            return classNames;
-        }
-
-        if (propElevated) {
-            classNames.push(modElevated);
-            return classNames;
+            classNames.push(MODIFIERS_MAP.bordered);
+        } else if (propTransparent) {
+            classNames.push(MODIFIERS_MAP.transparent);
+        } else if (propElevated) {
+            classNames.push(MODIFIERS_MAP.elevated);
         }
 
         return classNames;
-    }
-
-    /**
-     *
-     * @param data
-     * @param props
-     * @param listeners
-     * @return {{}}
-     */
-    function getData(data = {}, props = {}, listeners = {}) {
-        const {
-            type: propType,
-            disabled: propDisabled,
-        } = props;
-
-        const {
-            attrs = {},
-        } = data;
-
-        const {
-            click: listenerClick = () => {
-            },
-            ...restListeners
-        } = listeners;
-
-        data.attrs = {
-            ...attrs,
-            disabled: propDisabled,
-            type: propType
-        };
-
-        data.on = {
-            ...restListeners,
-            click: (event) => {
-                if (propDisabled) return;
-                listenerClick(event);
-            }
-        };
-
-        return data;
     }
 
     export default {
@@ -129,11 +80,39 @@
                 trailing: propTrailing,
             } = props;
 
-            // CSS class bindings
+            const {
+                type: propType,
+                disabled: propDisabled,
+            } = props;
+
+            const {
+                attrs = {},
+            } = data;
+
+            const {
+                click: listenerClick = () => {
+                },
+                ...restListeners
+            } = listeners;
+
+            data.attrs = {
+                ...attrs,
+                disabled: propDisabled,
+                type: propType
+            };
+
+            data.on = {
+                ...restListeners,
+                click: (event) => {
+                    if (propDisabled) return;
+                    listenerClick(event);
+                }
+            };
+
             data.class = [data.class, getClassNames(ClassName, props)];
 
             // Render
-            return createElement(propTag, getData(data, props, listeners), [
+            return createElement(propTag, data, [
                 // Leading icon
                 createIcon(createElement, propLeading, IconClassName),
 
