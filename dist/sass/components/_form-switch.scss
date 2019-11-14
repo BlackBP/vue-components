@@ -6,24 +6,28 @@
   $toggle-track: #{$toggle}-track;
   $toggle-knob: #{$toggle}-knob;
 
-  $padding: .125rem 0;
-  $track-width: 2.125rem;
-  $track-height: .875rem;
+  $padding: .125em 0;
+  $track-width: 2.125em;
+  $track-height: .875em;
   $track-background-color: lighten($check-color, 20%);
   $knob-size: $check-toggle-size;
-  $knob-transition: .1s nth($g-transition, 2);
+  $knob-transition: .1s ease;
   $track-transition: .1s ease;
 
-  $knob-hover-box-shadow: 0 0 0 10px $check-shadow-color;
-  $knob-press-box-shadow: 0 0 0 10px $check-shadow-press-color;
-  $knob-active-hover-box-shadow: 0 0 0 10px $check-active-shadow-color;
-  $knob-active-press-box-shadow: 0 0 0 10px $check-active-shadow-press-color;
+  $knob-box-shadow: 0 0 0 .5em;
+  $knob-hover-box-shadow: $knob-box-shadow $check-shadow-color;
+  $knob-press-box-shadow: $knob-box-shadow $check-shadow-press-color;
+  $knob-active-hover-box-shadow: $knob-box-shadow $check-active-shadow-color;
+  $knob-active-press-box-shadow: $knob-box-shadow $check-active-shadow-press-color;
 
   @at-root {
     #{$self} {
-      display: inline-block;
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: flex-start;
       position: relative;
-      line-height: 1;
+      font-size: 1rem;
       @include no-select();
 
       &:hover,
@@ -32,9 +36,7 @@
           box-shadow: $knob-hover-box-shadow;
 
           &:before {
-            box-shadow: 0 3px 1px -2px rgba(#000, .2),
-            0 2px 2px 0 rgba(#000, .14),
-            0 1px 5px 0 rgba(#000, .12);
+            box-shadow: $check-toggle-shadow;
           }
         }
       }
@@ -94,16 +96,16 @@
       margin: 0;
       font-weight: 400;
       font-style: normal;
-      line-height: 1;
     }
 
     #{$content} {
       display: block;
-      margin-left: .625rem;
+      padding: $check-content-padding;
     }
 
     #{$toggle} {
       position: relative;
+      margin-top: nth($check-content-padding, 1);
     }
 
     #{$toggle-track} {
@@ -142,7 +144,7 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        border: .125rem solid currentColor;
+        border: .1em solid currentColor;
         color: inherit;
         background-color: #fff;
       }
