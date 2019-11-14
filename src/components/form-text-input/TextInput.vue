@@ -121,7 +121,11 @@
                 this.$refs.field.focus();
             },
             onInput(event) {
-                this.$emit(MODEL.event, event.target.value)
+                let value = event.target.value;
+
+                if(size(value) <= this.maxLength) {
+                    this.$emit(MODEL.event, value)
+                }
             },
             onFocus(event) {
                 this.focused = true;

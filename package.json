@@ -16,7 +16,8 @@
   ],
   "version": "0.10.9",
   "scripts": {
-    "serve-sandbox": "vue-cli-service serve --host=localhost sandbox/app.js",
+    "serve": "vue-cli-service serve --host=192.168.1.102 sandbox/app.js",
+    "serve-local": "vue-cli-service serve --host=localhost sandbox/app.js",
     "build": "rollup -c",
     "build-css": "node-sass --source-map=true --importer=node_modules/node-sass-package-importer/dist/cli.js src/styles/index.scss dist/css/styles.css",
     "build-css-min": "node-sass --output-style=compressed --importer=node_modules/node-sass-package-importer/dist/cli.js src/styles/index.scss dist/css/styles.min.css",

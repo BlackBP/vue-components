@@ -14,7 +14,6 @@
                    @change="handleChange">
 
             <span class="c-radio__toggle">
-                <span class="c-radio__toggle-mark"></span>
                 <span class="c-radio__toggle-box"></span>
                 <span class="c-radio__toggle-shadow"></span>
             </span>

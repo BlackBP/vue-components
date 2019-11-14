@@ -37,7 +37,7 @@ $g-border-radius: .375rem !default;
 $g-border-radius-lg: .75rem !default;
 
 // Transition
-$g-transition: .15s ease-in-out !default;
+$g-transition: .15s ease !default;
 
 // Gutter
 $g-gutter: 15px !default;
@@ -138,11 +138,11 @@ $card-padding: $g-gutter;
 
 // Switch / Checkbox / Radio
 $check-color: #555;
-$check-label-padding: .1875rem 0;
-$check-content-padding: .1875rem 0 0 .625rem;
-$check-toggle-size: 1.25rem;
+$check-label-padding: .1875em 0;
+$check-content-padding: .1875em 0 0 .625em;
+$check-toggle-size: 1.25em;
 $check-toggle-border: .1em solid $check-color;
-$check-toggle-shadow: 0 3px 1px -2px rgba(#000, .2), 0 2px 2px 0 rgba(#000, .14), 0 1px 5px 0 rgba(#000, .12);
+$check-toggle-shadow: 0 .15em .05em -.2em rgba(#000, .2), 0 .2em .2em 0 rgba(#000, .14), 0 .05em .25em 0 rgba(#000, .12);
 $check-transition: .1s ease;
 $check-shadow-color: rgba(#000, .1);
 $check-shadow-press-color: rgba(#000, .2);
