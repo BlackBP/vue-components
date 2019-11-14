@@ -21,7 +21,7 @@ $color-enabled: $color-primary !default;
 $g-font-family: 'Roboto', sans-serif !default;
 $g-font-size: 16px !default;
 $g-font-weight: 400 !default;
-$g-font-color: #3c4858 !default;
+$g-font-color: #3C4858 !default;
 $g-line-height: 1.25 !default;
 
 // Selected text
@@ -138,38 +138,55 @@ $card-padding: $g-gutter;
 
 // Button
 $btn-base-color: #EEE !default;
-$btn-height: calc(1.5em + .875rem) !default;
-$btn-padding: .375rem 1rem !default;
+$btn-height: 2.25em !default;
+$btn-padding: calc(.375em - 1px) 1em !default;
 $btn-border: $g-border-width $g-border-style !default;
 $btn-border-radius: $g-border-radius !default;
 $btn-background-color: $btn-base-color !default;
 $btn-hover-background-color: darken($btn-background-color, 5%) !default;
 $btn-active-background-color: darken($btn-background-color, 10%) !default;
 $btn-font-color: $g-font-color !default;
-$btn-font-size: 1em !default;
+$btn-font-size: 1rem !default;
 $btn-font-weight: 600 !default;
 $btn-line-height: 1.5 !default;
-$btn-icon-margin: .375rem !default;
-$btn-icon-font-size: 1.1em !default;
-$btn-transition: $g-transition !default;
+$btn-icon-margin: .375em !default;
+$btn-icon-font-size: 1.125em !default;
 $btn-disabled-background-color: $color-disabled !default;
 $btn-disabled-font-color: darken($color-disabled, 10%) !default;
+$btn-modifier-transparent: #{'.is-transparent'};
+$btn-modifier-bordered: #{'.is-bordered'};
+$btn-modifier-elevated: #{'.is-elevated'};
+$btn-modifier-block: #{'.is-block'};
+$btn-modifier-small: #{'.is-small'};
+$btn-modifier-medium: #{'.is-medium'};
+$btn-modifier-large: #{'.is-large'};
 
 // Icon button
 $icon-btn-font-size: 1.5rem;
 $icon-btn-default-size: 1.75em;
-$icon-btn-dense-size: 1.4em;
 
 // Form input
+$form-input-state-focused: #{'.is-focused'};
+$form-input-state-error: #{'.has-error'};
+$form-input-state-success: #{'.has-success'};
+$form-input-state-readonly: #{'.is-readonly'};
+$form-input-state-disabled: #{'.is-disabled'};
+
 $form-input-height: calc(1.5em + .875rem) !default;
 $form-input-padding: .375rem .75rem !default;
-$form-input-background-color: #fff !default;
+$form-input-background-color: #FFFFFF !default;
 $form-input-placeholder-color: #757575 !default;
 $form-input-border-radius: .375rem !default;
 $form-input-border: $g-border !default;
 $form-input-font-color: $g-font-color !default;
 $form-input-active-color: $color-primary !default;
+$form-input-disabled-background-color: #E7E7E7 !default;
+$form-input-error-color: $color-error;
+$form-input-success-color: $color-success;
 
 // Text input
+$text-input-icon-color: $g-font-color !default;
 $text-input-icon-size: 1.5rem !default;
 $text-input-icon-gutter: .625rem !default;
+$text-input-icon-opacity: .7 !default;
+$text-input-icon-active-opacity: 1 !default;

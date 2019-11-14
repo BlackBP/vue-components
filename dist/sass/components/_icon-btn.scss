@@ -5,64 +5,28 @@
   $icon: #{$self}__icon;
 
   // Modifiers
-  $mod-color-primary: #{$self}--primary;
-  $mod-color-secondary: #{$self}--secondary;
-  $mod-color-success: #{$self}--success;
-  $mod-color-error: #{$self}--error;
-  $mod-color-warn: #{$self}--warn;
-  $mod-color-info: #{$self}--info;
-  $mod-color-light: #{$self}--light;
-  $mod-color-dark: #{$self}--dark;
-  $mod-elevated: #{$self}--elevated;
-  $mod-dense: #{$self}--dense;
-  $mod-transparent: #{$self}--transparent;
-  $mod-bordered: #{$self}--bordered;
+  $mod-color-primary: #{$self}-primary;
+  $mod-color-secondary: #{$self}-secondary;
+  $mod-color-success: #{$self}-success;
+  $mod-color-error: #{$self}-error;
+  $mod-color-warn: #{$self}-warn;
+  $mod-color-info: #{$self}-info;
+  $mod-color-light: #{$self}-light;
+  $mod-color-dark: #{$self}-dark;
 
   // Styles
   @at-root {
 
     #{$self} {
-      display: inline-flex;
-      flex-flow: row nowrap;
-      justify-content: center;
-      align-items: center;
+      @include btn-style-base;
+      @include no-select;
+
       width: $icon-btn-default-size;
       height: $icon-btn-default-size;
       padding: 0;
-      margin: 0;
-      border: $btn-border $btn-background-color;
       border-radius: calc(#{$icon-btn-default-size} / 2);
-      background-color: $btn-background-color;
-      background-clip: border-box;
-      color: inherit;
-      font-size: $btn-font-size;
+      font-size: $icon-btn-font-size;
       line-height: 1;
-      text-decoration: none;
-      cursor: pointer;
-      transition: box-shadow $btn-transition, background-color $btn-transition, color $btn-transition, border-color $btn-transition;
-      @include no-select();
-
-      &:hover,
-      &:focus {
-        background-color: $btn-hover-background-color;
-        border-color: $btn-hover-background-color;
-        text-decoration: none;
-      }
-
-      &:active {
-        background-color: $btn-active-background-color;
-        border-color: $btn-active-background-color;
-      }
-
-      &[disabled],
-      &[disabled="disabled"] {
-        background-color: $btn-disabled-background-color !important;
-        border-color: $btn-disabled-background-color !important;
-        color: $btn-disabled-font-color !important;
-        box-shadow: none !important;
-        cursor: not-allowed !important;
-        pointer-events: unset;
-      }
     }
 
     #{$icon} {
@@ -83,7 +47,7 @@
   @include btn-modifier-colored($mod-color-dark, $color-dark);
 
   // Transparent
-  @include make-modifier($mod-transparent) {
+  @include make-modifier($btn-modifier-transparent) {
     background-clip: padding-box;
 
     @include btn-transparent($btn-font-color);
@@ -98,7 +62,7 @@
   }
 
   // Bordered
-  @include make-modifier($mod-bordered) {
+  @include make-modifier($btn-modifier-bordered) {
     background-color: transparent;
 
     @include btn-bordered($btn-font-color);
@@ -113,22 +77,20 @@
   }
 
   // Elevated
-  @include make-modifier($mod-elevated) {
-    @include box-elevation(3);
-
-    &:hover,
-    &:focus {
-      @include box-elevation(6)
-    }
-
-    &:active {
-      @include box-elevation(1);
-    }
+  @include make-modifier($btn-modifier-elevated) {
+    @include btn-elevated;
   }
 
-  // Dense
-  @include make-modifier($mod-dense) {
-    width: $icon-btn-dense-size;
-    height: $icon-btn-dense-size;
+  // Size
+  @include make-modifier($btn-modifier-small) {
+    width: 1.25em;
+    height: 1.25em;
+    font-size: 1.25rem;
+  }
+  @include make-modifier($btn-modifier-medium) {;
+    font-size: 1.75rem;
+  }
+  @include make-modifier($btn-modifier-large) {
+    font-size: 2rem;
   }
 }

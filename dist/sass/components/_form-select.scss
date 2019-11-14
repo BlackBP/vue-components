@@ -1,134 +1,158 @@
-//.c-select {
-//  $self: #{&};
-//  $wrap: #{$self}__wrap;
-//  $chip: #{$self}__chip;
-//
-//  $field: #{$self}__field;
-//  $field-input: #{$field}-input;
-//  $field-icon: #{$field}-icon;
-//  $field-label: #{$field}-label;
-//
-//  $list: #{$self}__list;
-//  $list-info: #{$self}__list-info;
-//  $list-options: #{$self}__list-options;
-//
-//  $option: #{$self}__option;
-//
-//  @at-root {
-//
-//    #{$self} {
-//      cursor: pointer;
-//
-//      // Transition
-//      &-trans-enter-active,
-//      &-trans-leave-active {
-//        transition: opacity 0.2s ease;
-//      }
-//
-//      &-trans-enter,
-//      &-trans-leave-active {
-//        opacity: 0;
-//      }
-//    }
-//
-//    #{$wrap} {
-//      position: relative;
-//    }
-//
-//    #{$chip} {
-//      margin: 0 5px 5px 0;
-//      font-size: 0.9em;
-//    }
-//
-//    #{$field} {
-//      flex: 1 1 auto;
-//      display: flex;
-//      flex-flow: row nowrap;
-//      justify-content: space-between;
-//      align-items: center;
-//      width: 100%;
-//      max-width: 100%;
-//      height: auto;
-//      min-height: $field-height;
-//      padding: $field-padding;
-//      margin: 0;
-//      background: none;
-//      border: none;
-//      line-height: 1;
-//      color: $field-font-color;
-//    }
-//
-//    #{$field-label} {
-//      display: block;
-//      width: 100%;
-//      @include word-ellipsis();
-//    }
-//
-//    #{$field-input} {
-//      flex: 1 1 auto;
-//      display: block;
-//      width: 100%;
-//      height: 100%;
-//      border: none;
-//      cursor: pointer;
-//      background: none;
-//
-//      @include input-placeholder() {
-//        color: $field-placeholder-color;
-//        line-height: inherit;
-//        font-size: inherit;
-//      }
-//    }
-//
-//    #{$field-icon} {
-//      flex: 0 0 auto;
-//      display: inline-block;
-//      margin: auto 0 auto auto;
-//      font-size: 22px;
-//    }
-//
-//    #{$list} {
-//      position: absolute;
-//      z-index: 3;
-//      top: 100%;
-//      left: 0;
-//      right: 0;
-//      display: block;
-//      height: auto;
-//      max-height: 300px;
-//      background: #fff;
-//      box-shadow: 0 5px 10px 0 rgba(#000, 0.3);
-//      overflow-x: hidden;
-//      overflow-y: auto;
-//    }
-//
-//    #{$list-info} {
-//      padding: nth($field-padding, 2);
-//      color: $field-placeholder-color;
-//    }
-//
-//    #{$option} {
-//      display: block;
-//      width: 100%;
-//      padding: nth($field-padding, 2);
-//      cursor: pointer;
-//
-//      &:hover,
-//      &:focus {
-//        background: rgba(#000, 0.05);
-//      }
-//
-//      &.is-selected {
-//        background: $color-primary;
-//        color: #fff;
-//      }
-//
-//      &.is-group {
-//        background: #ddd;
-//        color: $field-font-color;
-//      }
-//    }
-//
-//  }
-//
-//}
+@keyframes select-loading-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.c-select {
+  $self: #{&};
+  $selected: #{$self}__selected;
+  $chip: #{$self}__chip;
+  $field: #{$self}__field;
+  $toggle: #{$self}__toggle;
+
+  $list: #{$self}__list;
+  $list-info: #{$self}__list-info;
+  $list-options: #{$self}__list-options;
+
+  $option: #{$self}__option;
+
+  $toggle-font-size: 1.375rem;
+  $option-padding: .375rem .75rem;
+  $option-font-color: $g-font-color;
+  $option-hover-background-color: rgba($color-primary, 0.8);
+  $option-selected-background-color: rgba(#000, 0.1);
+  $option-delete-background-color: rgba($color-error, 0.8);
+  $option-group-background-color: rgba(#000, 0.15);
+
+  @at-root {
+
+    #{$self} {
+      position: relative;
+      height: auto;
+      padding-right: calc(#{nth($form-input-padding, 2)*2} + #{$toggle-font-size});
+    }
+
+    #{$chip} {
+      margin: 0 5px 5px 0;
+      background-color: $option-hover-background-color;
+      color: #fff;
+      font-size: 0.9em;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $option-delete-background-color;
+        color: #fff;
+      }
+    }
+
+    #{$field} {
+      flex: 1 1 auto;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: none;
+      margin: 0;
+    }
+
+    #{$selected} {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+      margin: 0;
+      @include word-ellipsis();
+    }
+
+    #{$toggle} {
+      position: absolute;
+      z-index: 2;
+      top: nth($form-input-padding, 1);
+      right: nth($form-input-padding, 2);
+      font-size: $toggle-font-size;
+      cursor: pointer;
+    }
+
+    #{$list} {
+      position: absolute;
+      z-index: 3;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+      box-shadow: 0 5px 10px 0 rgba(#000, 0.3);
+    }
+
+    #{$list-info} {
+      display: block;
+      width: 100%;
+      padding: $option-padding;
+    }
+
+    #{$list-options} {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    #{$option} {
+      display: block;
+      width: 100%;
+      padding: $option-padding;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background-color: $option-hover-background-color;
+        color: #fff;
+      }
+
+      &.is-selected {
+        font-weight: 600;
+        background-color: $option-selected-background-color;
+        color: $option-font-color;
+
+        &:hover,
+        &:focus {
+          background-color: $option-delete-background-color;
+          color: #fff;
+        }
+      }
+
+      &.is-group {
+        background: $option-group-background-color;
+        color: $option-font-color;
+      }
+    }
+
+  }
+
+  // Transition
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  &-enter,
+  &-leave-active {
+    opacity: 0;
+  }
+
+  &-spin {
+    animation: 0.5s linear infinite select-loading-spin;
+  }
+
+}

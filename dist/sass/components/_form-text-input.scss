@@ -1,3 +1,5 @@
+@import "../mixins/form-input";
+
 .c-text-input {
   $self: #{&};
   $field: #{$self}__field;
@@ -12,14 +14,23 @@
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
-      height: auto;
     }
 
     #{$field} {
       flex: 1 1 auto;
+      display: block;
       width: 100%;
       max-width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      background: none;
+      border: none;
+      outline: none;
+      color: $form-input-font-color;
+      resize: none;
+
+      @include form-input-placeholder;
     }
 
     #{$leading},
@@ -31,19 +42,25 @@
     }
 
     #{$leading} {
-      margin: auto 0 auto $text-input-icon-gutter;
+      margin: auto $text-input-icon-gutter auto 0;
     }
 
     #{$trailing} {
-      margin: auto $text-input-icon-gutter auto 0;
+      margin: auto 0 auto $text-input-icon-gutter;
     }
 
     #{$icon} {
       font-size: $text-input-icon-size;
       line-height: 1;
-      color: $text-input-icon-size;
+      opacity: $text-input-icon-opacity;
+      transition: opacity $g-transition;
     }
 
+  }
+
+  &.is-multiline {
+    display: block;
+    height: auto;
   }
 
 }

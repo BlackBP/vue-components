@@ -1,57 +1,80 @@
+@import "../mixins/form-input";
+
 .c-form-input {
-  display: block;
-  width: 100%;
-  height: $form-input-height;
-  padding: $form-input-padding;
-  background-color: $form-input-background-color;
-  background-clip: padding-box;
-  border: $form-input-border;
-  border-radius: $form-input-border-radius;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  transition: border-color $g-transition, box-shadow $g-transition;
+  $self: #{&};
+  $label: #{$self}__label;
+  $field: #{$self}__field;
+  $footer: #{$self}__footer;
+  $helper: #{$self}__helper;
+  $counter: #{$self}__counter;
 
-  &:focus {
-    border-color: $form-input-active-color;
-    outline: 0;
-    box-shadow: 0 0 0 .2rem rgba($form-input-active-color,.25);
-  }
+  @at-root {
+    #{$self} {
+      display: block;
 
-  &::placeholder {
-    color: $form-input-placeholder-color;
-    opacity: 1;
-  }
+      &.is-focused {
+        #{$field} {
+          @include form-input-style-focused;
+        }
+      }
 
-  // Disabled & Readonly states
-  &:disabled,
-  &[readonly] {
-    background-color: #e7e7e7;
-  }
+      &.is-disabled,
+      &.is-readonly {
+        #{$field} {
+          @include form-input-style-disabled;
+        }
+      }
 
-  &:disabled {
-    cursor: not-allowed;
-  }
+      &.has-error {
+        #{$field} {
+          @include form-input-style-error;
+        }
 
-  &[readonly] {
-    cursor: default;
-  }
+        #{$footer} {
+          color: $form-input-error-color;
+        }
+      }
 
-  // States
-  &.has-error {
-    border-color: $color-error;
-  }
+      &.has-success {
+        #{$field} {
+          @include form-input-style-success;
+        }
+      }
+    }
 
-  &.has-success {
-    border-color: $color-success;
-  }
+    #{$field} {
+      display: block;
+      @include form-input-styles;
+    }
 
-  // Google Chrome autofill input background fix
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus,
-  &:-webkit-autofill:active {
-    box-shadow: inset 0 0 0 50px $form-input-background-color !important;
+    #{$label} {
+      display: inline-block;
+      margin-bottom: .25rem;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    #{$footer} {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: .25rem;
+    }
+
+    #{$helper},
+    #{$counter} {
+      font-size: .8rem;
+    }
+
+    #{$helper} {
+      margin: 0 auto auto 0;
+    }
+
+    #{$counter} {
+      margin: 0 0 auto auto;
+    }
+
   }
 
 }

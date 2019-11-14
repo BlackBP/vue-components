@@ -1,3 +1,24 @@
 .c-form-field {
+  $self: #{&};
+  $label: #{$self}__label;
+
+  @at-root {
+    #{$self} {
+      display: block;
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    #{$label} {
+      display: inline-block;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+      @include no-select;
+    }
+
+  }
 
 }
