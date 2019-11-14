@@ -13,10 +13,13 @@
                    :disabled="disabled"
                    @change="handleChange">
 
-            <span class="c-switch__toggle"></span>
+            <span class="c-switch__toggle">
+                <span class="c-switch__toggle-track"></span>
+                <span class="c-switch__toggle-knob"></span>
+            </span>
 
             <span class="c-switch__content">
-                <slot></slot>
+                <slot />
             </span>
 
         </label>

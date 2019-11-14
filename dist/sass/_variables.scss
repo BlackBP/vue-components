@@ -136,6 +136,24 @@ $elevation-ambient-map: (
 // Card
 $card-padding: $g-gutter;
 
+// Switch / Checkbox / Radio
+$check-color: #555;
+$check-label-padding: .1875rem 0;
+$check-content-padding: .1875rem 0 0 .625rem;
+$check-toggle-size: 1.25rem;
+$check-toggle-border: .1em solid $check-color;
+$check-toggle-shadow: 0 3px 1px -2px rgba(#000, .2), 0 2px 2px 0 rgba(#000, .14), 0 1px 5px 0 rgba(#000, .12);
+$check-transition: .1s ease;
+$check-shadow-color: rgba(#000, .1);
+$check-shadow-press-color: rgba(#000, .2);
+$check-active-color: $color-primary;
+$check-active-shadow-color: rgba($check-active-color, .2);
+$check-active-shadow-press-color: rgba(darken($check-active-color, 10%), .25);
+
+//
+$checkbox-border-radius: .1875rem;
+$checkbox-mark-background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath d='M.04.627L.146.52.43.804.323.91zm.177.177L.854.167.96.273.323.91z' fill='%23fff'/%3E%3C/svg%3E");
+
 // Button
 $btn-base-color: #EEE !default;
 $btn-height: 2.25em !default;

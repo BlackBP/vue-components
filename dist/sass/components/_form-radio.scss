@@ -1,77 +1,50 @@
+@import "../mixins/checkbox-radio";
+
 .c-radio {
   $self: #{&};
-  $icon: #{$self}__icon;
   $label: #{$self}__label;
   $content: #{$self}__content;
-
-  $icon-size: 1.5rem;
-  $padding: .125em 0;
+  $toggle: #{$self}__toggle;
+  $toggle-mark: #{$toggle}-mark;
+  $toggle-box: #{$toggle}-box;
+  $toggle-shadow: #{$toggle}-shadow;
 
   @at-root {
 
     #{$self} {
-      display: inline-block;
-      position: relative;
-      line-height: 1;
-      @include no-select();
+      @include check-styles('radio', $toggle, $toggle-shadow, $toggle-box, $toggle-mark);
+      @include check-label;
+      @include check-content;
+    }
 
-      &:hover,
-      &:focus {
-        #{$icon} {
-          box-shadow: 0 0 0 8px rgba(#000, 0.1);
-          background: rgba(#000, 0.1);
-        }
-      }
-
-      &:active {
-        #{$icon} {
-          box-shadow: 0 0 0 0 rgba($color-enabled, 0.1);
-          background: rgba($color-enabled, 0.1);
-        }
-      }
-
-      input {
-        &:not(:checked),
-        &:checked {
-          display: none;
-          opacity: 0;
-        }
-      }
-
-      &.is-active {
-        #{$icon} {
-          color: $color-enabled;
-        }
+    #{$toggle} {
+      @include check-toggle-styles {
+        border-radius: 50%;
       }
     }
 
-    #{$icon} {
-      display: inline-block;
-      color: $g-font-color;
-      font-size: $icon-size;
-      border-radius: 50%;
-      box-shadow: 0 0 0 0 rgba(#000, 0);
-      transition: box-shadow 0.09s nth($g-transition, 2),
-      border-radius 0.09s nth($g-transition, 2);
-    }
-
-    #{$label} {
-      position: relative;
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: flex-start;
-      align-items: flex-start;
-      padding: $padding;
-      margin: 0;
-      line-height: 1;
-      cursor: pointer;
-    }
-
-    #{$content} {
+    #{$toggle-mark} {
+      position: absolute;
+      z-index: 4;
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      height: 50%;
       display: block;
-      margin-left: .625rem;
-      margin-top: .25rem;
+      background-color: $check-active-color;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform $check-transition;
     }
 
+    #{$toggle-box} {
+      @include check-toggle-box-styles {
+        border-radius: 50%;
+      }
+    }
+
+    #{$toggle-shadow} {
+      @include check-toggle-shadow-styles;
+    }
   }
 }

@@ -3,14 +3,21 @@
   $label: #{$self}__label;
   $content: #{$self}__content;
   $toggle: #{$self}__toggle;
+  $toggle-track: #{$toggle}-track;
+  $toggle-knob: #{$toggle}-knob;
 
   $padding: .125rem 0;
   $track-width: 2.125rem;
   $track-height: .875rem;
-  $knob-size: 1.25rem;
-  $background-color: #CCC;
+  $track-background-color: lighten($check-color, 20%);
+  $knob-size: $check-toggle-size;
   $knob-transition: .1s nth($g-transition, 2);
   $track-transition: .1s ease;
+
+  $knob-hover-box-shadow: 0 0 0 10px $check-shadow-color;
+  $knob-press-box-shadow: 0 0 0 10px $check-shadow-press-color;
+  $knob-active-hover-box-shadow: 0 0 0 10px $check-active-shadow-color;
+  $knob-active-press-box-shadow: 0 0 0 10px $check-active-shadow-press-color;
 
   @at-root {
     #{$self} {
@@ -21,33 +28,60 @@
 
       &:hover,
       &:focus {
-        #{$toggle} {
+        #{$toggle-knob} {
+          box-shadow: $knob-hover-box-shadow;
+
           &:before {
             box-shadow: 0 3px 1px -2px rgba(#000, .2),
             0 2px 2px 0 rgba(#000, .14),
-            0 1px 5px 0 rgba(#000, .12),
-            0 0 0 10px rgba(#000, .05);
+            0 1px 5px 0 rgba(#000, .12);
           }
         }
       }
 
       &:active {
-        #{$toggle} {
-          &:before {
-            box-shadow: 0 3px 1px -2px rgba(#000, .2),
-            0 2px 2px 0 rgba(#000, .14),
-            0 1px 5px 0 rgba(#000, .12),
-            0 0 0 2px rgba($color-enabled, .1);
-          }
+        #{$toggle-knob} {
+          box-shadow: $knob-press-box-shadow;
         }
       }
 
-      input[type="checkbox"],
-      input[type="radio"] {
-        display: none;
-        opacity: 0;
+      input {
+        &[type="checkbox"],
+        &[type="radio"] {
+          display: none;
+          opacity: 0;
+        }
+
+        &:not(:checked),
+        &:checked {
+          display: none;
+          opacity: 0;
+        }
       }
 
+      &.is-active {
+        &:hover,
+        &:focus {
+          #{$toggle-knob} {
+            box-shadow: $knob-active-hover-box-shadow;
+          }
+        }
+
+        &:active {
+          #{$toggle-knob} {
+            box-shadow: $knob-active-press-box-shadow;
+          }
+        }
+
+        #{$toggle-track} {
+          background-color: $check-active-color;
+        }
+
+        #{$toggle-knob} {
+          color: $check-active-color;
+          transform: translateX($track-width - $knob-size);
+        }
+      }
     }
 
     #{$label} {
@@ -63,57 +97,54 @@
       line-height: 1;
     }
 
-    #{$toggle} {
-      display: inline-block;
-      position: relative;
-      z-index: 2;
-      top: .125rem;
-      left: 0;
-      width: $track-width;
-      height: $track-height;
-      border-radius: $track-height / 2;
-      background-color: $background-color;
-      outline: none;
-      cursor: pointer;
-      transition: background-color $track-transition;
-
-      // Knob
-      &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        z-index: 3;
-        top: -.2rem;
-        left: 0;
-        width: $knob-size;
-        height: $knob-size;
-        transform: translateX(0px);
-        border-radius: $knob-size / 2;
-        border: .125rem solid $background-color;
-        background-color: #fff;
-        transition: transform $knob-transition,
-                    background-color $knob-transition,
-                    box-shadow $knob-transition;
-      }
-    }
-
     #{$content} {
       display: block;
-      margin-top: 1px;
       margin-left: .625rem;
     }
 
-    // Active state
-    #{$self} {
-      &.is-active {
-        #{$toggle} {
-          background-color: $color-enabled;
+    #{$toggle} {
+      position: relative;
+    }
 
-          &:before {
-            transform: translateX($track-width - $knob-size);
-            border-color: $color-enabled;
-          }
-        }
+    #{$toggle-track} {
+      display: block;
+      z-index: 2;
+      width: $track-width;
+      height: $track-height;
+      border-radius: $track-height / 2;
+      background-color: $track-background-color;
+      outline: none;
+      cursor: pointer;
+      transition: background-color $track-transition;
+    }
+
+    #{$toggle-knob} {
+      display: block;
+      position: absolute;
+      z-index: 3;
+      top: -.2rem;
+      left: 0;
+      width: 1em;
+      height: 1em;
+      font-size: $check-toggle-size;
+      border-radius: .5em;
+      color: $track-background-color;
+      transform: translateX(0px);
+      transition: transform $knob-transition, box-shadow $knob-transition;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: .125rem solid currentColor;
+        color: inherit;
+        background-color: #fff;
       }
     }
 

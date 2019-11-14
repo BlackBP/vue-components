@@ -13,8 +13,11 @@
                    :disabled="disabled"
                    @change="handleChange">
 
-            <c-icon class="c-radio__icon"
-                    :name="checked ? 'radiobox-marked' : 'radiobox-blank'"/>
+            <span class="c-radio__toggle">
+                <span class="c-radio__toggle-mark"></span>
+                <span class="c-radio__toggle-box"></span>
+                <span class="c-radio__toggle-shadow"></span>
+            </span>
 
             <span class="c-radio__content">
                 <slot></slot>

@@ -13,8 +13,12 @@
                    :disabled="disabled"
                    @change="handleChange">
 
-            <c-icon class="c-checkbox__icon"
-                    :name="checked ? 'checkbox-marked' : 'checkbox-blank-outline'"/>
+            <span class="c-checkbox__toggle">
+                <span class="c-checkbox__toggle-mark"></span>
+                <span class="c-checkbox__toggle-box"></span>
+                <span class="c-checkbox__toggle-shadow"></span>
+            </span>
+
 
             <span v-if="$slots.default"
                   class="c-checkbox__content">
@@ -32,12 +36,10 @@
         isArray,
         isBoolean
     } from '../../utils/helpers';
-    import {CIcon} from '../icon';
     import {createProp} from "../../utils/component";
 
     export default {
         name: "c-checkbox",
-        components: {CIcon},
         model: {
             prop: 'model',
             event: 'change'
