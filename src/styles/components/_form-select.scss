@@ -11,12 +11,10 @@
 
 .c-select {
   $self: #{&};
+  $selected: #{$self}__selected;
   $chip: #{$self}__chip;
-
   $field: #{$self}__field;
-  $field-input: #{$field}-input;
-  $field-selected: #{$field}-selected;
-  $field-icon: #{$field}-icon;
+  $toggle: #{$self}__toggle;
 
   $list: #{$self}__list;
   $list-info: #{$self}__list-info;
@@ -24,6 +22,8 @@
 
   $option: #{$self}__option;
 
+  $toggle-font-size: 1.375rem;
+  $option-padding: .375rem .75rem;
   $option-font-color: $g-font-color;
   $option-hover-background-color: rgba($color-primary, 0.8);
   $option-selected-background-color: rgba(#000, 0.1);
@@ -35,6 +35,7 @@
     #{$self} {
       position: relative;
       height: auto;
+      padding-right: calc(#{nth($form-input-padding, 2)*2} + #{$toggle-font-size});
     }
 
     #{$chip} {
@@ -51,16 +52,6 @@
     }
 
     #{$field} {
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      max-width: 100%;
-      height: 100%;
-    }
-
-    #{$field-input} {
       flex: 1 1 auto;
       display: block;
       width: 100%;
@@ -70,19 +61,23 @@
       margin: 0;
     }
 
-    #{$field-selected} {
-      flex: 1 0 auto;
-      display: block;
-      width: auto;
-      margin: 0 auto 0 0;
+    #{$selected} {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+      margin: 0;
       @include word-ellipsis();
     }
 
-    #{$field-icon} {
-      flex: 0 0 auto;
-      display: inline-block;
-      margin: auto 0 auto auto;
-      font-size: 22px;
+    #{$toggle} {
+      position: absolute;
+      z-index: 2;
+      top: nth($form-input-padding, 1);
+      right: nth($form-input-padding, 2);
+      font-size: $toggle-font-size;
+      cursor: pointer;
     }
 
     #{$list} {
@@ -101,7 +96,7 @@
     #{$list-info} {
       display: block;
       width: 100%;
-      padding: .375rem .75rem;
+      padding: $option-padding;
     }
 
     #{$list-options} {
@@ -116,7 +111,7 @@
     #{$option} {
       display: block;
       width: 100%;
-      padding: .375rem .75rem;
+      padding: $option-padding;
       cursor: pointer;
 
       &:hover,

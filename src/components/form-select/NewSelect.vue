@@ -9,39 +9,38 @@
                   :show-counter="max > 0"
                   :focused="focused">
 
-        <div class="c-select__field">
-            <div class="c-select__field-selected">
-                <template v-if="multiple">
-                    <c-chip v-for="selectedItem in selected"
-                            trailing="close"
-                            class="c-select__chip"
-                            :key="getOptionId(selectedItem)"
-                            @mousedown.prevent
-                            @click="removeOption(selectedItem)">
-                        {{ getOptionText(selectedItem) }}
-                    </c-chip>
-                </template>
+        <div class="c-select__selected">
+            <template v-if="multiple">
+                <c-chip v-for="selectedItem in selected"
+                        trailing="close"
+                        class="c-select__chip"
+                        :key="getOptionId(selectedItem)"
+                        @mousedown.prevent
+                        @click="removeOption(selectedItem)">
+                    {{ getOptionText(selectedItem) }}
+                </c-chip>
+            </template>
 
-                <template v-else>
-                    {{ selected }}
-                </template>
-            </div>
-
-            <input ref="field"
-                   type="text"
-                   class="c-select__field-input"
-                   :id="inputId"
-                   :placeholder="placeholder"
-                   :disabled="disabled"
-                   :readonly="readonly"
-                   :value="query"
-                   @focus="onFocus"
-                   @blur="onBlur"
-                   @input="onSearch">
-
-            <c-icon class="c-select__field-icon"
-                    :name="iconClassName"/>
+            <template v-else>
+                {{ selected }}
+            </template>
         </div>
+
+        <input ref="field"
+               type="text"
+               class="c-select__field"
+               :id="inputId"
+               :placeholder="placeholder"
+               :disabled="disabled"
+               :readonly="!searchable || readonly"
+               :value="query"
+               @focus="onFocus"
+               @blur="onBlur"
+               @input="onSearch">
+
+        <c-icon class="c-select__toggle"
+                :name="iconClassName"
+                @click="showList"/>
 
         <transition name="c-select">
             <div v-show="focused"
@@ -65,12 +64,12 @@
                 <div v-if="hasOptions"
                      class="c-select__list-options"
                      @mousedown.prevent>
-                    <template v-for="option in parsedOptions" >
+                    <template v-for="option in parsedOptions">
                         <div class="c-select__option"
-                             :class="{'is-selected': option.selected}"
+                             :class="[option.selected && 'is-selected', option.group && 'is-group']"
                              :key="option.id"
                              @click="onSelect(option)">
-                            {{ option }}
+                            {{ option.text }}
                         </div>
                     </template>
                 </div>
@@ -106,25 +105,6 @@
         event: 'change'
     };
 
-    /**
-     *
-     * @param id
-     * @param text
-     * @param value
-     * @param selected
-     * @param disabled
-     * @return {{disabled: *, id: *, text: *, value: *, selected: *}}
-     */
-    const createOption = (id, text, value, selected = false, disabled = false) => {
-        return {
-            id,
-            text,
-            value,
-            selected,
-            disabled
-        }
-    };
-
     export default {
         name: "c-select",
         model: MODEL,
@@ -138,9 +118,12 @@
             options: createProp([Array, Object], () => ([])),
             trackBy: createProp(String, 'id'),
             optionText: createProp(String, 'name'),
+            groupValues: createProp(String, ''),
+            groupText: createProp(String, ''),
             max: createProp([String, Number], 0),
             multiple: createProp(Boolean, false),
             toggleable: createProp(Boolean, false),
+            searchable: createProp(Boolean, false),
             emptyPlaceholder: createProp(String, 'Список пуст'),
             maxPlaceholder: createProp(String, 'Выбрано максимальное количество элементов'),
         },
@@ -163,11 +146,11 @@
             selected() {
                 let selected = this.value;
 
-                if(!isArray(selected)) {
-                    selected = [selected]
+                if (isArray(selected)) {
+                    return selected
+                } else {
+                    return [selected]
                 }
-
-                return selected
             },
             selectedCount() {
                 return size(this.selected)
@@ -181,82 +164,147 @@
             hasMax() {
                 let max = parseInt(this.max);
 
-                if(max > 0) {
+                if (max > 0) {
                     return this.selectedCount >= max
                 }
 
                 return false
             },
             iconClassName() {
-                if(this.loading) return 'loading c-select-spin';
+                if (this.loading) return 'loading c-select-spin';
                 return this.focused ? 'menu-up' : 'menu-down';
             }
         },
         methods: {
-            showList() {
-                if(this.focused || this.disabled) return;
-                this.$refs.input.focus()
-            },
-            hideList() {
-                if (!this.focused) return;
-                this.$refs.input.blur()
-            },
+
+            /**
+             *
+             * @param option
+             * @return {*}
+             */
             getOptionText(option) {
-                if(isObjectLike(option)) {
+                if (isObjectLike(option)) {
                     return get(option, this.optionText, '')
                 }
 
                 return option
             },
+
+            /**
+             *
+             * @param option
+             * @return {*}
+             */
             getOptionId(option) {
-                if(isObjectLike(option)) {
+                if (isObjectLike(option)) {
                     return get(option, this.trackBy, '')
                 }
 
                 return option
             },
-            mapOption(option) {
-                let id = this.getOptionId(option);
-                let text = this.getOptionText(option);
-                let value = '';
-                let isSelected = false;
-                let isDisabled = get(option, 'disabled', false);
 
-                if (isObjectLike(option)) {
-                    value = {...option};
+            /**
+             *
+             * @param option
+             */
+            getOptionGroupValues(option) {
+                return get(option, this.groupValues, [])
+            },
+
+            /**
+             *
+             * @param option
+             */
+            getOptionGroupText(option) {
+                return get(option, this.groupText, '')
+            },
+
+            /**
+             *
+             * @param {String|Number|Object} option
+             * @return {{id: [Number|String], text: [Number|String], value: *, selected: Boolean, group: Boolean}}
+             */
+            mapOption(option) {
+                let groupValues = this.getOptionGroupValues(option);
+                let isSelected = false;
+                let isGroup = isArray(groupValues) && size(groupValues) > 0;
+                let id = this.getOptionId(option);
+                let text = isGroup ? this.getOptionGroupText(option) : this.getOptionText(option);
+                let value = '';
+                // let isDisabled = get(option, 'disabled', false); // TODO: Обдумать вариант отключения опции
+
+                if (isGroup) {
+                    value = [...groupValues];
                 } else {
-                    value = option;
+                    if (isObjectLike(option)) {
+                        value = {...option};
+                    } else {
+                        value = option;
+                    }
                 }
 
-                return createOption(id, text, value, isSelected, isDisabled)
+                return {
+                    id,
+                    text,
+                    value,
+                    selected: isSelected,
+                    group: isGroup
+                }
             },
-            parseOptions() {
-                if (!this.hasOptions) return [];
 
-                //TODO: Добавить группы
+            /**
+             *
+             * @param options
+             * @return {Array|*}
+             */
+            mapOptions(options = []) {
+                if (size(options) < 1) return [];
 
-                let options = reduce(this.options, (total, option) => {
+                options = reduce(options, (total, option) => {
+                    let groupValues = [];
+
                     option = this.mapOption(option);
 
-                    if(this.hasSelected) {
+                    // Проверка выбранных опций
+                    if (this.hasSelected) {
                         option.selected = some(this.selected, selectedItem => {
                             return this.getOptionId(selectedItem) == option.id
                         })
                     }
 
-                    total.push(option);
+                    // Распаковка групп
+                    if (option.group) {
+                        groupValues = this.mapOptions(option.value)
+                    }
+
+                    total.push(option, ...groupValues);
 
                     return total
                 }, []);
 
-                if(this.query !== '') {
+                // Проверка на совпадение со строкой поиска
+                if (this.query !== '') {
                     options = options.filter(option => {
+                        if(option.group) return false;
+
                         return toLower(option.text).match(this.query)
                     });
                 }
 
-                this.parsedOptions = options
+                return options
             },
+
+            /**
+             *
+             */
+            parseOptions() {
+                this.parsedOptions = this.mapOptions(this.options)
+            },
+
+            /**
+             *
+             * @param option
+             */
             removeOption(option) {
                 let selected = this.selected.filter(selectedOption => {
                     return this.getOptionId(selectedOption) != this.getOptionId(option)
@@ -264,39 +312,32 @@
 
                 this.emitChange(selected)
             },
-            filterByQuery: debounce(function () {
-                this.parseOptions();
-                this.loading = false;
-            }, 400),
-            onFocus(event) {
-                this.focused = true;
-                this.$emit('focus', event)
-            },
-            onBlur(event) {
-                this.focused = false;
-                this.$emit('blur', event)
-            },
-            onSearch(event) {
-                this.loading = true;
-                this.query = toString(event.target.value);
-                this.filterByQuery()
-            },
+
+            //
+            /**
+             *
+             * @param option
+             */
             onSelect(option = {}) {
                 const {
                     id: optionId,
                     value: optionValue,
+                    group: isGroup,
                     selected: isSelected
                 } = option;
 
-                if(this.multiple) {
+                // TODO: создать возможность выбора группы
+                if (isGroup) return;
+
+                if (this.multiple) {
                     let selected = [...this.selected];
 
-                    if(isSelected) {
+                    if (isSelected) {
                         selected = selected.filter(selectedOption => {
                             return this.getOptionId(selectedOption) != optionId
                         });
                     } else {
-                        if(!this.hasMax) {
+                        if (!this.hasMax) {
                             selected.push(optionValue);
                         }
                     }
@@ -304,8 +345,8 @@
                     this.showList();
                     this.emitChange(selected);
                 } else {
-                    if(isSelected) {
-                        if(this.toggleable) {
+                    if (isSelected) {
+                        if (this.toggleable) {
                             this.emitChange(null)
                         }
                     } else {
@@ -315,11 +356,71 @@
                     this.hideList();
                 }
             },
+
+            /**
+             *
+             * @param event
+             */
+            onFocus(event) {
+                this.focused = true;
+                this.$emit('focus', event)
+            },
+
+            /**
+             *
+             * @param event
+             */
+            onBlur(event) {
+                this.focused = false;
+                this.$emit('blur', event)
+            },
+
+            /**
+             *
+             * @param event
+             */
+            onSearch(event) {
+                this.loading = true;
+                this.query = toString(event.target.value);
+                this.filterByQuery()
+            },
+
+            //
+            /**
+             *
+             */
+            showList() {
+                if (this.focused || this.disabled) return;
+                this.$refs.field.focus()
+            },
+
+            /**
+             *
+             */
+            hideList() {
+                if (!this.focused) return;
+                this.$refs.field.blur()
+            },
+
+            //
+
+            /**
+             *
+             * @param value
+             */
             emitChange(value = null) {
-                if(this.disabled || this.readonly) return;
+                if (this.disabled || this.readonly) return;
 
                 this.$emit(MODEL.event, value)
-            }
+            },
+
+            /**
+             *
+             */
+            filterByQuery: debounce(function () {
+                this.parseOptions();
+                this.loading = false;
+            }, 400),
         },
         mounted() {
             this.parseOptions()
