@@ -1663,16 +1663,8 @@ a {
   padding: 0.1875em 0 0 0.625em; }
 
 .c-switch {
-  display: inline-flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  position: relative;
-  font-size: 1rem;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
+  display: inline-block;
+  font-size: 1rem; }
   .c-switch:hover .c-switch__toggle-knob, .c-switch:focus .c-switch__toggle-knob {
     box-shadow: 0 0 0 0.5em rgba(0, 0, 0, 0.1); }
     .c-switch:hover .c-switch__toggle-knob:before, .c-switch:focus .c-switch__toggle-knob:before {
@@ -1721,6 +1713,7 @@ a {
   height: 0.875em;
   border-radius: 0.4375em;
   background-color: #888888;
+  font-size: inherit;
   outline: none;
   cursor: pointer;
   transition: background-color 0.1s ease; }

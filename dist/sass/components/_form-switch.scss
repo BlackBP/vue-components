@@ -22,13 +22,8 @@
 
   @at-root {
     #{$self} {
-      display: inline-flex;
-      flex-flow: row nowrap;
-      justify-content: flex-start;
-      align-items: flex-start;
-      position: relative;
+      display: inline-block;
       font-size: 1rem;
-      @include no-select();
 
       &:hover,
       &:focus {
@@ -115,6 +110,7 @@
       height: $track-height;
       border-radius: $track-height / 2;
       background-color: $track-background-color;
+      font-size: inherit;
       outline: none;
       cursor: pointer;
       transition: background-color $track-transition;

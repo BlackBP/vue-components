@@ -9,22 +9,25 @@
                   :show-counter="max > 0"
                   :focused="focused">
 
-        <div class="c-select__selected">
-            <template v-if="multiple">
-                <c-chip v-for="selectedItem in selected"
-                        trailing="close"
-                        class="c-select__chip"
-                        :key="getOptionId(selectedItem)"
-                        @mousedown.prevent
-                        @click="removeOption(selectedItem)">
-                    {{ getOptionText(selectedItem) }}
-                </c-chip>
-            </template>
+        <template v-if="hasSelected">
+            <template v-for="selectedItem in selected">
+                <template v-if="multiple">
+                    <c-chip trailing="close"
+                            class="c-select__selected"
+                            :key="getOptionId(selectedItem)"
+                            @mousedown.prevent
+                            @click="removeOption(selectedItem)">
+                        {{ getOptionText(selectedItem) }}
+                    </c-chip>
+                </template>
 
-            <template v-else>
-                {{ selected }}
+                <template v-else>
+                    <c-chip class="c-select__selected">
+                        {{ getOptionText(selectedItem) }}
+                    </c-chip>
+                </template>
             </template>
-        </div>
+        </template>
 
         <input ref="field"
                type="text"
@@ -51,13 +54,11 @@
                     <template v-if="hasMax">
                         <c-chip color="info"
                                 leading="information">
-                            {{ maxPlaceholder }}
+                            {{ maxPlaceholder }} ({{ selectedCount }}/{{ max }})
                         </c-chip>
                     </template>
                     <template v-if="!hasOptions">
-                        <c-chip color="info">
-                            {{ emptyPlaceholder }}
-                        </c-chip>
+                        {{ emptyPlaceholder }}
                     </template>
                 </div>
 
@@ -91,7 +92,7 @@
         some,
         isNumber,
         toString,
-        map, debounce, toLower
+        map, debounce, toLower, isEmpty
     } from '../../utils/helpers';
     import {createProp} from '../../utils/component';
     import {CFormInput} from '../form-input';
@@ -147,10 +148,18 @@
                 let selected = this.value;
 
                 if (isArray(selected)) {
-                    return selected
-                } else {
+                    return size(selected) > 0 ? selected : []
+                }
+
+                if(isNumber(selected)) {
                     return [selected]
                 }
+
+                if(isObjectLike(selected) || isString(selected)) {
+                    return isEmpty(selected) ? [] : [selected]
+                }
+
+                return  []
             },
             selectedCount() {
                 return size(this.selected)
@@ -159,7 +168,7 @@
                 return this.selectedCount > 0
             },
             hasOptions() {
-                return isArray(this.options) && size(this.options) > 0
+                return isArray(this.parsedOptions) && size(this.parsedOptions) > 0
             },
             hasMax() {
                 let max = parseInt(this.max);
@@ -285,7 +294,7 @@
                 // Проверка на совпадение со строкой поиска
                 if (this.query !== '') {
                     options = options.filter(option => {
-                        if(option.group) return false;
+                        if (option.group) return false;
 
                         return toLower(option.text).match(this.query)
                     });

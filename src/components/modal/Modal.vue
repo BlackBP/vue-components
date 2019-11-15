@@ -46,7 +46,7 @@
                                     <div v-if="allowDismiss"
                                          class="c-modal__close-icon">
                                         <c-icon-btn icon="close"
-                                                    :dense="true"
+                                                    color="light"
                                                     :transparent="true"
                                                     @click="close"/>
                                     </div>

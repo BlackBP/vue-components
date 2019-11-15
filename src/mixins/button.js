@@ -30,7 +30,11 @@ export const getSizeClassName = (size = '') => {
  * @return {String}
  */
 export const getColorClassName = (className = '', color = '') => {
-    return `${className}-${color}`
+    if(color !== '') {
+        return `${className}-${color}`
+    }
+
+    return ''
 };
 
 export default {
