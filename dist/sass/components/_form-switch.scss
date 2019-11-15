@@ -105,7 +105,7 @@
 
     #{$toggle} {
       position: relative;
-      margin-top: nth($check-content-padding, 1);
+      margin-top: .25em;
     }
 
     #{$toggle-track} {
@@ -129,6 +129,7 @@
       width: 1em;
       height: 1em;
       font-size: $check-toggle-size;
+      line-height: 1;
       border-radius: .5em;
       color: $track-background-color;
       transform: translateX(0px);

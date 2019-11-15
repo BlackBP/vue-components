@@ -1712,7 +1712,7 @@ a {
 
 .c-switch__toggle {
   position: relative;
-  margin-top: 0.1875em; }
+  margin-top: .25em; }
 
 .c-switch__toggle-track {
   display: block;
@@ -1734,6 +1734,7 @@ a {
   width: 1em;
   height: 1em;
   font-size: 1.25em;
+  line-height: 1;
   border-radius: .5em;
   color: #888888;
   transform: translateX(0px);
@@ -1761,39 +1762,32 @@ a {
     transform: rotate(359deg); } }
 
 .c-select {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
   position: relative;
   height: auto;
   padding-right: calc(1.5rem + 1.375rem); }
 
-.c-select__chip {
+.c-select__selected {
   margin: 0 5px 5px 0;
   background-color: rgba(97, 189, 79, 0.8);
   color: #fff;
   font-size: 0.9em;
   cursor: pointer; }
-  .c-select__chip:hover {
+  .c-select__selected:hover {
     background-color: rgba(255, 82, 82, 0.8);
     color: #fff; }
 
 .c-select__field {
   flex: 1 1 auto;
   display: block;
-  width: 100%;
+  max-width: 100%;
   height: 100%;
   border: none;
   background: none;
   margin: 0; }
-
-.c-select__selected {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis; }
 
 .c-select__toggle {
   position: absolute;

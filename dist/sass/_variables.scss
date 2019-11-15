@@ -194,7 +194,7 @@ $form-input-height: calc(1.5em + .875rem) !default;
 $form-input-padding: .375rem .75rem !default;
 $form-input-background-color: #FFFFFF !default;
 $form-input-placeholder-color: #757575 !default;
-$form-input-border-radius: .375rem !default;
+$form-input-border-radius: $g-border-radius !default;
 $form-input-border: $g-border !default;
 $form-input-font-color: $g-font-color !default;
 $form-input-active-color: $color-primary !default;
