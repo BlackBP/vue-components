@@ -2629,7 +2629,7 @@ html.modal-open {
     vertical-align: middle;
     text-align: inherit; }
 
-.c-table.c-table--width-auto {
+.c-table.is-width-auto {
   width: auto;
   max-width: 100%; }
 

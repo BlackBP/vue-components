@@ -9,7 +9,7 @@
             <tr>
                 <th v-for="(header, key) in headers"
                     :key="`table-header-${key}`">
-                    <slot v-bind="{key, value: header}"
+                    <slot v-bind="{key: key, value: header}"
                           :name="`header-${key}`">
                         {{ header }}
                     </slot>

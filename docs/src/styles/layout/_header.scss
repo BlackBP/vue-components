@@ -1,0 +1,25 @@
+.app-header {
+  $self: #{&};
+  $title: #{$self}__title;
+
+  @at-root {
+    #{$self} {
+      position: fixed;
+      z-index: $layout-header-zIndex;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100vw;
+      height: $layout-header-height;
+      padding: 7px 15px;
+      background-color: $layout-element-background;
+      color: $layout-element-font-color
+    }
+
+    #{$title} {
+      line-height: 1;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+  }
+}

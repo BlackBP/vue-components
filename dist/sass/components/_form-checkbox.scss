@@ -88,7 +88,7 @@
       display: block;
       opacity: 0;
       transform: scale(0);
-      background: $checkbox-mark-background no-repeat center / 90%;
+      background: $checkbox-mark-checked-background no-repeat center / 90%;
       transition: opacity $check-transition, transform $check-transition;
     }
 
