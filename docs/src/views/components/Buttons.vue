@@ -141,6 +141,7 @@
 
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard.vue";
+
     import {CCardSection} from "../../../../src/components/card";
     import {CBtn} from "../../../../src/components/button";
     import {CIconBtn} from "../../../../src/components/icon-button";

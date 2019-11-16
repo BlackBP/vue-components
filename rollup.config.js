@@ -1,22 +1,23 @@
 import PluginVue from 'rollup-plugin-vue';
-import PluginResolve from 'rollup-plugin-node-resolve';
+import PluginNodeResolve from 'rollup-plugin-node-resolve';
 import PluginLocalResolve from 'rollup-plugin-local-resolve';
 import PluginCommonjs from 'rollup-plugin-commonjs';
 import PluginCopy from 'rollup-plugin-copy';
 import {terser as PluginTerser} from 'rollup-plugin-terser';
+import PluginNodeGlobals from 'rollup-plugin-node-globals';
 
 const CONFIG = {
-    input: './src/index.js',
+    input: 'src/index.js',
     output: {
         fileName: 'lib',
-        dir: '/dist',
+        dir: 'dist',
     },
     plugins: [
-        PluginResolve(),
+        PluginNodeResolve(),
         PluginLocalResolve(),
         PluginCommonjs(),
         PluginVue(),
-        PluginTerser()
+        PluginTerser(),
     ],
     pluginOpts: {
         copy: {
@@ -60,7 +61,7 @@ export default [
         output: {
             file: CONFIG.getFileName('common'),
             format: 'cjs',
-            exports: 'named'
+            exports: 'named',
         },
         plugins: [
             ...CONFIG.plugins,
