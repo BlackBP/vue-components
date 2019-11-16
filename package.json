@@ -16,13 +16,13 @@
   ],
   "version": "0.10.13",
   "scripts": {
-    "serve": "vue-cli-service serve --host=192.168.1.102 docs/src/app.js",
-    "serve-local": "vue-cli-service serve --host=localhost docs/src/app.js",
+    "serve": "vue-cli-service serve --host=192.168.1.102 src-docs/app.js",
+    "serve-local": "vue-cli-service serve --host=localhost src-docs/app.js",
     "build": "rollup -c rollup.config.js",
     "build-css": "node-sass --source-map=true --importer=node_modules/node-sass-package-importer/dist/cli.js src/styles/index.scss dist/css/styles.css",
     "build-css-min": "node-sass --output-style=compressed --importer=node_modules/node-sass-package-importer/dist/cli.js src/styles/index.scss dist/css/styles.min.css",
-    "build-docs": "rollup -c rollup-docs.config.js",
-    "build-docs-css": "node-sass --output-style=compressed --importer=node_modules/node-sass-package-importer/dist/cli.js docs/src/app.scss docs/public/app.min.css",
+    "build-docs": "vue-cli-service build src-docs/app.js --dest docs",
+    "build-docs-css": "node-sass --output-style=compressed --importer=node_modules/node-sass-package-importer/dist/cli.js src-docs/app.scss docs/public/app.min.css",
     "publish-build": "yarn publish",
     "publish-build beta": "yarn publish --tag beta",
     "version-patch": "yarn version --patch",
@@ -39,6 +39,7 @@
     "*.js"
   ],
   "dependencies": {
+    "@blackbp/vue-components": "^0.10.5",
     "@mdi/font": "latest",
     "@mdi/svg": "latest",
     "animated-scroll-to": "^2.0.5",
