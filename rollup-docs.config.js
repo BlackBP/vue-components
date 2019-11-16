@@ -6,24 +6,23 @@ import PluginNodeGlobals from 'rollup-plugin-node-globals';
 import PluginReplace from 'rollup-plugin-replace';
 import {terser as PluginTerser} from 'rollup-plugin-terser';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export default {
     input: 'docs/src/app.js',
     output: {
         file: 'docs/public/app.min.js',
-        format: 'iife',
-        globals: {
-        }
+        format: 'iife'
     },
     plugins: [
-        PluginVue(),
+        PluginCommonjs(),
         PluginNodeResolve(),
         PluginLocalResolve(),
-        PluginCommonjs(),
         PluginReplace({
             'process.env.NODE_ENV': JSON.stringify('development'),
             'process.env.VUE_ENV': JSON.stringify('browser')
         }),
-        // PluginNodeGlobals(),
-        // PluginTerser()
+        PluginVue(),
+        PluginTerser()
     ],
 }
