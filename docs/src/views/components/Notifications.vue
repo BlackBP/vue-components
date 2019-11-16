@@ -52,11 +52,6 @@
 
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard.vue";
-    import {CTextInput} from "../../../../src/components/form-text-input";
-    import {CGridRow} from "../../../../src/components/grid";
-    import {CGridCol} from "../../../../src/components/grid";
-    import {CSelect} from "../../../../src/components/form-select";
-    import {CBtn} from "../../../../src/components/button";
 
     const COLORS = [
         {
@@ -84,11 +79,6 @@
     export default {
         name: "ScreenNotifications",
         components: {
-            CBtn,
-            CSelect,
-            CGridCol,
-            CGridRow,
-            CTextInput,
             LayoutScreenCard
         },
         data() {

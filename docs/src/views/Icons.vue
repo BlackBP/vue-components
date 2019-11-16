@@ -60,14 +60,6 @@
     import {debounce, filter, size, some, toLower} from "../../../src/utils/helpers";
     import LayoutScreenCard from "./layouts/ScreenCard.vue";
 
-    import {CGridRow} from "../../../src/components/grid";
-    import {CGridCol} from "../../../src/components/grid";
-    import {CIcon} from "../../../src/components/icon";
-    import {CTextInput} from "../../../src/components/form-text-input";
-    import {CFormField} from "../../../src/components/form-field";
-    import {CDivider} from "../../../src/components/divider";
-    import {CChip} from "../../../src/components/chip";
-
     /**
      *
      * @param str
@@ -94,7 +86,9 @@
 
     export default {
         name: "ScreenIcons",
-        components: {CChip, CDivider, LayoutScreenCard, CFormField, CTextInput, CIcon, CGridCol, CGridRow},
+        components: {
+            LayoutScreenCard
+        },
         data() {
             return {
                 query: '',

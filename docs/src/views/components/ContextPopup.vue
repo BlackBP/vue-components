@@ -50,18 +50,12 @@
 
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard.vue";
-    import {CContextPopup} from "../../../../src/components/context-popup";
-    import {CList} from "../../../../src/components/list";
-    import {CListItem} from "../../../../src/components/list";
-    import {CIcon} from "../../../../src/components/icon";
-    import {CTable} from "../../../../src/components/table";
-    import {CIconBtn} from "../../../../src/components/icon-button";
-    import {CChip} from "../../../../src/components/chip";
-    import {CDivider} from "../../../../src/components/divider";
 
     export default {
         name: "ScreenContextPopup",
-        components: {CDivider, CChip, CIconBtn, CTable, CIcon, CListItem, CList, CContextPopup, LayoutScreenCard},
+        components: {
+            LayoutScreenCard
+        },
         data() {
             return {
                 data: _.map(Array(50), (item, index) => {

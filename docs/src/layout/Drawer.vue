@@ -37,8 +37,6 @@
 </template>
 
 <script>
-    import {CIcon} from "../../../src/components/icon";
-    import {CIconBtn} from "../../../src/components/icon-button";
 
     /**
      *
@@ -60,7 +58,6 @@
 
     export default {
         name: "app-drawer",
-        components: {CIconBtn, CIcon},
         computed: {
             isOpen() {
                 return this.$store.getters[this.$storeMeta.getter.drawerIsOpen]

@@ -15,11 +15,9 @@
 </template>
 
 <script>
-    import {CBtn} from "../../../src/components/button";
 
     export default {
         name: "CountDown",
-        components: {CBtn},
         data() {
             return {
                 width: 100,

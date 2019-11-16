@@ -108,18 +108,6 @@
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard.vue";
 
-    import {CSelect} from "../../../../src/components/form-select";
-    import {CFormField} from "../../../../src/components/form-field";
-    import {CTextInput} from "../../../../src/components/form-text-input";
-    import {CIconBtn} from "../../../../src/components/icon-button";
-    import {CStackItem} from "../../../../src/components/stack-group";
-    import {CSwitch} from "../../../../src/components/form-switch";
-    import {CStackGroup} from "../../../../src/components/stack-group";
-    import {CDivider} from "../../../../src/components/divider";
-    import {CForm} from "../../../../src/components/form";
-    import {CRadio} from "../../../../src/components/form-radio";
-    import {CCheckbox} from "../../../../src/components/form-checkbox";
-
     const createOptions = (size = 50, isChild = false, parentId = 0) => {
         return [...Array(size)].map((item, index) => {
             let id = index + 1;
@@ -136,17 +124,6 @@
     export default {
         name: "ScreenFormFields",
         components: {
-            CCheckbox,
-            CRadio,
-            CForm,
-            CDivider,
-            CStackGroup,
-            CSwitch,
-            CStackItem,
-            CIconBtn,
-            CTextInput,
-            CFormField,
-            CSelect,
             LayoutScreenCard
         },
         data() {

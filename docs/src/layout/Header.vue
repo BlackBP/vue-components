@@ -24,17 +24,9 @@
 </template>
 
 <script>
-    import {CIconBtn} from "../../../src/components/icon-button";
-    import {CStackGroup} from "../../../src/components/stack-group";
-    import {CStackItem} from "../../../src/components/stack-group";
 
     export default {
         name: "app-header",
-        components: {
-            CStackItem,
-            CStackGroup,
-            CIconBtn
-        },
         computed: {
             drawerIsOpen() {
                 return this.$store.getters[this.$storeMeta.getter.drawerIsOpen]

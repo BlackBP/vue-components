@@ -142,28 +142,9 @@
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard.vue";
 
-    import {CCardSection} from "../../../../src/components/card";
-    import {CBtn} from "../../../../src/components/button";
-    import {CIconBtn} from "../../../../src/components/icon-button";
-    import {CSwitch} from "../../../../src/components/form-switch";
-    import {CDivider} from "../../../../src/components/divider";
-    import {CGridRow} from "../../../../src/components/grid";
-    import {CGridCol} from "../../../../src/components/grid";
-    import {CStackGroup} from "../../../../src/components/stack-group";
-    import {CStackItem} from "../../../../src/components/stack-group";
-
     export default {
         name: "ScreenButtons",
         components: {
-            CStackItem,
-            CStackGroup,
-            CGridCol,
-            CGridRow,
-            CDivider,
-            CSwitch,
-            CIconBtn,
-            CBtn,
-            CCardSection,
             LayoutScreenCard
         },
         data() {

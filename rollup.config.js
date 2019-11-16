@@ -4,7 +4,6 @@ import PluginLocalResolve from 'rollup-plugin-local-resolve';
 import PluginCommonjs from 'rollup-plugin-commonjs';
 import PluginCopy from 'rollup-plugin-copy';
 import {terser as PluginTerser} from 'rollup-plugin-terser';
-import PluginNodeGlobals from 'rollup-plugin-node-globals';
 
 const CONFIG = {
     input: 'src/index.js',
