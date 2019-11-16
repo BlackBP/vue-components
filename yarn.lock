@@ -854,10 +854,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blackbp/vue-components@^0.10.5":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@blackbp/vue-components/-/vue-components-0.10.5.tgz#779e81a6087488316eb919dc8b47d232ad95aa8e"
-  integrity sha512-egi9Qz7l5adEPnmVPTm76nxnfRNwUcoxnbsB0i/SVbxEhAYnmgkWrzW/Clm1nV+c4I4YglSla3jm1H1bSP4drw==
+"@blackbp/vue-components@beta":
+  version "0.10.13"
+  resolved "https://registry.yarnpkg.com/@blackbp/vue-components/-/vue-components-0.10.13.tgz#93f690304ff5a735fdae3c1ddf50ad52787b515c"
+  integrity sha512-YKSSGYMIOaPAQvhcW9x2WH4gGsWnsQ4CMlt8eRXgs+67qeiQFNdiCmE78yw902hxmGyb27mk1cba4qz/N2Qb0Q==
   dependencies:
     "@mdi/font" "^4.2.95"
     "@mdi/svg" "^4.2.95"

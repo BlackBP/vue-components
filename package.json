@@ -38,7 +38,7 @@
     "*.js"
   ],
   "dependencies": {
-    "@blackbp/vue-components": "^0.10.5",
+    "@blackbp/vue-components": "beta",
     "@mdi/font": "latest",
     "@mdi/svg": "latest",
     "animated-scroll-to": "^2.0.5",
