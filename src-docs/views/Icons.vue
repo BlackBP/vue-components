@@ -110,7 +110,7 @@
                     return
                 }
 
-                this.icons = filter(MDI_META, icon => {
+                this.icons = filter(MDI_META.default, icon => {
                     const selfMatch = toLower(icon.name).match(query);
                     const aliasesMatch = some(icon.aliases, alias => {
                         return toLower(alias).match(query)

@@ -1,0 +1,79 @@
+/*
+ * WEIGHTS:
+ * Hairline = 100
+ * Thin     = 200
+ * Light    = 300
+ * Regular  = 400
+ * Medium   = 500
+ * Semibold = 600
+ * Bold     = 700
+ * Black    = 800
+ * Heavy    = 900
+ */
+
+// Common
+* {
+  color: inherit;
+}
+
+html {
+  font-size: $g-font-size;
+  font-family: $g-font-family;
+  font-weight: $g-font-weight;
+  color: $g-font-color;
+  line-height: $g-line-height;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Selected text
+::selection {
+  background: $g-selected-background;
+  text-shadow: 0 1px 3px #000;
+  color: $g-selected-font-color;
+}
+
+// Links
+a {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+// Headers
+.h1, h1,
+.h2, h2,
+.h3, h3,
+.h4, h4,
+.h5, h5,
+.h6, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.h1, h1 {
+  font-size: 2rem
+}
+
+.h2, h2 {
+  font-size: 1.75rem
+}
+
+.h3, h3 {
+  font-size: 1.5rem
+}
+
+.h4, h4 {
+  font-size: 1.125rem
+}
+
+.h5, h5 {
+  font-size: .875rem
+}
+
+.h6, h6 {
+  font-size: .75rem
+}

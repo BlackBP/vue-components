@@ -1,7 +1,7 @@
 <script>
-    import {CCard} from "../../../src/components/card";
-    import {CDivider} from "../../../src/components/divider";
-    import {CIcon} from "../../../src/components/icon";
+    import {CCard} from "@blackbp/vue-components";
+    import {CDivider} from "@blackbp/vue-components";
+    import {CIcon} from "@blackbp/vue-components";
 
     export default {
         name: "LayoutScreenCard",
@@ -10,11 +10,23 @@
             header: String,
             icon: String
         },
-        render(createElement, {data, props, children}) {
-            const {
-                header: propHeader,
-                icon: propIcon
+        render(createElement, {data = {}, props = {}, children, parent = {}}) {
+            let {
+                header: propHeader = '',
+                icon: propIcon = ''
             } = props;
+
+            if(parent.$route) {
+                if(parent.$route.meta) {
+                    const {
+                        title: routeTitle = '',
+                        icon: routeIcon = ''
+                    } = parent.$route.meta;
+
+                    propHeader = propHeader !== '' ? propHeader : routeTitle;
+                    propIcon = propIcon !== '' ? propIcon : routeIcon;
+                }
+            }
 
             const titleData = {
                 style: {
@@ -33,15 +45,18 @@
                 }
             };
 
+            const hasHeader = propHeader !== '';
+            const hasIcon = propIcon !== '';
+
             data.class = [data.class, 'elevate-3'];
             data.props = props;
 
             return createElement(CCard, data, [
                 createElement('h2', titleData, [
-                    propIcon ? createElement(CIcon, iconData) : null,
-                    propHeader
+                    hasIcon ? createElement(CIcon, iconData) : null,
+                    hasHeader ? propHeader : null
                 ]),
-                createElement(CDivider),
+                (hasIcon || hasHeader) ? createElement(CDivider) : null,
                 children
             ])
         }

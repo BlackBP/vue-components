@@ -1,46 +1,56 @@
 <template>
-    <layout-screen-card :header="$route.meta.title"
-                        :icon="$route.meta.icon">
+    <layout-screen-card>
 
         <c-grid-row justify="center">
             <c-grid-col xl="4">
 
                 <form @submit.prevent="addNotify">
 
-                    <div>
+                    <c-form-field label="Duration"
+                                  label-for="duration">
                         <c-text-input v-model="duration"
+                                      id="duration"
                                       type="number"
                                       placeholder="Duration"
-                                      leading="timer"/>
-                    </div>
+                                      leading="timer">
+                            <template slot="trailing">ms</template>
+                        </c-text-input>
+                    </c-form-field>
 
-                    <div>
+                    <c-form-field label="Color"
+                                  label-for="color">
                         <c-select v-model="color"
+                                  id="color"
                                   track-by="id"
                                   option-label="name"
                                   placeholder="Color"
                                   :options="colors"/>
-                    </div>
+                    </c-form-field>
 
-                    <div>
+                    <c-form-field label="Title"
+                                  label-for="title">
                         <c-text-input v-model="title"
+                                      id="title"
                                       leading="text"
                                       placeholder="Title"/>
-                    </div>
+                    </c-form-field>
 
-                    <div>
+                    <c-form-field label="Message"
+                                  label-for="message">
                         <c-text-input v-model="message"
+                                      id="message"
                                       placeholder="Message"
                                       :multiline="true"/>
-                    </div>
+                    </c-form-field>
 
-                    <div>
+                    <c-form-field>
                         <c-btn color="primary"
                                leading="bell"
-                               type="submit">
+                               type="submit"
+                               :block="true">
                             Show notification
                         </c-btn>
-                    </div>
+                    </c-form-field>
 
                 </form>
 
@@ -85,7 +95,7 @@
             return {
                 title: 'Notification',
                 message: 'Awesome notification message!',
-                duration: 1000,
+                duration: 2000,
                 color: {...COLORS[0]},
                 colors: [...COLORS]
             }

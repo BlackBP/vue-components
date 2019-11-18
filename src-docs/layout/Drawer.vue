@@ -67,10 +67,11 @@
                     home: createMenuItem(this.$appRoute.home,  {
                         exact: true
                     }),
-                    components: createMenuItem(this.$appRoute.buttons),
+                    buttons: createMenuItem(this.$appRoute.buttons),
+                    formFields: createMenuItem(this.$appRoute.formFields),
+                    collapse: createMenuItem(this.$appRoute.collapse),
                     notifications: createMenuItem(this.$appRoute.notifications),
                     contextPopup: createMenuItem(this.$appRoute.contextPopup),
-                    formFields: createMenuItem(this.$appRoute.formFields),
                     icons: createMenuItem(this.$appRoute.icons),
                 }
             }

@@ -1,6 +1,5 @@
 <template>
-    <layout-screen-card :header="$route.meta.title"
-                        :icon="$route.meta.icon">
+    <layout-screen-card>
 
         <c-icon-btn icon="dots-vertical"
                     :transparent="true"

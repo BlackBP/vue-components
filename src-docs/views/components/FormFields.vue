@@ -1,6 +1,5 @@
 <template>
-    <layout-screen-card :header="$route.meta.title"
-                        :icon="$route.meta.icon">
+    <layout-screen-card>
         <c-stack-group justify="start"
                        :wrap="true">
             <c-stack-item>

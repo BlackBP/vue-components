@@ -7,7 +7,6 @@ import router from './router';
 // Plugins
 // import './plugins/clickOutside';
 import './plugins/components';
-import './plugins/notify';
 import './plugins/routes';
 import './plugins/storeMeta';
 
