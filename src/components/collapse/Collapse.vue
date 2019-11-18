@@ -1,23 +1,21 @@
-<template>
-    <transition-collapse>
-        <div v-show="visible"
-             class="c-collapse">
-            <slot />
-        </div>
-    </transition-collapse>
-</template>
-
 <script>
     import TransitionCollapse from './Transition.vue';
     import {createProp} from "../../utils/component";
 
     export default {
         name: "c-collapse",
-        components: {
-            TransitionCollapse
-        },
+        functional: true,
         props: {
             visible: createProp(Boolean, false)
+        },
+        render(createElement, {props = {}, children = []}) {
+            const {
+                visible
+            } = props;
+
+            return createElement(TransitionCollapse, [
+                visible ? children : null
+            ])
         }
     }
 </script>

@@ -3,20 +3,20 @@ import PluginNodeResolve from 'rollup-plugin-node-resolve';
 import PluginLocalResolve from 'rollup-plugin-local-resolve';
 import PluginCommonjs from 'rollup-plugin-commonjs';
 import PluginCopy from 'rollup-plugin-copy';
-import {terser as PluginTerser} from 'rollup-plugin-terser';
+import {terser as PluginMinify} from 'rollup-plugin-terser';
 
 const CONFIG = {
-    input: 'src/index.js',
+    input: './src/index.js',
     output: {
         fileName: 'lib',
-        dir: 'dist',
+        dir: './dist',
     },
     plugins: [
         PluginNodeResolve(),
         PluginLocalResolve(),
         PluginCommonjs(),
         PluginVue(),
-        PluginTerser(),
+        PluginMinify()
     ],
     pluginOpts: {
         copy: {

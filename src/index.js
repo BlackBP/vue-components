@@ -6,7 +6,7 @@ export {CBadge} from './components/badge';
 export {CBtn} from './components/button';
 export {CCard, CCardSection} from './components/card';
 export {CChip} from './components/chip';
-export {CCollapse} from './components/collapse';
+export {CCollapse, CCollapseTransition} from './components/collapse';
 export {CContextPopup} from './components/context-popup';
 export {CDivider} from './components/divider';
 export {CForm} from './components/form';

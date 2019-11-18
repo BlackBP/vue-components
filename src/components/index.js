@@ -2,7 +2,7 @@ import {CBadge} from './badge';
 import {CBtn} from './button';
 import {CCard, CCardSection} from './card';
 import {CChip} from './chip';
-import {CCollapse} from './collapse';
+import {CCollapse, CCollapseTransition} from './collapse';
 import {CContextPopup} from './context-popup';
 import {CDivider} from './divider';
 import {CForm} from './form';
@@ -31,6 +31,7 @@ export default {
     CCardSection,
     CChip,
     CCollapse,
+    CCollapseTransition,
     CContextPopup,
     CDivider,
     CForm,
