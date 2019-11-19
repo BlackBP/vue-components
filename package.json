@@ -14,7 +14,7 @@
     "vue",
     "ui"
   ],
-  "version": "0.10.14",
+  "version": "0.10.15",
   "scripts": {
     "serve": "vue-cli-service serve --host=192.168.1.102 src-docs/app.js",
     "serve-local": "vue-cli-service serve --host=localhost src-docs/app.js",
@@ -48,8 +48,12 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.5",
     "@vue/cli-service": "^4.0.5",
+    "animated-scroll-to": "^2.0.5",
+    "lodash": "^4.17.15",
     "node-sass": "4.13.0",
     "node-sass-package-importer": "5.3.2",
+    "normalize.css": "^8.0.1",
+    "popper.js": "^1.16.0",
     "rollup": "1.27.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-copy": "3.1.0",
@@ -59,12 +63,8 @@
     "rollup-plugin-terser": "5.1.2",
     "rollup-plugin-vue": "5.1.1",
     "sass-loader": "8.0.0",
-    "lodash": "^4.17.15",
     "vue": "^2.6.10",
-    "vue-template-compiler": "2.6.10",
-    "animated-scroll-to": "^2.0.5",
-    "normalize.css": "^8.0.1",
-    "popper.js": "^1.16.0"
+    "vue-template-compiler": "2.6.10"
   },
   "postcss": {
     "plugins": {
