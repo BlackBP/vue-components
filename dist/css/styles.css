@@ -1791,11 +1791,7 @@ a {
   cursor: pointer; }
 
 .c-select__list {
-  position: absolute;
   z-index: 3;
-  top: 100%;
-  left: 0;
-  right: 0;
   display: block;
   width: 100%;
   height: auto;

@@ -89,7 +89,7 @@
                           option-text="name"
                           group-values="children"
                           group-text="name"
-                          max="5"
+                          max="10"
                           :disabled="disabled"
                           :toggleable="false"
                           :multiple="true"
