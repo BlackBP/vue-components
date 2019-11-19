@@ -3,7 +3,8 @@
     <div class="c-form-input"
          :class="className">
 
-        <div class="c-form-input__field"
+        <div ref="field"
+             class="c-form-input__field"
              :class="contentClass">
             <slot/>
         </div>
@@ -83,6 +84,9 @@
                 if (isString(helper) && size(helper) > 0) {
                     return helper
                 }
+            },
+            fieldRef() {
+                return this.$refs.field
             }
         }
     }

@@ -1,5 +1,6 @@
 <template>
-    <c-form-input content-class="c-select"
+    <c-form-input ref="root"
+                  content-class="c-select"
                   :disabled="disabled"
                   :readonly="readonly"
                   :helper="helper"
@@ -47,6 +48,7 @@
 
         <transition name="c-select">
             <div v-show="focused"
+                 ref="list"
                  class="c-select__list">
 
                 <div v-if="hasMax || !hasOptions"
@@ -74,7 +76,6 @@
                         </div>
                     </template>
                 </div>
-
             </div>
         </transition>
 
@@ -82,6 +83,7 @@
 </template>
 
 <script>
+    import Popper from 'popper.js';
     import {
         isArray,
         isObjectLike,
@@ -92,7 +94,9 @@
         some,
         isNumber,
         toString,
-        map, debounce, toLower, isEmpty
+        debounce,
+        toLower,
+        isEmpty
     } from '../../utils/helpers';
     import {createProp} from '../../utils/component';
     import {CFormInput} from '../form-input';
@@ -105,6 +109,8 @@
         prop: 'value',
         event: 'change'
     };
+
+    let ListPopper = null;
 
     export default {
         name: "c-select",
@@ -137,10 +143,26 @@
         },
         watch: {
             options() {
-                this.parseOptions()
+                this.parseOptions();
+
+                if (this.focused) {
+                    ListPopper.update();
+                }
             },
             value() {
-                this.parseOptions()
+                this.parseOptions();
+
+                if (this.focused) {
+                    ListPopper.update();
+                }
+            },
+            focused(value) {
+                if (value) {
+                    ListPopper.enableEventListeners();
+                    ListPopper.update();
+                } else {
+                    ListPopper.disableEventListeners();
+                }
             }
         },
         computed: {
@@ -151,15 +173,15 @@
                     return size(selected) > 0 ? selected : []
                 }
 
-                if(isNumber(selected)) {
+                if (isNumber(selected)) {
                     return [selected]
                 }
 
-                if(isObjectLike(selected) || isString(selected)) {
+                if (isObjectLike(selected) || isString(selected)) {
                     return isEmpty(selected) ? [] : [selected]
                 }
 
-                return  []
+                return []
             },
             selectedCount() {
                 return size(this.selected)
@@ -411,7 +433,13 @@
                 this.$refs.field.blur()
             },
 
-            //
+            /**
+             *
+             */
+            filterByQuery: debounce(function () {
+                this.parseOptions();
+                this.loading = false;
+            }, 400),
 
             /**
              *
@@ -422,17 +450,25 @@
 
                 this.$emit(MODEL.event, value)
             },
-
-            /**
-             *
-             */
-            filterByQuery: debounce(function () {
-                this.parseOptions();
-                this.loading = false;
-            }, 400),
         },
         mounted() {
-            this.parseOptions()
+            this.parseOptions();
+
+            ListPopper = new Popper(this.$refs.root.fieldRef, this.$refs.list, {
+                modifiers: {
+                    arrow: {
+                        enabled: false
+                    },
+                    inner: {
+                        enabled: false
+                    },
+                }
+            });
+        },
+        beforeDestroy() {
+            if (ListPopper !== null) {
+                ListPopper.destroy()
+            }
         }
     }
 </script>
