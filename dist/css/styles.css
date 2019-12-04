@@ -388,6 +388,7 @@ a {
 
 .img-responsive {
   display: block;
+  width: 100%;
   max-width: 100%;
   height: auto;
   border: 0; }
@@ -1829,6 +1830,8 @@ a {
   .c-select__option.is-group {
     background: rgba(0, 0, 0, 0.15);
     color: #3C4858; }
+  .c-select__option.is-focused {
+    outline: 1px solid rgba(97, 189, 79, 0.8); }
 
 .c-select-enter-active, .c-select-leave-active {
   transition: opacity 0.2s ease; }
