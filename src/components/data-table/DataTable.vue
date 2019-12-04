@@ -62,7 +62,6 @@
 </template>
 
 <script>
-    import {createProp} from "../../utils/component";
     import {
         isFunction,
         get,
@@ -89,11 +88,28 @@
     export default {
         name: "CDataTable",
         props: {
-            data: createProp(Array, () => ([]), true),
-            headers: createProp(Object, () => ({}), true),
-            rowClass: createProp([Array, Object, String, Function], ''),
-            headerClass: createProp([Array, Object, String, Function], ''),
-            trackBy: createProp(String, ''),
+            data: {
+                type: Array,
+                default: () => ([]),
+                required: true
+            },
+            headers: {
+                type: Object,
+                default: () => ({}),
+                required: true
+            },
+            rowClass: {
+                type: [Array, Object, String, Function],
+                default: ''
+            },
+            headerClass: {
+                type: [Array, Object, String, Function],
+                default: ''
+            },
+            trackBy: {
+                type: String,
+                default: ''
+            },
         },
         computed: {
             // Data

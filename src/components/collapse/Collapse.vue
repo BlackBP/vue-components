@@ -1,12 +1,14 @@
 <script>
     import TransitionCollapse from './Transition.vue';
-    import {createProp} from "../../utils/component";
 
     export default {
         name: "c-collapse",
         functional: true,
         props: {
-            visible: createProp(Boolean, false)
+            visible: {
+                type: Boolean,
+                default: false
+            },
         },
         render(createElement, {props = {}, children = []}) {
             const {

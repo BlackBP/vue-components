@@ -47,6 +47,8 @@
                    :value="value"
                    :maxlength="maxLength"
                    @input="onInput"
+                   @keyup="onKeyUp"
+                   @keydown="onKeyDown"
                    @focus="onFocus"
                    @blur="onBlur">
 
@@ -71,7 +73,6 @@
         isString,
         isFunction, size
     } from '../../utils/helpers';
-    import {createProp} from '../../utils/component';
     import {getConfig} from '../../config';
     import {CIcon} from '../icon';
     import {CFormInput} from '../form-input';
@@ -92,13 +93,34 @@
             CIcon
         },
         props: {
-            type: createProp(String, 'text'),
-            multiline: createProp(Boolean, false),
-            mask: createProp([String, Boolean, Object], false),
-            leading: createProp(String, ''),
-            trailing: createProp(String, ''),
-            maxLength: createProp([Number, String], 500),
-            rows: createProp([Number, String], 5)
+            type: {
+                type: String,
+                default: 'text'
+            },
+            multiline: {
+                type: Boolean,
+                default: false
+            },
+            mask: {
+                type: [String, Boolean, Object],
+                default: false
+            },
+            leading: {
+                type: String,
+                default: ''
+            },
+            trailing: {
+                type: String,
+                default: ''
+            },
+            maxLength: {
+                type: [Number, String],
+                default: 500,
+            },
+            rows: {
+                type: [Number, String],
+                default: 5,
+            }
         },
         computed: {
             count() {

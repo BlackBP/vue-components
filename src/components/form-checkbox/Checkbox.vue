@@ -36,7 +36,6 @@
         isArray,
         isBoolean
     } from '../../utils/helpers';
-    import {createProp} from "../../utils/component";
 
     export default {
         name: "c-checkbox",
@@ -45,10 +44,13 @@
             event: 'change'
         },
         props: {
-            model: createProp(null),
-            value: createProp(null),
-            name: createProp(String),
-            disabled: createProp(Boolean, false)
+            model: null,
+            value: null,
+            name: String,
+            disabled: {
+                type: Boolean,
+                default: false
+            }
         },
         computed: {
             checked() {

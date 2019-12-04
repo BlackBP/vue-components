@@ -1,11 +1,24 @@
-import {createProp} from "../utils/component";
-
 export default {
     props: {
-        disabled: createProp(Boolean, false),
-        readonly: createProp(Boolean, false),
-        helper: createProp(String, ''),
-        errors: createProp([String, Array], ''),
-        showCounter: createProp(Boolean, false),
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+        readonly: {
+            type: Boolean,
+            default: false
+        },
+        helper: {
+            type: String,
+            default: ''
+        },
+        errors: {
+            type: [String, Array],
+            default: ''
+        },
+        showCounter: {
+            type: Boolean,
+            default: false
+        },
     }
 }

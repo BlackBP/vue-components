@@ -36,17 +36,28 @@
 
 <script>
     import {isArray, isString, size} from '../../utils/helpers';
-    import {createProp} from '../../utils/component';
     import mixinFormInput from '../../mixins/form-input';
 
     export default {
         name: "c-form-input",
         mixins: [mixinFormInput],
         props: {
-            countMax: createProp([Number, String], ''),
-            count: createProp([Number, String], ''),
-            contentClass: createProp([String, Array, Object], ''),
-            focused: createProp(Boolean, false),
+            countMax: {
+                type: [Number, String],
+                default: ''
+            },
+            count: {
+                type: [Number, String],
+                default: ''
+            },
+            contentClass: {
+                type: [String, Array, Object],
+                default: ''
+            },
+            focused: {
+                type: Boolean,
+                default: false
+            }
         },
         computed: {
             className() {

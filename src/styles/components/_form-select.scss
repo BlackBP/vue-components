@@ -125,6 +125,10 @@
         background: $option-group-background-color;
         color: $option-font-color;
       }
+
+      &.is-focused {
+        outline: 1px solid $option-hover-background-color;
+      }
     }
 
   }

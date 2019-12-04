@@ -1,6 +1,4 @@
 <script>
-    import {createProp} from "../../utils/component";
-
     const ClassName = 'c-form-field';
 
     /**
@@ -16,7 +14,7 @@
             labelFor: propLabelFor
         } = props;
 
-        if(propLabel === '' || propLabelFor === '') {
+        if (propLabel === '' || propLabelFor === '') {
             return null
         }
 
@@ -32,8 +30,14 @@
         name: "c-form-field",
         functional: true,
         props: {
-            label: createProp(String, ''),
-            labelFor: createProp(String, '')
+            label: {
+                type: String,
+                default: '',
+            },
+            labelFor: {
+                type: String,
+                default: '',
+            }
         },
         render(createElement, {data, props, slots, children}) {
             slots = slots();

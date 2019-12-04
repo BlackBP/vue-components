@@ -1,5 +1,4 @@
 import {get} from "../utils/helpers";
-import {createProp} from "../utils/component";
 
 export const MODIFIERS_MAP = {
     transparent: 'is-transparent',
@@ -39,13 +38,37 @@ export const getColorClassName = (className = '', color = '') => {
 
 export default {
     props: {
-        tag: createProp(String, 'button'),
-        type: createProp([String, Boolean], false),
-        color: createProp(String, ''),
-        size: createProp(String, ''),
-        bordered: createProp(Boolean, false),
-        elevated: createProp(Boolean, false),
-        transparent: createProp(Boolean, false),
-        disabled: createProp(Boolean, false),
+        tag: {
+            type: String,
+            default: 'button'
+        },
+        type: {
+            type: [String, Boolean],
+            default: false
+        },
+        color: {
+            type: String,
+            default: ''
+        },
+        size: {
+            type: String,
+            default: ''
+        },
+        bordered: {
+            type: Boolean,
+            default: false
+        },
+        elevated: {
+            type: Boolean,
+            default: false
+        },
+        transparent: {
+            type: Boolean,
+            default: false
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
     }
 }

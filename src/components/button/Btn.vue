@@ -1,5 +1,4 @@
 <script>
-    import {createProp} from "../../utils/component";
     import btnMixin, {
         MODIFIERS_MAP,
         getColorClassName,
@@ -69,9 +68,18 @@
         functional: true,
         mixins: [btnMixin],
         props: {
-            leading: createProp(String, ''),
-            trailing: createProp(String, ''),
-            block: createProp(Boolean, false)
+            leading: {
+                type: String,
+                default: ''
+            },
+            trailing: {
+                type: String,
+                default: ''
+            },
+            block: {
+                type: Boolean,
+                default: false
+            }
         },
         render(createElement, {data = {}, props = {}, children = [], listeners = {}}) {
             const {

@@ -1,7 +1,7 @@
 <template>
 
     <transition name="modal-container-fade">
-        <div v-show="visible"
+        <div v-show="isVisible"
              class="c-modal-container"
              tabindex="-1"
              role="dialog"
@@ -15,18 +15,19 @@
                 </template>
 
                 <template v-else>
-                    <transition :name="modalTransitionClassName">
+                    <transition :name="modalTransition">
 
                         <template v-if="customContent">
-                            <div v-show="visible"
+                            <div v-show="isVisible"
                                  class="c-modal"
+                                 :class="customContentClass"
                                  @click.stop>
-                                <slot :closeModal="close"></slot>
+                                <slot/>
                             </div>
                         </template>
 
                         <template v-else>
-                            <div v-show="visible"
+                            <div v-show="isVisible"
                                  :class="modalClassName"
                                  :style="modalStyle"
                                  @click.stop>
@@ -54,14 +55,12 @@
                                 </header>
 
                                 <div class="c-modal__body">
-                                    <slot :closeModal="close"></slot>
+                                    <slot/>
                                 </div>
 
                                 <footer v-show="showFooter"
                                         class="c-modal__footer">
-                                    <slot name="footer"
-                                          :closeModal="close">
-                                    </slot>
+                                    <slot name="footer"/>
                                 </footer>
 
                             </div>
@@ -89,25 +88,10 @@
 
     const $html = document.querySelector('html');
 
-    const CssClass = {
-        html: {
-            modalOpened: 'modal-open'
-        },
-        modal: {
-            base: 'c-modal',
-            transition: {
-                scale: 'modal-scale',
-                slideY: 'modal-slideY',
-                slideUpY: 'modal-slideUpY',
-                slideX: 'modal-slideX',
-                slideRightX: 'modal-slideRightX',
-                rotateX: 'modal-rotateX',
-                rotateY: 'modal-rotateY'
-            }
-        }
-    };
-
-    const Events = {
+    const ClassName = 'c-modal';
+    const ClassNameModalOpened = 'modal-open';
+    const DataKeyModalOpenCount = 'modalOpenCount';
+    const EVENTS = {
         open: {
             name: 'open'
         },
@@ -115,19 +99,6 @@
             name: 'close'
         }
     };
-
-    const dataKeys = {
-        modalOpenCount: 'modalOpenCount'
-    };
-
-    function getModalCount() {
-        let modalCount = parseInt($html.dataset[dataKeys.modalOpenCount]);
-        return isNaN(modalCount) ? 0 : modalCount;
-    }
-
-    function setModalCount(value) {
-        $html.dataset[dataKeys.modalOpenCount] = value;
-    }
 
     export default {
         name: "c-modal",
@@ -137,6 +108,10 @@
             CIcon
         },
         props: {
+            visible: {
+                type: Boolean,
+                default: false
+            },
             title: {
                 type: String,
                 default: '',
@@ -155,14 +130,15 @@
             },
             modalTransition: {
                 type: String,
-                default: 'scale',
-                validator(value) {
-                    return Object.keys(CssClass.modal.transition).includes(value);
-                }
+                default: 'modal-scale'
             },
             customContent: {
                 type: Boolean,
                 default: false,
+            },
+            customContentClass: {
+                type: [Array, Object, String],
+                default: ''
             },
             showFooter: {
                 type: Boolean,
@@ -187,8 +163,17 @@
         },
         data() {
             return {
-                visible: false
+                isVisible: this.visible
             };
+        },
+        watch: {
+            visible(value) {
+                if(value) {
+                    this.open()
+                } else {
+                    this.close()
+                }
+            }
         },
         computed: {
             hasTitle() {
@@ -198,60 +183,64 @@
                 return isString(this.icon) && this.icon !== '';
             },
             modalClassName() {
-                let base = CssClass.modal.base;
-                let mods = {};
-
-                mods[`${base}--${this.styleType}`] = !!this.styleType;
-                mods[`${base}--flex`] = this.flex;
-
-                return [base, mods];
+                return [
+                    ClassName,
+                    {
+                        [`${ClassName}--${this.styleType}`]: !!this.styleType,
+                        [`${ClassName}--flex`]: this.flex
+                    }
+                ];
             },
             modalStyle() {
                 return {
                     maxWidth: this.maxWidth
                 }
             },
-            modalTransitionClassName() {
-                return CssClass.modal.transition[this.modalTransition];
-            }
         },
         methods: {
             open() {
-                let modalCount = getModalCount();
+                const modalCount = this.getModalCount();
 
                 if (modalCount <= 0) {
-                    setModalCount(1);
+                    this.setModalCount(1);
                 } else {
-                    setModalCount(modalCount + 1)
+                    this.setModalCount(modalCount + 1)
                 }
 
-                $html.classList.add(CssClass.html.modalOpened);
+                $html.classList.add(ClassNameModalOpened);
 
-                this.visible = true;
-                this.$emit(Events.open.name);
+                this.isVisible = true;
+                this.$emit(EVENTS.open.name);
             },
             close() {
-                let modalCount = getModalCount();
+                const modalCount = this.getModalCount();
 
                 if (modalCount > 1) {
-                    setModalCount(modalCount - 1)
+                    this.setModalCount(modalCount - 1)
                 } else {
-                    setModalCount(0);
-                    $html.classList.remove(CssClass.html.modalOpened);
+                    this.setModalCount(0);
+                    $html.classList.remove(ClassNameModalOpened);
                 }
 
-                this.visible = false;
-                this.$emit(Events.close.name);
+                this.isVisible = false;
+                this.$emit(EVENTS.close.name);
             },
             backdropClick() {
                 if (this.outsideDismiss) {
                     this.close()
                 }
+            },
+            getModalCount() {
+                let modalCount = parseInt($html.dataset[DataKeyModalOpenCount]);
+                return isNaN(modalCount) ? 0 : modalCount;
+            },
+            setModalCount(value) {
+                $html.dataset[DataKeyModalOpenCount] = value;
             }
         },
         mounted() {
             this.$el.__vueModalListener__ = (event) => {
-                if(event.code === 'Escape') {
+                if (event.code === 'Escape') {
                     this.close()
                 }
             };

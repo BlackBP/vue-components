@@ -5,15 +5,23 @@
         toString
     } from '../../utils/helpers';
     import {CIcon} from '../icon';
-    import {createProp} from "../../utils/component";
 
     export default {
         name: "c-badge",
         functional: true,
         props: {
-            icon: createProp(String, ''),
-            color: createProp(String, ''),
-            value: createProp([Number, String], ''),
+            icon: {
+                type: String,
+                default: ''
+            },
+            color: {
+                type: String,
+                default: 'null'
+            },
+            value: {
+                type: [Number, String],
+                default: ''
+            },
         },
         render(h, {data, props, slots}) {
             const baseClassName = 'c-badge';
@@ -43,7 +51,7 @@
                 [`${baseClassName}--${propColor}`]: hasColor
             }];
 
-            if(hasValue || hasIcon) {
+            if (hasValue || hasIcon) {
                 let iconData = {
                     props: {
                         name: propIcon

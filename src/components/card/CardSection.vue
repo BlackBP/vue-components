@@ -1,11 +1,12 @@
 <script>
-    import {createProp} from "../../utils/component";
-
     export default {
         name: "c-card-section",
         functional: true,
         props: {
-            tag: createProp(String, 'div')
+            tag: {
+                type: String,
+                default: 'div'
+            }
         },
         render(createElement, {data, children, props}) {
             const className = 'c-card-section';

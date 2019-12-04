@@ -5,7 +5,6 @@
         getSizeClassName,
         MODIFIERS_MAP
     } from '../../mixins/button';
-    import {createProp} from "../../utils/component";
 
     const ClassName = 'c-icon-btn';
     const IconClassName = `${ClassName}__icon`;
@@ -65,7 +64,11 @@
         functional: true,
         mixins: [btnMixin],
         props: {
-            icon: createProp(String, 'dots-horizontal', true)
+            icon: {
+                type: String,
+                default: 'dots-horizontal',
+                required: true
+            },
         },
         render(createElement, {data = {}, props = {}, listeners = {}}) {
             const {

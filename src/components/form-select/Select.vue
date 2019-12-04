@@ -38,6 +38,7 @@
                :disabled="disabled"
                :readonly="!searchable || readonly"
                :value="query"
+               @keydown="onKeyDown"
                @focus="onFocus"
                @blur="onBlur"
                @input="onSearch">
@@ -65,11 +66,12 @@
                 </div>
 
                 <div v-if="hasOptions"
+                     ref="listOptions"
                      class="c-select__list-options"
                      @mousedown.prevent>
-                    <template v-for="option in parsedOptions">
+                    <template v-for="(option, optionIndex) in parsedOptions">
                         <div class="c-select__option"
-                             :class="[option.selected && 'is-selected', option.group && 'is-group']"
+                             :class="getOptionClassName(option, optionIndex)"
                              :key="option.id"
                              @click="onSelect(option)">
                             {{ option.text }}
@@ -98,7 +100,6 @@
         toLower,
         isEmpty
     } from '../../utils/helpers';
-    import {createProp} from '../../utils/component';
     import {CFormInput} from '../form-input';
     import {CIcon} from "../icon";
     import {CChip} from "../chip";
@@ -122,23 +123,57 @@
             CFormInput
         },
         props: {
-            options: createProp([Array, Object], () => ([])),
-            trackBy: createProp(String, 'id'),
-            optionText: createProp(String, 'name'),
-            groupValues: createProp(String, ''),
-            groupText: createProp(String, ''),
-            max: createProp([String, Number], 0),
-            multiple: createProp(Boolean, false),
-            toggleable: createProp(Boolean, false),
-            searchable: createProp(Boolean, false),
-            emptyPlaceholder: createProp(String, 'Список пуст'),
-            maxPlaceholder: createProp(String, 'Выбрано максимальное количество элементов'),
+            options: {
+                type: [Array, Object],
+                default: () => ([])
+            },
+            trackBy: {
+                type: String,
+                default: 'id'
+            },
+            optionText: {
+                type: String,
+                default: 'name'
+            },
+            groupValues: {
+                type: String,
+                default: ''
+            },
+            groupText: {
+                type: String,
+                default: ''
+            },
+            max: {
+                type: [String, Number],
+                default: 0
+            },
+            multiple: {
+                type: Boolean,
+                default: false
+            },
+            toggleable: {
+                type: Boolean,
+                default: false
+            },
+            searchable: {
+                type: Boolean,
+                default: false
+            },
+            emptyPlaceholder: {
+                type: String,
+                default: 'Список пуст'
+            },
+            maxPlaceholder: {
+                type: String,
+                default: 'Выбрано максимальное количество элементов'
+            },
         },
         data() {
             return {
                 query: '',
                 parsedOptions: [],
-                loading: false
+                loading: false,
+                focusedOption: null
             }
         },
         watch: {
@@ -157,10 +192,13 @@
                 }
             },
             focused(value) {
+
+                // Popper
                 if (value) {
                     ListPopper.enableEventListeners();
                     ListPopper.update();
                 } else {
+                    this.focusedOption = null;
                     ListPopper.disableEventListeners();
                 }
             }
@@ -186,11 +224,14 @@
             selectedCount() {
                 return size(this.selected)
             },
+            parsedOptionsCount() {
+                return size(this.parsedOptions)
+            },
             hasSelected() {
                 return this.selectedCount > 0
             },
             hasOptions() {
-                return isArray(this.parsedOptions) && size(this.parsedOptions) > 0
+                return isArray(this.parsedOptions) && this.parsedOptionsCount > 0
             },
             hasMax() {
                 let max = parseInt(this.max);
@@ -232,6 +273,23 @@
                 }
 
                 return option
+            },
+
+            /**
+             * @param {Object} option
+             * @param {Number} index
+             */
+            getOptionClassName(option = {}, index) {
+                const {
+                    selected = false,
+                    group = false
+                } = option;
+
+                return {
+                    'is-focused': index === this.focusedOption,
+                    'is-selected': selected,
+                    'is-group': group
+                }
             },
 
             /**
@@ -344,7 +402,19 @@
                 this.emitChange(selected)
             },
 
-            //
+            /**
+             *
+             */
+            focusOption() {
+                let focused = this.$refs.listOptions.querySelector('.is-focused');
+
+                if(focused) {
+                    focused.scrollIntoView({
+                        block: 'center'
+                    });
+                }
+            },
+
             /**
              *
              * @param option
@@ -392,31 +462,45 @@
              *
              * @param event
              */
-            onFocus(event) {
-                this.focused = true;
-                this.$emit('focus', event)
-            },
-
-            /**
-             *
-             * @param event
-             */
-            onBlur(event) {
-                this.focused = false;
-                this.$emit('blur', event)
-            },
-
-            /**
-             *
-             * @param event
-             */
             onSearch(event) {
                 this.loading = true;
                 this.query = toString(event.target.value);
                 this.filterByQuery()
             },
 
-            //
+            /**
+             * @param event
+             */
+            onKeyDown(event) {
+                if(this.hasOptions) {
+                    switch (event.code) {
+                        case 'ArrowUp':
+                            if (this.focusedOption === null) {
+                                this.focusedOption = 0;
+                            } else if (this.focusedOption > 0) {
+                                this.focusedOption--;
+                            }
+                            this.focusOption();
+                            break;
+
+                        case 'ArrowDown':
+                            if (this.focusedOption === null) {
+                                this.focusedOption = 0;
+                            } else if (this.focusedOption < this.parsedOptionsCount - 1) {
+                                this.focusedOption++;
+                            }
+                            this.focusOption();
+                            break;
+
+                        case 'Enter':
+                            if (isNumber(this.focusedOption) && this.focusedOption >= 0) {
+                                this.onSelect(this.parsedOptions[this.focusedOption])
+                            }
+                            break;
+                    }
+                }
+            },
+
             /**
              *
              */
@@ -449,7 +533,7 @@
                 if (this.disabled || this.readonly) return;
 
                 this.$emit(MODEL.event, value)
-            },
+            }
         },
         mounted() {
             this.parseOptions();
