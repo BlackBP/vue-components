@@ -12,16 +12,34 @@
                   :visible="visible">
             Hello world!
         </c-popper>
+
+        <c-checkbox v-model="visible">
+            visible
+        </c-checkbox>
+
+        <c-overlay v-model="visible"
+                   content-class="custom"
+                   :outside-dismiss="false">
+            <c-card style="width: auto;">
+                hello
+                <br>
+                <c-btn @click="visible = false">
+                    visible off
+                </c-btn>
+            </c-card>
+        </c-overlay>
     </layout-screen-card>
 </template>
 
 <script>
     import LayoutScreenCard from "./layouts/ScreenCard.vue";
     import CPopper from "../components/test/popper";
+    import COverlay from "../../src/components/overlay/COverlay";
 
     export default {
         name: "ScreenHome",
         components: {
+            COverlay,
             CPopper,
             LayoutScreenCard
         },
@@ -32,3 +50,9 @@
         },
     }
 </script>
+
+<style lang="scss">
+    .custom {
+
+    }
+</style>

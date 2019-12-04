@@ -2474,6 +2474,35 @@ html.modal-open {
   opacity: 0;
   transform: rotateY(20deg); }
 
+.c-overlay {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.45);
+  overflow: hidden; }
+  .c-overlay.is-absolute {
+    position: absolute;
+    width: 100%; }
+
+.c-overlay__content {
+  margin: auto; }
+
+.c-overlay-enter-active, .c-overlay-leave-active {
+  transition: .3s ease; }
+
+.c-overlay-enter, .c-overlay-leave-to {
+  opacity: 0; }
+
+.c-overlay-leave, .c-overlay-enter-to {
+  opacity: 1; }
+
 .c-pagination {
   display: inline-flex;
   flex-flow: row nowrap;

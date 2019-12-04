@@ -22,6 +22,7 @@ export {CIconBtn} from './components/icon-button';
 export {CList, CListItem} from './components/list';
 export {CLoading, CLoadingOverlay} from './components/loading';
 export {CModal} from './components/modal';
+export {COverlay} from './components/overlay';
 export {CPagination} from './components/pagination';
 export {CScrollView} from './components/scroll-view';
 export {CServiceFormValidate} from './components/service';

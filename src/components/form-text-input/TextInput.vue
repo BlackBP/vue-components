@@ -159,6 +159,8 @@
             },
         },
         mounted() {
+            this.$emit('mounted', this.$refs.field, this.mask);
+
             const config = getConfig(this, 'textInput');
             const onMount = isFunction(config.mounted) ? config.mounted : () => {
             };
@@ -166,6 +168,8 @@
             onMount(this, this.mask, this.hasMask, this.$refs.field);
         },
         beforeDestroy() {
+            this.$emit('before-destroy', this.$refs.field, this.mask);
+
             const config = getConfig(this, 'textInput');
             const onBeforeDestroy = isFunction(config.beforeDestroy) ? config.beforeDestroy : () => {
             };

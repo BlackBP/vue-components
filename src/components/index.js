@@ -18,6 +18,7 @@ import {CIconBtn} from './icon-button';
 import {CList, CListItem} from './list';
 import {CLoading, CLoadingOverlay} from './loading';
 import {CModal} from './modal';
+import {COverlay} from './overlay';
 import {CPagination} from './pagination';
 import {CScrollView} from './scroll-view';
 import {CServiceFormValidate} from './service';
@@ -51,6 +52,7 @@ export default {
     CLoading,
     CLoadingOverlay,
     CModal,
+    COverlay,
     CPagination,
     CScrollView,
     CServiceFormValidate,
