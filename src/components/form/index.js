@@ -1,3 +1,3 @@
-import CForm from './Form.vue';
+import CForm from './CForm.vue';
 
 export {CForm}

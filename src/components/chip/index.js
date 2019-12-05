@@ -1,3 +1,3 @@
-import CChip from './Chip.vue';
+import CChip from './CChip.vue';
 
 export {CChip}

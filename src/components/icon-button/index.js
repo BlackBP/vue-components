@@ -1,3 +1,3 @@
-import CIconBtn from './IconBtn.vue';
+import CIconBtn from './CIconBtn.vue';
 
 export {CIconBtn}

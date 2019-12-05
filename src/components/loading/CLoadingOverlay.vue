@@ -1,5 +1,5 @@
 <script>
-    import CLoading from './Loading.vue';
+    import CLoading from './CLoading.vue';
 
     export default {
         name: "c-loading-overlay",

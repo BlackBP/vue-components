@@ -1,3 +1,3 @@
-import CContextPopup from './ContextPopup.vue'
+import CContextPopup from './CContextPopup.vue'
 
 export {CContextPopup}

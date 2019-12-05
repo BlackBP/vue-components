@@ -1,3 +1,3 @@
-import CFormField from './FormField.vue';
+import CFormField from './CFormField.vue';
 
 export {CFormField}

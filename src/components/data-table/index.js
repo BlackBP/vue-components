@@ -1,2 +1,2 @@
-import CDataTable from "./DataTable.vue";
+import CDataTable from "./CDataTable.vue";
 export {CDataTable}

@@ -1,3 +1,3 @@
-import CRadio from './Radio.vue';
+import CRadio from './CRadio.vue';
 
 export {CRadio}

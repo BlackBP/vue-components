@@ -1,3 +1,3 @@
-import CSelect from './Select.vue';
+import CSelect from './CSelect.vue';
 
 export {CSelect}

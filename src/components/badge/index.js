@@ -1,3 +1,3 @@
-import CBadge from './Badge.vue';
+import CBadge from './CBadge.vue';
 
 export {CBadge}

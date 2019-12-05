@@ -1,5 +1,5 @@
 <script>
-    import TransitionCollapse from './Transition.vue';
+    import CCollapseTransition from './CCollapseTransition.vue';
 
     export default {
         name: "c-collapse",
@@ -15,7 +15,7 @@
                 visible
             } = props;
 
-            return createElement(TransitionCollapse, [
+            return createElement(CCollapseTransition, [
                 visible ? children : null
             ])
         }

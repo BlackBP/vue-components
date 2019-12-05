@@ -1,3 +1,3 @@
-import CModal from './Modal.vue';
+import CModal from './CModal.vue';
 
 export {CModal}

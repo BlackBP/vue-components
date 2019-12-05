@@ -1,2 +1,2 @@
-import CServiceFormValidate from './FormValidate.vue';
+import CServiceFormValidate from './CFormValidate.vue';
 export {CServiceFormValidate}

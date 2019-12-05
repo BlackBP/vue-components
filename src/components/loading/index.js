@@ -1,5 +1,5 @@
-import CLoading from './Loading.vue';
-import CLoadingOverlay from './LoadingOverlay.vue';
+import CLoading from './CLoading.vue';
+import CLoadingOverlay from './CLoadingOverlay.vue';
 
 export {
     CLoading,

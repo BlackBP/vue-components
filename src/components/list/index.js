@@ -1,5 +1,5 @@
-import CList from './List.vue';
-import CListItem from './ListItem.vue';
+import CList from './CList.vue';
+import CListItem from './CListItem.vue';
 
 export {
     CList,

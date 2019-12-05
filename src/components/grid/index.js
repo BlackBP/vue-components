@@ -1,6 +1,6 @@
-import CGridCol from './GridCol.vue';
-import CGridContainer from './GridContainer.vue';
-import CGridRow from './GridRow.vue';
+import CGridCol from './CGridCol.vue';
+import CGridContainer from './CGridContainer.vue';
+import CGridRow from './CGridRow.vue';
 
 export {
     CGridCol,

@@ -1,5 +1,5 @@
-import CStackGroup from './StackGroup.vue';
-import CStackItem from './StackItem.vue';
+import CStackGroup from './CStackGroup.vue';
+import CStackItem from './CStackItem.vue';
 
 export {
     CStackGroup,
