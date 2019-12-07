@@ -24,16 +24,11 @@ export const getSizeClassName = (size = '') => {
 
 /**
  *
- * @param className
  * @param color
  * @return {String}
  */
-export const getColorClassName = (className = '', color = '') => {
-    if(color !== '') {
-        return `${className}-${color}`
-    }
-
-    return ''
+export const getColorClassName = (color = '') => {
+    return color !== '' ? `is-${color}` : ''
 };
 
 export default {

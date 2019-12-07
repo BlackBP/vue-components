@@ -91,15 +91,8 @@
     const ClassName = 'c-modal';
     const ClassNameModalOpened = 'modal-open';
     const DataKeyModalOpenCount = 'modalOpenCount';
-    const EVENTS = {
-        open: {
-            name: 'open'
-        },
-        close: {
-            name: 'close'
-        }
-    };
 
+    //TODO: Рефакторинг.
     export default {
         name: "c-modal",
         components: {
@@ -186,8 +179,8 @@
                 return [
                     ClassName,
                     {
-                        [`${ClassName}--${this.styleType}`]: !!this.styleType,
-                        [`${ClassName}--flex`]: this.flex
+                        [`style-${this.styleType}`]: !!this.styleType,
+                        [`is-flex`]: this.flex
                     }
                 ];
             },
@@ -210,7 +203,7 @@
                 $html.classList.add(ClassNameModalOpened);
 
                 this.isVisible = true;
-                this.$emit(EVENTS.open.name);
+                this.$emit('open');
             },
             close() {
                 const modalCount = this.getModalCount();
@@ -223,7 +216,7 @@
                 }
 
                 this.isVisible = false;
-                this.$emit(EVENTS.close.name);
+                this.$emit('close');
             },
             backdropClick() {
                 if (this.outsideDismiss) {
@@ -231,7 +224,7 @@
                 }
             },
             getModalCount() {
-                let modalCount = parseInt($html.dataset[DataKeyModalOpenCount]);
+                const modalCount = parseInt($html.dataset[DataKeyModalOpenCount]);
                 return isNaN(modalCount) ? 0 : modalCount;
             },
             setModalCount(value) {

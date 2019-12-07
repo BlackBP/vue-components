@@ -3,18 +3,18 @@
 
     /**
      *
-     * @param h
+     * @param createElement
      * @param iconName
      * @param className
-     * @return {*}
+     * @return {VNode|null}
      */
-    function createIcon(h, iconName, className) {
-        return h(CIcon, {
+    function createIcon(createElement, iconName = '', className = '') {
+        return iconName !== '' ? createElement(CIcon, {
             class: className,
             props: {
                 name: iconName
             }
-        })
+        }) : null
     }
 
     export default {
@@ -38,14 +38,11 @@
                 default: ''
             },
         },
-        render(h, {data, children, props}) {
-            const baseClassName = 'c-chip';
-            const ClassName = {
-                leading: `${baseClassName}__leading`,
-                trailing: `${baseClassName}__trailing`,
-                text: `${baseClassName}__text`
-            };
-
+        render(createElemet, {data, children, props}) {
+            const ClassName = 'c-chip';
+            const LeadingClassName = `${ClassName}__leading`;
+            const TrailingClassName = `${ClassName}__trailing`;
+            const TextClassName = `${ClassName}__text`;
             const {
                 color: propColor = '',
                 leading: propLeading = '',
@@ -53,46 +50,19 @@
                 tag: propTag = 'div',
             } = props;
 
-            const hasColor = propColor !== '';
-            const hasLeading = propLeading !== '';
-            const hasTrailing = propTrailing !== '';
             const tagName = propTag !== '' ? propTag : 'div';
 
-            let elText = h('div', {
-                class: ClassName.text
-            }, children);
-
-            let content = [elText];
-
-            data.class = [data.class, baseClassName, {
-                [`${baseClassName}--${propColor}`]: hasColor
+            data.class = [data.class, ClassName, {
+                [`is-${propColor}`]: propColor !== ''
             }];
 
-            if (hasLeading || hasTrailing) {
-                if (hasLeading) {
-                    content = [
-                        createIcon(h, propLeading, ClassName.leading),
-                        elText
-                    ];
-                }
-
-                if (hasTrailing) {
-                    content = [
-                        elText,
-                        createIcon(h, propTrailing, ClassName.trailing),
-                    ];
-                }
-
-                if (hasLeading && hasTrailing) {
-                    content = [
-                        createIcon(h, propLeading, ClassName.leading),
-                        elText,
-                        createIcon(h, propTrailing, ClassName.trailing),
-                    ];
-                }
-            }
-
-            return h(tagName, data, content);
+            return createElemet(tagName, data, [
+                createIcon(createElemet, propLeading, LeadingClassName),
+                createElemet('div', {
+                    class: TextClassName
+                }, children),
+                createIcon(createElemet, propTrailing, TrailingClassName),
+            ]);
         }
     }
 </script>

@@ -16,19 +16,17 @@
             },
             color: {
                 type: String,
-                default: 'null'
+                default: ''
             },
             value: {
                 type: [Number, String],
                 default: ''
             },
         },
-        render(h, {data, props, slots}) {
-            const baseClassName = 'c-badge';
-            const ClassName = {
-                slot: `${baseClassName}__slot`,
-                badge: `${baseClassName}__badge`
-            };
+        render(createElement, {data, props, slots}) {
+            const ClassName = 'c-badge';
+            const SlotClassName = `${ClassName}__slot`;
+            const BadgeClassName = `${ClassName}__badge`;
             const {
                 icon: propIcon = '',
                 color: propColor = '',
@@ -41,31 +39,29 @@
             const hasColor = propColor !== '';
             const hasValue = value !== '';
             const children = [
-                h('div', {class: ClassName.slot}, [
+                createElement('div', {class: SlotClassName}, [
                     $slots.default
                 ]),
             ];
 
             // Добавляем основной класс
-            data.class = [data.class, baseClassName, {
-                [`${baseClassName}--${propColor}`]: hasColor
+            data.class = [data.class, ClassName, {
+                [`is-${propColor}`]: hasColor
             }];
 
             if (hasValue || hasIcon) {
-                let iconData = {
-                    props: {
-                        name: propIcon
-                    }
-                };
-
                 children.push(
-                    h('div', {class: ClassName.badge}, [
-                        hasIcon ? h(CIcon, iconData) : value
+                    createElement('div', {class: BadgeClassName}, [
+                        hasIcon ? createElement(CIcon, {
+                            props: {
+                                name: propIcon
+                            }
+                        }) : value
                     ])
                 )
             }
 
-            return h('div', data, children)
+            return createElement('div', data, children)
         }
     }
 </script>

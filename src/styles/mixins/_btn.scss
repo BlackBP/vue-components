@@ -59,7 +59,7 @@
 }
 
 @mixin btn-modifier-colored($mod-name, $background, $font-color: #fff) {
-  @include make-modifier($mod-name) {
+  &#{$mod-name} {
     @include btn-colored($background, $font-color);
   }
 }
@@ -86,7 +86,7 @@
 }
 
 @mixin btn-modifier-transparent($mod-name, $color) {
-  @include make-modifier($mod-name) {
+  &#{$mod-name} {
     @include btn-transparent($color)
   }
 }
@@ -114,7 +114,7 @@
 }
 
 @mixin btn-modifier-bordered($mod-name, $color, $hover-font-color: #fff) {
-  @include make-modifier($mod-name) {
+  &#{$mod-name} {
     @include btn-bordered($color, $hover-font-color)
   }
 }

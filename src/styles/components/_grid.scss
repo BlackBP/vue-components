@@ -19,7 +19,7 @@ $grid-column: #{'.c-grid-col'};
   padding-right: $grid-gutter;
   padding-left: $grid-gutter;
 
-  &.--fluid {
+  &.is-fluid {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
@@ -36,7 +36,7 @@ $grid-column: #{'.c-grid-col'};
   margin-right: -$grid-gutter;
   margin-left: -$grid-gutter;
 
-  &.--items {
+  &.is-items {
     &-start {
       align-items: start;
     }
@@ -58,7 +58,7 @@ $grid-column: #{'.c-grid-col'};
     }
   }
 
-  &.--justify {
+  &.is-justify {
     &-start {
       justify-content: flex-start;
     }
@@ -88,7 +88,7 @@ $grid-column: #{'.c-grid-col'};
   padding-right: $grid-gutter;
   padding-left: $grid-gutter;
 
-  &.--auto {
+  &.is-auto {
     @include make-auto-column;
   }
 }
@@ -102,7 +102,7 @@ $grid-column: #{'.c-grid-col'};
       width: $container-size;
     }
 
-    #{$grid-column}.--#{$breakpoint} {
+    #{$grid-column}.is-#{$breakpoint} {
       @include make-columns($grid-columns-count);
 
       &-auto {

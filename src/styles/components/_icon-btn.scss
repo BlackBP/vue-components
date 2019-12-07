@@ -4,16 +4,6 @@
   $self: #{&};
   $icon: #{$self}__icon;
 
-  // Modifiers
-  $mod-color-primary: #{$self}-primary;
-  $mod-color-secondary: #{$self}-secondary;
-  $mod-color-success: #{$self}-success;
-  $mod-color-error: #{$self}-error;
-  $mod-color-warn: #{$self}-warn;
-  $mod-color-info: #{$self}-info;
-  $mod-color-light: #{$self}-light;
-  $mod-color-dark: #{$self}-dark;
-
   // Styles
   @at-root {
 
@@ -37,60 +27,60 @@
   }
 
   // Colored
-  @include btn-modifier-colored($mod-color-primary, $color-primary);
-  @include btn-modifier-colored($mod-color-secondary, $color-secondary);
-  @include btn-modifier-colored($mod-color-success, $color-success);
-  @include btn-modifier-colored($mod-color-error, $color-error);
-  @include btn-modifier-colored($mod-color-warn, $color-warn);
-  @include btn-modifier-colored($mod-color-info, $color-info);
-  @include btn-modifier-colored($mod-color-light, $color-light, $btn-font-color);
-  @include btn-modifier-colored($mod-color-dark, $color-dark);
+  @include btn-modifier-colored($modifier-color-primary, $color-primary);
+  @include btn-modifier-colored($modifier-color-secondary, $color-secondary);
+  @include btn-modifier-colored($modifier-color-success, $color-success);
+  @include btn-modifier-colored($modifier-color-error, $color-error);
+  @include btn-modifier-colored($modifier-color-warn, $color-warn);
+  @include btn-modifier-colored($modifier-color-info, $color-info);
+  @include btn-modifier-colored($modifier-color-light, $color-light, $btn-font-color);
+  @include btn-modifier-colored($modifier-color-dark, $color-dark);
 
   // Transparent
-  @include make-modifier($btn-modifier-transparent) {
+  &#{$btn-modifier-transparent} {
     background-clip: padding-box;
 
     @include btn-transparent($btn-font-color);
-    @include btn-modifier-transparent($mod-color-primary, $color-primary);
-    @include btn-modifier-transparent($mod-color-secondary, $color-secondary);
-    @include btn-modifier-transparent($mod-color-success, $color-success);
-    @include btn-modifier-transparent($mod-color-error, $color-error);
-    @include btn-modifier-transparent($mod-color-warn, $color-warn);
-    @include btn-modifier-transparent($mod-color-info, $color-info);
-    @include btn-modifier-transparent($mod-color-light, $color-light);
-    @include btn-modifier-transparent($mod-color-dark, $color-dark);
+    @include btn-modifier-transparent($modifier-color-primary, $color-primary);
+    @include btn-modifier-transparent($modifier-color-secondary, $color-secondary);
+    @include btn-modifier-transparent($modifier-color-success, $color-success);
+    @include btn-modifier-transparent($modifier-color-error, $color-error);
+    @include btn-modifier-transparent($modifier-color-warn, $color-warn);
+    @include btn-modifier-transparent($modifier-color-info, $color-info);
+    @include btn-modifier-transparent($modifier-color-light, $color-light);
+    @include btn-modifier-transparent($modifier-color-dark, $color-dark);
   }
 
   // Bordered
-  @include make-modifier($btn-modifier-bordered) {
+  &#{$btn-modifier-bordered} {
     background-color: transparent;
 
     @include btn-bordered($btn-font-color);
-    @include btn-modifier-bordered($mod-color-primary, $color-primary);
-    @include btn-modifier-bordered($mod-color-secondary, $color-secondary);
-    @include btn-modifier-bordered($mod-color-success, $color-success);
-    @include btn-modifier-bordered($mod-color-error, $color-error);
-    @include btn-modifier-bordered($mod-color-warn, $color-warn);
-    @include btn-modifier-bordered($mod-color-info, $color-info);
-    @include btn-modifier-bordered($mod-color-light, $color-light, $btn-font-color);
-    @include btn-modifier-bordered($mod-color-dark, $color-dark);
+    @include btn-modifier-bordered($modifier-color-primary, $color-primary);
+    @include btn-modifier-bordered($modifier-color-secondary, $color-secondary);
+    @include btn-modifier-bordered($modifier-color-success, $color-success);
+    @include btn-modifier-bordered($modifier-color-error, $color-error);
+    @include btn-modifier-bordered($modifier-color-warn, $color-warn);
+    @include btn-modifier-bordered($modifier-color-info, $color-info);
+    @include btn-modifier-bordered($modifier-color-light, $color-light, $btn-font-color);
+    @include btn-modifier-bordered($modifier-color-dark, $color-dark);
   }
 
   // Elevated
-  @include make-modifier($btn-modifier-elevated) {
+  &#{$btn-modifier-elevated} {
     @include btn-elevated;
   }
 
   // Size
-  @include make-modifier($btn-modifier-small) {
+  &#{$btn-modifier-small} {
     width: 1.25em;
     height: 1.25em;
     font-size: 1.25rem;
   }
-  @include make-modifier($btn-modifier-medium) {;
+  &#{$btn-modifier-medium} {;
     font-size: 1.75rem;
   }
-  @include make-modifier($btn-modifier-large) {
+  &#{$btn-modifier-large} {
     font-size: 2rem;
   }
 }

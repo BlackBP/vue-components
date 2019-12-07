@@ -8,22 +8,12 @@
                     <c-stack-group justify="center"
                                    :wrap="true">
 
-                        <c-stack-item>
-                            <c-switch v-model="transparent">
-                                Transparent buttons
-                            </c-switch>
-                        </c-stack-item>
-
-                        <c-stack-item>
-                            <c-switch v-model="elevated">
-                                Elevated buttons
-                            </c-switch>
-                        </c-stack-item>
-
-                        <c-stack-item>
-                            <c-switch v-model="bordered">
-                                Bordered buttons
-                            </c-switch>
+                        <c-stack-item v-for="modifierCode in MODIFIERS_MAP">
+                            <c-radio v-model="modifier"
+                                     name="button-modifier"
+                                     :value="modifierCode">
+                                {{ modifierCode }}
+                            </c-radio>
                         </c-stack-item>
 
                     </c-stack-group>
@@ -141,6 +131,13 @@
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard.vue";
 
+    const MODIFIERS_MAP = {
+        default: 'default',
+        elevated: 'elevated',
+        transparent: 'transparent',
+        bordered: 'bordered',
+    };
+
     export default {
         name: "ScreenButtons",
         components: {
@@ -148,12 +145,24 @@
         },
         data() {
             return {
-                bordered: false,
-                elevated: false,
-                transparent: false,
+                modifier: MODIFIERS_MAP.default,
                 colors: ['default', 'primary', 'secondary', 'success', 'error', 'warn', 'info', 'light', 'dark'],
                 sizes: ['xs', '', 'md', 'lg']
             }
+        },
+        computed: {
+            MODIFIERS_MAP() {
+                return MODIFIERS_MAP
+            },
+            elevated() {
+                return this.modifier === MODIFIERS_MAP.elevated;
+            },
+            transparent() {
+                return this.modifier === MODIFIERS_MAP.transparent;
+            },
+            bordered() {
+                return this.modifier === MODIFIERS_MAP.bordered;
+            },
         }
     }
 </script>

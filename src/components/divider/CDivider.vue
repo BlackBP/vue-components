@@ -1,11 +1,11 @@
 <script>
+    const className = 'c-divider';
+
     export default {
         name: "c-divider",
         functional: true,
         render(createElement, {data}) {
-            let baseClass = 'c-divider';
-
-            data.class = [data.class, baseClass];
+            data.class = [data.class, className];
 
             return createElement('div', data)
         }

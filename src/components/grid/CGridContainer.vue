@@ -12,7 +12,7 @@
             let baseClass = 'c-grid-container';
 
             data.class = [data.class, baseClass, {
-                [`--fluid`]: props.fluid
+                [`is-fluid`]: props.fluid
             }];
 
             return createElement('div', data, children)

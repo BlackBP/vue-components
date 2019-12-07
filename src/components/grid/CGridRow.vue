@@ -24,10 +24,10 @@
             let baseClass = 'c-grid-row';
 
             data.class = [data.class, baseClass, {
-                [`--justify-${props.justify}`]: true,
-                [`--items-${props.alignItems}`]: true,
-                [`--no-gutters`]: props.noGutters,
-                [`--no-wrap`]: props.noWrap
+                [`is-justify-${props.justify}`]: true,
+                [`is-items-${props.alignItems}`]: true,
+                [`is-no-gutters`]: props.noGutters,
+                [`is-no-wrap`]: props.noWrap
             }];
 
             return createElement('div', data, children)

@@ -45,7 +45,7 @@
         const classNames = [
             className,
             getSizeClassName(propSize),
-            getColorClassName(className, propColor),
+            getColorClassName(propColor),
             {
                 [MODIFIERS_MAP.block]: propBlock
             }

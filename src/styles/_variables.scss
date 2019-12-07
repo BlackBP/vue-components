@@ -133,6 +133,16 @@ $elevation-ambient-map: (
 ) !default;
 
 // === Components ===
+// Global modifiers classname
+$modifier-color-primary: #{'.is-primary'};
+$modifier-color-secondary: #{'.is-secondary'};
+$modifier-color-success: #{'.is-success'};
+$modifier-color-error: #{'.is-error'};
+$modifier-color-warn: #{'.is-warn'};
+$modifier-color-info: #{'.is-info'};
+$modifier-color-light: #{'.is-light'};
+$modifier-color-dark: #{'.is-dark'};
+
 // Card
 $card-padding: $g-gutter;
 

@@ -10,18 +10,20 @@
      */
     const createLabel = (createElement, props, slots) => {
         const {
-            label: propLabel,
-            labelFor: propLabelFor
+            label: propLabel = '',
+            labelFor: propLabelFor = ''
         } = props;
+        const hasLabelFor = propLabelFor === '';
+        const tag = hasLabelFor  ? 'div' : 'label';
 
-        if (propLabel === '' || propLabelFor === '') {
+        if (propLabel === '') {
             return null
         }
 
-        return createElement('label', {
+        return createElement(tag, {
             class: `${ClassName}__label`,
             attrs: {
-                for: propLabelFor
+                for: hasLabelFor ? propLabelFor : false
             }
         }, propLabel)
     };

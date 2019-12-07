@@ -16,7 +16,7 @@
         },
         render(createElement, {data, props, children}) {
             data.class = [data.class, ClassName, {
-                [`${ClassName}--flex`]: props.flex
+                [`is-flex`]: props.flex
             }];
 
             return createElement(props.tag, data, children)

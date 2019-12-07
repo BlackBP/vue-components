@@ -57,11 +57,11 @@
             sizes = reduce(sizes, (total, value, key) => {
 
                 if (isString(value) && value !== '') {
-                    total.push(`--${key}-${value}`);
+                    total.push(`is-${key}-${value}`);
                 }
 
                 if(isBoolean(value) && value) {
-                    total.push(`--${key}`)
+                    total.push(`is-${key}`)
                 }
 
                 return total

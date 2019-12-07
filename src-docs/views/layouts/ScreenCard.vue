@@ -1,7 +1,7 @@
 <script>
-    import {CCard} from "@blackbp/vue-components";
-    import {CDivider} from "@blackbp/vue-components";
-    import {CIcon} from "@blackbp/vue-components";
+    import {CCard} from "../../../src/components/card";
+    import {CDivider} from "../../../src/components/divider";
+    import {CIcon} from "../../../src/components/icon";
 
     export default {
         name: "LayoutScreenCard",

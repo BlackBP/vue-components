@@ -38,7 +38,6 @@
     "*.js"
   ],
   "dependencies": {
-    "@blackbp/vue-components": "beta",
     "@mdi/font": "latest",
     "@mdi/svg": "latest",
     "inputmask": "^4.0.9",

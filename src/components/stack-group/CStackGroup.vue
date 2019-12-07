@@ -32,11 +32,11 @@
         },
         render(createElement, {data, props, children}) {
             data.class = [data.class, ClassName, {
-                [`${ClassName}--inline`]: props.inline,
-                [`${ClassName}--column`]: props.column,
-                [`${ClassName}--items-${props.alignItems}`]: true,
-                [`${ClassName}--justify-${props.justify}`]: true,
-                [`${ClassName}--wrap`]: props.wrap,
+                [`is-inline`]: props.inline,
+                [`is-column`]: props.column,
+                [`is-items-${props.alignItems}`]: true,
+                [`is-justify-${props.justify}`]: true,
+                [`is-wrap`]: props.wrap,
             }];
 
             return createElement(props.tag, data, children);

@@ -22,7 +22,7 @@
       height: $size;
       border-radius: $size / 2;
 
-      @include make-modifier('ripple') {
+      &.ripple {
         animation: ripple-marker 1s ease-out infinite;
 
       }

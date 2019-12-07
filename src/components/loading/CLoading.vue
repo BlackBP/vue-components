@@ -6,7 +6,7 @@
      *
      * @param {*} createElement
      * @param {Object} data
-     * @param {Vue} spinner
+     * @param {Object} spinner
      * @return {*}
      */
     function createSpinner(createElement, data, spinner) {
@@ -32,34 +32,32 @@
                 default: false,
             }
         },
-        render(h, {props, data, parent}) {
+        render(createElement, {props, data, parent}) {
             const Config = getConfig(parent, 'loading');
             const CustomSpinner = Config.spinner;
 
-            const BaseClassName = 'c-loading';
-            const ClassName = {
-                spinner: `${BaseClassName}__spinner`,
-                text: `${BaseClassName}__text`
-            };
-            const content = [];
+            const ClassName = 'c-loading';
+            const SpinnerClassName = `${ClassName}__spinner`;
+            const TextClassName = `${ClassName}__text`;
+            const children = [];
             const {
                 text: propText = '',
                 elevated: propElevated,
                 dense: propDense,
             } = props;
 
-            content.push(createSpinner(h, {class: ClassName.spinner}, CustomSpinner));
+            children.push(createSpinner(createElement, {class: SpinnerClassName}, CustomSpinner));
 
             if (propText !== '') {
-                content.push(h('div', {class: ClassName.text}, propText))
+                children.push(createElement('div', {class: TextClassName}, propText))
             }
 
-            data.class = [data.class, BaseClassName, {
-                [`${BaseClassName}--elevated`]: !!propElevated,
-                [`${BaseClassName}--dense`]: !!propDense
+            data.class = [data.class, ClassName, {
+                [`is-elevated`]: !!propElevated,
+                [`is-dense`]: !!propDense
             }];
 
-            return h('div', data, content);
+            return createElement('div', data, children);
         }
     }
 </script>

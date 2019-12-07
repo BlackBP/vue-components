@@ -115,17 +115,3 @@
 @mixin word-nowrap() {
   white-space: nowrap;
 }
-
-//
-@mixin make-state($state) {
-  &#{$state} {
-    @content;
-  }
-}
-
-//
-@mixin make-modifier($name) {
-  &#{$name} {
-    @content;
-  }
-}

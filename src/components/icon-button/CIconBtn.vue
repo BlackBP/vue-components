@@ -43,7 +43,7 @@
 
         const classNames = [
             className,
-            getColorClassName(className, propColor),
+            getColorClassName(propColor),
             getSizeClassName(propSize)
         ];
 

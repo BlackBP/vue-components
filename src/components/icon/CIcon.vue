@@ -11,7 +11,7 @@
             },
             name: {
                 type: String,
-                default: 'dots-horizontal',
+                default: '',
                 required: true
             },
             size: {
@@ -24,7 +24,7 @@
             },
         },
         render(createElement, {data, props, parent}) {
-            const baseClassName = 'c-icon';
+            const ClassName = 'c-icon';
             const config = getConfig(parent, 'icon');
             const {
                 tag: propTag,
@@ -34,7 +34,7 @@
             } = props;
             const vendorPrefix = config.vendorPrefix ? config.vendorPrefix : propVendorPrefix;
 
-            data.class = [data.class, baseClassName, `${vendorPrefix}${propName}`];
+            data.class = [data.class, ClassName, `${vendorPrefix}${propName}`];
 
             if (propSize) {
                 data.style = [data.style, {
