@@ -1,13 +1,20 @@
 <template>
-    
+    <div>
+        <c-btn>
+            Hello world!
+        </c-btn>
+    </div>
 </template>
 
 <script>
+    import CBtn from "../src/components/button/CBtn";
+
     export default {
-        name: "App"
+        name: "App",
+        components: {CBtn}
     }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+    @import "../src/styles/index";
 </style>
