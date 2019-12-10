@@ -50,10 +50,6 @@ html.modal-open {
   $body: #{$self}__body;
   $footer: #{$self}__footer;
 
-  // Modifiers
-  $mod-default: #{$self}--default;
-  $mod-flex: #{$self}--flex;
-
   // Configuration
   $padding: 15px;
   $blocks-gutter: 10px;
@@ -126,7 +122,8 @@ html.modal-open {
     }
   }
 
-  @include make-modifier($mod-default) {
+  // Modifiers
+  &.style-default {
     display: block;
     width: 100%;
     height: auto;
@@ -135,7 +132,7 @@ html.modal-open {
     @include box-elevation(10);
   }
 
-  @include make-modifier($mod-flex) {
+  &.is-flex {
     width: auto !important;
     max-width: none !important;
   }

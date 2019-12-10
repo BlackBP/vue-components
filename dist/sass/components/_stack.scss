@@ -1,36 +1,29 @@
 $stack-group: #{'.c-stack-group'};
 $stack-group-item: #{'.c-stack-item'};
+$stack-items-gap: 10px;
 
 #{$stack-group} {
-  $self: #{&};
+  display: flex;
+  flex-flow: row nowrap;
 
-  $items-gap: 10px;
+  & > #{$stack-group-item} {
+    margin-right: $stack-items-gap;
 
-  @at-root {
-    #{$self} {
-      display: flex;
-      flex-flow: row nowrap;
-
-      & > #{$stack-group-item} {
-        margin-right: $items-gap;
-
-        &:last-child {
-          margin-right: 0;
-        }
-      }
+    &:last-child {
+      margin-right: 0;
     }
   }
 
   // Modifiers
-  @include make-modifier(#{$self}--inline) {
+  &.is-inline {
     display: inline-flex;
   }
 
-  @include make-modifier(#{$self}--column) {
+  &.is-column {
     flex-direction: column;
 
     & > #{$stack-group-item} {
-      margin-bottom: $items-gap;
+      margin-bottom: $stack-items-gap;
       margin-right: initial;
 
       &:last-child {
@@ -40,41 +33,49 @@ $stack-group-item: #{'.c-stack-item'};
     }
   }
 
-  @include make-modifier(#{$self}--wrap) {
+  &.is-wrap {
     flex-wrap: wrap;
   }
 
-  @include make-modifier(#{$self}--items) {
+  &.is-items {
     &-start {
       align-items: start;
     }
+
     &-end {
       align-items: flex-end;
     }
+
     &-center {
       align-items: center;
     }
+
     &-stretch {
       align-items: stretch;
     }
+
     &-baseline {
       align-items: baseline;
     }
   }
 
-  @include make-modifier(#{$self}--justify) {
+  &.is-justify {
     &-start {
       justify-content: flex-start;
     }
+
     &-end {
       justify-content: flex-end;
     }
+
     &-center {
       justify-content: center;
     }
+
     &-between {
       justify-content: space-between;
     }
+
     &-around {
       justify-content: space-around;
     }
@@ -86,7 +87,7 @@ $stack-group-item: #{'.c-stack-item'};
   flex: 0 0 auto;
   display: block;
 
-  @include make-modifier(#{&}--flex) {
+  &.is-flex {
     flex: 1 1 auto;
     width: 100%;
   }

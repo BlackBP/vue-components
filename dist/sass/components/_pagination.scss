@@ -31,7 +31,7 @@
       display: inline-block;
       width: $item-size;
       height: $item-size;
-      border-radius: calc(#{$item-size} / 2);
+      border-radius: #{$item-size} / 2;
       cursor: pointer;
 
       &:hover,
@@ -53,8 +53,7 @@
       appearance: none;
       line-height: 1;
 
-      &[disabled],
-      &[disabled="disabled"] {
+      &:disabled {
         color: rgba(#000, 0.3);
         cursor: not-allowed;
 

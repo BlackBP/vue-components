@@ -4,14 +4,6 @@
   $leading: #{$self}__leading;
   $trailing: #{$self}__trailing;
 
-  // Modifiers
-  $mod-primary: #{$self}--primary;
-  $mod-secondary: #{$self}--secondary;
-  $mod-success: #{$self}--success;
-  $mod-error: #{$self}--error;
-  $mod-warn: #{$self}--warn;
-  $mod-info: #{$self}--info;
-
   // Configuration
   $icon-gap: 5px;
   $padding: 3px 6px;
@@ -20,7 +12,7 @@
   $border-radius: $g-border-radius;
 
   @mixin make-colored($name, $background, $font-color: #fff) {
-    @include make-modifier($name) {
+    &#{$name} {
       background-color: $background;
       color: $font-color
     }
@@ -62,10 +54,10 @@
     }
   }
 
-  @include make-colored($mod-primary, $color-primary);
-  @include make-colored($mod-secondary, $color-secondary);
-  @include make-colored($mod-success, $color-success);
-  @include make-colored($mod-error, $color-error);
-  @include make-colored($mod-warn, $color-warn);
-  @include make-colored($mod-info, $color-info);
+  @include make-colored($modifier-color-primary, $color-primary);
+  @include make-colored($modifier-color-secondary, $color-secondary);
+  @include make-colored($modifier-color-success, $color-success);
+  @include make-colored($modifier-color-error, $color-error);
+  @include make-colored($modifier-color-warn, $color-warn);
+  @include make-colored($modifier-color-info, $color-info);
 }
