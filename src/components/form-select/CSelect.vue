@@ -47,7 +47,9 @@
                 :name="iconClassName"
                 @click="showList"/>
 
-        <transition name="c-select">
+ёё        <transition name="c-select"
+                    @after-enter="onAfterListShow"
+                    @after-leave="onAfterListHide">
             <div v-show="focused"
                  ref="list"
                  class="c-select__list">
@@ -181,25 +183,14 @@
                 this.parseOptions();
 
                 if (this.focused) {
-                    ListPopper.update();
+                    ListPopper.scheduleUpdate();
                 }
             },
             value() {
                 this.parseOptions();
 
                 if (this.focused) {
-                    ListPopper.update();
-                }
-            },
-            focused(value) {
-
-                // Popper
-                if (value) {
-                    ListPopper.enableEventListeners();
-                    ListPopper.update();
-                } else {
-                    this.focusedOption = null;
-                    ListPopper.disableEventListeners();
+                    ListPopper.scheduleUpdate();
                 }
             }
         },
@@ -245,7 +236,7 @@
             iconClassName() {
                 if (this.loading) return 'loading c-select-spin';
                 return this.focused ? 'menu-up' : 'menu-down';
-            }
+            },
         },
         methods: {
 
@@ -395,7 +386,7 @@
              * @param option
              */
             removeOption(option) {
-                let selected = this.selected.filter(selectedOption => {
+                const selected = this.selected.filter(selectedOption => {
                     return this.getOptionId(selectedOption) != this.getOptionId(option)
                 });
 
@@ -406,7 +397,7 @@
              *
              */
             focusOption() {
-                let focused = this.$refs.listOptions.querySelector('.is-focused');
+                const focused = this.$refs.listOptions.querySelector('.is-focused');
 
                 if(focused) {
                     focused.scrollIntoView({
@@ -533,11 +524,35 @@
                 if (this.disabled || this.readonly) return;
 
                 this.$emit(MODEL.event, value)
+            },
+
+
+            // Transition event listeners
+            /**
+             *
+             */
+            onAfterListShow() {
+                this.$nextTick(() => {
+                    ListPopper.enableEventListeners();
+                    ListPopper.scheduleUpdate();
+                })
+            },
+
+            /**
+             *
+             */
+            onAfterListHide() {
+                this.$nextTick(() => {
+                    this.focusedOption = null;
+                    ListPopper.disableEventListeners();
+                })
             }
         },
         mounted() {
+            // Parse list options
             this.parseOptions();
 
+            // Popper.js initialization
             ListPopper = new Popper(this.$refs.root.fieldRef, this.$refs.list, {
                 modifiers: {
                     arrow: {
@@ -546,12 +561,18 @@
                     inner: {
                         enabled: false
                     },
-                }
+                    flip: {
+                        behavior: ['bottom', 'top']
+                    },
+                },
+                placement: 'bottom-start'
             });
         },
         beforeDestroy() {
             if (ListPopper !== null) {
-                ListPopper.destroy()
+                if(ListPopper.destroy) {
+                    ListPopper.destroy()
+                }
             }
         }
     }
