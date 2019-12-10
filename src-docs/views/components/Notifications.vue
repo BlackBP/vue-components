@@ -1,10 +1,20 @@
 <template>
-    <layout-screen-card>
+    <layout-screen-card style="padding: 500px 0;">
 
         <c-grid-row justify="center">
             <c-grid-col xl="4">
 
-                <form @submit.prevent="addNotify">
+                <c-form @submit.prevent="addNotify">
+                    <c-form-field label="Position"
+                                  label-for="position">
+                        <c-select v-model="position"
+                                  id="position"
+                                  track-by="id"
+                                  option-label="name"
+                                  placeholder="Position"
+                                  :options="positions"
+                                  @change="setPosition"/>
+                    </c-form-field>
 
                     <c-form-field label="Duration"
                                   label-for="duration">
@@ -52,7 +62,16 @@
                         </c-btn>
                     </c-form-field>
 
-                </form>
+                    <c-form-field>
+                        <c-btn color="error"
+                               leading="delete"
+                               :block="true"
+                               @click.prevent="removeAll">
+                            Remove all
+                        </c-btn>
+                    </c-form-field>
+
+                </c-form>
 
             </c-grid-col>
         </c-grid-row>
@@ -63,7 +82,7 @@
 <script>
     import LayoutScreenCard from "../layouts/ScreenCard.vue";
 
-    const COLORS = [
+    const COLORS_MAP = [
         {
             id: 'default',
             name: 'Default'
@@ -86,6 +105,25 @@
         },
     ];
 
+    const POSITIONS_MAP = [
+        {
+            id: 'top-right',
+            name: 'Top right'
+        },
+        {
+            id: 'top-left',
+            name: 'Top left'
+        },
+        {
+            id: 'bottom-right',
+            name: 'Bottom right'
+        },
+        {
+            id: 'bottom-left',
+            name: 'Bottom left'
+        },
+    ];
+
     export default {
         name: "ScreenNotifications",
         components: {
@@ -93,11 +131,13 @@
         },
         data() {
             return {
+                position: {...POSITIONS_MAP[0]},
+                positions: [...POSITIONS_MAP],
                 title: 'Notification',
                 message: 'Awesome notification message!',
                 duration: 2000,
-                color: {...COLORS[0]},
-                colors: [...COLORS]
+                color: {...COLORS_MAP[0]},
+                colors: [...COLORS_MAP]
             }
         },
         methods: {
@@ -106,11 +146,17 @@
                     title: this.title,
                     duration: this.duration,
                     color: this.color.id,
-                    onClose(e, i) {
-                        console.log(e, i)
+                    onClose(event, item) {
+                        console.log(event, item)
                     }
                 })
             },
+            removeAll() {
+                this.$notify.removeAll()
+            },
+            setPosition() {
+                this.$notify.setPosition(this.position.id)
+            }
         }
     }
 </script>

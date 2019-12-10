@@ -8,7 +8,8 @@
                     <c-stack-group justify="center"
                                    :wrap="true">
 
-                        <c-stack-item v-for="modifierCode in MODIFIERS_MAP">
+                        <c-stack-item v-for="modifierCode in MODIFIERS_MAP"
+                                      :key="modifierCode">
                             <c-radio v-model="modifier"
                                      name="button-modifier"
                                      :value="modifierCode">
