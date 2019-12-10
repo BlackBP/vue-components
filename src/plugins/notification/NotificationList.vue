@@ -1,4 +1,5 @@
 <script>
+    import {isFunction} from '../../utils/helpers'
     import Notification from "./Notification.vue";
     import {notificationFactory} from "./utils";
 
@@ -10,12 +11,13 @@
         props: {
             position: {
                 type: String,
-                default: ''
+                default: 'top-right',
             }
         },
         data() {
             return {
-                list: []
+                list: [],
+                currentPosition: this.position
             }
         },
         computed: {
@@ -25,13 +27,13 @@
         },
         methods: {
             add(options) {
-                const notify = notificationFactory(options);
+                const notification = notificationFactory(options);
                 const {
                     id,
                     duration = 0
-                } = notify;
+                } = notification;
 
-                this.list.push(notify);
+                this.list.push(notification);
 
                 if (duration > 0) {
                     this.$nextTick(() => {
@@ -46,48 +48,22 @@
                     return item['id'] !== id
                 })
             },
-            clearAll() {
-                this.list = [];
+            removeAll() {
+                this.list = []
             },
-            handleClick(event, item) {
-                const {
-                    onClick = () => {}
-                } = item;
-
-                onClick(event, item)
-            },
-            handleClose(event, item) {
-                const {
-                    id,
-                    onClose = () => {}
-                } = item;
-
-                onClose(event, item);
-                this.remove(id)
+            setPosition(value = 'top-right') {
+                this.currentPosition = value
             }
         },
         render(createElement) {
-            const Root = (children) => createElement('div', {
-                class: ClassName,
-                style: {
-                    display: this.hasNotify ? 'block' : 'none'
-                }
-            }, [
-                createElement('transition-group', {
-                    class: `${ClassName}__list`,
-                    props: {
-                        tag: 'div',
-                        name: 'transition-notify-list'
-                    }
-                }, children)
-            ]);
-
-            const Items = this.list.map(item => {
+            const NotificationArray = this.list.map(item => {
                 const {
                     id,
                     title,
                     message,
                     color,
+                    onClick,
+                    onClose
                 } = item;
 
                 return createElement(Notification, {
@@ -99,23 +75,62 @@
                         color
                     },
                     on: {
-                        click: event => this.handleClick(event, item),
-                        close: event => this.handleClose(event, item)
+                        click: (event) => {
+                            if (isFunction(onClick)) {
+                                onClick(event, item)
+                            }
+                        },
+                        close: (event) => {
+                            if (isFunction(onClose)) {
+                                onClose(event, item);
+                                this.remove(id)
+                            }
+                        }
                     }
                 })
             });
 
-            return Root(Items)
+            return createElement('transition', {
+                    props: {
+                        name: 'notification-list-fade'
+                    }
+                },
+                this.hasNotify ? [
+                    createElement(
+                        'div',
+                        {
+                            class: [
+                                ClassName,
+                                {
+                                    [`is-position-${this.currentPosition}`]: this.currentPosition !== ''
+                                }
+                            ],
+                        },
+                        [
+                            createElement('transition-group', {
+                                class: `${ClassName}__list`,
+                                props: {
+                                    tag: 'div',
+                                    name: 'notification-list'
+                                }
+                            }, NotificationArray)
+                        ]
+                    )
+                ] : null
+            )
         }
     }
 </script>
 
 <style lang="scss">
     .c-service-notify {
+        $viewport-offset: 15px;
+
         position: fixed;
-        top: 15px;
-        right: 15px;
         z-index: 9999;
+        display: flex;
+        justify-content: stretch;
+        align-items: flex-start;
         width: auto;
         height: auto;
 
@@ -124,9 +139,50 @@
             width: 100%;
             max-width: 100%;
         }
+
+        &.is-position-top-right {
+            align-items: flex-start;
+            top: $viewport-offset;
+            right: $viewport-offset;
+        }
+
+        &.is-position-top-left {
+            align-items: flex-start;
+            top: $viewport-offset;
+            left: $viewport-offset;
+        }
+
+        &.is-position-bottom-right {
+            align-items: flex-end;
+            bottom: $viewport-offset;
+            right: $viewport-offset;
+        }
+
+        &.is-position-bottom-left {
+            align-items: flex-end;
+            bottom: $viewport-offset;
+            left: $viewport-offset;
+        }
     }
 
-    .transition-notify-list {
+    .notification-list-fade {
+        &-enter-active,
+        &-leave-active {
+            transition: .3s ease;
+        }
+
+        &-enter,
+        &-leave-to {
+            opacity: 0;
+        }
+
+        &-leave,
+        &-enter-to {
+            opacity: 1;
+        }
+    }
+
+    .notification-list {
         $offsetX: 50px;
 
         &-leave-active {

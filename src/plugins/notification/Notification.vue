@@ -25,8 +25,6 @@
     import {CCard} from "../../components/card";
     import {CIconBtn} from "../../components/icon-button";
 
-    const ClassName = 'c-notify-item';
-
     export default {
         name: "Notification",
         props: {
@@ -54,7 +52,7 @@
         },
         computed: {
             className() {
-                return [`${ClassName}--${this.color}`]
+                return `is-${this.color}`
             }
         },
         methods: {
@@ -69,7 +67,7 @@
 </script>
 
 <style lang="scss" scoped>
-    $opacity: 0.85;
+    $opacity: 0.95;
 
     .c-notify-item {
         position: relative;
@@ -80,7 +78,7 @@
         margin-bottom: 10px;
         color: #ffffff;
         cursor: pointer;
-        transition: 0.3s ease;
+        transition: transform .3s ease, opacity .3s ease;
 
         &:last-child {
             margin-bottom: 0;
@@ -110,16 +108,16 @@
             font-size: 20px;
         }
 
-        &--error {
+        &.is-error {
             background: rgba(#F44336, $opacity);
         }
-        &--warn {
+        &.is-warn {
             background: rgba(#FF9800, $opacity);
         }
-        &--success {
+        &.is-success {
             background: rgba(#4CAF50, $opacity);
         }
-        &--info {
+        &.is-info {
             background: rgba(#03A9F4, $opacity);
         }
     }
