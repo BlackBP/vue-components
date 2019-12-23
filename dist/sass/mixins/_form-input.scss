@@ -68,6 +68,7 @@
 // Styles
 @mixin form-input-style-focused {
   border-color: $form-input-active-color;
+  box-shadow: inset 0 0 0 1px $form-input-active-color;
   outline: 0;
 }
 

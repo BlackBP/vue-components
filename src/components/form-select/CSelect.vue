@@ -47,7 +47,7 @@
                 :name="iconClassName"
                 @click="showList"/>
 
-ёё        <transition name="c-select"
+        <transition name="c-select"
                     @after-enter="onAfterListShow"
                     @after-leave="onAfterListHide">
             <div v-show="focused"
@@ -399,7 +399,7 @@
             focusOption() {
                 const focused = this.$refs.listOptions.querySelector('.is-focused');
 
-                if(focused) {
+                if (focused) {
                     focused.scrollIntoView({
                         block: 'center'
                     });
@@ -463,7 +463,7 @@
              * @param event
              */
             onKeyDown(event) {
-                if(this.hasOptions) {
+                if (this.hasOptions) {
                     switch (event.code) {
                         case 'ArrowUp':
                             if (this.focusedOption === null) {
@@ -570,7 +570,7 @@
         },
         beforeDestroy() {
             if (ListPopper !== null) {
-                if(ListPopper.destroy) {
+                if (ListPopper.destroy) {
                     ListPopper.destroy()
                 }
             }
