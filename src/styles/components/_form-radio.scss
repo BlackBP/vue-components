@@ -15,7 +15,6 @@
       flex-flow: row nowrap;
       justify-content: flex-start;
       align-items: flex-start;
-      position: relative;
       font-size: 1rem;
       @include no-select();
 
@@ -67,6 +66,7 @@
 
     #{$toggle} {
       position: relative;
+      z-index: 1;
       width: 1em;
       height: 1em;
       font-size: 1.25em;

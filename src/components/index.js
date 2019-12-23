@@ -3,7 +3,6 @@ import {CBtn} from './button';
 import {CCard, CCardSection} from './card';
 import {CChip} from './chip';
 import {CCollapse, CCollapseTransition} from './collapse';
-import {CContextPopup} from './context-popup';
 import {CDivider} from './divider';
 import {CForm} from './form';
 import {CCheckbox} from './form-checkbox';
@@ -21,7 +20,6 @@ import {CModal} from './modal';
 import {COverlay} from './overlay';
 import {CPagination} from './pagination';
 import {CScrollView} from './scroll-view';
-import {CServiceFormValidate} from './service';
 import {CStackItem, CStackGroup} from './stack-group';
 import {CTable} from './table';
 
@@ -33,7 +31,6 @@ export default {
     CChip,
     CCollapse,
     CCollapseTransition,
-    CContextPopup,
     CDivider,
     CForm,
     CCheckbox,
@@ -55,7 +52,6 @@ export default {
     COverlay,
     CPagination,
     CScrollView,
-    CServiceFormValidate,
     CStackGroup,
     CStackItem,
     CTable
