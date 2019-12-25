@@ -147,23 +147,31 @@ $modifier-color-dark: #{'.is-dark'};
 $card-padding: $g-gutter;
 
 // Switch / Checkbox / Radio
-$check-color: #555;
-$check-label-padding: .1875em 0;
-$check-content-padding: .1875em 0 0 .625em;
-$check-toggle-size: 1.25em;
-$check-toggle-border: .1em solid $check-color;
-$check-toggle-shadow: 0 .15em .05em -.2em rgba(#000, .2), 0 .2em .2em 0 rgba(#000, .14), 0 .05em .25em 0 rgba(#000, .12);
-$check-transition: .1s ease;
-$check-shadow-color: rgba(#000, .1);
-$check-shadow-press-color: rgba(#000, .2);
-$check-active-color: $color-primary;
-$check-active-shadow-color: rgba($check-active-color, .2);
-$check-active-shadow-press-color: rgba(darken($check-active-color, 10%), .25);
+$switches-color: #555;
+$switches-label-padding: .1875em 0;
+$switches-content-padding: .1em 0 0 .625em;
+$switches-toggle-size: 1.25em;
+$switches-toggle-border: .1em solid $switches-color;
+$switches-toggle-shadow: 0 .15em .05em -.2em rgba(#000, .2), 0 .2em .2em 0 rgba(#000, .14), 0 .05em .25em 0 rgba(#000, .12);
+$switches-transition: .1s ease;
+$switches-shadow-color: rgba(#000, .1);
+$switches-shadow-press-color: rgba(#000, .2);
+$switches-active-color: $color-primary;
+$switches-active-shadow-color: rgba($switches-active-color, .2);
+$switches-active-shadow-press-color: rgba(darken($switches-active-color, 10%), .25);
 
-//
+// Checkbox
 $checkbox-border-radius: .1875rem;
 $checkbox-mark-checked-background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath d='M.04.627L.146.52.43.804.323.91zm.177.177L.854.167.96.273.323.91z' fill='%23fff'/%3E%3C/svg%3E");
 $checkbox-mark-unchecked-background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath fill='%23fff' d='M.15.4h.7v.2h-.7z'/%3E%3C/svg%3E");
+
+// Switch
+$switch-track-width: 1.7em;
+$switch-track-height: .7em;
+$switch-track-background-color: lighten($switches-color, 20%);
+$switch-knob-size: 1em;
+$switch-knob-transition: .1s ease;
+$switch-track-transition: .1s ease;
 
 // Button
 $btn-base-color: #EEE !default;

@@ -1,7 +1,6 @@
 <template>
-
     <div class="c-switch"
-         :class="checked ? 'is-active' : ''">
+         :class="className">
 
         <label ref="label"
                tabindex="0"
@@ -11,39 +10,39 @@
                    :checked="checked"
                    :value="value"
                    :disabled="disabled"
-                   @change="handleChange">
+                   @change="onChange">
 
             <span class="c-switch__toggle">
                 <span class="c-switch__toggle-track"></span>
-                <span class="c-switch__toggle-knob"></span>
+                <span class="c-switch__toggle-knob">
+                    <span class="c-switch__toggle-knob-shadow"></span>
+                </span>
             </span>
 
-            <span class="c-switch__content">
-                <slot />
+            <span v-if="$slots.default"
+                  class="c-switch__content">
+                <slot/>
             </span>
 
         </label>
 
     </div>
-
 </template>
 
 <script>
-    import {
-        isArray,
-        isBoolean
-    } from '../../utils/helpers';
+    import _ from '../../utils/helpers';
+    import MixinFormSwitches from "../../mixins/form-switches"
+
+    const MODEL = {
+        prop: 'model',
+        event: 'change'
+    };
 
     export default {
         name: "c-switch",
-        model: {
-            prop: 'model',
-            event: 'change'
-        },
+        mixins: [MixinFormSwitches],
+        model: MODEL,
         props: {
-            model: null,
-            value: null,
-            name: String,
             type: {
                 type: String,
                 default: 'checkbox',
@@ -51,10 +50,6 @@
                     return ['checkbox', 'radio'].includes(value);
                 }
             },
-            disabled: {
-                type: Boolean,
-                default: false
-            }
         },
         computed: {
             checked() {
@@ -63,9 +58,9 @@
                 }
 
                 // For checkbox
-                if (isArray(this.model)) {
+                if (_.isArray(this.model)) {
                     return this.model.includes(this.value);
-                } else if (isBoolean(this.model)) {
+                } else if (_.isBoolean(this.model)) {
                     return this.model;
                 } else {
                     return this.model == this.value;
@@ -73,18 +68,18 @@
             }
         },
         methods: {
-            handleChange({target: {checked}}) {
+            onChange(event) {
                 if (this.type === 'radio') {
-                    this.$emit('change', this.value);
+                    this.$emit(MODEL.event, this.value);
                     return
                 }
 
                 // For checkbox
-                let isChecked = checked;
-                let value = this.value;
+                const isChecked = event.target.checked;
+                const value = this.value;
                 let newValue = value;
 
-                if (isArray(this.model)) {
+                if (_.isArray(this.model)) {
                     newValue = [...this.model];
 
                     if (isChecked) {
@@ -93,11 +88,11 @@
                         newValue.splice(newValue.indexOf(value), 1);
                     }
 
-                    this.$emit('change', newValue);
-                } else if (isBoolean(this.model)) {
-                    this.$emit('change', isChecked);
+                    this.$emit(MODEL.event, newValue);
+                } else if (_.isBoolean(this.model)) {
+                    this.$emit(MODEL.event, isChecked);
                 } else {
-                    this.$emit('change', value);
+                    this.$emit(MODEL.event, value);
                 }
             },
             focus() {

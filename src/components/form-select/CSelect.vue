@@ -115,7 +115,7 @@
         },
         props: {
             options: {
-                type: [Array, Object],
+                type: Array,
                 default: () => ([]),
                 required: true
             },
@@ -230,7 +230,7 @@
                 return _.isArray(this.parsedOptions) && this.parsedOptionsCount > 0
             },
             hasMax() {
-                let max = parseInt(this.max);
+                const max = parseInt(this.max);
 
                 if (max > 0) {
                     return this.selectedCount >= max

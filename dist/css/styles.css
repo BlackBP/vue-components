@@ -1448,15 +1448,12 @@ a {
   margin: 0 0 auto auto; }
 
 .c-checkbox {
-  display: inline-flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: inline-block;
   font-size: 1rem;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none; }
+  .c-checkbox input:not(:checked), .c-checkbox input:checked {
+    display: none;
+    opacity: 0; }
   .c-checkbox:hover .c-checkbox__toggle, .c-checkbox:focus .c-checkbox__toggle {
     box-shadow: 0 0.15em 0.05em -0.2em rgba(0, 0, 0, 0.2), 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.14), 0 0.05em 0.25em 0 rgba(0, 0, 0, 0.12); }
   .c-checkbox:hover .c-checkbox__toggle-shadow, .c-checkbox:focus .c-checkbox__toggle-shadow {
@@ -1464,9 +1461,6 @@ a {
     transform: scale(2); }
   .c-checkbox:active .c-checkbox__toggle-shadow {
     background-color: rgba(0, 0, 0, 0.2); }
-  .c-checkbox input:not(:checked), .c-checkbox input:checked {
-    display: none;
-    opacity: 0; }
   .c-checkbox.is-active:active .c-checkbox__toggle-shadow {
     background-color: rgba(75, 158, 59, 0.25); }
   .c-checkbox.is-active .c-checkbox__toggle-box {
@@ -1478,17 +1472,33 @@ a {
   .c-checkbox.is-active .c-checkbox__toggle-shadow {
     background-color: rgba(97, 189, 79, 0.2); }
 
+.c-checkbox__label {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  cursor: pointer; }
+
+.c-checkbox__content {
+  flex: 1 1 auto;
+  display: block;
+  padding: 0.1em 0 0 0.625em; }
+
 .c-checkbox__toggle {
-  position: relative;
-  z-index: 1;
+  flex: 0 0 1em;
   width: 1em;
   height: 1em;
   font-size: 1.25em;
+  position: relative;
+  z-index: 0;
   border-radius: 0.1875rem; }
 
 .c-checkbox__toggle-mark {
   position: absolute;
-  z-index: 4;
+  z-index: 3;
   top: 0;
   left: 0;
   width: 100%;
@@ -1500,55 +1510,38 @@ a {
   transition: opacity 0.1s ease, transform 0.1s ease; }
 
 .c-checkbox__toggle-box {
-  display: inline-block;
-  position: relative;
-  z-index: 3;
+  display: block;
   width: 100%;
   height: 100%;
   background-color: #fff;
   border: 0.1em solid #555;
+  position: relative;
+  z-index: 2;
   border-radius: 0.1875rem;
   transition: background-color 0.1s ease, border-color 0.1s ease; }
 
 .c-checkbox__toggle-shadow {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   transform: scale(1);
-  transition: transform 0.1s ease, opacity 0.1s ease, background-color 0.1s ease; }
-
-.c-checkbox__label {
-  position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 0.1875em 0;
-  margin: 0;
-  cursor: pointer; }
-
-.c-checkbox__content {
-  display: block;
-  padding: 0.1875em 0 0 0.625em; }
+  transition: transform 0.1s ease, opacity 0.1s ease, background-color 0.1s ease;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
 
 .c-radio {
-  display: inline-flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: inline-block;
   font-size: 1rem;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none; }
+  .c-radio input:not(:checked), .c-radio input:checked {
+    display: none;
+    opacity: 0; }
   .c-radio:hover .c-radio__toggle, .c-radio:focus .c-radio__toggle {
     box-shadow: 0 0.15em 0.05em -0.2em rgba(0, 0, 0, 0.2), 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.14), 0 0.05em 0.25em 0 rgba(0, 0, 0, 0.12); }
   .c-radio:hover .c-radio__toggle-shadow, .c-radio:focus .c-radio__toggle-shadow {
@@ -1556,9 +1549,6 @@ a {
     transform: scale(2); }
   .c-radio:active .c-radio__toggle-shadow {
     background-color: rgba(0, 0, 0, 0.2); }
-  .c-radio input:not(:checked), .c-radio input:checked {
-    display: none;
-    opacity: 0; }
   .c-radio.is-active:active .c-radio__toggle-shadow {
     background-color: rgba(75, 158, 59, 0.25); }
   .c-radio.is-active .c-radio__toggle-box {
@@ -1568,105 +1558,108 @@ a {
   .c-radio.is-active .c-radio__toggle-shadow {
     background-color: rgba(97, 189, 79, 0.2); }
 
+.c-radio__label {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  cursor: pointer; }
+
+.c-radio__content {
+  flex: 1 1 auto;
+  display: block;
+  padding: 0.1em 0 0 0.625em; }
+
 .c-radio__toggle {
-  position: relative;
-  z-index: 1;
+  flex: 0 0 1em;
   width: 1em;
   height: 1em;
   font-size: 1.25em;
-  border-radius: 50%; }
+  position: relative;
+  z-index: 0;
+  border-radius: .5em; }
 
 .c-radio__toggle-box {
-  display: inline-block;
-  position: relative;
-  z-index: 3;
+  display: block;
   width: 100%;
   height: 100%;
   background-color: #fff;
   border: 0.1em solid #555;
-  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  border-radius: .5em;
   box-shadow: inset 0 0 0 0 #fff;
   transition: background-color 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease; }
 
 .c-radio__toggle-shadow {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   transform: scale(1);
-  transition: transform 0.1s ease, opacity 0.1s ease, background-color 0.1s ease; }
-
-.c-radio__label {
-  position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 0.1875em 0;
-  margin: 0;
-  cursor: pointer; }
-
-.c-radio__content {
-  display: block;
-  padding: 0.1875em 0 0 0.625em; }
+  transition: transform 0.1s ease, opacity 0.1s ease, background-color 0.1s ease;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
 
 .c-switch {
   display: inline-block;
-  font-size: 1rem; }
-  .c-switch:hover .c-switch__toggle-knob, .c-switch:focus .c-switch__toggle-knob {
-    box-shadow: 0 0 0 0.5em rgba(0, 0, 0, 0.1); }
-    .c-switch:hover .c-switch__toggle-knob:before, .c-switch:focus .c-switch__toggle-knob:before {
-      box-shadow: 0 0.15em 0.05em -0.2em rgba(0, 0, 0, 0.2), 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.14), 0 0.05em 0.25em 0 rgba(0, 0, 0, 0.12); }
-  .c-switch:active .c-switch__toggle-knob {
-    box-shadow: 0 0 0 0.5em rgba(0, 0, 0, 0.2); }
-  .c-switch input[type="checkbox"], .c-switch input[type="radio"] {
-    display: none;
-    opacity: 0; }
+  font-size: 1rem;
+  user-select: none; }
   .c-switch input:not(:checked), .c-switch input:checked {
     display: none;
     opacity: 0; }
-  .c-switch.is-active:hover .c-switch__toggle-knob, .c-switch.is-active:focus .c-switch__toggle-knob {
-    box-shadow: 0 0 0 0.5em rgba(97, 189, 79, 0.2); }
-  .c-switch.is-active:active .c-switch__toggle-knob {
-    box-shadow: 0 0 0 0.5em rgba(75, 158, 59, 0.25); }
+  .c-switch:hover .c-switch__toggle-knob, .c-switch:focus .c-switch__toggle-knob {
+    box-shadow: 0 0.15em 0.05em -0.2em rgba(0, 0, 0, 0.2), 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.14), 0 0.05em 0.25em 0 rgba(0, 0, 0, 0.12); }
+  .c-switch:hover .c-switch__toggle-knob-shadow, .c-switch:focus .c-switch__toggle-knob-shadow {
+    opacity: 1;
+    transform: scale(2); }
+  .c-switch:active .c-switch__toggle-knob-shadow {
+    background-color: rgba(0, 0, 0, 0.2); }
+  .c-switch.is-active:active .c-switch__toggle-knob-shadow {
+    background-color: rgba(75, 158, 59, 0.25); }
   .c-switch.is-active .c-switch__toggle-track {
     background-color: #61BD4F; }
   .c-switch.is-active .c-switch__toggle-knob {
     color: #61BD4F;
-    transform: translateX(0.875em); }
+    transform: translateX(0.7em); }
+  .c-switch.is-active .c-switch__toggle-knob-shadow {
+    background-color: rgba(97, 189, 79, 0.2); }
 
 .c-switch__label {
-  display: inline-flex;
+  display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 0.125em 0;
-  cursor: pointer;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
-  font-weight: 400;
-  font-style: normal; }
+  cursor: pointer; }
 
 .c-switch__content {
+  flex: 1 1 auto;
   display: block;
-  padding: 0.1875em 0 0 0.625em; }
+  padding: 0.1em 0 0 0.625em; }
 
 .c-switch__toggle {
+  flex: 0 0 auto;
   position: relative;
-  margin-top: .25em; }
+  z-index: 0;
+  margin-top: .25em;
+  font-size: 1.25em; }
 
 .c-switch__toggle-track {
   display: block;
-  z-index: 2;
-  width: 2.125em;
-  height: 0.875em;
-  border-radius: 0.4375em;
+  width: 1.7em;
+  height: 0.7em;
+  border-radius: 0.35em;
   background-color: #888888;
   font-size: inherit;
   outline: none;
@@ -1676,30 +1669,41 @@ a {
 .c-switch__toggle-knob {
   display: block;
   position: absolute;
-  z-index: 3;
-  top: -.2rem;
+  z-index: 1;
+  top: -.15em;
   left: 0;
   width: 1em;
   height: 1em;
-  font-size: 1.25em;
-  line-height: 1;
+  font-size: 1em;
   border-radius: .5em;
   color: #888888;
   transform: translateX(0px);
-  transition: transform 0.1s ease, box-shadow 0.1s ease; }
+  transition: transform 0.1s ease; }
   .c-switch__toggle-knob:before {
+    position: relative;
+    z-index: 2;
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    display: block;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    background-color: #fff;
     border: .1em solid currentColor;
-    color: inherit;
-    background-color: #fff; }
+    border-radius: 50%; }
+
+.c-switch__toggle-knob-shadow {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  transform: scale(1);
+  transition: transform 0.1s ease, opacity 0.1s ease, background-color 0.1s ease;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
 
 @keyframes select-loading-spin {
   0% {

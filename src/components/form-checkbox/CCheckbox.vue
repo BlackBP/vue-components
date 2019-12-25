@@ -1,7 +1,6 @@
 <template>
-
     <div class="c-checkbox"
-         :class="checked ? 'is-active' : ''">
+         :class="className">
 
         <label ref="label"
                class="c-checkbox__label"
@@ -11,14 +10,13 @@
                    :checked="checked"
                    :value="value"
                    :disabled="disabled"
-                   @change="handleChange">
+                   @change="onChange">
 
             <span class="c-checkbox__toggle">
                 <span class="c-checkbox__toggle-mark"></span>
                 <span class="c-checkbox__toggle-box"></span>
                 <span class="c-checkbox__toggle-shadow"></span>
             </span>
-
 
             <span v-if="$slots.default"
                   class="c-checkbox__content">
@@ -28,35 +26,26 @@
         </label>
 
     </div>
-
 </template>
 
 <script>
-    import {
-        isArray,
-        isBoolean
-    } from '../../utils/helpers';
+    import _ from '../../utils/helpers'
+    import MixinFormSwitches from "../../mixins/form-switches"
+
+    const MODEL = {
+        prop: 'model',
+        event: 'change'
+    };
 
     export default {
         name: "c-checkbox",
-        model: {
-            prop: 'model',
-            event: 'change'
-        },
-        props: {
-            model: null,
-            value: null,
-            name: String,
-            disabled: {
-                type: Boolean,
-                default: false
-            }
-        },
+        mixins: [MixinFormSwitches],
+        model: MODEL,
         computed: {
             checked() {
-                if (isArray(this.model)) {
+                if (_.isArray(this.model)) {
                     return this.model.includes(this.value);
-                } else if (isBoolean(this.model)) {
+                } else if (_.isBoolean(this.model)) {
                     return this.model;
                 } else {
                     return this.model == this.value;
@@ -64,12 +53,12 @@
             }
         },
         methods: {
-            handleChange({target: {checked}}) {
-                let isChecked = checked;
-                let value = this.value;
+            onChange(event) {
+                const isChecked = event.target.checked;
+                const value = this.value;
                 let newValue = value;
 
-                if (isArray(this.model)) {
+                if (_.isArray(this.model)) {
                     newValue = [...this.model];
 
                     if (isChecked) {
@@ -78,11 +67,11 @@
                         newValue.splice(newValue.indexOf(value), 1);
                     }
 
-                    this.$emit('change', newValue);
-                } else if (isBoolean(this.model)) {
-                    this.$emit('change', isChecked);
+                    this.$emit(MODEL.event, newValue);
+                } else if (_.isBoolean(this.model)) {
+                    this.$emit(MODEL.event, isChecked);
                 } else {
-                    this.$emit('change', value);
+                    this.$emit(MODEL.event, value);
                 }
             },
             focus() {

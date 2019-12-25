@@ -1,4 +1,4 @@
-@import "../mixins/switchers";
+@import "../mixins/form-switches";
 
 .c-checkbox {
   $self: #{&};
@@ -12,17 +12,12 @@
   @at-root {
 
     #{$self} {
-      display: inline-flex;
-      flex-flow: row nowrap;
-      justify-content: flex-start;
-      align-items: flex-start;
-      font-size: 1rem;
-      @include no-select();
+      @include switches-style;
 
       &:hover,
       &:focus {
         #{$toggle} {
-          box-shadow: $check-toggle-shadow;
+          box-shadow: $switches-toggle-shadow;
         }
 
         #{$toggle-shadow} {
@@ -33,28 +28,20 @@
 
       &:active {
         #{$toggle-shadow} {
-          background-color: $check-shadow-press-color;
-        }
-      }
-
-      input {
-        &:not(:checked),
-        &:checked {
-          display: none;
-          opacity: 0;
+          background-color: $switches-shadow-press-color;
         }
       }
 
       &.is-active {
         &:active {
           #{$toggle-shadow} {
-            background-color: $check-active-shadow-press-color
+            background-color: $switches-active-shadow-press-color
           }
         }
 
         #{$toggle-box} {
-          border-color: $check-active-color;
-          background-color: $check-active-color;
+          border-color: $switches-active-color;
+          background-color: $switches-active-color;
         }
 
         #{$toggle-mark} {
@@ -63,24 +50,29 @@
         }
 
         #{$toggle-shadow} {
-          background-color: $check-active-shadow-color;
+          background-color: $switches-active-shadow-color;
         }
-
       }
     }
 
+    #{$label} {
+      @include switches-label;
+    }
+
+    #{$content} {
+      @include switches-content;
+    }
+
     #{$toggle} {
+      @include switches-toggle;
       position: relative;
-      z-index: 1;
-      width: 1em;
-      height: 1em;
-      font-size: 1.25em;
+      z-index: 0;
       border-radius: $checkbox-border-radius;
     }
 
     #{$toggle-mark} {
       position: absolute;
-      z-index: 4;
+      z-index: 3;
       top: 0;
       left: 0;
       width: 100%;
@@ -89,51 +81,27 @@
       opacity: 0;
       transform: scale(0);
       background: $checkbox-mark-checked-background no-repeat center / 90%;
-      transition: opacity $check-transition, transform $check-transition;
+      transition: opacity $switches-transition, transform $switches-transition;
     }
 
     #{$toggle-box} {
-      display: inline-block;
+      @include switches-toggle-box;
       position: relative;
-      z-index: 3;
-      width: 100%;
-      height: 100%;
-      background-color: #fff;
-      border: $check-toggle-border;
+      z-index: 2;
       border-radius: $checkbox-border-radius;
-      transition: background-color $check-transition, border-color $check-transition;
+      transition: background-color $switches-transition, border-color $switches-transition;
     }
 
     #{$toggle-shadow} {
+      @include switches-toggle-shadow;
       position: absolute;
       z-index: 1;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      background-color: $check-shadow-color;
-      border-radius: 50%;
-      transform: scale(1);
-      transition: transform $check-transition, opacity $check-transition, background-color $check-transition;
     }
 
-    #{$label} {
-      position: relative;
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: flex-start;
-      align-items: flex-start;
-      padding: $check-label-padding;
-      margin: 0;
-      cursor: pointer;
-    }
-
-    #{$content} {
-      display: block;
-      padding: $check-content-padding;
-    }
   }
+
 }
