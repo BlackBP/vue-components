@@ -1,13 +1,12 @@
 @mixin form-input-styles {
   width: 100%;
   max-width: 100%;
-  height: $form-input-height;
-  min-height: $form-input-height;
   padding: $form-input-padding;
   background-color: $form-input-background-color;
   background-clip: padding-box;
   border: $form-input-border;
   border-radius: $form-input-border-radius;
+  box-shadow: inset 0 0 0 0 transparent;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -66,21 +65,29 @@
 }
 
 // Styles
+@mixin form-input-style-hover {
+}
+
 @mixin form-input-style-focused {
   border-color: $form-input-active-color;
+  box-shadow: inset 0 0 0 1px $form-input-active-color;
   outline: 0;
 }
 
 @mixin form-input-style-error {
   border-color: $form-input-error-color;
+  box-shadow: inset 0 0 0 0 transparent !important;
   background-color: rgba($form-input-error-color, 0.15);
 }
+
 @mixin form-input-style-success {
   border-color: $form-input-success-color;
+  box-shadow: inset 0 0 0 0 transparent !important;
   background-color: rgba($form-input-success-color, 0.15);
 }
 
 @mixin form-input-style-disabled {
   border: $form-input-border !important;
+  box-shadow: inset 0 0 0 0 transparent !important;
   background-color: $form-input-disabled-background-color !important;
 }

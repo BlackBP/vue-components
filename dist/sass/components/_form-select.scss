@@ -1,3 +1,5 @@
+@import "../mixins/form-input";
+
 @keyframes select-loading-spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -13,12 +15,11 @@
   $self: #{&};
   $selected: #{$self}__selected;
   $field: #{$self}__field;
+  $input: #{$self}__input;
   $toggle: #{$self}__toggle;
-
   $list: #{$self}__list;
   $list-info: #{$self}__list-info;
   $list-options: #{$self}__list-options;
-
   $option: #{$self}__option;
 
   $toggle-font-size: 1.375rem;
@@ -30,22 +31,50 @@
   $option-group-background-color: rgba(#000, 0.15);
 
   @at-root {
-
     #{$self} {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: flex-start;
-      align-items: flex-start;
       position: relative;
-      height: auto;
-      padding-right: calc(#{nth($form-input-padding, 2)*2} + #{$toggle-font-size});
+      z-index: 1;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #{$field} {
+      @include form-input-styles {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: auto;
+        min-height: $form-input-height;
+        padding-right: calc(#{nth($form-input-padding, 2)*2} + #{$toggle-font-size});
+      }
+
+      &#{$form-input-state-disabled},
+      &#{$form-input-state-readonly} {
+        @include form-input-style-disabled;
+      }
+
+      &#{$form-input-state-focused} {
+        @include form-input-style-focused;
+      }
+
+      &#{$form-input-state-error} {
+        @include form-input-style-error;
+      }
+
+      &#{$form-input-state-success} {
+        @include form-input-style-success;
+      }
     }
 
     #{$selected} {
       margin: 0 5px 5px 0;
       background-color: $option-hover-background-color;
       color: #fff;
-      font-size: 0.9em;
+      font-size: .9em;
       cursor: pointer;
 
       &:hover {
@@ -54,7 +83,7 @@
       }
     }
 
-    #{$field} {
+    #{$input} {
       flex: 1 1 auto;
       display: block;
       max-width: 100%;
@@ -62,6 +91,8 @@
       border: none;
       background: none;
       margin: 0;
+      outline: 0;
+      @include form-input-placeholder;
     }
 
     #{$toggle} {

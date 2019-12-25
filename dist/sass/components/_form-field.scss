@@ -1,6 +1,10 @@
 .c-form-field {
   $self: #{&};
   $label: #{$self}__label;
+  $field: #{$self}__field;
+  $footer: #{$self}__footer;
+  $helper: #{$self}__helper;
+  $counter: #{$self}__counter;
 
   @at-root {
     #{$self} {
@@ -14,9 +18,36 @@
 
     #{$label} {
       display: inline-block;
-      margin-bottom: 0.2rem;
+      margin-bottom: .2rem;
       font-weight: 600;
       @include no-select;
+    }
+
+    #{$field} {
+      display: block;
+    }
+
+    #{$footer} {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 100%;
+      margin-top: .25rem;
+    }
+
+    #{$helper},
+    #{$counter} {
+      font-size: .8rem;
+    }
+
+    #{$helper} {
+      margin: 0 auto auto 0;
+    }
+
+    #{$counter} {
+      margin: 0 0 auto auto;
     }
 
   }

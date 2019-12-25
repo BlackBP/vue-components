@@ -1,67 +1,67 @@
 <template>
-    <c-form-input ref="root"
-                  content-class="c-select"
-                  :disabled="disabled"
-                  :readonly="readonly"
-                  :helper="helper"
-                  :errors="errors"
-                  :count="selectedCount"
-                  :count-max="max"
-                  :show-counter="max > 0"
-                  :focused="focused">
+    <div class="c-select">
 
-        <template v-if="hasSelected">
-            <template v-for="selectedItem in selected">
-                <template v-if="multiple">
-                    <c-chip trailing="close"
-                            class="c-select__selected"
-                            :key="getOptionId(selectedItem)"
-                            @mousedown.prevent
-                            @click="removeOption(selectedItem)">
-                        {{ getOptionText(selectedItem) }}
-                    </c-chip>
-                </template>
+        <div ref="field"
+             class="c-select__field"
+             :class="fieldClassName"
+             @click.self="showList">
 
-                <template v-else>
-                    <c-chip class="c-select__selected">
-                        {{ getOptionText(selectedItem) }}
-                    </c-chip>
+            <template v-if="hasSelected">
+                <template v-for="selectedItem in selected">
+                    <template v-if="multiple">
+                        <c-chip trailing="close"
+                                class="c-select__selected"
+                                :key="getOptionId(selectedItem)"
+                                @mousedown.prevent
+                                @click="removeOption(selectedItem)">
+                            {{ getOptionText(selectedItem) }}
+                        </c-chip>
+                    </template>
+
+                    <template v-else>
+                        <c-chip class="c-select__selected">
+                            {{ getOptionText(selectedItem) }}
+                        </c-chip>
+                    </template>
                 </template>
             </template>
-        </template>
 
-        <input ref="field"
-               type="text"
-               class="c-select__field"
-               :id="inputId"
-               :placeholder="placeholder"
-               :disabled="disabled"
-               :readonly="!searchable || readonly"
-               :value="query"
-               @keydown="onKeyDown"
-               @focus="onFocus"
-               @blur="onBlur"
-               @input="onSearch">
+            <input ref="input"
+                   type="text"
+                   class="c-select__input"
+                   :id="inputId"
+                   :placeholder="placeholder"
+                   :disabled="disabled"
+                   :readonly="!searchable || readonly"
+                   :value="query"
+                   @keydown="onKeyDown"
+                   @focus="onFocus"
+                   @blur="onBlur"
+                   @input="onSearch">
 
-        <c-icon class="c-select__toggle"
-                :name="iconClassName"
-                @click="showList"/>
+            <c-icon class="c-select__toggle"
+                    :name="iconClassName"
+                    @click="showList"/>
+        </div>
 
-ёё        <transition name="c-select"
+        <transition name="c-select"
                     @after-enter="onAfterListShow"
                     @after-leave="onAfterListHide">
+
             <div v-show="focused"
                  ref="list"
                  class="c-select__list">
 
                 <div v-if="hasMax || !hasOptions"
                      class="c-select__list-info">
+
                     <template v-if="hasMax">
                         <c-chip color="info"
                                 leading="information">
                             {{ maxPlaceholder }} ({{ selectedCount }}/{{ max }})
                         </c-chip>
                     </template>
+
                     <template v-if="!hasOptions">
                         {{ emptyPlaceholder }}
                     </template>
@@ -82,31 +82,19 @@
                 </div>
             </div>
         </transition>
-
-    </c-form-input>
+    </div>
 </template>
 
 <script>
-    import Popper from 'popper.js';
-    import {
-        isArray,
-        isObjectLike,
-        isString,
-        get,
-        reduce,
-        size,
-        some,
-        isNumber,
-        toString,
-        debounce,
-        toLower,
-        isEmpty
-    } from '../../utils/helpers';
-    import {CFormInput} from '../form-input';
-    import {CIcon} from "../icon";
-    import {CChip} from "../chip";
-    import mixinFormInput from '../../mixins/form-input';
-    import mixinFormField from '../../mixins/form-field';
+    import Popper from 'popper.js'
+    import _ from '../../utils/helpers'
+    import MixinFormInput from "../../mixins/form-input"
+
+    import {CIcon} from "../icon"
+    import {CChip} from "../chip"
+
+    import OptionService from "./OptionService"
+    import OptionListService from "./OptionListService"
 
     const MODEL = {
         prop: 'value',
@@ -118,16 +106,18 @@
     export default {
         name: "c-select",
         model: MODEL,
-        mixins: [mixinFormInput, mixinFormField],
+        mixins: [
+            MixinFormInput
+        ],
         components: {
             CChip,
-            CIcon,
-            CFormInput
+            CIcon
         },
         props: {
             options: {
                 type: [Array, Object],
-                default: () => ([])
+                default: () => ([]),
+                required: true
             },
             trackBy: {
                 type: String,
@@ -172,9 +162,10 @@
         },
         data() {
             return {
+                focused: false,
+                loading: false,
                 query: '',
                 parsedOptions: [],
-                loading: false,
                 focusedOption: null
             }
         },
@@ -195,34 +186,48 @@
             }
         },
         computed: {
+            iconClassName() {
+                if (this.loading) return 'loading c-select-spin';
+                return this.focused ? 'menu-up' : 'menu-down';
+            },
+            fieldClassName() {
+                return [
+                    this.state !== '' && this.state,
+                    {
+                        'is-focused': this.focused,
+                        'is-disabled': this.disabled,
+                        'is-readonly': this.readonly,
+                    }
+                ]
+            },
             selected() {
                 let selected = this.value;
 
-                if (isArray(selected)) {
-                    return size(selected) > 0 ? selected : []
+                if (_.isArray(selected)) {
+                    return _.size(selected) > 0 ? selected : []
                 }
 
-                if (isNumber(selected)) {
+                if (_.isNumber(selected)) {
                     return [selected]
                 }
 
-                if (isObjectLike(selected) || isString(selected)) {
-                    return isEmpty(selected) ? [] : [selected]
+                if (_.isObjectLike(selected) || _.isString(selected)) {
+                    return _.isEmpty(selected) ? [] : [selected]
                 }
 
                 return []
             },
             selectedCount() {
-                return size(this.selected)
+                return _.size(this.selected)
             },
             parsedOptionsCount() {
-                return size(this.parsedOptions)
+                return _.size(this.parsedOptions)
             },
             hasSelected() {
                 return this.selectedCount > 0
             },
             hasOptions() {
-                return isArray(this.parsedOptions) && this.parsedOptionsCount > 0
+                return _.isArray(this.parsedOptions) && this.parsedOptionsCount > 0
             },
             hasMax() {
                 let max = parseInt(this.max);
@@ -233,43 +238,21 @@
 
                 return false
             },
-            iconClassName() {
-                if (this.loading) return 'loading c-select-spin';
-                return this.focused ? 'menu-up' : 'menu-down';
-            },
         },
         methods: {
+            // The model event handler
+            emitChange(value = null) {
+                if (this.disabled || this.readonly) return;
+                this.$emit(MODEL.event, value)
+            },
 
-            /**
-             *
-             * @param option
-             * @return {*}
-             */
+            // An option data handlers
             getOptionText(option) {
-                if (isObjectLike(option)) {
-                    return get(option, this.optionText, '')
-                }
-
-                return option
+                return OptionService.getText(option, this.optionText)
             },
-
-            /**
-             *
-             * @param option
-             * @return {*}
-             */
             getOptionId(option) {
-                if (isObjectLike(option)) {
-                    return get(option, this.trackBy, '')
-                }
-
-                return option
+                return OptionService.getId(option, this.trackBy)
             },
-
-            /**
-             * @param {Object} option
-             * @param {Number} index
-             */
             getOptionClassName(option = {}, index) {
                 const {
                     selected = false,
@@ -282,137 +265,49 @@
                     'is-group': group
                 }
             },
-
-            /**
-             *
-             * @param option
-             */
-            getOptionGroupValues(option) {
-                return get(option, this.groupValues, [])
-            },
-
-            /**
-             *
-             * @param option
-             */
-            getOptionGroupText(option) {
-                return get(option, this.groupText, '')
-            },
-
-            /**
-             *
-             * @param {String|Number|Object} option
-             * @return {{id: [Number|String], text: [Number|String], value: *, selected: Boolean, group: Boolean}}
-             */
-            mapOption(option) {
-                let groupValues = this.getOptionGroupValues(option);
-                let isSelected = false;
-                let isGroup = isArray(groupValues) && size(groupValues) > 0;
-                let id = this.getOptionId(option);
-                let text = isGroup ? this.getOptionGroupText(option) : this.getOptionText(option);
-                let value = '';
-                // let isDisabled = get(option, 'disabled', false); // TODO: Обдумать вариант отключения опции
-
-                if (isGroup) {
-                    value = [...groupValues];
-                } else {
-                    if (isObjectLike(option)) {
-                        value = {...option};
-                    } else {
-                        value = option;
-                    }
-                }
-
-                return {
-                    id,
-                    text,
-                    value,
-                    selected: isSelected,
-                    group: isGroup
-                }
-            },
-
-            /**
-             *
-             * @param options
-             * @return {Array|*}
-             */
-            mapOptions(options = []) {
-                if (size(options) < 1) return [];
-
-                options = reduce(options, (total, option) => {
-                    let groupValues = [];
-
-                    option = this.mapOption(option);
-
-                    // Проверка выбранных опций
-                    if (this.hasSelected) {
-                        option.selected = some(this.selected, selectedItem => {
-                            return this.getOptionId(selectedItem) == option.id
-                        })
-                    }
-
-                    // Распаковка групп
-                    if (option.group) {
-                        groupValues = this.mapOptions(option.value)
-                    }
-
-                    total.push(option, ...groupValues);
-
-                    return total
-                }, []);
-
-                // Проверка на совпадение со строкой поиска
-                if (this.query !== '') {
-                    options = options.filter(option => {
-                        if (option.group) return false;
-
-                        return toLower(option.text).match(this.query)
-                    });
-                }
-
-                return options
-            },
-
-            /**
-             *
-             */
             parseOptions() {
-                this.parsedOptions = this.mapOptions(this.options)
+                this.parsedOptions = OptionListService.map(this.options, {
+                    query: this.query,
+                    trackBy: this.trackBy,
+                    optionText: this.optionText,
+                    groupValues: this.groupValues,
+                    groupText: this.groupText,
+                    selectedList: this.selected,
+                })
             },
-
-            /**
-             *
-             * @param option
-             */
             removeOption(option) {
-                const selected = this.selected.filter(selectedOption => {
-                    return this.getOptionId(selectedOption) != this.getOptionId(option)
-                });
-
+                const selected = OptionListService.removeOptionFromList(this.selected, option, this.trackBy);
                 this.emitChange(selected)
             },
 
-            /**
-             *
-             */
+            // The list view methods
+            showList() {
+                if (this.focused || this.disabled) return;
+                this.$refs.input.focus()
+            },
+            hideList() {
+                if (!this.focused) return;
+                this.$refs.input.blur()
+            },
             focusOption() {
                 const focused = this.$refs.listOptions.querySelector('.is-focused');
 
-                if(focused) {
-                    focused.scrollIntoView({
-                        block: 'center'
-                    });
+                if (focused) {
+                    if(focused.scrollIntoView) {
+                        focused.scrollIntoView({
+                            block: 'center'
+                        })
+                    }
                 }
             },
 
-            /**
-             *
-             * @param option
-             */
+            // The Input event listeners
+            filterByQuery: _.debounce(function () {
+                this.parseOptions();
+                this.loading = false;
+            }, 400),
             onSelect(option = {}) {
                 const {
-                    id: optionId,
                     value: optionValue,
                     group: isGroup,
                     selected: isSelected
@@ -425,9 +320,7 @@
                     let selected = [...this.selected];
 
                     if (isSelected) {
-                        selected = selected.filter(selectedOption => {
-                            return this.getOptionId(selectedOption) != optionId
-                        });
+                        selected = OptionListService.removeOptionFromList(selected, option, this.trackBy)
                     } else {
                         if (!this.hasMax) {
                             selected.push(optionValue);
@@ -448,22 +341,13 @@
                     this.hideList();
                 }
             },
-
-            /**
-             *
-             * @param event
-             */
             onSearch(event) {
                 this.loading = true;
-                this.query = toString(event.target.value);
+                this.query = event.target.value;
                 this.filterByQuery()
             },
-
-            /**
-             * @param event
-             */
             onKeyDown(event) {
-                if(this.hasOptions) {
+                if (this.hasOptions) {
                     switch (event.code) {
                         case 'ArrowUp':
                             if (this.focusedOption === null) {
@@ -484,63 +368,29 @@
                             break;
 
                         case 'Enter':
-                            if (isNumber(this.focusedOption) && this.focusedOption >= 0) {
+                            if (_.isNumber(this.focusedOption) && this.focusedOption >= 0) {
                                 this.onSelect(this.parsedOptions[this.focusedOption])
                             }
                             break;
                     }
                 }
             },
-
-            /**
-             *
-             */
-            showList() {
-                if (this.focused || this.disabled) return;
-                this.$refs.field.focus()
+            onFocus(event) {
+                this.focused = true;
+                this.$emit('focus', event);
+            },
+            onBlur(event) {
+                this.focused = false;
+                this.$emit('blur', event);
             },
 
-            /**
-             *
-             */
-            hideList() {
-                if (!this.focused) return;
-                this.$refs.field.blur()
-            },
-
-            /**
-             *
-             */
-            filterByQuery: debounce(function () {
-                this.parseOptions();
-                this.loading = false;
-            }, 400),
-
-            /**
-             *
-             * @param value
-             */
-            emitChange(value = null) {
-                if (this.disabled || this.readonly) return;
-
-                this.$emit(MODEL.event, value)
-            },
-
-
-            // Transition event listeners
-            /**
-             *
-             */
+            // The List transition event listeners
             onAfterListShow() {
                 this.$nextTick(() => {
                     ListPopper.enableEventListeners();
                     ListPopper.scheduleUpdate();
                 })
             },
-
-            /**
-             *
-             */
             onAfterListHide() {
                 this.$nextTick(() => {
                     this.focusedOption = null;
@@ -553,24 +403,26 @@
             this.parseOptions();
 
             // Popper.js initialization
-            ListPopper = new Popper(this.$refs.root.fieldRef, this.$refs.list, {
-                modifiers: {
-                    arrow: {
-                        enabled: false
+            this.$nextTick(() => {
+                ListPopper = new Popper(this.$refs.field, this.$refs.list, {
+                    modifiers: {
+                        arrow: {
+                            enabled: false
+                        },
+                        inner: {
+                            enabled: false
+                        },
+                        flip: {
+                            behavior: ['bottom', 'top']
+                        },
                     },
-                    inner: {
-                        enabled: false
-                    },
-                    flip: {
-                        behavior: ['bottom', 'top']
-                    },
-                },
-                placement: 'bottom-start'
-            });
+                    placement: 'bottom-start'
+                });
+            })
         },
         beforeDestroy() {
             if (ListPopper !== null) {
-                if(ListPopper.destroy) {
+                if (ListPopper.destroy) {
                     ListPopper.destroy()
                 }
             }

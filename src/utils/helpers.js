@@ -26,3 +26,32 @@ export const each = _.each;
 export const toString = _.toString;
 export const size = _.size;
 export const get = _.get;
+
+export default {
+    defaultsDeep,
+    isEmpty,
+    isNumber,
+    isNaN,
+    isArray,
+    isObjectLike,
+    isString,
+    isBoolean,
+    isFunction,
+    uniqBy,
+    debounce,
+    some,
+    toLower,
+    reduce,
+    filter,
+    last,
+    concat,
+    map,
+    mapKeys,
+    mapValues,
+    find,
+    values,
+    each,
+    toString,
+    size,
+    get,
+}

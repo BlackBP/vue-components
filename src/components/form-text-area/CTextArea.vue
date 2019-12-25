@@ -1,5 +1,6 @@
 <template>
     <textarea class="c-text-area"
+              :id="inputId"
               :class="className"
               :rows="rows"
               :maxlength="attrMaxLength"
@@ -14,11 +15,15 @@
 </template>
 
 <script>
-    import MixinFormTextInput from "../../mixins/form-text-input";
+    import MixinFormTextInput from "../../mixins/form-text-input"
+    import MixinFormInput from "../../mixins/form-input"
 
     export default {
         name: "c-text-area",
-        mixins: [MixinFormTextInput],
+        mixins: [
+            MixinFormTextInput,
+            MixinFormInput
+        ],
         props: {
             rows: {
                 type: [Number, String],

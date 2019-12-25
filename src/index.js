@@ -15,6 +15,7 @@ export {CRadio} from './components/form-radio';
 export {CSelect} from './components/form-select';
 export {CSwitch} from './components/form-switch';
 export {CTextInput} from './components/form-text-input';
+export {CTextArea} from './components/form-text-area';
 export {CGridCol, CGridContainer, CGridRow} from './components/grid';
 export {CIcon} from './components/icon';
 export {CIconBtn} from './components/icon-button';

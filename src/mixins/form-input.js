@@ -1,5 +1,13 @@
-export default {
+const MixinFormInput = {
     props: {
+        id: {
+            type: String,
+            default: ''
+        },
+        value: {
+            type: null,
+            default: ''
+        },
         disabled: {
             type: Boolean,
             default: false
@@ -8,17 +16,20 @@ export default {
             type: Boolean,
             default: false
         },
-        helper: {
+        state: {
             type: String,
             default: ''
         },
-        errors: {
-            type: [String, Array],
+        placeholder: {
+            type: String,
             default: ''
         },
-        showCounter: {
-            type: Boolean,
-            default: false
-        },
+    },
+    computed: {
+        inputId() {
+            return this.id !== '' ? this.id : false
+        }
     }
-}
+};
+
+export default MixinFormInput

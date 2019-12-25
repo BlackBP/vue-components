@@ -11,6 +11,7 @@ import {CRadio} from './form-radio';
 import {CSelect} from './form-select';
 import {CSwitch} from './form-switch';
 import {CTextInput} from './form-text-input';
+import {CTextArea} from './form-text-area';
 import {CGridCol, CGridContainer, CGridRow} from './grid';
 import {CIcon} from './icon';
 import {CIconBtn} from './icon-button';
@@ -39,6 +40,7 @@ export default {
     CSelect,
     CSwitch,
     CTextInput,
+    CTextArea,
     CGridCol,
     CGridContainer,
     CGridRow,
