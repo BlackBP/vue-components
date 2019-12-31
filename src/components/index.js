@@ -12,7 +12,7 @@ import {CSelect} from './form-select';
 import {CSwitch} from './form-switch';
 import {CTextInput} from './form-text-input';
 import {CTextArea} from './form-text-area';
-import {CGridCol, CGridContainer, CGridRow} from './grid';
+import {CCol, CContainer, CRow} from './grid';
 import {CIcon} from './icon';
 import {CIconBtn} from './icon-button';
 import {CList, CListItem} from './list';
@@ -41,9 +41,9 @@ export default {
     CSwitch,
     CTextInput,
     CTextArea,
-    CGridCol,
-    CGridContainer,
-    CGridRow,
+    CCol,
+    CContainer,
+    CRow,
     CIcon,
     CIconBtn,
     CList,

@@ -1,6 +1,6 @@
 <script>
     export default {
-        name: "c-grid-row",
+        name: "c-row",
         functional: true,
         props: {
             noGutters: {
@@ -21,7 +21,7 @@
             }
         },
         render(createElement, {data, props, children}) {
-            let baseClass = 'c-grid-row';
+            let baseClass = 'c-row';
 
             data.class = [data.class, baseClass, {
                 [`is-justify-${props.justify}`]: true,

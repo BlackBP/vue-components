@@ -1,9 +1,9 @@
-import CGridCol from './CGridCol.vue';
-import CGridContainer from './CGridContainer.vue';
-import CGridRow from './CGridRow.vue';
+import CCol from './CCol.vue';
+import CContainer from './CContainer.vue';
+import CRow from './CRow.vue';
 
 export {
-    CGridCol,
-    CGridContainer,
-    CGridRow
+    CCol,
+    CContainer,
+    CRow
 }

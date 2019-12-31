@@ -1,9 +1,5 @@
 <script>
-    import {
-        reduce,
-        isString,
-        isBoolean
-    } from '../../utils/helpers';
+    import _ from '../../utils/helpers';
 
     const SIZE = {
         xl: 'xl',
@@ -15,27 +11,27 @@
     };
 
     export default {
-        name: "c-grid-col",
+        name: "c-col",
         functional: true,
         props: {
             xl: {
-                type: String,
+                type: [Number, String],
                 default: ''
             },
             lg: {
-                type: String,
+                type: [Number, String],
                 default: ''
             },
             md: {
-                type: String,
+                type: [Number, String],
                 default: ''
             },
             sm: {
-                type: String,
+                type: [Number, String],
                 default: ''
             },
             xs: {
-                type: String,
+                type: [Number, String],
                 default: ''
             },
             auto: {
@@ -44,7 +40,7 @@
             }
         },
         render(createElement, {data, props, children}) {
-            let baseClass = 'c-grid-col';
+            let baseClass = 'c-col';
             let sizes = {
                 [SIZE.xl]: props[SIZE.xl],
                 [SIZE.lg]: props[SIZE.lg],
@@ -54,13 +50,13 @@
                 [SIZE.auto]: props[SIZE.auto]
             };
 
-            sizes = reduce(sizes, (total, value, key) => {
+            sizes = _.reduce(sizes, (total, value, key) => {
 
-                if (isString(value) && value !== '') {
+                if ((_.isString(value) && value !== '') || (_.isNumber(value) && value > 0)) {
                     total.push(`is-${key}-${value}`);
                 }
 
-                if(isBoolean(value) && value) {
+                if(_.isBoolean(value) && value) {
                     total.push(`is-${key}`)
                 }
 

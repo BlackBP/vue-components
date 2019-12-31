@@ -6,9 +6,9 @@ $grid-container-sizes: (xs: 100%, sm: 570px, md: 750px, lg: 990px, xl: 1170px);
 $grid-gutter: 15px !default;
 $grid-columns-count: 12;
 
-$grid-container: #{'.c-grid-container'};
-$grid-row: #{'.c-grid-row'};
-$grid-column: #{'.c-grid-col'};
+$grid-container: #{'.c-container'};
+$grid-row: #{'.c-row'};
+$grid-column: #{'.c-col'};
 
 // === STYLES
 #{$grid-container} {
