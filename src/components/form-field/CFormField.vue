@@ -1,9 +1,9 @@
 <script>
+    import FormFieldService from "./FormFieldService"
     import createLabel from "./createLabel"
     import createFooter from "./createFooter"
     import createHelper from "./createHelper"
     import createCounter from "./createCounter"
-    import FormFieldService from "./FormFieldService"
     import createField from "./createField";
 
     const ClassName = 'c-form-field';

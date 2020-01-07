@@ -153,7 +153,7 @@ $switches-content-padding: .1em 0 0 .625em;
 $switches-toggle-size: 1.25em;
 $switches-toggle-border: .1em solid $switches-color;
 $switches-toggle-shadow: 0 .15em .05em -.2em rgba(#000, .2), 0 .2em .2em 0 rgba(#000, .14), 0 .05em .25em 0 rgba(#000, .12);
-$switches-transition: .1s ease;
+$switches-transition: .15s ease;
 $switches-shadow-color: rgba(#000, .1);
 $switches-shadow-press-color: rgba(#000, .2);
 $switches-active-color: $color-primary;
@@ -169,7 +169,6 @@ $checkbox-mark-indeterminate-background: url("data:image/svg+xml;charset=utf-8,%
 // Switch
 $switch-track-width: 1.7em;
 $switch-track-height: .7em;
-$switch-track-background-color: lighten($switches-color, 20%);
 $switch-knob-size: 1em;
 $switch-knob-transition: .1s ease;
 $switch-track-transition: .1s ease;

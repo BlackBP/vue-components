@@ -28,7 +28,6 @@
 
                         <c-form-field label="helper"
                                       label-for="helper">
-
                             <c-text-input v-model="helperText"
                                           id="helper"
                                           placeholder="helperText"/>
@@ -59,41 +58,54 @@
                         </c-form-field>
                     </c-col>
                     <c-col>
-                        <c-form-field>
-                            <c-checkbox v-model="checkbox"/>
-                            <br>
-                            <c-checkbox v-model="checkbox">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae ea eveniet nostrum quasi quo
-                                totam veritatis vitae! Debitis dolore dolorem ex id minima, minus rerum. Assumenda est in ullam.
-                                Eius!
-                            </c-checkbox>
+                        <c-form-field label="Without text (standalone)">
+                            <c-stack-group align-items="center"
+                                           justify="start">
+                                <c-stack-item>
+                                    <c-checkbox v-model="checkbox"/>
+                                </c-stack-item>
+                                <c-stack-item>
+                                    <c-radio v-model="checkbox"
+                                             :value="true" />
+                                </c-stack-item>
+                                <c-stack-item>
+                                    <c-switch v-model="checkbox"/>
+                                </c-stack-item>
+                            </c-stack-group>
                         </c-form-field>
 
-                        <c-form-field>
-                            <c-switch v-model="checkbox"/>
-                            <br>
-                            <c-switch v-model="checkbox">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae ea eveniet nostrum quasi quo
-                                totam veritatis vitae! Debitis dolore dolorem ex id minima, minus rerum. Assumenda est in ullam.
-                                Eius!
-                            </c-switch>
-                        </c-form-field>
-
-                        <c-form-field>
-                            <template v-for="item in stateList">
-                                <c-radio v-model="state"
-                                         name="state"
-                                         style="margin-right: 1rem;"
-                                         :key="item"
-                                         :value="item">
-                                    {{ item }}
-                                    <br>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi aspernatur
-                                    consequatur debitis excepturi fugiat, impedit in iure labore, libero minus natus numquam
-                                    obcaecati omnis quod quos repudiandae tempore voluptatem.
-                                </c-radio>
-                                <br>
-                            </template>
+                        <c-form-field label="With text">
+                            <c-stack-group align-items="start"
+                                           justify="start">
+                                <c-stack-item>
+                                    <c-checkbox v-model="checkbox">
+                                        Checkbox
+                                        <br>
+                                        ...some text
+                                    </c-checkbox>
+                                </c-stack-item>
+                                <c-stack-item>
+                                    <c-switch v-model="checkbox">
+                                        Switch
+                                        <br>
+                                        ...some text
+                                    </c-switch>
+                                </c-stack-item>
+                                <c-stack-item>
+                                    <template v-for="item in stateList">
+                                        <c-radio v-model="state"
+                                                 name="state"
+                                                 style="margin-right: 1rem;"
+                                                 :key="item"
+                                                 :value="item">
+                                            {{ item }}
+                                            <br>
+                                            ...some text
+                                        </c-radio>
+                                        <br>
+                                    </template>
+                                </c-stack-item>
+                            </c-stack-group>
                         </c-form-field>
                     </c-col>
                 </c-row>
@@ -116,10 +128,14 @@
     import CRow from "../src/components/grid/CRow";
     import CCol from "../src/components/grid/CCol";
     import SandboxSection from "./SandboxSection";
+    import CStackGroup from "../src/components/stack-group/CStackGroup";
+    import CStackItem from "../src/components/stack-group/CStackItem";
 
     export default {
         name: "App",
         components: {
+            CStackItem,
+            CStackGroup,
             SandboxSection,
             CCol,
             CRow,
