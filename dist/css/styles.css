@@ -1507,7 +1507,7 @@ a {
   opacity: 0;
   transform: scale(0);
   background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath d='M.04.627L.146.52.43.804.323.91zm.177.177L.854.167.96.273.323.91z' fill='%23fff'/%3E%3C/svg%3E") no-repeat center/90%;
-  transition: opacity 0.1s ease, transform 0.1s ease; }
+  transition: opacity 0.15s ease, transform 0.15s ease; }
 
 .c-checkbox__toggle-box {
   display: block;
@@ -1518,7 +1518,7 @@ a {
   position: relative;
   z-index: 2;
   border-radius: 0.1875rem;
-  transition: background-color 0.1s ease, border-color 0.1s ease; }
+  transition: background-color 0.15s ease, border-color 0.15s ease; }
 
 .c-checkbox__toggle-shadow {
   width: 100%;
@@ -1527,7 +1527,7 @@ a {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   transform: scale(1);
-  transition: transform 0.1s ease, opacity 0.1s ease, background-color 0.1s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -1592,7 +1592,7 @@ a {
   z-index: 2;
   border-radius: .5em;
   box-shadow: inset 0 0 0 0 #fff;
-  transition: background-color 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease; }
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
 
 .c-radio__toggle-shadow {
   width: 100%;
@@ -1601,7 +1601,7 @@ a {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   transform: scale(1);
-  transition: transform 0.1s ease, opacity 0.1s ease, background-color 0.1s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -1652,31 +1652,35 @@ a {
   flex: 0 0 auto;
   position: relative;
   z-index: 0;
-  margin-top: .25em;
+  display: block;
+  width: 1.7em;
+  height: 1em;
   font-size: 1.25em; }
 
 .c-switch__toggle-track {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  transform: translateY(-50%);
   display: block;
   width: 1.7em;
   height: 0.7em;
   border-radius: 0.35em;
-  background-color: #888888;
+  background-color: #555;
   font-size: inherit;
   outline: none;
   cursor: pointer;
   transition: background-color 0.1s ease; }
 
 .c-switch__toggle-knob {
-  display: block;
-  position: absolute;
+  position: relative;
   z-index: 1;
-  top: -.15em;
-  left: 0;
+  display: block;
   width: 1em;
   height: 1em;
   font-size: 1em;
   border-radius: .5em;
-  color: #888888;
+  color: #555;
   transform: translateX(0px);
   transition: transform 0.1s ease; }
   .c-switch__toggle-knob:before {
@@ -1697,7 +1701,7 @@ a {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   transform: scale(1);
-  transition: transform 0.1s ease, opacity 0.1s ease, background-color 0.1s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
   position: absolute;
   z-index: 1;
   top: 0;

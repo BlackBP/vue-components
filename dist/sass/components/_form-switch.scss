@@ -65,16 +65,22 @@
       flex: 0 0 auto;
       position: relative;
       z-index: 0;
-      margin-top: .25em;
+      display: block;
+      width: $switch-track-width;
+      height: 1em;
       font-size: $switches-toggle-size;
     }
 
     #{$toggle-track} {
+      position: absolute;
+      z-index: 0;
+      top: 50%;
+      transform: translateY(-50%);
       display: block;
       width: $switch-track-width;
       height: $switch-track-height;
       border-radius: $switch-track-height / 2;
-      background-color: $switch-track-background-color;
+      background-color: $switches-color;
       font-size: inherit;
       outline: none;
       cursor: pointer;
@@ -82,16 +88,14 @@
     }
 
     #{$toggle-knob} {
-      display: block;
-      position: absolute;
+      position: relative;
       z-index: 1;
-      top: -.15em;
-      left: 0;
+      display: block;
       width: 1em;
       height: 1em;
       font-size: $switch-knob-size;
       border-radius: .5em;
-      color: $switch-track-background-color;
+      color: $switches-color;
       transform: translateX(0px);
       transition: transform $switch-knob-transition;
 
