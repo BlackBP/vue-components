@@ -1,4 +1,4 @@
-import {get} from "../utils/helpers";
+import _ from "../utils/helpers";
 
 export const MODIFIERS_MAP = {
     transparent: 'is-transparent',
@@ -19,7 +19,8 @@ export const SIZES_MAP = {
  * @returns {String}
  */
 export const getSizeClassName = (size = '') => {
-    return get(SIZES_MAP, size, '')
+    const sizeFromMap = _.get(SIZES_MAP, size, '');
+    return sizeFromMap !== '' ? sizeFromMap : size
 };
 
 /**

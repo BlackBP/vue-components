@@ -4,7 +4,7 @@
              class="c-overlay"
              :class="className"
              :style="styles"
-             @click="hide">
+             @click="outsideDismiss && hide()">
 
             <transition :name="contentTransition">
                 <div v-show="visible"
@@ -20,12 +20,14 @@
 </template>
 
 <script>
+    const MODEL = {
+        prop: 'visible',
+        event: 'change'
+    };
+
     export default {
         name: "c-overlay",
-        model: {
-            prop: 'visible',
-            event: 'change'
-        },
+        model: MODEL,
         props: {
             visible: {
                 type: Boolean,
@@ -70,12 +72,10 @@
         },
         methods: {
             show() {
-                this.$emit('change', true)
+                this.$emit(MODEL.event, true)
             },
             hide() {
-                if(this.outsideDismiss) {
-                    this.$emit('change', false)
-                }
+                this.$emit(MODEL.event, false)
             }
         }
     }

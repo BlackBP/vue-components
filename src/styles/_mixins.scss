@@ -22,24 +22,8 @@
 
 }
 
-// Input, TextArea placeholder
-@mixin input-placeholder {
-  &::-webkit-input-placeholder {
-    @content
-  }
-  &:-moz-placeholder {
-    @content
-  }
-  &::-moz-placeholder {
-    @content
-  }
-  &:-ms-input-placeholder {
-    @content
-  }
-}
-
 // Media queries
-@mixin media( $breakpoints ) {
+@mixin media($breakpoints) {
   @each $breakpoint in $breakpoints {
 
     @if $breakpoint == xs-s {
@@ -94,8 +78,33 @@
   user-select: none;
 }
 
+// Disable outline on focus
+@mixin no-outline {
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// Input, TextArea placeholder
+@mixin input-placeholder {
+  &::-webkit-input-placeholder {
+    @content
+  }
+  &:-moz-placeholder {
+    @content
+  }
+  &::-moz-placeholder {
+    @content
+  }
+  &:-ms-input-placeholder {
+    @content
+  }
+}
+
 // Word wrapping
-@mixin word-wrap() {
+@mixin word-wrap {
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
@@ -106,12 +115,12 @@
   white-space: normal;
 }
 
-@mixin word-ellipsis() {
+@mixin word-ellipsis {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-@mixin word-nowrap() {
+@mixin word-nowrap {
   white-space: nowrap;
 }

@@ -10,8 +10,11 @@
             <div class="c-modal-container__wrap">
 
                 <template v-if="loading">
-                    <c-loading style="margin: auto;"
-                               :visible="true"/>
+                    <slot name="loading">
+                        <div style="margin: auto; background: #fff; padding: 1rem 1.25rem; border-radius: .5rem; font-size: 1.25rem; font-weight: bold;">
+                            Loading...
+                        </div>
+                    </slot>
                 </template>
 
                 <template v-else>
@@ -77,10 +80,7 @@
 </template>
 
 <script>
-    import {
-        isNaN,
-        isString
-    } from '../../utils/helpers';
+    import _ from '../../utils/helpers';
 
     import {CIcon} from '../icon';
     import {CIconBtn} from '../icon-button';
@@ -101,10 +101,6 @@
             CIcon
         },
         props: {
-            visible: {
-                type: Boolean,
-                default: false
-            },
             title: {
                 type: String,
                 default: '',
@@ -156,24 +152,15 @@
         },
         data() {
             return {
-                isVisible: this.visible
-            };
-        },
-        watch: {
-            visible(value) {
-                if(value) {
-                    this.open()
-                } else {
-                    this.close()
-                }
+                isVisible: false
             }
         },
         computed: {
             hasTitle() {
-                return isString(this.title) && this.title !== '';
+                return _.isString(this.title) && this.title !== '';
             },
             hasIcon() {
-                return isString(this.icon) && this.icon !== '';
+                return _.isString(this.icon) && this.icon !== '';
             },
             modalClassName() {
                 return [
@@ -225,7 +212,7 @@
             },
             getModalCount() {
                 const modalCount = parseInt($html.dataset[DataKeyModalOpenCount]);
-                return isNaN(modalCount) ? 0 : modalCount;
+                return _.isNaN(modalCount) ? 0 : modalCount;
             },
             setModalCount(value) {
                 $html.dataset[DataKeyModalOpenCount] = value;

@@ -32,6 +32,8 @@
     pointer-events: unset !important;
   }
 
+  @include no-outline;
+
   @content;
 }
 

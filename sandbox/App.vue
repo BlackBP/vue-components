@@ -66,7 +66,7 @@
                                 </c-stack-item>
                                 <c-stack-item>
                                     <c-radio v-model="checkbox"
-                                             :value="true" />
+                                             :value="true"/>
                                 </c-stack-item>
                                 <c-stack-item>
                                     <c-switch v-model="checkbox"/>
@@ -130,10 +130,12 @@
     import SandboxSection from "./SandboxSection";
     import CStackGroup from "../src/components/stack-group/CStackGroup";
     import CStackItem from "../src/components/stack-group/CStackItem";
+    import CBtn from "../src/components/button/CBtn";
 
     export default {
         name: "App",
         components: {
+            CBtn,
             CStackItem,
             CStackGroup,
             SandboxSection,
