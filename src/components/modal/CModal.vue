@@ -31,6 +31,7 @@
 
                         <template v-else>
                             <div v-show="isVisible"
+                                 class="c-modal"
                                  :class="modalClassName"
                                  :style="modalStyle"
                                  @click.stop>
@@ -39,8 +40,8 @@
                                         class="c-modal__header">
 
                                     <c-icon v-if="hasIcon"
-                                            :name="icon"
-                                            class="c-modal__header-icon"/>
+                                            class="c-modal__header-icon"
+                                            :name="icon"/>
 
                                     <div v-if="hasTitle"
                                          class="c-modal__header-title">
@@ -84,11 +85,9 @@
 
     import {CIcon} from '../icon';
     import {CIconBtn} from '../icon-button';
-    import {CLoading} from '../loading';
 
     const $html = document.querySelector('html');
 
-    const ClassName = 'c-modal';
     const ClassNameModalOpened = 'modal-open';
     const DataKeyModalOpenCount = 'modalOpenCount';
 
@@ -96,7 +95,6 @@
     export default {
         name: "c-modal",
         components: {
-            CLoading,
             CIconBtn,
             CIcon
         },
@@ -163,13 +161,10 @@
                 return _.isString(this.icon) && this.icon !== '';
             },
             modalClassName() {
-                return [
-                    ClassName,
-                    {
-                        [`style-${this.styleType}`]: !!this.styleType,
-                        [`is-flex`]: this.flex
-                    }
-                ];
+                return {
+                    [`style-${this.styleType}`]: !!this.styleType,
+                    [`is-flex`]: this.flex
+                }
             },
             modalStyle() {
                 return {
