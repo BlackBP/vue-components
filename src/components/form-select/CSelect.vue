@@ -10,7 +10,7 @@
                 <template v-for="selectedItem in selected">
                     <template v-if="multiple">
                         <c-chip trailing="close"
-                                class="c-select__selected"
+                                class="c-select__selected is-multiple"
                                 :key="getOptionId(selectedItem)"
                                 @mousedown.prevent
                                 @click="removeOption(selectedItem)">
@@ -19,9 +19,9 @@
                     </template>
 
                     <template v-else>
-                        <c-chip class="c-select__selected">
+                        <span class="c-select__selected">
                             {{ getOptionText(selectedItem) }}
-                        </c-chip>
+                        </span>
                     </template>
                 </template>
             </template>
@@ -30,11 +30,10 @@
                    type="text"
                    class="c-select__input"
                    :id="inputId"
-                   :placeholder="placeholder"
+                   :placeholder="inputPlaceholder"
                    :disabled="disabled"
                    :readonly="!searchable || readonly"
                    :value="query"
-                   @keydown="onKeyDown"
                    @focus="onFocus"
                    @blur="onBlur"
                    @input="onSearch">
@@ -75,6 +74,7 @@
                         <div class="c-select__option"
                              :class="getOptionClassName(option, optionIndex)"
                              :key="option.id"
+                             tabindex="-1"
                              @click="onSelect(option)">
                             {{ option.text }}
                         </div>
@@ -174,14 +174,14 @@
                 this.parseOptions();
 
                 if (this.focused) {
-                    ListPopper.scheduleUpdate();
+                    this.updateListPosition();
                 }
             },
             value() {
                 this.parseOptions();
 
                 if (this.focused) {
-                    ListPopper.scheduleUpdate();
+                    this.updateListPosition();
                 }
             }
         },
@@ -199,6 +199,13 @@
                         'is-readonly': this.readonly,
                     }
                 ]
+            },
+            inputPlaceholder() {
+                if(this.hasSelected) {
+                    return this.multiple ? this.placeholder : ''
+                } else {
+                    return this.placeholder
+                }
             },
             selected() {
                 let selected = this.value;
@@ -289,17 +296,6 @@
                 if (!this.focused) return;
                 this.$refs.input.blur()
             },
-            focusOption() {
-                const focused = this.$refs.listOptions.querySelector('.is-focused');
-
-                if (focused) {
-                    if(focused.scrollIntoView) {
-                        focused.scrollIntoView({
-                            block: 'center'
-                        })
-                    }
-                }
-            },
 
             // The Input event listeners
             filterByQuery: _.debounce(function () {
@@ -346,35 +342,6 @@
                 this.query = event.target.value;
                 this.filterByQuery()
             },
-            onKeyDown(event) {
-                if (this.hasOptions) {
-                    switch (event.code) {
-                        case 'ArrowUp':
-                            if (this.focusedOption === null) {
-                                this.focusedOption = 0;
-                            } else if (this.focusedOption > 0) {
-                                this.focusedOption--;
-                            }
-                            this.focusOption();
-                            break;
-
-                        case 'ArrowDown':
-                            if (this.focusedOption === null) {
-                                this.focusedOption = 0;
-                            } else if (this.focusedOption < this.parsedOptionsCount - 1) {
-                                this.focusedOption++;
-                            }
-                            this.focusOption();
-                            break;
-
-                        case 'Enter':
-                            if (_.isNumber(this.focusedOption) && this.focusedOption >= 0) {
-                                this.onSelect(this.parsedOptions[this.focusedOption])
-                            }
-                            break;
-                    }
-                }
-            },
             onFocus(event) {
                 this.focused = true;
                 this.$emit('focus', event);
@@ -383,12 +350,56 @@
                 this.focused = false;
                 this.$emit('blur', event);
             },
+            // TODO: Рефакторинг навигации по списку с помощью клавиш
+            // onKeyDown(event) {
+            // if (this.hasOptions) {
+            //     switch (event.code) {
+            //         case 'ArrowUp':
+            //             if (this.focusedOption === null) {
+            //                 this.focusedOption = 0;
+            //             } else if (this.focusedOption > 0) {
+            //                 this.focusedOption--;
+            //             }
+            //             this.focusOption();
+            //             break;
+            //
+            //         case 'ArrowDown':
+            //             if (this.focusedOption === null) {
+            //                 this.focusedOption = 0;
+            //             } else if (this.focusedOption < this.parsedOptionsCount - 1) {
+            //                 this.focusedOption++;
+            //             }
+            //             this.focusOption();
+            //             break;
+            //
+            //         case 'Enter':
+            //             if (_.isNumber(this.focusedOption) && this.focusedOption >= 0) {
+            //                 this.onSelect(this.parsedOptions[this.focusedOption])
+            //             }
+            //             break;
+            //     }
+            // }
+            // },
+            // scrollList() {
+            //     const focused = this.$refs.listOptions.querySelector('.is-focused');
+            //
+            //     if (focused && this.$refs.listOptions) {
+            //         ScrollTo(focused, {
+            //             elementToScroll: this.$refs.listOptions
+            //         })
+            //     }
+            // },
 
             // The List transition event listeners
+            updateListPosition() {
+                if (ListPopper) {
+                    ListPopper.scheduleUpdate();
+                }
+            },
             onAfterListShow() {
                 this.$nextTick(() => {
                     ListPopper.enableEventListeners();
-                    ListPopper.scheduleUpdate();
+                    this.updateListPosition();
                 })
             },
             onAfterListHide() {
