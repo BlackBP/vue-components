@@ -52,7 +52,9 @@
                             <c-select v-model="state"
                                       id="states"
                                       placeholder="Select..."
-                                      :toggleable="true"
+                                      :toggleable="false"
+                                      :multiple="true"
+                                      :searchable="false"
                                       :state="state"
                                       :options="stateList"/>
                         </c-form-field>
@@ -158,7 +160,7 @@
                 errorText: '',
                 helperText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad alias asperiores commodi consectetur facere incidunt iste itaque, iure laborum magni molestiae nesciunt nisi officia optio perferendis porro praesentium repellat suscipit!',
                 state: '',
-                stateList: ['has-error', 'has-success', 'is-disabled', 'is-readonly']
+                stateList: ['has-error', 'has-success', 'is-disabled', 'is-readonly', 'is-bad', 'is-cool', 'is-veryr', 'asdasd', '123123']
             }
         }
     }

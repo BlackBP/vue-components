@@ -5,10 +5,8 @@
 </template>
 
 <script>
-    import {
-        debounce
-    } from '../../utils/helpers';
-    import ScrollTo from 'animated-scroll-to';
+    import _ from '../../utils/helpers'
+    import ScrollTo from 'animated-scroll-to'
 
     export default {
         name: "c-scroll-view",
@@ -48,7 +46,7 @@
         methods: {
             scrollTo(offset = 0) {
                 ScrollTo(offset, {
-                    element: this.$el
+                    elementToScroll: this.$el
                 })
             },
             scrollToEnd() {
@@ -64,7 +62,7 @@
         },
         mounted() {
             if (this.enableLoading) {
-                const debouncedCB = debounce(() => {
+                const debouncedCB = _.debounce(() => {
                     this.loading = true;
                     this.$emit('loading', {
                         loaded: () => {
