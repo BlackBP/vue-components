@@ -1,3 +1,4 @@
+// @ts-ignore
 import _ from 'lodash';
 
 export const defaultsDeep = _.defaultsDeep;

@@ -34,27 +34,34 @@
   ],
   "dependencies": {
     "@mdi/font": "latest",
-    "@mdi/svg": "latest"
+    "@mdi/svg": "latest",
+    "normalize.css": "latest"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.149",
     "@vue/cli-plugin-babel": "^4.0.5",
+    "@vue/cli-plugin-typescript": "^4.1.0",
     "@vue/cli-service": "^4.0.5",
     "animated-scroll-to": "^2.0.5",
     "lodash": "^4.17.15",
     "node-sass": "4.13.0",
     "node-sass-package-importer": "5.3.2",
     "popper.js": "^1.16.0",
-    "rollup": "1.27.0",
-    "rollup-plugin-commonjs": "10.1.0",
-    "rollup-plugin-copy": "3.1.0",
+    "rollup": "1.29.0",
+    "@rollup/plugin-commonjs": "11.0.1",
+    "@rollup/plugin-node-resolve": "7.0.0",
+    "@rollup/plugin-typescript": "2.1.0",
+    "rollup-plugin-copy": "^3.1.0",
     "rollup-plugin-local-resolve": "1.0.7",
     "rollup-plugin-node-globals": "1.4.0",
-    "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-terser": "5.1.2",
     "rollup-plugin-vue": "5.1.1",
     "sass-loader": "8.0.0",
+    "typescript": "3.7.4",
     "vue": "^2.6.10",
-    "vue-template-compiler": "2.6.10"
+    "vue-template-compiler": "2.6.10",
+    "vue-property-decorator": "^8.3.0",
+    "vue-class-component": "^7.2.2"
   },
   "postcss": {
     "plugins": {

@@ -29,6 +29,7 @@
   $option-selected-background-color: rgba(#000, 0.1);
   $option-delete-background-color: rgba($color-error, 0.8);
   $option-group-background-color: rgba(#000, 0.15);
+  $selected-background-color: $color-primary;
 
   @at-root {
     #{$self} {
@@ -71,15 +72,19 @@
     }
 
     #{$selected} {
-      margin: 0 5px 5px 0;
-      background-color: $option-hover-background-color;
-      color: #fff;
-      font-size: .9em;
+      margin: auto .5em auto 0;
       cursor: pointer;
 
-      &:hover {
-        background-color: $option-delete-background-color;
+      &.is-multiple {
+        margin: 0 .5em .5em 0;
+        background-color: $selected-background-color;
         color: #fff;
+        font-size: .9em;
+
+        &:hover {
+          background-color: $option-delete-background-color;
+          color: #fff;
+        }
       }
     }
 
@@ -123,9 +128,10 @@
       display: block;
       width: 100%;
       height: auto;
-      max-height: 300px;
+      max-height: 200px;
       overflow-x: hidden;
       overflow-y: auto;
+      overscroll-behavior: contain;
     }
 
     #{$option} {
@@ -135,7 +141,8 @@
       cursor: pointer;
 
       &:hover,
-      &:focus {
+      &:focus,
+      &.is-focused {
         background-color: $option-hover-background-color;
         color: #fff;
       }
@@ -155,10 +162,6 @@
       &.is-group {
         background: $option-group-background-color;
         color: $option-font-color;
-      }
-
-      &.is-focused {
-        outline: 1px solid $option-hover-background-color;
       }
     }
 

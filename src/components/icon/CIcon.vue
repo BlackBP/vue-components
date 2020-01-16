@@ -1,13 +1,20 @@
-<script>
-    import {getConfig} from '../../config';
+<script lang="ts">
+    import Vue, {CreateElement, RenderContext, VNode} from 'vue'
 
-    export default {
+    type IconProps = {
+        tag: string
+        name: string
+        size: string
+        vendorPrefix: string
+    }
+
+    export default Vue.extend({
         name: "c-icon",
         functional: true,
         props: {
             tag: {
                 type: String,
-                default: 'i'
+                default: 'i',
             },
             name: {
                 type: String,
@@ -23,26 +30,18 @@
                 default: 'mdi mdi-'
             },
         },
-        render(createElement, {data, props, parent}) {
-            const ClassName = 'c-icon';
-            const config = getConfig(parent, 'icon');
-            const {
-                tag: propTag,
-                name: propName,
-                size: propSize,
-                vendorPrefix: propVendorPrefix,
-            } = props;
-            const vendorPrefix = config.vendorPrefix ? config.vendorPrefix : propVendorPrefix;
+        render(createElement: CreateElement, {data = {}, props = <IconProps>{}}: RenderContext<IconProps>): VNode {
+            const className = 'c-icon';
 
-            data.class = [data.class, ClassName, `${vendorPrefix}${propName}`];
+            data.class = [data.class, className, `${props.vendorPrefix}${props.name}`];
 
-            if (propSize) {
+            if (props.size) {
                 data.style = [data.style, {
-                    fontSize: propSize
+                    fontSize: props.size
                 }];
             }
 
-            return createElement(propTag, data);
+            return createElement(props.tag, data);
         }
-    }
+    });
 </script>

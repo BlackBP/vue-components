@@ -1,5 +1,5 @@
 <script>
-    import {isFunction} from '../../utils/helpers'
+    import _ from '../../utils/helpers'
     import Notification from "./Notification.vue";
     import {notificationFactory} from "./utils";
 
@@ -76,12 +76,12 @@
                     },
                     on: {
                         click: (event) => {
-                            if (isFunction(onClick)) {
+                            if (_.isFunction(onClick)) {
                                 onClick(event, item)
                             }
                         },
                         close: (event) => {
-                            if (isFunction(onClose)) {
+                            if (_.isFunction(onClose)) {
                                 onClose(event, item);
                                 this.remove(id)
                             }

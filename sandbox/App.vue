@@ -17,6 +17,12 @@
 
         <sandbox-section>
             <c-card class="elevate-6">
+                <c-icon name="menu" />
+            </c-card>
+        </sandbox-section>
+
+        <sandbox-section>
+            <c-card class="elevate-6">
                 <c-row>
                     <c-col>
                         <c-form-field label="errorText"
@@ -133,10 +139,12 @@
     import CStackGroup from "../src/components/stack-group/CStackGroup";
     import CStackItem from "../src/components/stack-group/CStackItem";
     import CBtn from "../src/components/button/CBtn";
+    import CIcon from "../src/components/icon/CIcon";
 
     export default {
         name: "App",
         components: {
+            CIcon,
             CBtn,
             CStackItem,
             CStackGroup,

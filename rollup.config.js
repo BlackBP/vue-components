@@ -1,8 +1,9 @@
 import PluginVue from 'rollup-plugin-vue';
-import PluginNodeResolve from 'rollup-plugin-node-resolve';
+import PluginNodeResolve from '@rollup/plugin-node-resolve';
 import PluginLocalResolve from 'rollup-plugin-local-resolve';
-import PluginCommonjs from 'rollup-plugin-commonjs';
+import PluginCommonjs from '@rollup/plugin-commonjs';
 import PluginCopy from 'rollup-plugin-copy';
+import PluginTypeScript from '@rollup/plugin-typescript';
 import {terser as PluginMinify} from 'rollup-plugin-terser';
 
 const CONFIG = {
@@ -14,7 +15,12 @@ const CONFIG = {
     plugins: [
         PluginNodeResolve(),
         PluginLocalResolve(),
-        PluginCommonjs(),
+        PluginTypeScript({
+            tsconfig: './tsconfig.json'
+        }),
+        PluginCommonjs({
+            extensions: ['.js', '.ts']
+        }),
         PluginVue(),
         PluginMinify()
     ],
@@ -66,5 +72,5 @@ export default [
             ...CONFIG.plugins,
             PluginCopy(CONFIG.pluginOpts.copy)
         ]
-    },
+    }
 ];
