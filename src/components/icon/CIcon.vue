@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Vue, {CreateElement, RenderContext, VNode} from 'vue'
+    import Vue, {CreateElement, PropOptions, RenderContext, VNode} from 'vue'
 
     type IconProps = {
         tag: string
@@ -12,20 +12,20 @@
         name: "c-icon",
         functional: true,
         props: {
-            tag: {
+            tag: <PropOptions>{
                 type: String,
                 default: 'i',
             },
-            name: {
+            name: <PropOptions>{
                 type: String,
                 default: '',
                 required: true
             },
-            size: {
+            size: <PropOptions>{
                 type: String,
                 default: ''
             },
-            vendorPrefix: {
+            vendorPrefix: <PropOptions>{
                 type: String,
                 default: 'mdi mdi-'
             },

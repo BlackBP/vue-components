@@ -17,7 +17,7 @@
 
         <sandbox-section>
             <c-card class="elevate-6">
-                <c-icon name="menu" />
+                <c-icon name="menu" tag="asd" />
             </c-card>
         </sandbox-section>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Vue, {CreateElement, RenderContext, VNode} from 'vue'
+    import Vue, {CreateElement, PropOptions, RenderContext, VNode} from 'vue'
 
     type CardProps = {
         tag: string
@@ -9,7 +9,7 @@
         name: "c-card",
         functional: true,
         props: {
-            tag: {
+            tag: <PropOptions>{
                 type: String,
                 default: 'div'
             }
