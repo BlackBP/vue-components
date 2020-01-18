@@ -1,3 +1,3 @@
 import Vue from 'vue'
 
-export declare class CIcon extends Vue {}
+export declare class CBadge extends Vue {}

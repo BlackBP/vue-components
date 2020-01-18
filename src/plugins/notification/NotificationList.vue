@@ -1,5 +1,5 @@
 <script>
-    import _ from '../../utils/helpers'
+    import _ from 'lodash'
     import Notification from "./Notification.vue";
     import {notificationFactory} from "./utils";
 

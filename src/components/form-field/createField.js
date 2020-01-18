@@ -1,4 +1,4 @@
-import _ from '../../utils/helpers'
+import _ from 'lodash'
 
 /**
  *

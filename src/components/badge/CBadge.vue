@@ -1,9 +1,5 @@
 <script>
-    import {
-        isNumber,
-        isString,
-        toString
-    } from '../../utils/helpers';
+    import _ from 'lodash';
     import {CIcon} from '../icon';
 
     export default {
@@ -33,7 +29,7 @@
                 value: propValue = '',
             } = props;
             const $slots = slots();
-            const value = !isNumber(propValue) && !isString(propValue) ? '' : toString(propValue);
+            const value = !_.isNumber(propValue) && !_.isString(propValue) ? '' : _.toString(propValue);
 
             const hasIcon = propIcon !== '';
             const hasColor = propColor !== '';

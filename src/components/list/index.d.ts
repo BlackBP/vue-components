@@ -1,3 +1,4 @@
 import Vue from 'vue'
 
-export declare class CChip extends Vue {}
+export declare class CList extends Vue {}
+export declare class CListItem extends Vue {}

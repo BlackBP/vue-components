@@ -81,7 +81,7 @@
 </template>
 
 <script>
-    import _ from '../../utils/helpers';
+    import _ from 'lodash';
 
     import {CIcon} from '../icon';
     import {CIconBtn} from '../icon-button';

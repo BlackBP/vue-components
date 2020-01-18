@@ -1,7 +1,5 @@
 <script>
-    import {
-        each
-    } from '../../utils/helpers';
+    import _ from 'lodash'
 
     const ANIMATED_STYLES = {
         opacity: [0, 1],
@@ -40,7 +38,7 @@
      * @param visibleState
      */
     function setAnimatedStyles(element, visibleState = false) {
-        each(ANIMATED_STYLES, (value, key) => {
+        _.each(ANIMATED_STYLES, (value, key) => {
             element.style[key] = visibleState ? value[1] : value[0]
         })
     }
@@ -50,7 +48,7 @@
      * @param element
      */
     function clearStyles(element) {
-        each(STYLES_MAP, value => {
+        _.each(STYLES_MAP, value => {
             element.style[value] = null
         });
     }

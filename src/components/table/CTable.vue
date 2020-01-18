@@ -59,11 +59,7 @@
 </template>
 
 <script>
-    import {
-        isArray,
-        isObjectLike,
-        size
-    } from '../../utils/helpers';
+    import _ from 'lodash'
 
     export default {
         name: "c-table",
@@ -89,14 +85,14 @@
         },
         computed: {
             hasData() {
-                if (!isArray(this.data)) return false;
-                return size(this.data) > 0
+                if (!_.isArray(this.data)) return false;
+                return _.size(this.data) > 0
             },
             columnsCount() {
-                if (!isObjectLike(this.headers)) return 0;
-                if (isArray(this.headers)) return 0;
+                if (!_.isObjectLike(this.headers)) return 0;
+                if (_.isArray(this.headers)) return 0;
 
-                return size(Object.keys(this.headers));
+                return _.size(Object.keys(this.headers));
             }
         }
 

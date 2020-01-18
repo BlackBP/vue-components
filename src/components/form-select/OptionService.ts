@@ -1,110 +1,57 @@
-import _ from "../../utils/helpers";
-
-/**
- * @typedef {String|Number|Object} rawOption
- */
-
-/**
- * @typedef {Object} mappedOption
- * @property {String|Number} id
- * @property {String|Number} text
- * @property {*} value
- * @property {Boolean} selected
- * @property {Boolean} group
- */
-
+import _ from 'lodash'
+import {rawOption, mappedOption, optionMapProps} from "./index"
 
 export default class OptionService {
-    /**
-     * @param {rawOption} option
-     * @return {Boolean}
-     */
-    static isObject(option) {
+
+    static isObject(option: rawOption): boolean {
         return _.isObjectLike(option) && !_.isArray(option)
     }
 
-    /**
-     *
-     * @param {rawOption} option
-     * @return {Boolean}
-     */
-    static isString(option) {
+    static isString(option: rawOption): boolean {
         return _.isString(option)
     }
 
-    /**
-     *
-     * @param {rawOption} option
-     * @return {Boolean}
-     */
-    static isNumber(option) {
+    static isNumber(option: rawOption): boolean {
         return _.isNumber(option)
     }
 
-    /**
-     *
-     * @param {*} optionValues
-     * @return {boolean}
-     */
-    static isGroup(optionValues) {
-        return _.isArray(optionValues) && _.size(optionValues) > 0;
+    static isGroup(optionValues: any): boolean {
+        return _.isArray(optionValues) ? _.size(optionValues) > 0 : false;
     }
 
-    /**
-     *
-     * @param option
-     * @param prop
-     * @return {String|Number}
-     */
-    static getText(option, prop) {
+    static getText(option: rawOption|mappedOption, prop: string): string|number {
         if (OptionService.isObject(option)) {
             return _.get(option, prop, '')
         }
 
-        return option
+        if(typeof option ==='string' || typeof option === 'number') {
+            return option
+        }
+
+        return ''
     }
 
-    /**
-     *
-     * @param {rawOption} option
-     * @param {String} prop
-     * @return {String|Number}
-     */
-    static getId(option, prop) {
+    static getId(option: rawOption|mappedOption, prop: string): string|number {
         if (OptionService.isObject(option)) {
             return _.get(option, prop, '')
         }
 
-        return option
+        if(typeof option ==='string' || typeof option === 'number') {
+            return option
+        }
+
+        return ''
     }
 
-    /**
-     *
-     * @param option
-     * @param prop
-     * @return {*}
-     */
-    static getGroupValues(option, prop) {
+    static getGroupValues(option: rawOption|mappedOption, prop: string): [] {
         return _.get(option, prop, [])
     }
 
-    /**
-     *
-     * @param option
-     * @param prop
-     * @return {*}
-     */
-    static getGroupText(option, prop) {
+    static getGroupText(option: rawOption|mappedOption, prop: string): number|string {
         return _.get(option, prop, '')
     }
 
-    /**
-     *
-     * @param {rawOption} option
-     * @param {Object} props
-     * @return {mappedOption}
-     */
-    static map(option = {}, props = {}) {
+    static map(option: rawOption = {}, props: optionMapProps): mappedOption {
         let value;
         const {
             trackBy: propTrackBy,
@@ -113,7 +60,7 @@ export default class OptionService {
             groupText: propGroupText,
         } = props;
         const groupValues = OptionService.getGroupValues(option, propGroupValues);
-        const groupText = OptionService.getGroupText(option, propGroupText);
+        const groupText = OptionService.getGroupText(option, <string>propGroupText);
         const optionText = OptionService.getText(option, propOptionText);
         const optionId = OptionService.getId(option, propTrackBy);
         const isGroup = OptionService.isGroup(groupValues);
@@ -123,7 +70,7 @@ export default class OptionService {
             value = [...groupValues];
         } else {
             if (OptionService.isObject(option)) {
-                value = {...option};
+                value = {...<object>option};
             } else if (OptionService.isString(option) || OptionService.isNumber(option)) {
                 value = option;
             } else {

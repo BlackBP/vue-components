@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import _ from '../../utils/helpers'
+    import _ from 'lodash'
     import ScrollTo from 'animated-scroll-to'
 
     export default {

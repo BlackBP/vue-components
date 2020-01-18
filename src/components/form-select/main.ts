@@ -1,21 +1,14 @@
-import {Model, Watch, Ref, Mixins} from 'vue-property-decorator'
+import {Model, Watch, Ref, Vue, Prop} from 'vue-property-decorator'
 import Component from 'vue-class-component'
+import _ from 'lodash'
 import Popper from 'popper.js'
 
-// @ts-ignore
-import _ from '../../utils/helpers'
-import MixinGetters from "./mixin-getters"
-import MixinState from "./mixin-state"
-import MixinProps from "./mixin-props"
-
-// @ts-ignore
 import {CIcon} from "../icon"
-// @ts-ignore
 import {CChip} from "../chip"
 
 import OptionService from "./OptionService"
-// @ts-ignore
 import OptionListService from "./OptionListService"
+import {mappedOption, mappedOptionArray, rawOption, rawOptionArray} from "./index"
 
 const MODEL_EVENT: string = 'change';
 
@@ -26,7 +19,7 @@ const MODEL_EVENT: string = 'change';
         CIcon
     }
 })
-export default class CSelect extends Mixins(MixinGetters, MixinState, MixinProps) {
+export default class CSelect extends Vue {
     @Model(MODEL_EVENT, {
         type: [String, Number, Array, Object]
     }) value!: string | string[] | number | number[] | object;
@@ -35,58 +28,213 @@ export default class CSelect extends Mixins(MixinGetters, MixinState, MixinProps
     @Ref('field') readonly refField!: HTMLDivElement;
     @Ref('list') readonly refList!: HTMLDivElement;
 
-    //
-    private popperInstance: Popper|null = null;
+    @Prop({
+        type: Array,
+        default: () => ([]),
+        required: true
+    }) options!: rawOptionArray;
+
+    @Prop({
+        type: String,
+        default: 'id'
+    }) trackBy!: string;
+
+    @Prop({
+        type: String,
+        default: 'name'
+    }) optionText!: string;
+
+    @Prop({
+        type: String,
+        default: ''
+    }) groupValues!: string;
+
+    @Prop({
+        type: String,
+        default: ''
+    }) groupText!: string;
+
+    @Prop({
+        type: [String, Number],
+        default: 0
+    }) max!: string | number;
+
+    @Prop({
+        type: Boolean,
+        default: false
+    }) multiple!: boolean;
+
+    @Prop({
+        type: Boolean,
+        default: false
+    }) toggleable!: boolean;
+
+    @Prop({
+        type: Boolean,
+        default: false
+    }) searchable!: boolean;
+
+    @Prop({
+        type: String,
+        default: 'Список пуст'
+    }) emptyPlaceholder!: string;
+
+    @Prop({
+        type: String,
+        default: 'Выбрано максимальное количество элементов'
+    }) maxPlaceholder!: string;
+
+    @Prop({
+        type: String,
+        default: ''
+    }) id!: string;
+
+    @Prop({
+        type: Boolean,
+        default: false
+    }) disabled!: boolean;
+
+    @Prop({
+        type: Boolean,
+        default: false
+    }) readonly!: boolean;
+
+    @Prop({
+        type: String,
+        default: ''
+    }) state!: string;
+
+    @Prop({
+        type: String,
+        default: ''
+    }) placeholder!: string;
+
+    // State
+    private focused: boolean = false;
+    private loading: boolean = false;
+    private query: string = '';
+    private parsedOptions: mappedOptionArray = [];
+    private popperInstance: Popper | null = null;
+
+    // Getters
+    get inputId(): string | boolean {
+        return this.id !== '' ? this.id : false
+    }
+
+    get iconClassName(): string {
+        if (this.loading) return 'loading c-select-spin';
+        return this.focused ? 'menu-up' : 'menu-down';
+    }
+
+    get fieldClassName(): object {
+        return [
+            this.state !== '' && this.state,
+            {
+                'is-focused': this.focused,
+                'is-disabled': this.disabled,
+                'is-readonly': this.readonly,
+            }
+        ]
+    }
+
+    get inputPlaceholder() {
+        if (this.hasSelected) {
+            return this.multiple ? this.placeholder : ''
+        } else {
+            return this.placeholder
+        }
+    }
+
+    get selected(): rawOptionArray {
+        let selected = this.value;
+
+        if (Array.isArray(selected)) {
+            return _.size(selected) > 0 ? selected : []
+        }
+
+        if (_.isNumber(selected)) {
+            return [selected]
+        }
+
+        if (_.isObjectLike(selected) || _.isString(selected)) {
+            return _.isEmpty(selected) ? [] : [selected]
+        }
+
+        return []
+    }
+
+    get selectedCount(): number {
+        return _.size(this.selected)
+    }
+
+    get parsedOptionsCount(): number {
+        return _.size(this.parsedOptions)
+    }
+
+    get hasSelected(): boolean {
+        return this.selectedCount > 0
+    }
+
+    get hasOptions(): boolean {
+        return _.isArray(this.parsedOptions) && this.parsedOptionsCount > 0
+    }
+
+    get hasMax(): boolean {
+        const max = parseInt(<string>this.max);
+
+        if (max > 0) {
+            return this.selectedCount >= max
+        }
+
+        return false
+    }
 
     // Watch
     @Watch('options')
     onOptionsChange() {
         this.parseOptions();
-
-        if (this.focused) {
-            this.updateListPosition();
-        }
     }
 
     @Watch('value')
     onValueChange() {
         this.parseOptions();
+    }
 
+    @Watch('parsedOptions')
+    onParsedOptionsChange() {
         if (this.focused) {
-            this.updateListPosition();
+            this.$nextTick(() => this.updatePopper())
         }
     }
 
     // Methods
-    // The model event handler
-    emitChange(value = null): void {
+    emitChange(value: rawOptionArray|rawOption): void {
         if (this.disabled || this.readonly) return;
         this.$emit(MODEL_EVENT, value)
     }
 
     // An option data handlers
-    getOptionText(option): void {
+    getOptionText(option: rawOption | mappedOption): string | number {
         return OptionService.getText(option, this.optionText)
     }
 
-    getOptionId(option): void {
+    getOptionId(option: rawOption | mappedOption): string | number {
         return OptionService.getId(option, this.trackBy)
     }
 
-    getOptionClassName(option = {}, index) {
+    getOptionClassName(option: mappedOption, index: number): object {
         const {
             selected = false,
             group = false
         } = option;
 
         return {
-            'is-focused': index === this.focusedOption,
             'is-selected': selected,
             'is-group': group
         }
     }
 
-    parseOptions() {
+    parseOptions(): void {
         this.parsedOptions = OptionListService.map(this.options, {
             query: this.query,
             trackBy: this.trackBy,
@@ -97,36 +245,31 @@ export default class CSelect extends Mixins(MixinGetters, MixinState, MixinProps
         })
     }
 
-    removeOption(option) {
+    removeOption(option: rawOption): void {
         const selected = OptionListService.removeOptionFromList(this.selected, option, this.trackBy);
         this.emitChange(selected)
     }
 
     // The list view methods
-    showList() {
+    showList(): void {
         if (this.focused || this.disabled) return;
-        this.$refInput.focus()
+        this.refInput.focus()
     }
 
-    hideList() {
+    hideList(): void {
         if (!this.focused) return;
-        this.$refInput.blur()
+        this.refInput.blur()
     }
 
     // The Input event listeners
-    filterByQuery: _.debounce
-(
-
-    function() {
+    filterByQuery = _.debounce(function () {
+        // @ts-ignore
         this.parseOptions();
+        // @ts-ignore
         this.loading = false;
-    }
+    }, 400);
 
-,
-    400
-)
-
-    onSelect(option = {}) {
+    onSelect(option: mappedOption): void {
         const {
             value: optionValue,
             group: isGroup,
@@ -162,69 +305,89 @@ export default class CSelect extends Mixins(MixinGetters, MixinState, MixinProps
         }
     }
 
-    onSearch(event) {
+    onSearch(event: InputEvent) {
         this.loading = true;
-        this.query = event.target.value;
+        this.query = _.get(event.target, 'value', '');
         this.filterByQuery()
     }
 
-    onFocus(event) {
+    onFocus(event: FocusEvent) {
         this.focused = true;
         this.$emit('focus', event);
     }
 
-    onBlur(event) {
+    onBlur(event: FocusEvent) {
         this.focused = false;
         this.$emit('blur', event);
     }
 
     // The List transition event listeners
-    updateListPosition() {
-        if (ListPopper) {
-            ListPopper.scheduleUpdate();
-        }
-    }
-
     onAfterListShow() {
         this.$nextTick(() => {
-            ListPopper.enableEventListeners();
-            this.updateListPosition();
+            if(this.popperInstance instanceof Popper) {
+                this.enablePopperEventListeners();
+                this.updatePopper();
+            }
         })
     }
 
     onAfterListHide() {
         this.$nextTick(() => {
-            this.focusedOption = null;
-            ListPopper.disableEventListeners();
+            if(this.popperInstance instanceof Popper) {
+                this.disablePopperEventListeners();
+            }
         })
+    }
+
+    // Popper.js methods
+    initPopper() {
+        this.popperInstance = new Popper(this.refField, this.refList, {
+            modifiers: {
+                arrow: {
+                    enabled: false
+                },
+                inner: {
+                    enabled: false
+                },
+                flip: {
+                    behavior: ['bottom', 'top']
+                },
+            },
+            placement: 'bottom-start'
+        })
+    }
+
+    destroyPopper() {
+        if (this.popperInstance instanceof Popper) {
+            this.popperInstance.destroy()
+        }
+    }
+
+    updatePopper() {
+        if (this.popperInstance instanceof Popper) {
+            this.popperInstance.scheduleUpdate()
+        }
+    }
+
+    enablePopperEventListeners() {
+        if (this.popperInstance instanceof Popper) {
+            this.popperInstance.enableEventListeners()
+        }
+    }
+
+    disablePopperEventListeners() {
+        if (this.popperInstance instanceof Popper) {
+            this.popperInstance.disableEventListeners()
+        }
     }
 
     // Hooks
     mounted() {
-        // Popper.js initialization
-        this.popperInstance = this.$nextTick(() => {
-            ListPopper = new Popper(this.$refField, this.$refList, {
-                modifiers: {
-                    arrow: {
-                        enabled: false
-                    },
-                    inner: {
-                        enabled: false
-                    },
-                    flip: {
-                        behavior: ['bottom', 'top']
-                    },
-                },
-                placement: 'bottom-start'
-            });
-        })
+        this.parseOptions();
+        this.$nextTick(() => this.initPopper())
     }
 
     beforeDestroy() {
-        if (ListPopper !== null) {
-            if (ListPopper.destroy) {
-                ListPopper.destroy()
-            }
-        }
+        this.destroyPopper()
     }
 }

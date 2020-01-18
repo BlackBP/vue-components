@@ -1,46 +1,25 @@
-import _ from "../../utils/helpers";
+import _ from 'lodash'
 import OptionService from "./OptionService";
+import {mappedOption, mappedOptionArray, optionMapProps, rawOption, rawOptionArray} from "./index";
 
 export default class OptionListService {
 
-    /**
-     *
-     * @param {*} options
-     * @return {Boolean}
-     */
-    static isValid(options) {
+    static isValid(options: any): boolean {
         return _.isArray(options)
     }
 
-    /**
-     *
-     * @param {*} options
-     * @return {Boolean}
-     */
-    static isEmpty(options) {
+    static isEmpty(options: any): boolean {
         return _.size(options) <= 0
     }
 
-    /**
-     *
-     * @param {rawOption[]} list
-     * @param {rawOption} option
-     * @param {String} trackBy
-     */
-    static removeOptionFromList(list = [], option, trackBy) {
-        return _.filter(list, selectedOption => {
+    static removeOptionFromList(list: rawOptionArray, option: rawOption, trackBy: string): rawOptionArray {
+        return list.filter((selectedOption) => {
             return OptionService.getId(option, trackBy) !== OptionService.getId(selectedOption, trackBy)
         })
     }
 
-    /**
-     *
-     * @param {Array} options
-     * @param {Object} props
-     * @return {mappedOption[]}
-     */
-    static map(options = [], props = {}) {
-        if(!OptionListService.isValid(options) && OptionListService.isEmpty(options)) return [];
+    static map(options: rawOptionArray, props: optionMapProps): mappedOptionArray {
+        if (!OptionListService.isValid(options) && OptionListService.isEmpty(options)) return [];
 
         const {
             query: propQuery = '',
@@ -51,36 +30,36 @@ export default class OptionListService {
             selectedList: propSelectedList
         } = props;
 
-        options = _.reduce(options, (mappedOptions, option) => {
-            option = OptionService.map(option, {
+        let mappedOptions: mappedOptionArray = _.reduce(options, (mappedOptions: any[], option: rawOption) => {
+            let mapped = OptionService.map(option, {
                 trackBy: propTrackBy,
                 optionText: propOptionText,
                 groupValues: propGroupValues,
                 groupText: propGroupText,
             });
 
-            if(_.size(propSelectedList) > 0) {
-                option.selected = _.some(propSelectedList, selectedItem => {
-                    return OptionService.getId(selectedItem, propTrackBy) === option.id
+            if (_.size(propSelectedList) > 0) {
+                mapped.selected = _.some(propSelectedList, selectedItem => {
+                    return OptionService.getId(selectedItem, propTrackBy) === mapped.id
                 })
             }
 
-            if(option.group) {
-                mappedOptions.push(option, ...OptionListService.map(option.value, props))
+            if (mapped.group) {
+                mappedOptions.push(mapped, ...OptionListService.map(mapped.value, props))
             } else {
-                mappedOptions.push(option)
+                mappedOptions.push(mapped)
             }
 
             return mappedOptions
         }, []);
 
-        if(propQuery !== '') {
-            options = _.filter(options, option => {
-                if(option.group) return false;
-                return _.toLower(option.text).match(propQuery);
+        if (propQuery !== '') {
+            return mappedOptions.filter(option => {
+                if (option.group) return false;
+                return _.toLower(<string>option.text).match(<string>propQuery);
             })
         }
 
-        return options
+        return mappedOptions
     }
 }

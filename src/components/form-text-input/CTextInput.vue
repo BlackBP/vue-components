@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import _ from '../../utils/helpers'
+    import _ from 'lodash'
     import {getConfig} from '../../config'
     import MixinFormTextInput from "../../mixins/form-text-input"
     import MixinFormInput from "../../mixins/form-input"

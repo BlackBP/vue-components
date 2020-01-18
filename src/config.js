@@ -1,7 +1,4 @@
-import {
-    defaultsDeep,
-    get
-} from './utils/helpers';
+import _ from 'lodash';
 
 const CONFIG_KEY = '$componentsConfig';
 
@@ -62,7 +59,7 @@ const DefaultConfig = {
  * @param config
  */
 export function setConfig(Vue, config) {
-    Vue.prototype[CONFIG_KEY] = defaultsDeep(config, DefaultConfig);
+    Vue.prototype[CONFIG_KEY] = _.defaultsDeep(config, DefaultConfig);
 }
 
 
@@ -73,6 +70,6 @@ export function setConfig(Vue, config) {
  * @return {*}
  */
 export function getConfig(context = {}, path = '') {
-    let config = get(context, CONFIG_KEY, {});
-    return get(config, path, {});
+    let config = _.get(context, CONFIG_KEY, {});
+    return _.get(config, path, {});
 }

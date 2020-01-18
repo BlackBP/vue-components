@@ -17,7 +17,7 @@
 
         <sandbox-section>
             <c-card class="elevate-6">
-                <c-icon name="menu" tag="asd" />
+                <v-select v-model="textArea" />
             </c-card>
         </sandbox-section>
 
@@ -59,8 +59,8 @@
                                       id="states"
                                       placeholder="Select..."
                                       :toggleable="false"
-                                      :multiple="true"
-                                      :searchable="false"
+                                      :multiple="false"
+                                      :searchable="true"
                                       :state="state"
                                       :options="stateList"/>
                         </c-form-field>
@@ -140,10 +140,12 @@
     import CStackItem from "../src/components/stack-group/CStackItem";
     import CBtn from "../src/components/button/CBtn";
     import CIcon from "../src/components/icon/CIcon";
+    import VSelect from "./select-ts";
 
     export default {
         name: "App",
         components: {
+            VSelect,
             CIcon,
             CBtn,
             CStackItem,
