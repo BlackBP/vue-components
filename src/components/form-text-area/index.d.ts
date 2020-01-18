@@ -1,3 +1,3 @@
-import Vue from 'vue'
+import {VComponent} from '../../../types'
 
-export declare class CTextArea extends Vue {}
+export declare class CTextArea extends VComponent {}

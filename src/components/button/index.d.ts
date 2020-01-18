@@ -1,3 +1,3 @@
-import Vue from 'vue'
+import {VComponent} from '../../../types'
 
-export declare class CBtn extends Vue {}
+export declare class CBtn extends VComponent {}

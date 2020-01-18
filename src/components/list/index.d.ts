@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import {VComponent} from '../../../types'
 
-export declare class CList extends Vue {}
-export declare class CListItem extends Vue {}
+export declare class CList extends VComponent {}
+export declare class CListItem extends VComponent {}

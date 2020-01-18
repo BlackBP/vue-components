@@ -8,7 +8,7 @@ import {CChip} from "../chip"
 
 import OptionService from "./OptionService"
 import OptionListService from "./OptionListService"
-import {mappedOption, mappedOptionArray, rawOption, rawOptionArray} from "./index"
+import {mappedOption, mappedOptionArray, rawOption, rawOptionArray} from "./types"
 
 const MODEL_EVENT: string = 'change';
 

@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import {VComponent} from '../../../types'
 
-export declare class CStackGroup extends Vue {}
-export declare class CStackItem extends Vue {}
+export declare class CStackGroup extends VComponent {}
+export declare class CStackItem extends VComponent {}

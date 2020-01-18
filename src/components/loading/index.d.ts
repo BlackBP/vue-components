@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import {VComponent} from '../../../types'
 
-export declare class CLoading extends Vue {}
-export declare class CLoadingOverlay extends Vue {}
+export declare class CLoading extends VComponent {}
+export declare class CLoadingOverlay extends VComponent {}

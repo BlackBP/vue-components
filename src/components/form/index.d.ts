@@ -1,3 +1,3 @@
-import Vue from 'vue'
+import {VComponent} from '../../../types'
 
-export declare class CForm extends Vue {}
+export declare class CForm extends VComponent {}
