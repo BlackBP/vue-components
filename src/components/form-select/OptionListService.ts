@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import OptionService from "./OptionService";
-import {mappedOptionArray, optionMapProps, rawOption, rawOptionArray} from "./types";
+import OptionService from "./OptionService"
+import {mappedOptionArray, optionMapProps, rawOption, rawOptionArray} from "../../../types/select"
 
 export default class OptionListService {
 

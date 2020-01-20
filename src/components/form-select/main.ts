@@ -5,10 +5,9 @@ import Popper from 'popper.js'
 
 import {CIcon} from "../icon"
 import {CChip} from "../chip"
-
+import {mappedOption, mappedOptionArray, rawOption, rawOptionArray} from "../../../types/select"
 import OptionService from "./OptionService"
 import OptionListService from "./OptionListService"
-import {mappedOption, mappedOptionArray, rawOption, rawOptionArray} from "./types"
 
 const MODEL_EVENT: string = 'change';
 

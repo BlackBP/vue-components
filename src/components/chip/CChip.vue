@@ -1,21 +1,5 @@
 <script>
-    import {CIcon} from '../icon';
-
-    /**
-     *
-     * @param createElement
-     * @param iconName
-     * @param className
-     * @return {VNode|null}
-     */
-    function createIcon(createElement, iconName = '', className = '') {
-        return iconName !== '' ? createElement(CIcon, {
-            class: className,
-            props: {
-                name: iconName
-            }
-        }) : null
-    }
+    import {createIcon} from '../icon/helper'
 
     export default {
         name: "c-chip",
@@ -57,11 +41,15 @@
             }];
 
             return createElemet(tagName, data, [
-                createIcon(createElemet, propLeading, LeadingClassName),
+                createIcon(createElemet, LeadingClassName, {
+                    name: propLeading
+                }),
                 createElemet('div', {
                     class: TextClassName
                 }, children),
-                createIcon(createElemet, propTrailing, TrailingClassName),
+                createIcon(createElemet, TrailingClassName, {
+                    name: propTrailing
+                }),
             ]);
         }
     }

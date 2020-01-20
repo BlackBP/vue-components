@@ -15,11 +15,7 @@
             </template>
         </sandbox-section>
 
-        <sandbox-section>
-            <c-card class="elevate-6">
-                <v-select v-model="textArea" />
-            </c-card>
-        </sandbox-section>
+        <section-buttons />
 
         <sandbox-section>
             <c-card class="elevate-6">
@@ -138,16 +134,14 @@
     import SandboxSection from "./SandboxSection";
     import CStackGroup from "../src/components/stack-group/CStackGroup";
     import CStackItem from "../src/components/stack-group/CStackItem";
-    import CBtn from "../src/components/button/CBtn";
     import CIcon from "../src/components/icon/CIcon";
-    import VSelect from "./select-ts";
+    import SectionButtons from "./SectionButtons";
 
     export default {
         name: "App",
         components: {
-            VSelect,
+            SectionButtons,
             CIcon,
-            CBtn,
             CStackItem,
             CStackGroup,
             SandboxSection,

@@ -1,73 +1,50 @@
-<script>
-    import btnMixin, {
-        MODIFIERS_MAP,
-        getColorClassName,
-        getSizeClassName
-    } from '../../mixins/button';
-    import {CIcon} from '../icon';
+<script lang="ts">
+    import _ from 'lodash'
+    import {CreateElement, RenderContext, VNode, VNodeData} from 'vue'
+    import {createIcon} from '../icon/helper'
+    import {ButtonProps} from '../../../types/button'
+    import {getButtonColor, getButtonSize} from '../../utils/button'
 
     const ClassName = 'c-btn';
     const IconClassName = `${ClassName}__icon`;
     const TextClassName = `${ClassName}__text`;
 
-    /**
-     *
-     * @param createElement
-     * @param name
-     * @param className
-     * @return {{}|null}
-     */
-    const createIcon = (createElement, name = '', className = '') => {
-        return name ? createElement(CIcon, {
-            class: className,
-            props: {
-                name
-            }
-        }) : null
-    };
-
-    /**
-     *
-     * @param className
-     * @param props
-     * @return {*[]}
-     */
-    function getClassNames(className, props = {}) {
-        const {
-            color: propColor,
-            size: propSize,
-            block: propBlock,
-            bordered: propBordered,
-            transparent: propTransparent,
-            elevated: propElevated,
-        } = props;
-
-        const classNames = [
-            className,
-            getSizeClassName(propSize),
-            getColorClassName(propColor),
-            {
-                [MODIFIERS_MAP.block]: propBlock
-            }
-        ];
-
-        // TODO: Найти более лучший способ добавления ОДНОГО из данных классов
-        if (propBordered) {
-            classNames.push(MODIFIERS_MAP.bordered);
-        } else if (propTransparent) {
-            classNames.push(MODIFIERS_MAP.transparent);
-        } else if (propElevated) {
-            classNames.push(MODIFIERS_MAP.elevated);
-        }
-
-        return classNames;
-    }
-
     export default {
         name: "c-btn",
         functional: true,
-        mixins: [btnMixin],
         props: {
+            tag: {
+                type: String,
+                default: 'button'
+            },
+            type: {
+                type: [String, Boolean],
+                default: false
+            },
+            color: {
+                type: String,
+                default: ''
+            },
+            size: {
+                type: String,
+                default: ''
+            },
+            bordered: {
+                type: Boolean,
+                default: false
+            },
+            elevated: {
+                type: Boolean,
+                default: false
+            },
+            transparent: {
+                type: Boolean,
+                default: false
+            },
+            disabled: {
+                type: Boolean,
+                default: false
+            },
             leading: {
                 type: String,
                 default: ''
@@ -81,27 +58,25 @@
                 default: false
             }
         },
-        render(createElement, {data = {}, props = {}, children = [], listeners = {}}) {
+        render(createElement: CreateElement, {data = <VNodeData>{}, props = <ButtonProps>{}, children}: RenderContext<ButtonProps>): VNode {
             const {
                 tag: propTag,
                 leading: propLeading,
                 trailing: propTrailing,
-            } = props;
-
-            const {
                 type: propType,
                 disabled: propDisabled,
+                color: propColor,
+                size: propSize,
+                block: propBlock,
+                bordered: propBordered,
+                transparent: propTransparent,
+                elevated: propElevated,
             } = props;
 
             const {
                 attrs = {},
+                on: listeners = {}
             } = data;
-
-            const {
-                click: listenerClick = () => {
-                },
-                ...restListeners
-            } = listeners;
 
             data.attrs = {
                 ...attrs,
@@ -110,19 +85,35 @@
             };
 
             data.on = {
-                ...restListeners,
-                click: (event) => {
+                ...listeners,
+                click: (event: MouseEvent) => {
                     if (propDisabled) return;
-                    listenerClick(event);
+                    if (_.isFunction(listeners.click)) {
+                        listeners.click(event)
+                    }
                 }
             };
 
-            data.class = [data.class, getClassNames(ClassName, props)];
+            data.class = [
+                data.class,
+                ClassName,
+                getButtonColor(propColor),
+                getButtonSize(<string>propSize),
+                {
+                    [`is-disabled`]: propDisabled,
+                    [`is-block`]: propBlock,
+                    [`is-bordered`]: propBordered,
+                    [`is-transparent`]: propTransparent,
+                    [`is-elevated`]: propElevated
+                }
+            ];
 
             // Render
             return createElement(propTag, data, [
                 // Leading icon
-                createIcon(createElement, propLeading, IconClassName),
+                createIcon(createElement, IconClassName, {
+                    name: <string>propLeading
+                }),
 
                 // Slot - default
                 createElement('span', {
@@ -130,7 +121,9 @@
                 }, children),
 
                 // Trailing icon
-                createIcon(createElement, propTrailing, IconClassName)
+                createIcon(createElement, IconClassName, {
+                    name: <string>propTrailing
+                })
             ])
         }
     }

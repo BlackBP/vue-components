@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Vue, {CreateElement, PropOptions, RenderContext, VNode} from 'vue'
+    import {CreateElement, PropOptions, RenderContext, VNode, VNodeData} from 'vue'
 
     type CardProps = {
         tag: string
     }
 
-    export default Vue.extend({
+    export default {
         name: "c-card",
         functional: true,
         props: {
@@ -14,12 +14,12 @@
                 default: 'div'
             }
         },
-        render(createElement: CreateElement, {data = {}, props = <CardProps>{}, children}: RenderContext<CardProps>): VNode {
+        render(createElement: CreateElement, {data = <VNodeData>{}, props = <CardProps>{}, children}: RenderContext<CardProps>): VNode {
             const className = 'c-card';
 
             data.class = [data.class, className];
 
             return createElement(props.tag, data, children)
         }
-    })
+    }
 </script>

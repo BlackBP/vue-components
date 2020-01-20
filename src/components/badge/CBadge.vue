@@ -1,25 +1,32 @@
-<script>
-    import _ from 'lodash';
-    import {CIcon} from '../icon';
+<script lang="ts">
+    import _ from 'lodash'
+    import {CreateElement, PropOptions, RenderContext, VNode, VNodeData} from 'vue'
+    import {CIcon} from '../icon'
+
+    type BadgeProps = {
+        icon: string
+        color: string
+        value: string|number
+    }
 
     export default {
         name: "c-badge",
         functional: true,
         props: {
-            icon: {
+            icon: <PropOptions>{
                 type: String,
                 default: ''
             },
-            color: {
+            color: <PropOptions>{
                 type: String,
                 default: ''
             },
-            value: {
+            value: <PropOptions>{
                 type: [Number, String],
                 default: ''
             },
         },
-        render(createElement, {data, props, slots}) {
+        render(createElement: CreateElement, {data = <VNodeData>{}, props = <BadgeProps>{}, slots}: RenderContext<BadgeProps>): VNode {
             const ClassName = 'c-badge';
             const SlotClassName = `${ClassName}__slot`;
             const BadgeClassName = `${ClassName}__badge`;

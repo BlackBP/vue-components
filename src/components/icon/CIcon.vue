@@ -1,14 +1,8 @@
 <script lang="ts">
-    import Vue, {CreateElement, PropOptions, RenderContext, VNode} from 'vue'
+    import {CreateElement, PropOptions, RenderContext, VNode, VNodeData} from 'vue'
+    import {IconProps} from "../../../types/icon";
 
-    type IconProps = {
-        tag: string
-        name: string
-        size: string
-        vendorPrefix: string
-    }
-
-    export default Vue.extend({
+    export default {
         name: "c-icon",
         functional: true,
         props: {
@@ -30,7 +24,7 @@
                 default: 'mdi mdi-'
             },
         },
-        render(createElement: CreateElement, {data = {}, props = <IconProps>{}}: RenderContext<IconProps>): VNode {
+        render(createElement: CreateElement, {data = <VNodeData>{}, props = <IconProps>{}}: RenderContext<IconProps>): VNode {
             const className = 'c-icon';
 
             data.class = [data.class, className, `${props.vendorPrefix}${props.name}`];
@@ -43,5 +37,5 @@
 
             return createElement(props.tag, data);
         }
-    });
+    }
 </script>
