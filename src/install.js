@@ -1,7 +1,3 @@
-import {
-    setConfig
-} from './config';
-
 /**
  *
  * @param {Object} {components: Object}
@@ -9,7 +5,6 @@ import {
  */
 export const installFactory = ({components}) => {
     return pluginFactory((Vue, config) => {
-        setConfig(Vue, config);
         registerComponents(Vue, components);
     })
 };
