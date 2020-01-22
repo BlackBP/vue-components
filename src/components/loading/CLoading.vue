@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {CreateElement, FunctionalComponentOptions, RenderContext, VNode} from "vue"
+    import {CreateElement, RenderContext, VNode} from "vue"
 
     type LoadingProps = {
         text: string
