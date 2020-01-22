@@ -16,8 +16,6 @@
 </template>
 
 <script>
-    import _ from 'lodash'
-    import {getConfig} from '../../config'
     import MixinFormTextInput from "../../mixins/form-text-input"
     import MixinFormInput from "../../mixins/form-input"
 
@@ -37,27 +35,10 @@
                 default: false
             },
         },
-        computed: {
-            hasMask() {
-                return _.isObjectLike(this.mask) || _.isString(this.mask)
-            },
-        },
         mounted() {
-            const config = getConfig(this, 'textInput');
-
-            if (_.isFunction(config.mounted)) {
-                config.mounted(this, this.mask, this.hasMask, this.$el)
-            }
-
             this.$emit('mounted', this.$el, this.mask);
         },
         beforeDestroy() {
-            const config = getConfig(this, 'textInput');
-
-            if (_.isFunction(config.beforeDestroy)) {
-                config.beforeDestroy(this, this.mask, this.hasMask, this.$el);
-            }
-
             this.$emit('before-destroy', this.$el, this.mask);
         }
     }
