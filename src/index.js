@@ -20,7 +20,7 @@ export {CCol, CContainer, CRow} from './components/grid';
 export {CIcon} from './components/icon';
 export {CIconBtn} from './components/icon-button';
 export {CList, CListItem} from './components/list';
-export {CLoading, CLoadingOverlay} from './components/loading';
+export {CLoading} from './components/loading';
 export {CModal} from './components/modal';
 export {COverlay} from './components/overlay';
 export {CPagination} from './components/pagination';

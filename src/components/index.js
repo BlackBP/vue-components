@@ -49,7 +49,6 @@ export default {
     CList,
     CListItem,
     CLoading,
-    CLoadingOverlay,
     CModal,
     COverlay,
     CPagination,

@@ -19,6 +19,13 @@
 
         <sandbox-section>
             <c-card class="elevate-6">
+                <c-loading class="elevate-6"/>
+            </c-card>
+        </sandbox-section>
+
+
+        <sandbox-section>
+            <c-card class="elevate-6">
                 <c-row>
                     <c-col>
                         <c-form-field label="errorText"
@@ -136,10 +143,12 @@
     import CStackItem from "../src/components/stack-group/CStackItem";
     import CIcon from "../src/components/icon/CIcon";
     import SectionButtons from "./SectionButtons";
+    import CLoading from "../src/components/loading/CLoading";
 
     export default {
         name: "App",
         components: {
+            CLoading,
             SectionButtons,
             CIcon,
             CStackItem,

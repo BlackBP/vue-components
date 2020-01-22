@@ -11,7 +11,7 @@
     const SpinnerClassName = `${ClassName}__spinner`;
     const TextClassName = `${ClassName}__text`;
 
-    export default <FunctionalComponentOptions>{
+    export default {
         name: "c-loading",
         functional: true,
         props: {
