@@ -1,21 +1,17 @@
-<script>
-    import LoaderDefault from './CLoaderDefault.vue';
-    import {getConfig} from '../../config';
+<script lang="ts">
+    import {CreateElement, FunctionalComponentOptions, RenderContext, VNode} from "vue"
 
-    /**
-     *
-     * @param {*} createElement
-     * @param {Object} data
-     * @param {Object} spinner
-     * @return {*}
-     */
-    function createSpinner(createElement, data, spinner) {
-        return createElement('div', data, [
-            createElement(spinner ? spinner : LoaderDefault)
-        ])
+    type LoadingProps = {
+        text: string
+        elevated: boolean
+        dense: boolean
     }
 
-    export default {
+    const ClassName = 'c-loading';
+    const SpinnerClassName = `${ClassName}__spinner`;
+    const TextClassName = `${ClassName}__text`;
+
+    export default <FunctionalComponentOptions>{
         name: "c-loading",
         functional: true,
         props: {
@@ -32,32 +28,32 @@
                 default: false,
             }
         },
-        render(createElement, {props, data, parent}) {
-            const Config = getConfig(parent, 'loading');
-            const CustomSpinner = Config.spinner;
-
-            const ClassName = 'c-loading';
-            const SpinnerClassName = `${ClassName}__spinner`;
-            const TextClassName = `${ClassName}__text`;
-            const children = [];
+        render(createElement: CreateElement, {props = <LoadingProps>{}, slots, data}: RenderContext<LoadingProps>): VNode {
             const {
-                text: propText = '',
+                text: propText,
                 elevated: propElevated,
                 dense: propDense,
             } = props;
 
-            children.push(createSpinner(createElement, {class: SpinnerClassName}, CustomSpinner));
+            const slotSpinner = slots().spinner;
+            const slotText = slots().default;
 
-            if (propText !== '') {
-                children.push(createElement('div', {class: TextClassName}, propText))
-            }
+            const text = slotText ? slotText : propText;
+            const spinner = createElement('div', {
+                class: 'c-loading-spinner'
+            });
 
             data.class = [data.class, ClassName, {
-                [`is-elevated`]: !!propElevated,
-                [`is-dense`]: !!propDense
+                [`is-elevated`]: propElevated,
+                [`is-dense`]: propDense
             }];
 
-            return createElement('div', data, children);
+            return createElement('div', data, [
+                createElement('div', {class: SpinnerClassName}, [
+                    slotSpinner ? slotSpinner : spinner
+                ]),
+                text ? createElement('div', {class: TextClassName}, text) : null
+            ]);
         }
     }
 </script>

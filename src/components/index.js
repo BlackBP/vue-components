@@ -16,7 +16,7 @@ import {CCol, CContainer, CRow} from './grid';
 import {CIcon} from './icon';
 import {CIconBtn} from './icon-button';
 import {CList, CListItem} from './list';
-import {CLoading, CLoadingOverlay} from './loading';
+import {CLoading} from './loading';
 import {CModal} from './modal';
 import {COverlay} from './overlay';
 import {CPagination} from './pagination';

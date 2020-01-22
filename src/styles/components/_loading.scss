@@ -46,8 +46,8 @@
 
 }
 
-// === Loaders
-.loader-default {
+// Spinner
+.c-loading-spinner {
   $self: #{&};
 
   $spinner-size: 45px;
