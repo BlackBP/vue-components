@@ -1,59 +1,25 @@
-import {CBadge} from './badge';
-import {CBtn} from './button';
-import {CCard, CCardSection} from './card';
-import {CChip} from './chip';
-import {CCollapse, CCollapseTransition} from './collapse';
-import {CDivider} from './divider';
-import {CForm} from './form';
-import {CCheckbox} from './form-checkbox';
-import {CFormField} from './form-field';
-import {CRadio} from './form-radio';
-import {CSelect} from './form-select';
-import {CSwitch} from './form-switch';
-import {CTextArea} from './form-text-area';
-import {CTextInput} from './form-text-input';
-import {CCol, CContainer, CRow} from './grid';
-import {CIcon} from './icon';
-import {CIconBtn} from './icon-button';
-import {CList, CListItem} from './list';
-import {CLoading} from './loading';
-import {CModal} from './modal';
-import {COverlay} from './overlay';
-import {CPagination} from './pagination';
-import {CScrollView} from './scroll-view';
-import {CStackItem, CStackGroup} from './stack-group';
-import {CTable} from './table';
-
-export default {
-    CBadge,
-    CBtn,
-    CCard,
-    CCardSection,
-    CChip,
-    CCollapse,
-    CCollapseTransition,
-    CDivider,
-    CForm,
-    CCheckbox,
-    CFormField,
-    CRadio,
-    CSelect,
-    CSwitch,
-    CTextInput,
-    CTextArea,
-    CCol,
-    CContainer,
-    CRow,
-    CIcon,
-    CIconBtn,
-    CList,
-    CListItem,
-    CLoading,
-    CModal,
-    COverlay,
-    CPagination,
-    CScrollView,
-    CStackGroup,
-    CStackItem,
-    CTable
-}
+export * from './badge';
+export * from './button';
+export * from './card';
+export * from './chip';
+export * from './collapse';
+export * from './divider';
+export * from './form';
+export * from './form-checkbox';
+export * from './form-field';
+export * from './form-radio';
+export * from './form-select';
+export * from './form-switch';
+export * from './form-text-area';
+export * from './form-text-input';
+export * from './grid';
+export * from './icon';
+export * from './icon-button';
+export * from './list';
+export * from './loading';
+export * from './modal';
+export * from './overlay';
+export * from './pagination';
+export * from './scroll-view';
+export * from './stack-group';
+export * from './table';

@@ -1,11 +1,10 @@
 import _ from 'lodash'
-import {ButtonSize} from "../../types/button"
 
 /**
  *
  * @param size
  */
-export function getButtonSize(size: string): ButtonSize {
+export function getButtonSize(size: string): string {
     return _.get({
         xs: 'is-small',
         md: 'is-medium',

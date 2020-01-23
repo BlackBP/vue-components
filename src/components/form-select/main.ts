@@ -12,7 +12,6 @@ import OptionListService from "./OptionListService"
 const MODEL_EVENT: string = 'change';
 
 @Component({
-    name: "c-select",
     components: {
         CChip,
         CIcon

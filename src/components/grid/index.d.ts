@@ -1,4 +1,4 @@
-import {VComponent} from '../../../types'
+import {VComponent} from '../../'
 
 export declare class CCol extends VComponent {}
 export declare class CContainer extends VComponent {}

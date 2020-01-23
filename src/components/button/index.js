@@ -1,15 +1,13 @@
 import _ from 'lodash'
-import Vue, {CreateElement, RenderContext, VNode, VNodeData} from 'vue'
+import Vue from 'vue'
 import {createIcon} from '../icon/helper'
-import {ButtonProps} from '../../../types/button'
 import {getButtonColor, getButtonSize} from '../../utils/button'
 
 const ClassName = 'c-btn';
 const IconClassName = `${ClassName}__icon`;
 const TextClassName = `${ClassName}__text`;
-
-export const CBtn = Vue.extend<ButtonProps>({
-    name: "c-btn",
+export const CBtn = Vue.extend({
+    name: "CBtn",
     functional: true,
     props: {
         tag: {
@@ -57,7 +55,7 @@ export const CBtn = Vue.extend<ButtonProps>({
             default: false
         }
     },
-    render(createElement: CreateElement, {data = <VNodeData>{}, props = <ButtonProps>{}, children}: RenderContext<ButtonProps>): VNode {
+    render(createElement, {data, props, children}) {
         const {
             tag: propTag,
             leading: propLeading,
@@ -85,7 +83,7 @@ export const CBtn = Vue.extend<ButtonProps>({
 
         data.on = {
             ...listeners,
-            click: (event: MouseEvent) => {
+            click: (event) => {
                 if (propDisabled) return;
                 if (_.isFunction(listeners.click)) {
                     listeners.click(event)
@@ -97,7 +95,7 @@ export const CBtn = Vue.extend<ButtonProps>({
             data.class,
             ClassName,
             getButtonColor(propColor),
-            getButtonSize(<string>propSize),
+            getButtonSize(propSize),
             {
                 [`is-disabled`]: propDisabled,
                 [`is-block`]: propBlock,
@@ -111,7 +109,7 @@ export const CBtn = Vue.extend<ButtonProps>({
         return createElement(propTag, data, [
             // Leading icon
             createIcon(createElement, IconClassName, {
-                name: <string>propLeading
+                name: propLeading
             }),
 
             // Slot - default
@@ -121,8 +119,8 @@ export const CBtn = Vue.extend<ButtonProps>({
 
             // Trailing icon
             createIcon(createElement, IconClassName, {
-                name: <string>propTrailing
+                name: propTrailing
             })
         ])
     }
-})
+});

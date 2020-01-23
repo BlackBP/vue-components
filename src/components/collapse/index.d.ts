@@ -1,4 +1,5 @@
-import {VComponent} from '../../../types'
+import Vue from 'vue'
+import {VComponent} from '../../'
 
 export declare class CCollapse extends VComponent {}
 export declare class CCollapseTransition extends VComponent {}

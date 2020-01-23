@@ -2,11 +2,22 @@
     import _ from 'lodash'
     import {CreateElement, RenderContext, VNode, VNodeData} from 'vue'
     import {createIcon} from '../icon/helper'
-    import {IconBtnProps} from '../../../types/button'
     import {getButtonColor, getButtonSize} from '../../utils/button'
 
     const ClassName = 'c-icon-btn';
     const IconClassName = `${ClassName}__icon`;
+
+    type IconBtnProps = {
+        tag: string
+        type: string | boolean
+        color: string
+        size: string
+        bordered: boolean
+        elevated: boolean
+        transparent: boolean
+        disabled: boolean
+        icon: string
+    }
 
     export default {
         name: "c-icon-btn",
