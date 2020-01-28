@@ -1,7 +1,13 @@
 import {CreateElement, VNode, VNodeData} from 'vue'
 import {CIcon} from './index'
-import {IconProps} from "../../../types/icon";
+import {IconProps} from "../../../types/icon"
 
+/**
+ *
+ * @param {CreateElement} createElement
+ * @param {string} className
+ * @param {IconProps} props
+ */
 export const createIcon = (createElement: CreateElement, className: string, props: IconProps): VNode|null => {
     return props.name ? createElement(CIcon, <VNodeData>{
         class: className,

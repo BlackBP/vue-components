@@ -4,31 +4,41 @@
     import {getButtonColor, getButtonSize} from '../../utils/button'
     import mixinsButton from '../../mixins/button'
 
-    const ClassName = 'c-icon-btn';
+    const ClassName = 'c-btn';
     const IconClassName = `${ClassName}__icon`;
+    const TextClassName = `${ClassName}__text`;
 
     export default {
-        name: "c-icon-btn",
+        name: "c-btn",
         functional: true,
         mixins: [mixinsButton],
         props: {
-            icon: {
+            leading: {
                 type: String,
-                default: 'dots-horizontal',
-                required: true
+                default: ''
+            },
+            trailing: {
+                type: String,
+                default: ''
+            },
+            block: {
+                type: Boolean,
+                default: false
             }
         },
-        render(createElement, {data, props, listeners = {}}) {
+        render(createElement, {data, props, children, listeners = {}}) {
             const {
                 tag: propTag,
-                icon: propIcon,
+                leading: propLeading,
+                trailing: propTrailing,
                 type: propType,
                 disabled: propDisabled,
                 color: propColor,
                 size: propSize,
+                block: propBlock,
+                bordered: propBordered,
                 transparent: propTransparent,
                 elevated: propElevated,
-                bordered: propBordered
             } = props;
 
             data = _.defaultsDeep({
@@ -49,21 +59,33 @@
                 class: [
                     data.class,
                     ClassName,
-                    getButtonSize(propSize),
                     getButtonColor(propColor),
+                    getButtonSize(propSize),
                     {
-                        [`is-disabled`]: propDisabled,
-                        [`is-transparent`]: propTransparent,
-                        [`is-elevated`]: propElevated,
-                        [`is-bordered`]: propBordered,
+                        ['is-disabled']: propDisabled,
+                        ['is-block']: propBlock,
+                        ['is-bordered']: propBordered,
+                        ['is-transparent']: propTransparent,
+                        ['is-elevated']: propElevated
                     }
                 ]
             }, data);
 
             // Render
             return createElement(propTag, data, [
+                // Leading icon
                 createIcon(createElement, IconClassName, {
-                    name: propIcon
+                    name: propLeading
+                }),
+
+                // Slot - default
+                createElement('span', {
+                    class: TextClassName
+                }, children),
+
+                // Trailing icon
+                createIcon(createElement, IconClassName, {
+                    name: propTrailing
                 })
             ])
         }

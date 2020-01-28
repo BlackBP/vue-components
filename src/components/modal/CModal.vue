@@ -81,10 +81,10 @@
 </template>
 
 <script>
-    import _ from 'lodash';
+    import _ from 'lodash'
 
-    import {CIcon} from '../icon';
-    import {CIconBtn} from '../icon-button';
+    import {CIcon} from '../icon'
+    import {CIconBtn} from '../icon-button'
 
     const $html = document.querySelector('html');
 

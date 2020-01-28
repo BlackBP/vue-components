@@ -1,5 +1,5 @@
-import {Model, Watch, Ref, Vue, Prop} from 'vue-property-decorator'
 import Component from 'vue-class-component'
+import {Model, Watch, Ref, Vue, Prop} from 'vue-property-decorator'
 import _ from 'lodash'
 import Popper from 'popper.js'
 

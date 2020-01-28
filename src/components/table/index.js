@@ -1,3 +1,2 @@
-import CTable from './CTable.vue';
-
+import CTable from './CTable.vue'
 export {CTable}

@@ -1,10 +1,11 @@
 <script>
+    import _ from 'lodash'
     import FormFieldService from "./FormFieldService"
     import createLabel from "./createLabel"
     import createFooter from "./createFooter"
     import createHelper from "./createHelper"
     import createCounter from "./createCounter"
-    import createField from "./createField";
+    import createField from "./createField"
 
     const ClassName = 'c-form-field';
 
@@ -41,7 +42,7 @@
                 default: ''
             },
         },
-        render(createElement, {data = {}, props = {}, scopedSlots = {}}) {
+        render(createElement, {data, props, scopedSlots = {}}) {
             data.class = [data.class, ClassName];
 
             const {

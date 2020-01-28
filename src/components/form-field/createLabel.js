@@ -7,7 +7,7 @@
  * @param {String} props.labelFor
  * @return {null|VNode}
  */
-const createLabel = (createElement, className, props = {}) => {
+const createLabel = (createElement, className, props) => {
     const {
         label: propLabel = '',
         labelFor: propLabelFor = '',

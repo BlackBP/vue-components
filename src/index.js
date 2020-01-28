@@ -1,13 +1,17 @@
 import * as Components from './components'
-import {installFactory} from './install'
+import {pluginFactory} from './install'
 
-// Components
+// The Components plugin
+const VComponentsPlugin = pluginFactory({
+    components: Components
+});
+
+// Components named export
 export * from './components'
 
 // Plugins
 // export {AlertPlugin} from './plugins/alert';
-export {NotificationPlugin} from './plugins/notification'
+// export {NotificationPlugin} from './plugins/notification'
 
-export default installFactory({
-    components: Components
-})
+// Default export is the Components plugin
+export default VComponentsPlugin

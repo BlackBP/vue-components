@@ -1,3 +1,3 @@
-import CBadge from './CBadge.vue';
+import CBadge from './CBadge.vue'
 
 export {CBadge}

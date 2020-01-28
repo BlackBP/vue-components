@@ -8,7 +8,7 @@
  * @param {Boolean} props.showCount
  * @return {null|VNode}
  */
-const createCounter = (createElement, className, props = {}) => {
+const createCounter = (createElement, className, props) => {
     const {
         count,
         countMax,

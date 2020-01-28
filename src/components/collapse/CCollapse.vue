@@ -10,7 +10,7 @@
                 default: false
             },
         },
-        render(createElement, {props = {}, children = []}) {
+        render(createElement, {props, children}) {
             const {
                 visible
             } = props;

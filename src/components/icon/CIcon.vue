@@ -1,30 +1,27 @@
-<script lang="ts">
-    import {CreateElement, PropOptions, RenderContext, VNode, VNodeData} from 'vue'
-    import {IconProps} from "../../../types/icon";
-
+<script>
     export default {
         name: "c-icon",
         functional: true,
         props: {
-            tag: <PropOptions>{
+            tag: {
                 type: String,
                 default: 'i',
             },
-            name: <PropOptions>{
+            name: {
                 type: String,
                 default: '',
                 required: true
             },
-            size: <PropOptions>{
+            size: {
                 type: String,
                 default: ''
             },
-            vendorPrefix: <PropOptions>{
+            vendorPrefix: {
                 type: String,
                 default: 'mdi mdi-'
             },
         },
-        render(createElement: CreateElement, {data = <VNodeData>{}, props = <IconProps>{}}: RenderContext<IconProps>): VNode {
+        render(createElement, {data, props}) {
             const className = 'c-icon';
 
             data.class = [data.class, className, `${props.vendorPrefix}${props.name}`];

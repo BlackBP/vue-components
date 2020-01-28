@@ -1,16 +1,38 @@
 /**
  *
- * @param {Object} {components: Object}
+ * @param {Object} {components: Object, plugins: Object}
  * @return {Function} plugin install function
  */
-export const installFactory = ({components}) => {
-    return pluginFactory((Vue, config) => {
+export const installFactory = ({components= {}, plugins = {}} = {}) => {
+    const install = (Vue) => {
+        if (install.installed) {
+            /* istanbul ignore next */
+            return
+        }
+        install.installed = true;
+
         registerComponents(Vue, components);
-    })
+        registerPlugins(Vue, plugins);
+    };
+
+    install.installed = false;
+
+    return install
 };
 
 /**
- *
+ * @param {Object} opts
+ * @param {Object} [opts.components]
+ * @param {Object} [opts.plugins]
+ * @param {Object} [extend]
+ * @return {{install: install}}
+ */
+export const pluginFactory = (opts = {}, extend = {}) => ({
+    ...extend,
+    install: installFactory(opts)
+});
+
+/**
  * @param {Object} Vue
  * @param {Object} components
  */
@@ -21,7 +43,6 @@ export const registerComponents = (Vue, components = {}) => {
 };
 
 /**
- *
  * @param {Object} Vue
  * @param {String} name
  * @param {Object} definition
@@ -32,13 +53,15 @@ export const registerComponent = (Vue, name, definition) => {
     }
 };
 
+
 /**
- *
- * @param {Function} install
- * @return {{install: Function}}
+ * @param {Object} Vue
+ * @param {Object} plugins definitions
  */
-export function pluginFactory(install) {
-    return {
-        install
+export const registerPlugins = (Vue, plugins = {}) => {
+    for (const plugin in plugins) {
+        if (plugin && plugins[plugin]) {
+            Vue.use(plugins[plugin])
+        }
     }
-}
+};

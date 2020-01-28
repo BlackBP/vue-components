@@ -1,12 +1,4 @@
-<script lang="ts">
-    import {CreateElement, RenderContext, VNode} from "vue"
-
-    type LoadingProps = {
-        text: string
-        elevated: boolean
-        dense: boolean
-    }
-
+<script>
     const ClassName = 'c-loading';
     const SpinnerClassName = `${ClassName}__spinner`;
     const TextClassName = `${ClassName}__text`;
@@ -28,7 +20,7 @@
                 default: false,
             }
         },
-        render(createElement: CreateElement, {props = <LoadingProps>{}, slots, data}: RenderContext<LoadingProps>): VNode {
+        render(createElement, {props, slots, data}) {
             const {
                 text: propText,
                 elevated: propElevated,

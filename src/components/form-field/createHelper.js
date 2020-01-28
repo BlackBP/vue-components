@@ -9,7 +9,7 @@ import _ from 'lodash'
  * @param {String} props.errorText
  * @return {null|*}
  */
-const createHelper = (createElement, className, props = {}) => {
+const createHelper = (createElement, className, props) => {
     const {
         helperText,
         errorText

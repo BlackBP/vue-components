@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 /**
  *
  * @param {Function} createElement
@@ -8,8 +6,8 @@ import _ from 'lodash'
  * @param {Function} scopedSlot
  * @return {null|VNode}
  */
-const createField = (createElement, className, props = {}, scopedSlot) => {
-    if(_.isFunction(scopedSlot)) {
+const createField = (createElement, className, props, scopedSlot) => {
+    if(typeof scopedSlot === "function") {
         return createElement('div', {
             class: className
         }, scopedSlot(props))

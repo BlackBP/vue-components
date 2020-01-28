@@ -1,32 +1,25 @@
-<script lang="ts">
+<script>
     import _ from 'lodash'
-    import {CreateElement, PropOptions, RenderContext, VNode, VNodeData} from 'vue'
-    import {CIcon} from '../icon'
-
-    type BadgeProps = {
-        icon: string
-        color: string
-        value: string|number
-    }
+    import {createIcon} from '../icon/helper'
 
     export default {
         name: "c-badge",
         functional: true,
         props: {
-            icon: <PropOptions>{
+            icon: {
                 type: String,
                 default: ''
             },
-            color: <PropOptions>{
+            color: {
                 type: String,
                 default: ''
             },
-            value: <PropOptions>{
+            value: {
                 type: [Number, String],
                 default: ''
             },
         },
-        render(createElement: CreateElement, {data = <VNodeData>{}, props = <BadgeProps>{}, slots}: RenderContext<BadgeProps>): VNode {
+        render(createElement, {data = {}, props = {}, slots}) {
             const ClassName = 'c-badge';
             const SlotClassName = `${ClassName}__slot`;
             const BadgeClassName = `${ClassName}__badge`;
@@ -55,10 +48,8 @@
             if (hasValue || hasIcon) {
                 children.push(
                     createElement('div', {class: BadgeClassName}, [
-                        hasIcon ? createElement(CIcon, {
-                            props: {
-                                name: propIcon
-                            }
+                        hasIcon ? createIcon(createElement, '', {
+                            name: propIcon
                         }) : value
                     ])
                 )

@@ -9,7 +9,7 @@
  * @param {Array} children
  * @return {null|VNode}
  */
-const createFooter = (createElement, className, props = {}, children) => {
+const createFooter = (createElement, className, props, children) => {
     const {
         hasError = false,
         hasHelper = false,

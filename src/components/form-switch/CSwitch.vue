@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import _ from 'lodash';
+    import _ from 'lodash'
     import MixinFormSwitches from "../../mixins/form-switches"
 
     const MODEL = {
