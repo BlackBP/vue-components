@@ -1,7 +1,7 @@
-import CStackGroup from './CStackGroup.vue';
-import CStackItem from './CStackItem.vue';
+import CStackGroup from './CStackGroup.vue'
+import CStackItem from './CStackItem.vue'
 
 export {
-    CStackGroup,
-    CStackItem
+  CStackGroup,
+  CStackItem
 }

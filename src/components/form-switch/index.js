@@ -1,3 +1,3 @@
-import CSwitch from './CSwitch.vue';
+import CSwitch from './CSwitch.vue'
 
-export {CSwitch}
+export { CSwitch }

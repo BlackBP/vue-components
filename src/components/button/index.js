@@ -1,10 +1,10 @@
-import CBtn from "./CBtn.vue"
-import {pluginFactory} from "../../install"
+import CBtn from './CBtn.vue'
+import { pluginFactory } from '../../install'
 
 const CBtnPlugin = pluginFactory({
-    components: {
-        CBtn
-    }
-});
+  components: {
+    CBtn
+  }
+})
 
-export {CBtn, CBtnPlugin}
+export { CBtn, CBtnPlugin }

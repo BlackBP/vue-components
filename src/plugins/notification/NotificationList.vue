@@ -1,125 +1,125 @@
 <script>
-    import _ from 'lodash'
-    import Notification from "./Notification.vue";
-    import {notificationFactory} from "./utils";
+import _ from '../../utils/helpers'
+import Notification from './Notification.vue'
+import { notificationFactory } from './utils'
 
-    const ClassName = 'c-service-notify';
+const ClassName = 'c-service-notify'
 
-    export default {
-        name: "NotificationList",
-        components: {Notification},
-        props: {
-            position: {
-                type: String,
-                default: 'top-right',
-            }
-        },
-        data() {
-            return {
-                list: [],
-                currentPosition: this.position
-            }
-        },
-        computed: {
-            hasNotify() {
-                return this.list.length > 0
-            }
-        },
-        methods: {
-            add(options) {
-                const notification = notificationFactory(options);
-                const {
-                    id,
-                    duration = 0
-                } = notification;
-
-                this.list.push(notification);
-
-                if (duration > 0) {
-                    this.$nextTick(() => {
-                        setTimeout(() => {
-                            this.remove(id)
-                        }, duration);
-                    })
-                }
-            },
-            remove(id) {
-                this.list = this.list.filter((item) => {
-                    return item['id'] !== id
-                })
-            },
-            removeAll() {
-                this.list = []
-            },
-            setPosition(value = 'top-right') {
-                this.currentPosition = value
-            }
-        },
-        render(createElement) {
-            const NotificationArray = this.list.map(item => {
-                const {
-                    id,
-                    title,
-                    message,
-                    color,
-                    onClick,
-                    onClose
-                } = item;
-
-                return createElement(Notification, {
-                    key: id,
-                    props: {
-                        id,
-                        title,
-                        message,
-                        color
-                    },
-                    on: {
-                        click: (event) => {
-                            if (_.isFunction(onClick)) {
-                                onClick(event, item)
-                            }
-                        },
-                        close: (event) => {
-                            if (_.isFunction(onClose)) {
-                                onClose(event, item);
-                                this.remove(id)
-                            }
-                        }
-                    }
-                })
-            });
-
-            return createElement('transition', {
-                    props: {
-                        name: 'notification-list-fade'
-                    }
-                },
-                this.hasNotify ? [
-                    createElement(
-                        'div',
-                        {
-                            class: [
-                                ClassName,
-                                {
-                                    [`is-position-${this.currentPosition}`]: this.currentPosition !== ''
-                                }
-                            ],
-                        },
-                        [
-                            createElement('transition-group', {
-                                class: `${ClassName}__list`,
-                                props: {
-                                    tag: 'div',
-                                    name: 'notification-list'
-                                }
-                            }, NotificationArray)
-                        ]
-                    )
-                ] : null
-            )
-        }
+export default {
+  name: 'NotificationList',
+  components: { Notification },
+  props: {
+    position: {
+      type: String,
+      default: 'top-right'
     }
+  },
+  data () {
+    return {
+      list: [],
+      currentPosition: this.position
+    }
+  },
+  computed: {
+    hasNotify () {
+      return this.list.length > 0
+    }
+  },
+  methods: {
+    add (options) {
+      const notification = notificationFactory(options)
+      const {
+        id,
+        duration = 0
+      } = notification
+
+      this.list.push(notification)
+
+      if (duration > 0) {
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.remove(id)
+          }, duration)
+        })
+      }
+    },
+    remove (id) {
+      this.list = this.list.filter((item) => {
+        return item['id'] !== id
+      })
+    },
+    removeAll () {
+      this.list = []
+    },
+    setPosition (value = 'top-right') {
+      this.currentPosition = value
+    }
+  },
+  render (createElement) {
+    const NotificationArray = this.list.map(item => {
+      const {
+        id,
+        title,
+        message,
+        color,
+        onClick,
+        onClose
+      } = item
+
+      return createElement(Notification, {
+        key: id,
+        props: {
+          id,
+          title,
+          message,
+          color
+        },
+        on: {
+          click: (event) => {
+            if (_.isFunction(onClick)) {
+              onClick(event, item)
+            }
+          },
+          close: (event) => {
+            if (_.isFunction(onClose)) {
+              onClose(event, item)
+              this.remove(id)
+            }
+          }
+        }
+      })
+    })
+
+    return createElement('transition', {
+      props: {
+        name: 'notification-list-fade'
+      }
+    },
+    this.hasNotify ? [
+      createElement(
+        'div',
+        {
+          class: [
+            ClassName,
+            {
+              [`is-position-${this.currentPosition}`]: this.currentPosition !== ''
+            }
+          ]
+        },
+        [
+          createElement('transition-group', {
+            class: `${ClassName}__list`,
+            props: {
+              tag: 'div',
+              name: 'notification-list'
+            }
+          }, NotificationArray)
+        ]
+      )
+    ] : null
+    )
+  }
+}
 </script>
 
 <style lang="scss">

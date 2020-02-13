@@ -1,4 +1,4 @@
-import Vue, {PluginFunction, PluginObject} from 'vue'
+import Vue, { PluginFunction, PluginObject } from 'vue'
 
 // PluginFunction options interface
 export interface VConfigOptions {
@@ -19,7 +19,7 @@ export class VComponent extends Vue {
 export * from './components'
 
 // The Components plugin
-export declare const VComponentsPlugin: VPlugin;
+export declare const VComponentsPlugin: VPlugin
 
 // Default export is the Components plugin
 export default VComponentsPlugin

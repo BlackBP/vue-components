@@ -1,13 +1,13 @@
 <script>
-    const className = 'c-divider';
+const className = 'c-divider'
 
-    export default {
-        name: "c-divider",
-        functional: true,
-        render(createElement, {data}) {
-            data.class = [data.class, className];
+export default {
+  name: 'c-divider',
+  functional: true,
+  render (createElement, { data }) {
+    data.class = [data.class, className]
 
-            return createElement('div', data)
-        }
-    }
+    return createElement('div', data)
+  }
+}
 </script>

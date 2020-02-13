@@ -1,4 +1,4 @@
-import CCard from './CCard.vue';
-import CCardSection from './CCardSection.vue';
+import CCard from './CCard.vue'
+import CCardSection from './CCardSection.vue'
 
-export {CCard, CCardSection}
+export { CCard, CCardSection }

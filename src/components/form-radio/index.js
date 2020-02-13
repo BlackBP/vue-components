@@ -1,3 +1,3 @@
-import CRadio from './CRadio.vue';
+import CRadio from './CRadio.vue'
 
-export {CRadio}
+export { CRadio }

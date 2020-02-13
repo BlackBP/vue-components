@@ -29,29 +29,29 @@
 </template>
 
 <script>
-    import MixinFormSwitches from "../../mixins/form-switches"
+import MixinFormSwitches from '../../mixins/form-switches'
 
-    const MODEL = {
-        prop: 'model',
-        event: 'change'
-    };
+const MODEL = {
+  prop: 'model',
+  event: 'change'
+}
 
-    export default {
-        name: "c-radio",
-        mixins: [MixinFormSwitches],
-        model: MODEL,
-        computed: {
-            checked() {
-                return this.model == this.value;
-            },
-        },
-        methods: {
-            onChange() {
-                this.$emit(MODEL.event, this.value)
-            },
-            focus() {
-                this.$refs.label.focus();
-            }
-        }
+export default {
+  name: 'c-radio',
+  mixins: [MixinFormSwitches],
+  model: MODEL,
+  computed: {
+    checked () {
+      return this.model == this.value
     }
+  },
+  methods: {
+    onChange () {
+      this.$emit(MODEL.event, this.value)
+    },
+    focus () {
+      this.$refs.label.focus()
+    }
+  }
+}
 </script>

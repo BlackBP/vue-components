@@ -81,149 +81,149 @@
 </template>
 
 <script>
-    import _ from 'lodash'
+import _ from '../../utils/helpers'
 
-    import {CIcon} from '../icon'
-    import {CIconBtn} from '../icon-button'
+import { CIcon } from '../icon'
+import { CIconBtn } from '../icon-button'
 
-    const $html = document.querySelector('html');
+const $html = document.querySelector('html')
 
-    const ClassNameModalOpened = 'modal-open';
-    const DataKeyModalOpenCount = 'modalOpenCount';
+const ClassNameModalOpened = 'modal-open'
+const DataKeyModalOpenCount = 'modalOpenCount'
 
-    //TODO: Рефакторинг.
-    export default {
-        name: "c-modal",
-        components: {
-            CIconBtn,
-            CIcon
-        },
-        props: {
-            title: {
-                type: String,
-                default: '',
-            },
-            icon: {
-                type: String,
-                default: '',
-            },
-            allowDismiss: {
-                type: Boolean,
-                default: true,
-            },
-            outsideDismiss: {
-                type: Boolean,
-                default: true,
-            },
-            modalTransition: {
-                type: String,
-                default: 'modal-scale'
-            },
-            customContent: {
-                type: Boolean,
-                default: false,
-            },
-            customContentClass: {
-                type: [Array, Object, String],
-                default: ''
-            },
-            showFooter: {
-                type: Boolean,
-                default: false,
-            },
-            flex: {
-                type: Boolean,
-                default: false,
-            },
-            styleType: {
-                type: String,
-                default: 'default',
-            },
-            maxWidth: {
-                type: String,
-                default: '400px',
-            },
-            loading: {
-                type: Boolean,
-                default: false,
-            }
-        },
-        data() {
-            return {
-                isVisible: false
-            }
-        },
-        computed: {
-            hasTitle() {
-                return _.isString(this.title) && this.title !== '';
-            },
-            hasIcon() {
-                return _.isString(this.icon) && this.icon !== '';
-            },
-            modalClassName() {
-                return {
-                    [`style-${this.styleType}`]: !!this.styleType,
-                    [`is-flex`]: this.flex
-                }
-            },
-            modalStyle() {
-                return {
-                    maxWidth: this.maxWidth
-                }
-            },
-        },
-        methods: {
-            open() {
-                const modalCount = this.getModalCount();
-
-                if (modalCount <= 0) {
-                    this.setModalCount(1);
-                } else {
-                    this.setModalCount(modalCount + 1)
-                }
-
-                $html.classList.add(ClassNameModalOpened);
-
-                this.isVisible = true;
-                this.$emit('open');
-            },
-            close() {
-                const modalCount = this.getModalCount();
-
-                if (modalCount > 1) {
-                    this.setModalCount(modalCount - 1)
-                } else {
-                    this.setModalCount(0);
-                    $html.classList.remove(ClassNameModalOpened);
-                }
-
-                this.isVisible = false;
-                this.$emit('close');
-            },
-            backdropClick() {
-                if (this.outsideDismiss) {
-                    this.close()
-                }
-            },
-            getModalCount() {
-                const modalCount = parseInt($html.dataset[DataKeyModalOpenCount]);
-                return _.isNaN(modalCount) ? 0 : modalCount;
-            },
-            setModalCount(value) {
-                $html.dataset[DataKeyModalOpenCount] = value;
-            }
-        },
-        mounted() {
-            this.$el.__vueModalListener__ = (event) => {
-                if (event.code === 'Escape') {
-                    this.close()
-                }
-            };
-
-            window.addEventListener('keyup', this.$el.__vueModalListener__);
-        },
-        beforeDestroy() {
-            window.removeEventListener('keyup', this.$el.__vueModalListener__);
-        }
+// TODO: Рефакторинг.
+export default {
+  name: 'c-modal',
+  components: {
+    CIconBtn,
+    CIcon
+  },
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+    allowDismiss: {
+      type: Boolean,
+      default: true
+    },
+    outsideDismiss: {
+      type: Boolean,
+      default: true
+    },
+    modalTransition: {
+      type: String,
+      default: 'modal-scale'
+    },
+    customContent: {
+      type: Boolean,
+      default: false
+    },
+    customContentClass: {
+      type: [Array, Object, String],
+      default: ''
+    },
+    showFooter: {
+      type: Boolean,
+      default: false
+    },
+    flex: {
+      type: Boolean,
+      default: false
+    },
+    styleType: {
+      type: String,
+      default: 'default'
+    },
+    maxWidth: {
+      type: String,
+      default: '400px'
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
+  },
+  data () {
+    return {
+      isVisible: false
+    }
+  },
+  computed: {
+    hasTitle () {
+      return _.isString(this.title) && this.title !== ''
+    },
+    hasIcon () {
+      return _.isString(this.icon) && this.icon !== ''
+    },
+    modalClassName () {
+      return {
+        [`style-${this.styleType}`]: !!this.styleType,
+        [`is-flex`]: this.flex
+      }
+    },
+    modalStyle () {
+      return {
+        maxWidth: this.maxWidth
+      }
+    }
+  },
+  methods: {
+    open () {
+      const modalCount = this.getModalCount()
+
+      if (modalCount <= 0) {
+        this.setModalCount(1)
+      } else {
+        this.setModalCount(modalCount + 1)
+      }
+
+      $html.classList.add(ClassNameModalOpened)
+
+      this.isVisible = true
+      this.$emit('open')
+    },
+    close () {
+      const modalCount = this.getModalCount()
+
+      if (modalCount > 1) {
+        this.setModalCount(modalCount - 1)
+      } else {
+        this.setModalCount(0)
+        $html.classList.remove(ClassNameModalOpened)
+      }
+
+      this.isVisible = false
+      this.$emit('close')
+    },
+    backdropClick () {
+      if (this.outsideDismiss) {
+        this.close()
+      }
+    },
+    getModalCount () {
+      const modalCount = parseInt($html.dataset[DataKeyModalOpenCount])
+      return _.isNaN(modalCount) ? 0 : modalCount
+    },
+    setModalCount (value) {
+      $html.dataset[DataKeyModalOpenCount] = value
+    }
+  },
+  mounted () {
+    this.$el.__vueModalListener__ = (event) => {
+      if (event.code === 'Escape') {
+        this.close()
+      }
+    }
+
+    window.addEventListener('keyup', this.$el.__vueModalListener__)
+  },
+  beforeDestroy () {
+    window.removeEventListener('keyup', this.$el.__vueModalListener__)
+  }
+}
 </script>

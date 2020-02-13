@@ -1,3 +1,3 @@
-import CPagination from './CPagination.vue';
+import CPagination from './CPagination.vue'
 
-export {CPagination}
+export { CPagination }

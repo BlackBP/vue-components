@@ -20,63 +20,63 @@
 </template>
 
 <script>
-    const MODEL = {
-        prop: 'visible',
-        event: 'change'
-    };
+const MODEL = {
+  prop: 'visible',
+  event: 'change'
+}
 
-    export default {
-        name: "c-overlay",
-        model: MODEL,
-        props: {
-            visible: {
-                type: Boolean,
-                default: false
-            },
-            transition: {
-                type: String,
-                default: 'c-overlay'
-            },
-            absolute: {
-                type: Boolean,
-                default: false
-            },
-            outsideDismiss: {
-                type: Boolean,
-                default: false
-            },
-            zIndex: {
-                type: [String, Number],
-                default: 9999
-            },
-            contentClass: {
-                type: String,
-                default: ''
-            },
-            contentTransition: {
-                type: String,
-                default: 'c-overlay'
-            },
-        },
-        computed: {
-            className() {
-                return {
-                    'is-absolute': this.absolute
-                }
-            },
-            styles() {
-                return {
-                    zIndex: this.zIndex
-                }
-            }
-        },
-        methods: {
-            show() {
-                this.$emit(MODEL.event, true)
-            },
-            hide() {
-                this.$emit(MODEL.event, false)
-            }
-        }
+export default {
+  name: 'c-overlay',
+  model: MODEL,
+  props: {
+    visible: {
+      type: Boolean,
+      default: false
+    },
+    transition: {
+      type: String,
+      default: 'c-overlay'
+    },
+    absolute: {
+      type: Boolean,
+      default: false
+    },
+    outsideDismiss: {
+      type: Boolean,
+      default: false
+    },
+    zIndex: {
+      type: [String, Number],
+      default: 9999
+    },
+    contentClass: {
+      type: String,
+      default: ''
+    },
+    contentTransition: {
+      type: String,
+      default: 'c-overlay'
     }
+  },
+  computed: {
+    className () {
+      return {
+        'is-absolute': this.absolute
+      }
+    },
+    styles () {
+      return {
+        zIndex: this.zIndex
+      }
+    }
+  },
+  methods: {
+    show () {
+      this.$emit(MODEL.event, true)
+    },
+    hide () {
+      this.$emit(MODEL.event, false)
+    }
+  }
+}
 </script>

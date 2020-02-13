@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from '../../utils/helpers'
 
 /**
  *
@@ -10,23 +10,23 @@ import _ from 'lodash'
  * @return {null|*}
  */
 const createHelper = (createElement, className, props) => {
-    const {
-        helperText,
-        errorText
-    } = props;
-    const data = {
-        class: className
-    };
+  const {
+    helperText,
+    errorText
+  } = props
+  const data = {
+    class: className
+  }
 
-    if(_.size(errorText) > 0) {
-        return createElement('div', data, errorText)
-    }
+  if (_.size(errorText) > 0) {
+    return createElement('div', data, errorText)
+  }
 
-    if(_.size(helperText) > 0) {
-        return createElement('div', data, helperText)
-    } else {
-        return null;
-    }
-};
+  if (_.size(helperText) > 0) {
+    return createElement('div', data, helperText)
+  } else {
+    return null
+  }
+}
 
 export default createHelper

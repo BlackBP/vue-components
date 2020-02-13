@@ -1,4 +1,4 @@
-import CCollapseTransition from './CCollapseTransition.vue';
-import CCollapse from './CCollapse.vue';
+import CCollapseTransition from './CCollapseTransition.vue'
+import CCollapse from './CCollapse.vue'
 
-export {CCollapse, CCollapseTransition}
+export { CCollapse, CCollapseTransition }

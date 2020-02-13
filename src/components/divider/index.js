@@ -1,3 +1,3 @@
-import CDivider from './CDivider.vue';
+import CDivider from './CDivider.vue'
 
-export {CDivider}
+export { CDivider }

@@ -10,19 +10,19 @@
  * @return {null|VNode}
  */
 const createFooter = (createElement, className, props, children) => {
-    const {
-        hasError = false,
-        hasHelper = false,
-        hasCounter = false,
-    } = props;
+  const {
+    hasError = false,
+    hasHelper = false,
+    hasCounter = false
+  } = props
 
-    if (hasError || hasHelper || hasCounter) {
-        return createElement('div', {
-            class: className
-        }, children)
-    } else {
-        return null
-    }
-};
+  if (hasError || hasHelper || hasCounter) {
+    return createElement('div', {
+      class: className
+    }, children)
+  } else {
+    return null
+  }
+}
 
 export default createFooter

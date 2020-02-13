@@ -1,2 +1,2 @@
 import CTextArea from './CTextArea.vue'
-export {CTextArea}
+export { CTextArea }

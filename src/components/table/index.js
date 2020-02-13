@@ -1,2 +1,2 @@
 import CTable from './CTable.vue'
-export {CTable}
+export { CTable }

@@ -22,48 +22,48 @@
 </template>
 
 <script>
-    import {CCard} from "../../components/card";
-    import {CIconBtn} from "../../components/icon-button";
+import { CCard } from '../../components/card'
+import { CIconBtn } from '../../components/icon-button'
 
-    export default {
-        name: "Notification",
-        props: {
-            id: {
-                type: [String, Number],
-                default: '',
-                required: true
-            },
-            title: {
-                type: String,
-                default: ''
-            },
-            message: {
-                type: String,
-                default: ''
-            },
-            color: {
-                type: String,
-                default: ''
-            }
-        },
-        components: {
-            CIconBtn,
-            CCard
-        },
-        computed: {
-            className() {
-                return `is-${this.color}`
-            }
-        },
-        methods: {
-            handleClick(event) {
-                this.$emit('click', event)
-            },
-            handleClose(event) {
-                this.$emit('close', event)
-            }
-        },
+export default {
+  name: 'Notification',
+  props: {
+    id: {
+      type: [String, Number],
+      default: '',
+      required: true
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    message: {
+      type: String,
+      default: ''
+    },
+    color: {
+      type: String,
+      default: ''
     }
+  },
+  components: {
+    CIconBtn,
+    CCard
+  },
+  computed: {
+    className () {
+      return `is-${this.color}`
+    }
+  },
+  methods: {
+    handleClick (event) {
+      this.$emit('click', event)
+    },
+    handleClose (event) {
+      this.$emit('close', event)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

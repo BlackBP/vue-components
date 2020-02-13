@@ -1,3 +1,3 @@
-import CCheckbox from './CCheckbox.vue';
+import CCheckbox from './CCheckbox.vue'
 
-export {CCheckbox}
+export { CCheckbox }

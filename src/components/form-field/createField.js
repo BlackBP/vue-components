@@ -7,13 +7,13 @@
  * @return {null|VNode}
  */
 const createField = (createElement, className, props, scopedSlot) => {
-    if(typeof scopedSlot === "function") {
-        return createElement('div', {
-            class: className
-        }, scopedSlot(props))
-    } else {
-        return null
-    }
-};
+  if (typeof scopedSlot === 'function') {
+    return createElement('div', {
+      class: className
+    }, scopedSlot(props))
+  } else {
+    return null
+  }
+}
 
 export default createField

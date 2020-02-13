@@ -1,2 +1,2 @@
-import COverlay from "./COverlay.vue";
-export {COverlay}
+import COverlay from './COverlay.vue'
+export { COverlay }

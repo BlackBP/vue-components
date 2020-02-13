@@ -15,20 +15,20 @@
 </template>
 
 <script>
-    import MixinFormTextInput from "../../mixins/form-text-input"
-    import MixinFormInput from "../../mixins/form-input"
+import MixinFormTextInput from '../../mixins/form-text-input'
+import MixinFormInput from '../../mixins/form-input'
 
-    export default {
-        name: "c-text-area",
-        mixins: [
-            MixinFormTextInput,
-            MixinFormInput
-        ],
-        props: {
-            rows: {
-                type: [Number, String],
-                default: 5
-            }
-        }
+export default {
+  name: 'c-text-area',
+  mixins: [
+    MixinFormTextInput,
+    MixinFormInput
+  ],
+  props: {
+    rows: {
+      type: [Number, String],
+      default: 5
     }
+  }
+}
 </script>

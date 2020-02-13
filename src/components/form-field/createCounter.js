@@ -9,19 +9,19 @@
  * @return {null|VNode}
  */
 const createCounter = (createElement, className, props) => {
-    const {
-        count,
-        countMax,
-        showCount
-    } = props;
+  const {
+    count,
+    countMax,
+    showCount
+  } = props
 
-    if (showCount) {
-        return createElement('div', {
-            class: className,
-        }, `${count}/${countMax}`)
-    } else {
-        return null;
-    }
-};
+  if (showCount) {
+    return createElement('div', {
+      class: className
+    }, `${count}/${countMax}`)
+  } else {
+    return null
+  }
+}
 
 export default createCounter

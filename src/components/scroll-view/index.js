@@ -1,3 +1,3 @@
-import CScrollView from './CScrollView.vue';
+import CScrollView from './CScrollView.vue'
 
-export {CScrollView}
+export { CScrollView }

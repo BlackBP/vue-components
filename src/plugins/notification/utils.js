@@ -10,26 +10,26 @@
  * @return {{id: String, message: String, title: String, color: String, duration: Number, onClick: Function, onClose: Function}}
  */
 export const notificationFactory = (notify = {}) => {
-    let {
-        message = '',
-        title = 'Уведомление',
-        duration = 10000,
-        color = '',
-        onClick = () => {
-        },
-        onClose = () => {
-        },
-        ...rest
-    } = notify;
+  let {
+    message = '',
+    title = 'Уведомление',
+    duration = 10000,
+    color = '',
+    onClick = () => {
+    },
+    onClose = () => {
+    },
+    ...rest
+  } = notify
 
-    return {
-        ...rest,
-        id: `notify-${+new Date()}`,
-        message,
-        title,
-        color,
-        duration,
-        onClick,
-        onClose,
-    }
-};
+  return {
+    ...rest,
+    id: `notify-${+new Date()}`,
+    message,
+    title,
+    color,
+    duration,
+    onClick,
+    onClose
+  }
+}

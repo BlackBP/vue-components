@@ -1,3 +1,3 @@
-import CTextInput from './CTextInput.vue';
+import CTextInput from './CTextInput.vue'
 
-export {CTextInput}
+export { CTextInput }

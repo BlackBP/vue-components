@@ -59,42 +59,42 @@
 </template>
 
 <script>
-    import _ from 'lodash'
+import _ from '../../utils/helpers'
 
-    export default {
-        name: "c-table",
-        props: {
-            data: {
-                type: Array,
-                default: () => ([]),
-                required: true
-            },
-            headers: {
-                type: Object,
-                default: () => ({}),
-                required: true
-            },
-            showHeaders: {
-                type: Boolean,
-                default: true
-            },
-            rowClass: {
-                type: String,
-                default: ''
-            }
-        },
-        computed: {
-            hasData() {
-                if (!_.isArray(this.data)) return false;
-                return _.size(this.data) > 0
-            },
-            columnsCount() {
-                if (!_.isObjectLike(this.headers)) return 0;
-                if (_.isArray(this.headers)) return 0;
-
-                return _.size(Object.keys(this.headers));
-            }
-        }
-
+export default {
+  name: 'c-table',
+  props: {
+    data: {
+      type: Array,
+      default: () => ([]),
+      required: true
+    },
+    headers: {
+      type: Object,
+      default: () => ({}),
+      required: true
+    },
+    showHeaders: {
+      type: Boolean,
+      default: true
+    },
+    rowClass: {
+      type: String,
+      default: ''
     }
+  },
+  computed: {
+    hasData () {
+      if (!_.isArray(this.data)) return false
+      return _.size(this.data) > 0
+    },
+    columnsCount () {
+      if (!_.isObjectLike(this.headers)) return 0
+      if (_.isArray(this.headers)) return 0
+
+      return _.size(Object.keys(this.headers))
+    }
+  }
+
+}
 </script>
