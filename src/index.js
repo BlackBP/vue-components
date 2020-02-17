@@ -4,7 +4,7 @@ import { pluginFactory } from './install'
 // The Components plugin
 const VComponentsPlugin = pluginFactory({
   components: Components
-})
+});
 
 // Components named export
 export * from './components'
